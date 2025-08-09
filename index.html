@@ -1,272 +1,359 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>日本デザイン福祉専門学校｜OCサポーター紹介</title>
-  <meta name="description" content="学生インタビュー、当日の流れ、はじめての方向け安心ガイドが1ページで分かる特設。">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Yomogi&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>日本デザイン福祉専門学校｜OCサポーター紹介</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Yomogi&display=swap" rel="stylesheet">
+<style>
+/* ========== 基本 ========== */
+*{box-sizing:border-box}html,body{margin:0}
+img{max-width:100%;display:block;height:auto}
+:root{
+  --ink:#0b1224;--muted:#6b7280;
+  --blue:#1480ff;--blue2:#0f6de0;
+  --line:#00c100;--line2:#00a400;
+  --blk:#111;--blk2:#0a0a0a;
+  --shadow:0 14px 34px rgba(15,23,42,.16);
+  --radius:18px;
+}
+
+/* ========== 背景：しっかり見える多層グラデ（固定） ========== */
+body{
+  color:var(--ink);
+  font-family:'Noto Sans JP',system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
+  line-height:1.85;
+  background:
+    radial-gradient(120% 80% at 10% -10%, #ffe9f6 0 45%, transparent 46%),
+    radial-gradient(120% 80% at 95% 0%, #e6f7ff 0 45%, transparent 46%),
+    radial-gradient(120% 80% at 50% 115%, #fff6d9 0 45%, transparent 46%),
+    linear-gradient(180deg,#fff 0%,#f9fbff 45%,#ffffff 100%);
+  background-attachment:fixed,fixed,fixed,fixed;
+}
+
+/* ========== ラッパー/セクション ========== */
+.container{width:min(980px,92vw);margin-inline:auto}
+.section{padding:28px 0;position:relative}
+.section-title{font-weight:900;font-size:clamp(20px,5.2vw,28px);margin:0 0 14px}
+.section-title.hand{font-family:'Yomogi','Noto Sans JP',sans-serif;font-weight:400}
+.section-title.under{display:inline-block;position:relative;padding-bottom:6px}
+.section-title.under::after{
+  content:"";position:absolute;left:0;bottom:0;height:6px;width:100%;
+  background:linear-gradient(90deg,#1480ff,#7bd6ff);border-radius:6px;opacity:.9;
+}
+
+/* ========== 固定ラベル ========== */
+.site-title{
+  position:fixed;top:14px;left:14px;z-index:50;
+  font-weight:900;font-size:12px;color:#2f2f2f;
+  background:rgba(255,255,255,.95);padding:6px 10px;border-radius:999px;box-shadow:0 8px 20px rgba(0,0,0,.12)
+}
+
+/* ========== HERO（スマホ前提でコンパクト） ========== */
+.hero{position:relative;min-height:62svh;display:grid;place-items:end center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 0,rgba(0,0,0,.18) 75%,rgba(0,0,0,.25))}
+.hero-inner{position:relative;z-index:1;width:100%;padding:14px 0 20px}
+.lead{
+  width:min(900px,92vw);margin:0 auto 8px;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);
+  border-radius:999px;padding:8px 14px;font-weight:700;font-size:14px;display:flex;gap:.6ch;align-items:center;
+  box-shadow:0 10px 24px rgba(0,0,0,.12)
+}
+.lead .dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(#7bd6ff,#1480ff)}
+.title{width:min(900px,92vw);margin:0 auto 10px;color:#0b1224;font-weight:900;font-size:clamp(22px,6.6vw,34px);line-height:1.18}
+.title span{display:block}
+
+/* ========== ボタン：統一サイズのグロッシー ========== */
+.btnrow{width:min(900px,92vw);margin:0 auto;display:flex;gap:10px}
+.btn{
+  --col1:#000;--col2:#333;
+  flex:1; display:flex; justify-content:center; align-items:center; gap:.5ch;
+  height:48px; padding:0 14px; border-radius:999px; font-weight:900; font-size:15px; color:#fff;
+  text-decoration:none; position:relative; overflow:hidden;
+  background:linear-gradient(180deg,var(--col1),var(--col2));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.25),
+    0 10px 22px rgba(15,23,42,.20);
+}
+.btn::before{ /* 上側ハイライトで艶 */
+  content:""; position:absolute; inset:0 0 50% 0;
+  background:linear-gradient(180deg,rgba(255,255,255,.45),transparent);
+  pointer-events:none;
+}
+.btn:active{transform:translateY(1px)}
+.btn-blue{--col1:#2b8dff;--col2:#0f6de0}
+.btn-line{--col1:#00c100;--col2:#00a400}
+.btn-black{--col1:#161616;--col2:#0b0b0b}
+
+/* 使い回しのキラッ（出現時だけ一回） */
+.sweep{position:relative;overflow:hidden}
+.sweep.is-inview::after{
+  content:"";position:absolute;inset:0;transform:translateX(-120%) skewX(-20deg);
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent);
+  animation:shine 900ms ease forwards
+}
+@keyframes shine{to{transform:translateX(120%) skewX(-20deg)}}
+
+/* ========== スクロール追いつき ========== */
+[data-reveal]{opacity:0;transform:translateY(26px);will-change:transform,opacity}
+.is-inview{opacity:1;animation:catchup .8s cubic-bezier(.2,.8,.2,1) both}
+@keyframes catchup{0%{transform:translateY(26px)}60%{transform:translateY(-10px)}100%{transform:translateY(0)}}
+
+/* ========== カード ========== */
+.grid{display:grid;gap:16px}
+@media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{
+  border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;position:relative;padding:16px;background:#fff
+}
+/* 淡い学科色（強すぎない） */
+.dept-sweets{--c:#bff3ec}
+.dept-imagine{--c:#ffe0ec}
+.dept-hoiku{--c:#ffeec0}
+.card::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,color-mix(in srgb,var(--c) 68%,#fff 32%),#fff);z-index:-1}
+.badge{
+  position:absolute;right:12px;top:12px;width:72px;height:72px;border-radius:999px;background:#fff;
+  box-shadow:0 10px 22px rgba(0,0,0,.16),0 0 0 6px rgba(255,255,255,.95);overflow:hidden
+}
+.badge img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.sticker{display:inline-block;background:#fff;color:#111;padding:6px 10px;border-radius:10px;font-weight:900;font-size:12px;box-shadow:0 8px 18px rgba(0,0,0,.12);margin-bottom:8px}
+.card h3{margin:10px 0 6px;font-weight:900}
+.card .photos{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.card .photos img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;box-shadow:0 8px 22px rgba(15,23,42,.12);background:#0001}
+
+/* ========== 当日の流れ ========== */
+.step{display:grid;grid-template-columns:1fr;gap:10px;background:#fff;border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+.step img{width:100%;aspect-ratio:16/10;object-fit:cover;background:#0001}
+.step .body{padding:12px 14px}
+.num{display:inline-block;background:linear-gradient(180deg,#1480ff,#7bd6ff);color:#fff;font-weight:900;padding:.2rem .6rem;border-radius:999px;margin-bottom:6px}
+
+/* ========== 安心ガイド ========== */
+.guide{position:relative}
+.glist{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.gitem{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center}
+.gavatar{width:56px;height:56px;border-radius:999px;overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,.14);background:linear-gradient(180deg,#e6f5ff,#fff);display:grid;place-items:center}
+.gavatar img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.gcard{background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:10px 12px}
+
+/* ========== フッター/固定CTA ========== */
+.footer{padding:44px 0 80px;text-align:center;color:var(--muted)}
+.footer-cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.sticky-cta{
+  position:fixed;left:0;right:0;bottom:-80px;display:flex;gap:10px;padding:10px 14px;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(10px);box-shadow:0 -12px 24px rgba(0,0,0,.14);
+  transition:bottom .28s;z-index:60
+}
+.sticky-cta .btn{height:46px}
+.sticky-cta.show{bottom:0}
+</style>
 </head>
 <body>
 
-  <!-- 固定ラベル -->
-  <div class="site-title">日本デザイン福祉専門学校</div>
+<div class="site-title">日本デザイン福祉専門学校</div>
 
-  <!-- ===== HERO（モバイル前提・コンパクト） ===== -->
-  <header class="hero" role="banner">
-    <img class="hero-bg" src="images/Google_AI_Studio_2025-07-16T07_54_39.403Z.png" alt="キャンパスの雰囲気">
-    <div class="hero-overlay" aria-hidden="true"></div>
-    <div class="hero-vignette" aria-hidden="true"></div>
-
-    <div class="hero-inner container">
-      <p class="lead">
-        <span class="led-dot" aria-hidden="true"></span>
-        私たちOCサポーターも、進路に悩んだ高校生でした。
-      </p>
-      <h1 class="title">
-        <span>そんな私たちが、</span>
-        <span>この学校を選んだ</span>
-        <span>“きっかけ”教えます。</span>
-      </h1>
-      <div class="cta-row">
-        <a class="btn btn-primary sweep-once" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">OPEN CAMPUSを予約</a>
-        <a class="btn btn-line sweep-once" href="https://lin.ee/y2DLr3Y" target="_blank" rel="noopener">LINEで質問</a>
-        <a class="btn btn-ghost sweep-once" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
-      </div>
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <img class="hero-bg" src="images/Google_AI_Studio_2025-07-16T07_54_39.403Z.png" alt="キャンパスの雰囲気">
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <p class="lead"><span class="dot"></span>私たちOCサポーターも、進路に悩んだ高校生でした。</p>
+    <h1 class="title"><span>そんな私たちが、</span><span>この学校を選んだ</span><span>“きっかけ”教えます。</span></h1>
+    <div class="btnrow sweep">
+      <a class="btn btn-blue"  href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">OPEN CAMPUSを予約</a>
+      <a class="btn btn-line"  href="https://lin.ee/y2DLr3Y" target="_blank" rel="noopener">LINEで質問</a>
+      <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
     </div>
-  </header>
-
-  <main class="container">
-
-    <!-- ===== 学生インタビュー ===== -->
-    <section class="section">
-      <h2 class="section-title hand shimmer catch float" data-float="8">
-        OCサポーターが語る<br>“私”がここにいる理由
-      </h2>
-
-      <div class="cards">
-        <!-- 製菓：S・Hさん 2年 -->
-        <article class="card card-sweets shimmer catch float" data-float="10">
-          <div class="badge"><img src="images/IMG_0092.jpg" alt="S・Hさん"></div>
-          <div class="card-head">
-            <span class="label">製菓デザイン学科</span><span class="grade">2年</span>
-          </div>
-          <h3 class="name">S・Hさん</h3>
-          <p class="text">初めての見学でも、先輩が距離近く話してくれて安心できました。作品づくりを通じて“楽しい”が増えました。</p>
-          <div class="photos two">
-            <img src="images/IMG_2172.jpg" alt="授業風景1">
-            <img src="images/2024_161.jpg" alt="授業風景2">
-          </div>
-        </article>
-
-        <!-- イマジネーション：S・Mさん 1年 -->
-        <article class="card card-imagine shimmer catch float" data-float="10">
-          <div class="badge"><img src="images/IMG_2131.jpg" alt="S・Mさん"></div>
-          <div class="card-head">
-            <span class="label">イマジネーションデザイン学科</span><span class="grade">1年</span>
-          </div>
-          <h3 class="name">S・Mさん</h3>
-          <p class="text">レトロな校舎と最新設備の組み合わせが好き。制作相談も先生がすぐに乗ってくれて心強かったです。</p>
-          <div class="photos two">
-            <img src="images/IMG_2172.jpg" alt="授業風景1">
-            <img src="images/2024_161.jpg" alt="授業風景2">
-          </div>
-        </article>
-
-        <!-- 保育こども：I・Y君 1年 -->
-        <article class="card card-hoiku shimmer catch float" data-float="10">
-          <div class="badge"><img src="images/IMG_2131.jpg" alt="I・Y君"></div>
-          <div class="card-head">
-            <span class="label">保育こどもデザイン学科</span><span class="grade">1年</span>
-          </div>
-          <h3 class="name">I・Y君</h3>
-          <p class="text">在校生の空気感が自分に合っていた。イベントでの交流が入学の後押しになりました。</p>
-          <div class="photos two">
-            <img src="images/IMG_2172.jpg" alt="授業風景1">
-            <img src="images/2024_161.jpg" alt="授業風景2">
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ===== 当日の流れ ===== -->
-    <section class="section" id="flow">
-      <h2 class="section-title shimmer catch float" data-float="8">当日の流れ</h2>
-
-      <div class="steps">
-        <article class="step shimmer catch float" data-float="12">
-          <div class="media"><img src="images/IMG_8359.jpg" alt="受付"></div>
-          <div class="body">
-            <span class="num">1. 受付</span>
-            <h3>学校説明会は11:00から、体験講座は13:30からスタート</h3>
-            <p>開始5分前までにご来校ください。オーキャンサポーターがお出迎えします。</p>
-          </div>
-        </article>
-
-        <article class="step shimmer catch float" data-float="12">
-          <div class="media"><img src="images/IMG_4046.jpg" alt="学校説明会"></div>
-          <div class="body">
-            <span class="num">2. 学校説明会（11:00〜11:30）</span>
-            <h3>学科のこと、入学の流れ、学費や進路サポートまで</h3>
-            <p>初めての方でも安心して聞ける内容でご案内します。</p>
-          </div>
-        </article>
-
-        <article class="step shimmer catch float" data-float="12">
-          <div class="media"><img src="images/IMG_5870.jpg" alt="校内見学"></div>
-          <div class="body">
-            <span class="num">3. 校内見学（11:30〜11:45）</span>
-            <h3>レトロな環境 × 最新設備を在校生がご案内</h3>
-            <p>意外と映えスポットがあるんです！</p>
-          </div>
-        </article>
-
-        <article class="step shimmer catch float" data-float="12">
-          <div class="media"><img src="images/Google_AI_Studio_2025-08-08T14_33_39.722Z.jpg" alt="個別相談"></div>
-          <div class="body">
-            <span class="num">4. 個別相談（11:45〜随時）</span>
-            <h3>不安に寄り添います</h3>
-            <p>スタッフと先輩が親切にサポートします。</p>
-          </div>
-        </article>
-
-        <article class="step shimmer catch float" data-float="12">
-          <div class="media"><img src="images/IMG_6704.jpg" alt="体験講座"></div>
-          <div class="body">
-            <span class="num">5. 体験講座（13:30〜15:00）</span>
-            <h3>初心者でも安心して体験できる内容が充実</h3>
-            <p>講座後は個別相談も随時。なんでもお気軽に。</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ===== 安心ガイド（ストーリー） ===== -->
-    <section class="section guide" id="first-time-guide">
-      <h2 class="section-title hand shimmer catch float" data-float="8">
-        はじめてのドキドキを、ぜんぶワクワクに！<br>オープンキャンパス安心ガイド
-      </h2>
-
-      <ol class="guide-steps">
-        <li class="gstep shimmer catch float" data-float="10">
-          <div class="gav-wrap"><img class="gavatar" src="images/Google_AI_Studio_2025-08-09T03_39_37.511Z.png" alt=""></div>
-          <div class="gcard">
-            <div class="ghead"><span class="gtime">① 出発前</span></div>
-            <ul class="glist">
-              <li>👕 服装は自由。<strong>制服でも私服でもOK</strong>。</li>
-              <li>👜 持ち物は<strong>無しでOK</strong>！資料はこっちで用意。</li>
-            </ul>
-          </div>
-        </li>
-        <li class="gstep shimmer catch float" data-float="10">
-          <div class="gav-wrap"><img class="gavatar" src="images/Google_AI_Studio_2025-08-09T03_45_02.490Z.png" alt=""></div>
-          <div class="gcard">
-            <div class="ghead"><span class="gtime">② アクセス</span></div>
-            <ul class="glist">
-              <li>📍 迷ったら <a class="glink" href="https://ndc.ac.jp/access/" target="_blank" rel="noopener">アクセス案内</a> or <strong>LINE</strong>してね！</li>
-            </ul>
-          </div>
-        </li>
-        <li class="gstep shimmer catch float" data-float="10">
-          <div class="gav-wrap"><img class="gavatar" src="images/Google_AI_Studio_2025-08-09T03_44_19.676Z.png" alt=""></div>
-          <div class="gcard">
-            <div class="ghead"><span class="gtime">③ 到着したら</span></div>
-            <ul class="glist"><li>学校に着いたらワクワクタイムの始まり！<strong>まずはゆったり受付へ</strong></li></ul>
-          </div>
-        </li>
-        <li class="gstep shimmer catch float" data-float="10">
-          <div class="gav-wrap"><img class="gavatar" src="images/Google_AI_Studio_2025-08-09T03_44_44.871Z.png" alt=""></div>
-          <div class="gcard">
-            <div class="ghead"><span class="gtime">④ 見学・体験中</span></div>
-            <ul class="glist">
-              <li>👀 見て・聞いて・体験！<strong>ひらめいたらその場で質問🎶</strong></li>
-              <li>🧃 休憩スペースもあるから、疲れたらひと息OK。</li>
-            </ul>
-          </div>
-        </li>
-        <li class="gstep shimmer catch float" data-float="10">
-          <div class="gav-wrap"><img class="gavatar" src="images/Google_AI_Studio_2025-08-09T03_39_37.511Z.png" alt=""></div>
-          <div class="gcard">
-            <div class="ghead"><span class="gtime">⑤ 帰り道</span></div>
-            <ul class="glist">
-              <li>📸 <strong>SNSアップOK!</strong> 記念にパシャっとどうぞ。</li>
-              <li>🚶 気楽に来て、気楽に帰ってOK。</li>
-            </ul>
-          </div>
-        </li>
-      </ol>
-    </section>
-
-  </main>
-
-  <!-- ===== フッター ===== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-cta">
-        <a class="btn btn-primary sweep-once" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">OPEN CAMPUSを予約</a>
-        <a class="btn btn-line sweep-once" href="https://lin.ee/y2DLr3Y" target="_blank" rel="noopener">LINEで質問</a>
-        <a class="btn btn-ghost sweep-once" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
-      </div>
-      <small>© 2025 NIPPON DESIGN WELFARE COLLEGE</small>
-    </div>
-  </footer>
-
-  <!-- ===== フローティングCTA（スクロールで出現／フッターで隠れる） ===== -->
-  <div class="sticky-cta" role="region" aria-label="固定操作バー">
-    <a class="btn btn-primary" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">予約</a>
-    <a class="btn btn-line" href="https://lin.ee/y2DLr3Y" target="_blank" rel="noopener">LINE</a>
-    <a class="btn btn-ghost" href="https://ndc.ac.jp/" target="_blank" rel="noopener">公式</a>
   </div>
+</header>
 
-  <!-- ===== 軽量JS：見えた瞬間“キラッ”＋キャッチアップ、スクロール同期の上下ゆらぎ、CTA表示制御 ===== -->
-  <script>
-    // IntersectionObserver: 見えたら inview を1回だけ付与（＝キラッ＆追いつき）
-    const io = new IntersectionObserver((ents)=>{
-      ents.forEach(e=>{
-        if(e.isIntersecting){ e.target.classList.add('inview'); io.unobserve(e.target); }
-      });
-    }, {rootMargin:"0px 0px -10% 0px", threshold:0.15});
-    document.querySelectorAll('.shimmer, .catch').forEach(el=>io.observe(el));
+<main class="container">
 
-    // スクロール同期：data-float の値(px)分の上下“追随”
-    const floats = Array.from(document.querySelectorAll('.float'));
-    let ticking = false;
-    function onScroll(){
-      if(!ticking){
-        requestAnimationFrame(()=>{
-          const vh = innerHeight;
-          floats.forEach(el=>{
-            const r = el.getBoundingClientRect();
-            const span = Math.min(1, Math.max(0, 1 - Math.abs(r.top + r.height*0.5 - vh*0.5)/(vh*0.6)));
-            const amp = parseFloat(el.dataset.float||8);
-            const offset = (1-span)*amp; // 近づくほど0、離れるほど+amp（下から追いつく感）
-            el.style.setProperty('--float', offset.toFixed(2) + 'px');
-          });
-          ticking=false;
-        });
-        ticking=true;
-      }
+  <!-- ===== 学生インタビュー ===== -->
+  <section class="section" id="voices">
+    <h2 class="section-title hand under sweep" data-reveal>OCサポーターが語る<br>“私”がここにいる理由</h2>
+
+    <div class="grid" data-float>
+      <article class="card dept-sweets sweep" data-reveal>
+        <div class="badge"><img src="images/IMG_0092.jpg" alt="S・Hさん"></div>
+        <span class="sticker">製菓デザイン学科</span>
+        <p style="margin:.4rem 0 0;font-weight:900">2年</p>
+        <h3>S・Hさん</h3>
+        <p>初めての見学でも、先輩が距離近く話してくれて安心できました。作品づくりを通じて“楽しい”が増えました。</p>
+        <div class="photos">
+          <img src="images/IMG_2172.jpg" alt="授業風景1">
+          <img src="images/2024_161.jpg" alt="授業風景2">
+        </div>
+      </article>
+
+      <article class="card dept-imagine sweep" data-reveal>
+        <div class="badge"><img src="images/IMG_2131.jpg" alt="S・Mさん"></div>
+        <span class="sticker">イマジネーションデザイン学科</span>
+        <p style="margin:.4rem 0 0;font-weight:900">1年</p>
+        <h3>S・Mさん</h3>
+        <p>レトロな校舎と最新設備の組み合わせが好き。制作相談も先生がすぐに乗ってくれて心強かったです。</p>
+        <div class="photos">
+          <img src="images/IMG_2172.jpg" alt="授業風景1">
+          <img src="images/2024_161.jpg" alt="授業風景2">
+        </div>
+      </article>
+
+      <article class="card dept-hoiku sweep" data-reveal>
+        <div class="badge"><img src="images/IMG_2131.jpg" alt="I・Y君"></div>
+        <span class="sticker">保育こどもデザイン学科</span>
+        <p style="margin:.4rem 0 0;font-weight:900">1年</p>
+        <h3>I・Y君</h3>
+        <p>在校生の空気感が自分に合っていた。イベントでの交流が入学の後押しになりました。</p>
+        <div class="photos">
+          <img src="images/IMG_2172.jpg" alt="授業風景1">
+          <img src="images/2024_161.jpg" alt="授業風景2">
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== 当日の流れ ===== -->
+  <section class="section" id="flow">
+    <h2 class="section-title under sweep" data-reveal>当日の流れ</h2>
+
+    <div class="grid" data-float>
+      <article class="step sweep" data-reveal>
+        <img src="images/IMG_8359.jpg" alt="受付">
+        <div class="body">
+          <span class="num">1. 受付</span>
+          <h3 style="margin:.3rem 0 .4rem">学校説明会は11:00から、体験講座は13:30からスタート</h3>
+          <p>イベント開始5分前までにご来校ください。オーキャンサポーターがお出迎えしますよ♪</p>
+        </div>
+      </article>
+
+      <article class="step sweep" data-reveal>
+        <img src="images/IMG_4046.jpg" alt="学校説明会">
+        <div class="body">
+          <span class="num">2. 学校説明会（11:00〜11:30）</span>
+          <h3 style="margin:.3rem 0 .4rem">学科のこと、入学の流れ、学費や進路サポートまで</h3>
+          <p>気になることをわかりやすくご紹介します。初めての方でも安心して聞ける内容になっています。</p>
+        </div>
+      </article>
+
+      <article class="step sweep" data-reveal>
+        <img src="images/IMG_5870.jpg" alt="校内見学">
+        <div class="body">
+          <span class="num">3. 校内見学（11:30〜11:45）</span>
+          <h3 style="margin:.3rem 0 .4rem">レトロな環境 × 最新設備を在校生がご案内</h3>
+          <p>意外と映えスポットがあるんですよ！</p>
+        </div>
+      </article>
+
+      <article class="step sweep" data-reveal>
+        <img src="images/Google_AI_Studio_2025-08-08T14_33_39.722Z.jpg" alt="個別相談">
+        <div class="body">
+          <span class="num">4. 個別相談（11:45〜随時）</span>
+          <h3 style="margin:.3rem 0 .4rem">不安に寄り添います</h3>
+          <p>入学前に感じる不安は誰もが抱えるもの。スタッフと先輩が親切にサポートします。</p>
+        </div>
+      </article>
+
+      <article class="step sweep" data-reveal>
+        <img src="images/IMG_6704.jpg" alt="体験講座">
+        <div class="body">
+          <span class="num">5. 体験講座（13:30〜15:00）</span>
+          <h3 style="margin:.3rem 0 .4rem">初心者でも安心して体験できる内容が充実</h3>
+          <p>講座の中で学科のことや将来のことなど、なんでもお気軽にご相談ください。</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== 安心ガイド ===== -->
+  <section class="section guide" id="guide">
+    <h2 class="section-title hand under sweep" data-reveal>
+      はじめてのドキドキを、ぜんぶワクワクに！<br>オープンキャンパス安心ガイド
+    </h2>
+
+    <ul class="glist" data-float>
+      <li class="gitem sweep" data-reveal>
+        <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_39_37.511Z.png" alt=""></div>
+        <div class="gcard">
+          <strong>① 出発前</strong><br>👕 服装は自由。<b>制服でも私服でもOK</b>。／ 👜 持ち物は <b>無しでOK</b>！資料はこっちで用意。
+        </div>
+      </li>
+      <li class="gitem sweep" data-reveal>
+        <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_45_02.490Z.png" alt=""></div>
+        <div class="gcard">
+          <strong>② アクセス</strong><br>📍 迷ったら <a href="https://ndc.ac.jp/access/" target="_blank" rel="noopener">アクセス案内</a> or <b>LINE</b>してね！
+        </div>
+      </li>
+      <li class="gitem sweep" data-reveal>
+        <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_44_19.676Z.png" alt=""></div>
+        <div class="gcard">
+          <strong>③ 到着したら</strong><br>学校に着いたらワクワクタイムの始まり！<b>まずはゆったり受付へ</b>
+        </div>
+      </li>
+      <li class="gitem sweep" data-reveal>
+        <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_44_44.871Z.png" alt=""></div>
+        <div class="gcard">
+          <strong>④ 見学・体験中</strong><br>👀 見て・聞いて・体験！<b>ひらめいたらその場で質問🎶</b> ／ 🧃 休憩もOK。
+        </div>
+      </li>
+      <li class="gitem sweep" data-reveal>
+        <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_39_37.511Z.png" alt=""></div>
+        <div class="gcard">
+          <strong>⑤ 帰り道</strong><br>📸 <b>SNSアップOK!</b> 記念にパシャっとどうぞ。／ 🚶 気楽に来て、気楽に帰ってOK。
+        </div>
+      </li>
+    </ul>
+  </section>
+</main>
+
+<!-- ===== フッター ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-cta">
+      <a class="btn btn-blue"  href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">OPEN CAMPUSを予約</a>
+      <a class="btn btn-line"  href="https://lin.ee/y2DLr3Y" target="_blank" rel="noopener">LINEで質問</a>
+      <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
+    </div>
+    <small>© 2025 NIPPON DESIGN WELFARE COLLEGE</small>
+  </div>
+</footer>
+
+<!-- 固定CTA（スクロールで出現） -->
+<nav class="sticky-cta" aria-label="固定操作バー">
+  <a class="btn btn-blue"  href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">予約</a>
+  <a class="btn btn-line"  href="https://lin.ee/y2DLr3Y" target="_blank" rel="noopener">LINE</a>
+  <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">公式</a>
+</nav>
+
+<script>
+/* 出現監視：一回だけis-inviewを付与（キラッ＆追いつき） */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('is-inview');
+      io.unobserve(e.target);
     }
-    addEventListener('scroll', onScroll, {passive:true});
-    addEventListener('resize', onScroll);
-    onScroll();
+  })
+},{threshold:.22});
+document.querySelectorAll('[data-reveal], .sweep').forEach(el=>io.observe(el));
 
-    // Sticky CTA：ヒーロー超えで表示、フッターに近づいたら隠す
-    (function(){
-      const sticky = document.querySelector('.sticky-cta');
-      const footer = document.querySelector('footer');
-      function updateSticky(){
-        if(!sticky || !footer) return;
-        const scrolled = scrollY > 600;
-        const nearFooter = footer.getBoundingClientRect().top < innerHeight - 20;
-        sticky.classList.toggle('show', scrolled && !nearFooter);
-      }
-      addEventListener('scroll', updateSticky, {passive:true});
-      addEventListener('resize', updateSticky);
-      document.addEventListener('DOMContentLoaded', updateSticky);
-      updateSticky();
-    })();
-  </script>
+/* スクロール量で“追いつく上下モーション” */
+const floatGroups = document.querySelectorAll('[data-float]');
+function onScroll(){
+  const vh = innerHeight;
+  floatGroups.forEach(g=>{
+    const r = g.getBoundingClientRect();
+    const center = (r.top + r.bottom)/2;
+    const delta = (vh*0.5 - center) / (vh*0.5); // -1..1
+    const dy = Math.max(-12, Math.min(12, -delta*10));
+    g.style.transform = `translateY(${dy}px)`;
+  });
+  // CTA 表示
+  document.querySelector('.sticky-cta').classList.toggle('show', scrollY > 700);
+}
+onScroll();
+addEventListener('scroll', onScroll, {passive:true});
+addEventListener('resize', onScroll);
+
+/* 画像遅延・iOS白スジ軽減 */
+document.querySelectorAll('img').forEach(i=>{ i.loading='lazy'; i.decoding='async'; });
+</script>
 </body>
 </html>
