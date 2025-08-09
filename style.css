@@ -1,248 +1,229 @@
-/* ========== 基本設定 / 背景 ========== */
+/* ========== Reset / Base ========== */
+*{box-sizing:border-box}
+html,body{margin:0}
+img{max-width:100%;display:block;height:auto}
+
 :root{
   --ink:#0b1224; --muted:#6b7280;
-  --blue:#1480ff; --green:#11c000; --ink-soft:#23324a;
-  --ghost:#0c0c0c; --rad:28px; --shadow:0 18px 46px rgba(15,23,42,.16);
-  /* 学科色（淡め） */
-  --sweets:#aee9e5;    /* 製菓 */
-  --imagine:#ffd6e3;   /* イマジネーション */
-  --hoiku:#ffe3a9;     /* 保育こども */
+  --blue:#1480ff; --blue2:#0f6de0;
+  --line:#00c100; --line2:#009400;
+  --blk:#111; --blk2:#0b0b0b;
+  --shadow:0 14px 34px rgba(15,23,42,.16);
+  --r:18px;
 }
 
-/* 端末全体 */
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
+/* 背景：多層グラデを固定 */
 body{
-  color:var(--ink); line-height:1.8;
+  color:var(--ink);
   font-family:'Noto Sans JP',system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
-  /* 楽しい多層グラデーション（固定） */
+  line-height:1.85;
   background:
-    linear-gradient(180deg,#fff7f0 0%,#fffdfc 28%,#ffffff 46%,#f3f9ff 70%,#ffffff 100%),
-    radial-gradient(120% 70% at 15% -10%, rgba(255,225,241,.35) 0 55%, transparent 56%),
-    radial-gradient(120% 70% at 85% 0%,  rgba(232,252,255,.35) 0 55%, transparent 56%),
-    radial-gradient(120% 70% at 50% 115%, rgba(255,246,217,.35) 0 55%, transparent 56%);
-  background-attachment: fixed, fixed, fixed, fixed;
-  text-rendering:optimizeLegibility;
+    radial-gradient(120% 80% at 10% -10%, #ffe9f6 0 45%, transparent 46%),
+    radial-gradient(120% 80% at 95% 0%,  #e6f7ff 0 45%, transparent 46%),
+    radial-gradient(120% 80% at 50% 115%, #fff6d9 0 45%, transparent 46%),
+    linear-gradient(180deg,#fff 0%,#f9fbff 45%,#ffffff 100%);
+  background-attachment:fixed,fixed,fixed,fixed;
 }
 
-.container{ width:min(960px,92vw); margin-inline:auto }
-.site-title{
-  position:fixed; top:10px; left:10px; z-index:1000;
-  font-weight:900; font-size:12px; color:#1f2937;
-  background:rgba(255,255,255,.9); padding:6px 10px; border-radius:999px;
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
-}
+/* ========== Layout / Sections ========== */
+.container{width:min(980px,92vw);margin-inline:auto}
+.section{padding:28px 0;position:relative}
 
-/* ========== HERO ========== */
-.hero{ position:relative; min-height:66svh; overflow:hidden; }
-.hero-inner{ position:relative; z-index:1; padding:14svh 0 24px }
-.hero-bg{
-  position:absolute; inset:0; width:100%; height:100%;
-  object-fit:cover; object-position:center 32%;
-  transform:scale(var(--z,1)); transition:transform .2s ease; will-change:transform;
-  filter:saturate(1.08) contrast(1.02);
-}
-.hero-overlay{ position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.25) 60%, rgba(255,255,255,.35) 80%);
-  pointer-events:none;
-}
-.hero-vignette{ position:absolute; left:0; right:0; bottom:0; height:42%;
-  background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.16) 70%, rgba(0,0,0,.24) 100%);
-  pointer-events:none;
-}
-
-/* リード（白帯は短く・中央寄せ） */
-.lead{
-  display:inline-flex; align-items:center; gap:.6ch;
-  margin:0 0 10px;
-  background:rgba(255,255,255,.92);
-  padding:10px 14px; border-radius:999px;
-  font-weight:700; color:#23324a; box-shadow:0 8px 22px rgba(0,0,0,.08);
-  max-width:min(92vw,680px);
-}
-.led-dot{ width:12px; height:12px; border-radius:50%; display:inline-block;
-  background:radial-gradient(circle at 30% 30%, #7bd6ff, #0f7bff 60%); box-shadow:0 0 0 3px rgba(15,123,255,.15);
-}
-
-.title{ margin:0 0 12px; padding-inline:clamp(14px,4.8vw,20px);
-  font-weight:900; font-size:clamp(26px,7.6vw,40px); line-height:1.14; color:#0b1224;
-}
-.title span{ display:block }
-
-/* CTA（1行固定） */
-.cta-row{ display:flex; gap:10px; padding-inline:clamp(14px,4.8vw,20px); width:min(92vw,700px) }
-.btn{
-  flex:1 1 0; min-width:0; height:46px;
-  display:flex; align-items:center; justify-content:center;
-  padding-inline:12px; border-radius:999px;
-  color:#fff; text-decoration:none; font-weight:900;
-  font-size:clamp(13px,3.4vw,15px);
-  white-space:nowrap; text-wrap:nowrap; overflow-wrap:normal;
-  word-break:keep-all; line-break:strict;
-  box-shadow:0 10px 24px rgba(0,0,0,.20); position:relative; overflow:hidden;
-}
-.btn-primary{ background:linear-gradient(180deg,#2f89ff,#186be8); min-width:210px; }
-.btn-line{ background:linear-gradient(180deg,#12cd22,#0da017) }
-.btn-ghost{ background:linear-gradient(180deg,#191919,#0e0e0e) }
-
-/* スクロール時だけキラッ（sweep） */
-.sweep{ isolation:isolate }
-.sweep::after{
-  content:""; position:absolute; inset:-2px; pointer-events:none; border-radius:inherit; mix-blend-mode:screen;
-  background:linear-gradient(115deg, transparent 30%, rgba(255,255,255,.85) 50%, transparent 70%);
-  transform:translateX(-120%) skewX(-18deg); opacity:0;
-}
-@supports (animation-timeline: view()) {
-  .sweep::after{
-    animation:sweepShine 1 both;
-    animation-timeline:view(block);
-    animation-range:contain 0% contain 30%;
-  }
-  @keyframes sweepShine{
-    0%{ transform:translateX(-120%) skewX(-18deg); opacity:0 }
-    8%{ opacity:.9 }
-    100%{ transform:translateX(120%) skewX(-18deg); opacity:0 }
-  }
-}
-
-/* ========== セクション共通 ========== */
-.section{ padding:36px 0 }
+/* 見出し（手書きフォント＋下線） */
 .section-title{
-  margin:0 0 14px; padding:0 clamp(14px,4.8vw,20px);
-  font-size:clamp(20px,5.8vw,28px); font-weight:900; color:#111827;
+  margin:0 0 16px; font-weight:900;
+  font-size:clamp(20px,5.8vw,28px); letter-spacing:.02em;
   position:relative;
 }
 .section-title.hand{
-  font-family:'Yomogi','Noto Sans JP',sans-serif; font-weight:700; letter-spacing:.02em;
+  font-family:'Yomogi','Noto Sans JP',sans-serif;
+  -webkit-text-stroke:.6px rgba(11,18,36,.12);
 }
-.section-title::after{
-  content:""; position:absolute; left:clamp(14px,4.8vw,20px); right:clamp(14px,4.8vw,20px); bottom:-8px; height:6px;
-  background:linear-gradient(90deg,#0f7bff,#7bd6ff); border-radius:6px; opacity:.9;
+.section-title .underline{
+  display:block; height:6px; width:100%;
+  background:linear-gradient(90deg,#7bd6ff,#1480ff);
+  border-radius:6px; opacity:.95; margin-top:8px; position:relative; overflow:hidden;
+}
+.section-title.in .underline::after{
+  content:""; position:absolute; inset:0;
+  transform:translateX(-120%) skewX(-20deg);
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.7),transparent);
+  animation:u-shine .9s ease .2s forwards;
+}
+@keyframes u-shine{to{transform:translateX(120%) skewX(-20deg)}}
+
+/* 手書き文字の1文字ポップ（JSで .char を付与） */
+.hand span.char{
+  display:inline-block; opacity:0; transform:translateY(14px) rotate(var(--rot,0deg)) scale(.92);
+  filter:blur(2px);
+}
+.hand.in span.char{
+  animation:charPop .6s cubic-bezier(.2,.8,.2,1) forwards;
+  animation-delay:var(--d,0ms);
+}
+@keyframes charPop{
+  40%{transform:translateY(-6px) rotate(var(--rot,0deg)) scale(1.02); filter:blur(0); opacity:1}
+  100%{transform:translateY(0) rotate(0) scale(1); filter:blur(0); opacity:1}
 }
 
-/* スクロールで“追いつく”アニメ（lift） */
-@supports (animation-timeline: view()) {
-  .section-title, .student-card, .step, .gcard{
-    animation:liftUp .8s ease-out both;
-    animation-timeline:view(block);
-    animation-range:entry 0% entry 60%;
+/* ========== 固定ラベル ========== */
+.site-title{
+  position:fixed; top:14px; left:4vw; z-index:50;
+  font-weight:900; font-size:12px; color:#2f2f2f;
+  background:rgba(255,255,255,.95); padding:6px 10px; border-radius:999px;
+  box-shadow:0 8px 20px rgba(0,0,0,.12)
+}
+
+/* ========== HERO（スマホ前提） ========== */
+.hero{position:relative; min-height:62svh; display:grid; place-items:end start; overflow:hidden}
+.hero-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 35%}
+.hero-overlay{position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0) 0,rgba(0,0,0,.18) 75%,rgba(0,0,0,.25))}
+.hero-inner{position:relative; z-index:1; width:100%; padding:14px 0 20px}
+
+/* リード（白帯）控えめに */
+.lead{
+  width:min(900px,92vw); margin:0 auto 8px;
+  background:rgba(255,255,255,.24); backdrop-filter:blur(2px);
+  border-radius:999px; padding:8px 14px; font-weight:700; font-size:14px;
+  display:flex; gap:.6ch; align-items:center;
+  box-shadow:0 10px 14px rgba(0,0,0,.05)
+}
+.lead .dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(#7bd6ff,#1480ff)}
+.lead .lead-text{white-space:nowrap}
+
+/* ヒーロー見出し：濃ネイビー＋白フチ（文字の裏側） */
+.title{
+  width:min(900px,92vw);
+  margin:0 auto 10px;
+  font-weight:900;
+  font-size:clamp(22px,6.5vw,34px);
+  line-height:1.16;
+  color:#133a7c;                 /* 濃いめネイビー */
+  background:transparent;
+  padding:0;
+}
+.title span{display:block}
+
+/* Safari/iOS 主体：白フチを直接描く */
+@supports (-webkit-text-stroke: 1px white) {
+  .title{
+    -webkit-text-stroke: 2px rgba(255,255,255,.95);
+    text-stroke: 2px rgba(255,255,255,.95);
+    text-shadow: 0 2px 6px rgba(0,0,0,.25); /* ほんのり落ち影 */
   }
-  @keyframes liftUp{ from{ transform:translateY(26px); opacity:.0 } to{ transform:none; opacity:1 } }
+}
+/* フォールバック：多方向シャドウで白フチ風 */
+@supports not (-webkit-text-stroke: 1px white) {
+  .title{
+    text-shadow:
+      -1px -1px 0 #fff, 1px -1px 0 #fff,
+      -1px  1px 0 #fff, 1px  1px 0 #fff,
+      0 2px 6px rgba(0,0,0,.25);
+  }
 }
 
-/* ========== インタビュー（3カード） ========== */
-.grid{ display:grid; grid-template-columns:1fr; gap:14px; padding-inline:clamp(14px,4.8vw,20px) }
-.student-card{
-  position:relative; border-radius:20px; background:#fff; box-shadow:var(--shadow);
-  padding:18px 16px 16px; overflow:hidden;
+/* ========== Buttons（グロッシー） ========== */
+.btnrow{width:min(900px,92vw); margin:0 auto; display:flex; gap:10px}
+.btn{
+  --c1:#000; --c2:#333;
+  flex:1; display:flex; justify-content:center; align-items:center; gap:.5ch;
+  height:48px; padding:0 14px; border-radius:999px; font-weight:900;
+  font-size:clamp(14px,3.8vw,15px); color:#fff; text-decoration:none;
+  position:relative; overflow:hidden; white-space:nowrap;
+  background:linear-gradient(180deg,var(--c1),var(--c2));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 10px 22px rgba(15,23,42,.20);
 }
-.dept-sweets { background:linear-gradient(180deg, color-mix(in srgb, var(--sweets) 80%, #fff 20%), #ffffff) }
-.dept-imagine{ background:linear-gradient(180deg, color-mix(in srgb, var(--imagine) 80%,#fff 20%), #ffffff) }
-.dept-hoiku  { background:linear-gradient(180deg, color-mix(in srgb, var(--hoiku) 80%,  #fff 20%), #ffffff) }
+.btn::before{content:""; position:absolute; inset:0 0 55% 0; background:linear-gradient(180deg,rgba(255,255,255,.45),transparent); pointer-events:none}
+.btn:active{transform:translateY(1px)}
+.btn-blue{--c1:#2b8dff; --c2:#0f6de0; font-size:clamp(13px,3.4vw,14px)} /* 青だけ少し小さく＝1行死守 */
+.btn-line{--c1:#00c100; --c2:#009400}
+.btn-black{--c1:#161616; --c2:#0b0b0b}
 
-.sticker{
-  display:inline-block; background:#fff; color:#111; font-weight:900; font-size:.82rem;
-  padding:6px 10px; border-radius:12px; box-shadow:0 6px 16px rgba(0,0,0,.10); margin-bottom:8px;
+/* さりげない“キラッ” */
+.sweep{position:relative; overflow:hidden}
+.sweep.in::after{
+  content:""; position:absolute; inset:0;
+  transform:translateX(-120%) skewX(-20deg);
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent);
+  animation:shine .9s ease forwards;
+}
+@keyframes shine{to{transform:translateX(120%) skewX(-20deg)}}
+
+/* ========== グリッド / カード ========== */
+.grid{display:grid; gap:16px}
+@media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}
+
+.card{
+  position:relative; padding:16px; border-radius:var(--r);
+  box-shadow:var(--shadow); background:#fff; overflow:hidden;
+}
+/* 学科色（淡く） */
+.dept-sweets{--tone:#bff3ec}
+.dept-imagine{--tone:#ffe0ec}
+.dept-hoiku{--tone:#ffeec0}
+.card::before{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(135deg, color-mix(in srgb,var(--tone) 68%,#fff 32%), #fff);
+  z-index:-1;
 }
 .badge{
-  position:absolute; right:10px; top:10px; width:64px; height:64px;
-  border-radius:999px; overflow:hidden; background:#fff; box-shadow:0 10px 20px rgba(0,0,0,.12), 0 0 0 5px rgba(255,255,255,.9);
+  position:absolute; right:12px; top:12px; width:72px; height:72px; border-radius:999px;
+  background:#fff; box-shadow:0 10px 22px rgba(0,0,0,.16), 0 0 0 6px rgba(255,255,255,.95); overflow:hidden;
 }
-.badge img{ width:100%; height:100%; object-fit:cover; object-position:center 28% }
-
-.student-title{ margin:6px 0 2px; font-weight:900; }
-.student-name { margin:2px 0 8px; font-weight:900; font-size:1.25rem }
-.student-body { margin:8px 0 10px; color:#2f3a4a }
-
-.student-photos{
-  display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:8px;
-}
-.student-photos img{
-  width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:14px; box-shadow:0 10px 24px rgba(15,23,42,.14);
-}
+.badge img{width:100%; height:100%; object-fit:cover; object-position:center 30%}
+.sticker{display:inline-block; background:#fff; color:#111; padding:6px 10px; border-radius:10px; font-weight:900; font-size:12px; box-shadow:0 8px 18px rgba(0,0,0,.12); margin-bottom:8px}
+.card h3{margin:10px 0 6px; font-weight:900}
+.card .photos{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:12px}
+.card .photos img{width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px; box-shadow:0 8px 22px rgba(15,23,42,.12); background:#0001}
 
 /* ========== 当日の流れ ========== */
-.steps{ display:grid; gap:12px; padding-inline:clamp(14px,4.8vw,20px) }
 .step{
-  background:#fff; border-radius:18px; box-shadow:var(--shadow); overflow:hidden;
+  display:grid; grid-template-columns:1fr; gap:10px;
+  background:#fff; border-radius:16px; box-shadow:var(--shadow); overflow:hidden;
 }
-.step img{ width:100%; aspect-ratio:16/10; object-fit:cover; display:block }
-.step .body{ padding:12px 14px 16px }
-.step .num{
-  display:inline-block; font-weight:900; color:#fff; background:linear-gradient(180deg,#0f7bff,#7bd6ff);
-  padding:.2rem .6rem; border-radius:999px; margin-bottom:6px;
-}
+.step img{width:100%; aspect-ratio:16/10; object-fit:cover; background:#0001}
+.step .body{padding:12px 14px}
+.num{display:inline-block; background:linear-gradient(180deg,#1480ff,#7bd6ff); color:#fff; font-weight:900; padding:.2rem .6rem; border-radius:999px; margin-bottom:6px}
 
-/* ========== 安心ガイド（ストーリー） ========== */
-.guide-story{ padding-top:10px }
-.guide-steps{ list-style:none; margin:0; padding:0 0 6px }
-.gstep{ position:relative; padding-left:84px; margin:0 0 12px; }
-.gline{
-  position:absolute; left:46px; top:0; bottom:0; width:3px;
-  background:linear-gradient(180deg,#b3d9ff,#e5efff); border-radius:3px; z-index:1;
-}
+/* ========== 安心ガイド（タイムライン） ========== */
+.guide{position:relative}
+.glist{list-style:none; margin:0; padding:0; display:grid; gap:12px}
+.gitem{display:grid; grid-template-columns:auto 1fr; gap:10px; align-items:center}
 .gavatar{
-  position:absolute; left:10px; top:8px; width:72px; height:72px;
-  border-radius:999px; background:#eaf6ff; /* 透明PNGでも顔が映える淡色 */
-  display:grid; place-items:center; overflow:hidden; z-index:2; box-shadow:0 10px 20px rgba(0,0,0,.12);
+  width:60px; height:60px; border-radius:999px; overflow:hidden;
+  box-shadow:0 8px 18px rgba(0,0,0,.14);
+  background:linear-gradient(180deg,#e6f5ff,#fff); display:grid; place-items:center;
 }
-.gavatar img{ width:100%; height:100%; object-fit:cover; object-position:center 28% }
+.gavatar img{width:100%; height:100%; object-fit:cover; object-position:center 35%}
+/* ①④は少し上寄せ、②（アクセス）は下寄せで顔切れ防止、⑤は新画像用 */
+.gitem:nth-child(1) .gavatar img,
+.gitem:nth-child(4) .gavatar img{object-position:center 28%}
+.gitem.access .gavatar img{object-position:center 48%}
+.gcard{background:#fff; border-radius:14px; box-shadow:var(--shadow); padding:10px 12px}
 
-.gcard{
-  position:relative; background:#fff; border-radius:16px; box-shadow:var(--shadow);
-  padding:12px 14px; margin-right:clamp(14px,4.8vw,20px); margin-left:0;
-}
-.ghead{ font-weight:900; color:#0b1224; margin-bottom:6px }
-.gtime{ display:inline-block; background:#e8f1ff; color:#1062e0; font-weight:900; padding:.14rem .56rem; border-radius:999px }
-.glist{ margin:0; padding-left:1.1em; }
-.glist li{ margin:.25rem 0; }
+/* ========== “追いつく”上下モーションの対象 ========== */
+[data-float]{will-change:transform}
 
 /* ========== フッター / 固定CTA ========== */
-.footer{ padding:40px 0 72px; text-align:center; color:var(--muted) }
-.footer-cta{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:14px }
-.footer .btn{ height:44px; padding-inline:16px; font-size:.95rem }
-
-/* Sticky CTA（SP） */
+.footer{padding:42px 0 96px; text-align:center; color:var(--muted)}
 .sticky-cta{
-  position:fixed; left:0; right:0; bottom:-80px; display:flex; gap:10px;
-  padding:10px 14px; backdrop-filter:blur(12px);
-  background:rgba(255,255,255,.86); box-shadow:0 -14px 26px rgba(0,0,0,.12);
-  transition:bottom .28s ease; z-index:1000;
+  position:fixed; left:0; right:0; bottom:-80px;
+  display:flex; gap:10px; padding:10px 14px;
+  background:rgba(255,255,255,.92); backdrop-filter:blur(10px);
+  box-shadow:0 -12px 24px rgba(0,0,0,.14); transition:bottom .28s; z-index:60;
 }
-.sticky-cta.show{ bottom:0 }
-.sticky-cta .btn{ flex:1; height:46px }
+.sticky-cta .btn{height:46px}
+.sticky-cta.show{bottom:0}
 
-/* ========== スマホ最適化 ========== */
-@media (min-width: 680px){
-  .grid{ grid-template-columns:repeat(3,1fr) }
-  .hero-inner{ padding-top:18svh }
-}
-
-@media (max-width: 360px){
-  .lead{ padding:8px 12px; font-size:.88rem }
-  .title{ font-size:clamp(24px,7vw,28px) }
-  .btn{ font-size:12.5px; }
-  .btn-primary{ min-width:200px }
+/* ========== リビール / パララックス ========== */
+.reveal{opacity:0; transform:translateY(26px)}
+.reveal.in{opacity:1; animation:catch .8s cubic-bezier(.2,.8,.2,1) both}
+@keyframes catch{
+  0%{transform:translateY(26px)} 60%{transform:translateY(-8px)} 100%{transform:translateY(0)}
 }
 
-/* ========== CSS Scroll-linked 連動 ========== */
-/* ヒーローのズームは下の @supports で定義。ここはその他の“追いつく”やキラッ */
-@supports (animation-timeline: view()) {
-  /* 見出し・カードのキラッ */
-  .sweep::after{
-    animation:sweepShine 1 both;
-    animation-timeline:view(block);
-    animation-range:contain 0% contain 35%;
-  }
-  /* スクロールで上下に追いつく */
-  .lift, .student-card, .step, .gcard{
-    animation:liftUp .9s cubic-bezier(.2,.7,.2,1) both;
-    animation-timeline:view(block);
-    animation-range:entry 0% entry 65%;
-  }
+/* 低モーション環境 */
+@media (prefers-reduced-motion: reduce){
+  .reveal,.sweep,.hand span.char{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
 }
-
-/* ========== 細部 ========== */
-a{ color:#135ef5; text-decoration:underline 1px rgba(19,94,245,.35) }
-a:hover{ text-decoration-color:rgba(19,94,245,.7) }
-img{ display:block; max-width:100% }
