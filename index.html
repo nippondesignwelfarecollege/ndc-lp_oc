@@ -34,27 +34,38 @@ body{
 .container{width:min(980px,92vw);margin-inline:auto}
 .section{padding:28px 0;position:relative}
 .section-title{
-  margin:0 0 16px;
-  font-weight:900;
-  font-size:clamp(20px,5.8vw,28px);
-  letter-spacing:.02em;
-  position:relative;
+  margin:0 0 16px;font-weight:900;
+  font-size:clamp(20px,5.8vw,28px);letter-spacing:.02em;position:relative;
 }
 .section-title.hand{
   font-family:'Yomogi','Noto Sans JP',sans-serif;
-  text-shadow:0 0 1px rgba(11,18,36,.35),0 1px 0 rgba(11,18,36,.25);
   -webkit-text-stroke:.6px rgba(11,18,36,.12);
 }
 .section-title .underline{
   display:block;height:6px;width:100%;
   background:linear-gradient(90deg,#7bd6ff,#1480ff);
-  border-radius:6px;opacity:.9;margin-top:8px;
+  border-radius:6px;opacity:.9;margin-top:8px;position:relative;overflow:hidden;
 }
+.section-title.in .underline::after{
+  content:"";position:absolute;inset:0;transform:translateX(-120%) skewX(-20deg);
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.7),transparent);
+  animation:u-shine .9s ease .2s forwards;
+}
+@keyframes u-shine{to{transform:translateX(120%) skewX(-20deg)}}
 
-/* ===== Reveal (scroll) ===== */
-.reveal{opacity:0;transform:translateY(26px)}
-.reveal.in{opacity:1;animation:catch .8s cubic-bezier(.2,.8,.2,1) both}
-@keyframes catch{0%{transform:translateY(26px)}60%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+/* 手書き風：1文字ずつポップ */
+.hand span.char{
+  display:inline-block;opacity:0;transform:translateY(14px) rotate(var(--rot,0deg)) scale(.92);
+  filter:blur(2px);
+}
+.hand.in span.char{
+  animation:charPop .6s cubic-bezier(.2,.8,.2,1) forwards;
+  animation-delay:var(--d,0ms);
+}
+@keyframes charPop{
+  40%{transform:translateY(-6px) rotate(var(--rot,0deg)) scale(1.02);filter:blur(0);opacity:1}
+  100%{transform:translateY(0) rotate(0deg) scale(1);filter:blur(0);opacity:1}
+}
 
 /* ===== Fixed label ===== */
 .site-title{
@@ -69,55 +80,53 @@ body{
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 0,rgba(0,0,0,.18) 75%,rgba(0,0,0,.25))}
 .hero-inner{position:relative;z-index:1;width:100%;padding:14px 0 20px}
 
-/* ← 透明度をさらに上げ、ぼかしも弱め */
+/* リード文：さらに薄く */
 .lead{
   width:min(900px,92vw);margin:0 auto 8px;
-  background:rgba(255,255,255,.55);
+  background:rgba(255,255,255,.45);
   backdrop-filter:blur(3px);
   border-radius:999px;padding:8px 14px;
   font-weight:700;font-size:14px;display:flex;gap:.6ch;align-items:center;
-  box-shadow:0 10px 18px rgba(0,0,0,.06)
+  box-shadow:0 10px 14px rgba(0,0,0,.05)
 }
 .lead .dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(#7bd6ff,#1480ff)}
 
-/* ← 大見出しの幕&ぼかしを弱める */
+/* 大見出し：幕ぼかしさらに弱め */
 .title{
   width:min(900px,92vw);margin:0 auto 10px;color:#0b1224;font-weight:900;
   font-size:clamp(22px,6.5vw,34px);line-height:1.18;
   padding:6px 10px;border-radius:14px;
-  background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.02));
-  -webkit-backdrop-filter:blur(1.2px);
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+  -webkit-backdrop-filter:blur(.8px);
   text-shadow:0 2px 0 rgba(255,255,255,.35),0 3px 8px rgba(0,0,0,.10);
 }
 .title span{display:block}
 
-/* Buttons under hero */
+/* Buttons */
 .btnrow{width:min(900px,92vw);margin:0 auto;display:flex;gap:10px}
 .btn{
   --c1:#000;--c2:#333;
   flex:1;display:flex;justify-content:center;align-items:center;gap:.5ch;
   height:48px;padding:0 14px;border-radius:999px;font-weight:900;
-  font-size:clamp(14px,3.8vw,15px); /* ほんの少しだけ可変で1行死守 */
+  font-size:clamp(14px,3.8vw,15px);
   color:#fff;text-decoration:none;position:relative;overflow:hidden;
   background:linear-gradient(180deg,var(--c1),var(--c2));
   box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 10px 22px rgba(15,23,42,.20);
-  white-space:nowrap; /* ← 必ず1行 */
+  white-space:nowrap;
 }
-.btn::before{content:"";position:absolute;inset:0 0 55% 0;background:linear-gradient(180deg,rgba(255,255,255,.45),transparent);pointer-events:none}
-.btn:active{transform:translateY(1px)}
-.btn-blue{--c1:#2b8dff;--c2:#0f6de0}
+.btn-blue{--c1:#2b8dff;--c2:#0f6de0; font-size:clamp(13px,3.4vw,14px);} /* ← 青ボタンだけ少し小さく */
 .btn-line{--c1:#00c100;--c2:#00a400}
 .btn-black{--c1:#161616;--c2:#0b0b0b}
-/* Shine on appear */
+.btn::before{content:"";position:absolute;inset:0 0 55% 0;background:linear-gradient(180deg,rgba(255,255,255,.45),transparent);pointer-events:none}
+.btn:active{transform:translateY(1px)}
 .sweep{position:relative;overflow:hidden}
-.sweep.in::after{content:"";position:absolute;inset:0;transform:translateX(-120%) skewX(-20deg);background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent);animation:shine 900ms ease forwards}
+.sweep.in::after{content:"";position:absolute;inset:0;transform:translateX(-120%) skewX(-20deg);background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent);animation:shine .9s ease forwards}
 @keyframes shine{to{transform:translateX(120%) skewX(-20deg)}}
 
 /* ===== Cards / Grid ===== */
 .grid{display:grid;gap:16px}
 @media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}
 .card{position:relative;padding:16px;border-radius:var(--r);box-shadow:var(--shadow);background:#fff;overflow:hidden}
-/* 学科色（淡め） */
 .dept-sweets{--tone:#bff3ec}
 .dept-imagine{--tone:#ffe0ec}
 .dept-hoiku{--tone:#ffeec0}
@@ -141,11 +150,13 @@ body{
 .gitem{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center}
 .gavatar{width:60px;height:60px;border-radius:999px;overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,.14);background:linear-gradient(180deg,#e6f5ff,#fff);display:grid;place-items:center}
 .gavatar img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
-/* ②アクセスの顔が切れないようにやや下寄せ */
+/* ②は下寄せで顔切れ防止、①④は少し上に移動（= 顔をやや高めに） */
+.gitem:nth-child(1) .gavatar img,
+.gitem:nth-child(4) .gavatar img{object-position:center 28%}
 .gitem.access .gavatar img{object-position:center 48%}
 .gcard{background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:10px 12px}
 
-/* ===== Scroll micro float ===== */
+/* ===== Micro float ===== */
 [data-float]{will-change:transform}
 
 /* ===== Footer / Sticky CTA ===== */
@@ -157,6 +168,11 @@ body{
 }
 .sticky-cta .btn{height:46px}
 .sticky-cta.show{bottom:0}
+
+/* ===== Reveal ===== */
+.reveal{opacity:0;transform:translateY(26px)}
+.reveal.in{opacity:1;animation:catch .8s cubic-bezier(.2,.8,.2,1) both}
+@keyframes catch{0%{transform:translateY(26px)}60%{transform:translateY(-8px)}100%{transform:translateY(0)}}
 </style>
 </head>
 <body>
@@ -184,7 +200,7 @@ body{
 <main class="container">
 
   <section class="section">
-    <h2 class="section-title hand reveal">OCサポーターが語る<br>“私”がここにいる理由<span class="underline"></span></h2>
+    <h2 class="section-title hand reveal js-hand">OCサポーターが語る<br>“私”がここにいる理由<span class="underline"></span></h2>
 
     <div class="grid" data-float>
       <article class="card dept-sweets sweep reveal">
@@ -226,7 +242,7 @@ body{
   </section>
 
   <section class="section" id="flow">
-    <h2 class="section-title reveal">当日の流れ<span class="underline"></span></h2>
+    <h2 class="section-title reveal js-hand">当日の流れ<span class="underline"></span></h2>
 
     <div class="grid" data-float>
       <article class="step sweep reveal">
@@ -277,7 +293,7 @@ body{
   </section>
 
   <section class="section guide" id="guide">
-    <h2 class="section-title hand reveal">はじめてのドキドキを、ぜんぶワクワクに！<br>オープンキャンパス安心ガイド<span class="underline"></span></h2>
+    <h2 class="section-title hand reveal js-hand">はじめてのドキドキを、ぜんぶワクワクに！<br>オープンキャンパス安心ガイド<span class="underline"></span></h2>
 
     <ul class="glist" data-float>
       <li class="gitem sweep reveal">
@@ -317,15 +333,15 @@ body{
 </nav>
 
 <script>
-/* IntersectionObserver: .in 付与（キラッ&ふわっと） */
-const io = new IntersectionObserver((ents)=>{
-  ents.forEach(e=>{
+/* Intersections: reveal & shine */
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{
     if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
   });
 },{threshold:.22});
-document.querySelectorAll('.reveal,.sweep').forEach(el=>io.observe(el));
+document.querySelectorAll('.reveal,.sweep,.section-title').forEach(el=>io.observe(el));
 
-/* Sticky CTA：最初からは出さない */
+/* Sticky CTA & float */
 const sticky=document.querySelector('.sticky-cta');
 function onScroll(){
   const vh=innerHeight;
@@ -344,6 +360,33 @@ onScroll();
 
 /* 画像最適化 */
 document.querySelectorAll('img').forEach(i=>{ i.loading='lazy'; i.decoding='async'; });
+
+/* 手書き風タイトル：文字を分割してランダム遅延 */
+function sprinkleHand(el){
+  // 既に分割済みならスキップ
+  if(el.dataset.splitted) return;
+  el.dataset.splitted="1";
+  const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null,false);
+  const texts=[];
+  while(walker.nextNode()) texts.push(walker.currentNode);
+  texts.forEach(node=>{
+    const s=node.nodeValue;
+    if(!s.trim()) return;
+    const frag=document.createDocumentFragment();
+    [...s].forEach((ch,idx)=>{
+      const span=document.createElement('span');
+      span.className='char';
+      const jitter=(Math.random()*8-4).toFixed(1);
+      span.style.setProperty('--rot',jitter+'deg');
+      const delay=40*idx + Math.floor(Math.random()*60);
+      span.style.setProperty('--d',delay+'ms');
+      span.textContent=ch;
+      frag.appendChild(span);
+    });
+    node.parentNode.replaceChild(frag,node);
+  });
+}
+document.querySelectorAll('.js-hand').forEach(sprinkleHand);
 
 /* リード文は必ず1行 */
 document.querySelector('.lead-text').style.whiteSpace='nowrap';
