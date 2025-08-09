@@ -1,175 +1,167 @@
-/* ========== Base ========== */
+/* ===== ベース ===== */
 :root{
   --ink:#0f172a; --muted:#6b7280;
   --accent:#0f7bff; --accent2:#7bd6ff; --line:#00b900;
-  --radius:24px; --shadow:0 18px 46px rgba(15,23,42,.16);
+  --radius:22px; --shadow:0 14px 40px rgba(15,23,42,.16);
+  --c-sweets:#b8f1ef;  /* 学科カラー薄めに */
+  --c-imagine:#ffd7e6;
+  --c-hoiku:#ffe6ac;
 }
+
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{
   color:var(--ink); line-height:1.8;
   font-family:'Noto Sans JP',system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
-  /* 多層グラデ背景（固定） */
+  /* 楽しい多層グラデ（固定） */
   background:
-    linear-gradient(180deg,#fff7f0 0%,#fffdfc 28%,#ffffff 42%,#f7fbff 72%,#ffffff 100%),
+    linear-gradient(180deg,#fff7f0 0%,#ffffff 28%,#f7fbff 72%,#ffffff 100%),
     radial-gradient(120% 70% at 15% -10%, rgba(255,225,241,.35) 0 55%, transparent 56%),
     radial-gradient(120% 70% at 85% 0%, rgba(232,252,255,.35) 0 55%, transparent 56%),
     radial-gradient(120% 70% at 50% 115%, rgba(255,246,217,.35) 0 55%, transparent 56%);
   background-attachment: fixed, fixed, fixed, fixed;
-  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
-.container{width:min(1080px,92vw); margin-inline:auto}
+
+.container{width:min(760px,92vw); margin-inline:auto}
+
+/* スマホ幅固定（PCでもスマホレイアウト） */
+@media (min-width:761px){
+  body{margin:0 auto}
+}
 
 /* 固定ラベル */
 .site-title{
-  position:fixed; top:12px; left:12px; z-index:100;
-  font-weight:900; font-size:14px; color:#2f2f2f;
-  background:rgba(255,255,255,.85); padding:6px 10px; border-radius:10px;
+  position:fixed; top:12px; left:12px; z-index:1000;
+  font-weight:900; font-size:12px; color:#2f2f2f;
+  background:rgba(255,255,255,.9); padding:6px 10px; border-radius:12px;
   box-shadow:0 6px 18px rgba(0,0,0,.08);
 }
 
-/* ========== HERO ========== */
+/* ===== HERO ===== */
 .hero{position:relative; min-height:68vh; display:grid; place-items:end start; overflow:hidden}
-.hero-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 34%; filter:saturate(1.1) contrast(1.05)}
-.hero-overlay{position:absolute; inset:0; background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.35) 60%, rgba(255,255,255,.42) 76%)}
-.hero-vignette{position:absolute; inset:auto 0 0 0; height:40%; background:linear-gradient(180deg, transparent, rgba(0,0,0,.18))}
-.hero-inner{position:relative; z-index:1; width:100%; padding:16vh 0 28px}
-.lead{
-  display:inline-flex; align-items:center; gap:.6ch;
-  font-weight:700; color:#1f2937; background:rgba(255,255,255,.9);
-  padding:.5rem .9rem; border-radius:999px; box-shadow:0 10px 26px rgba(0,0,0,.08)
-}
-.led-dot{width:10px;height:10px;border-radius:50%;background:#4aa3ff;box-shadow:0 0 0 6px rgba(74,163,255,.25) inset}
-.title{font-weight:900; font-size:clamp(28px,6vw,46px); line-height:1.14; margin:14px 0 12px}
+.hero-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 36%; display:block}
+.hero-overlay{position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(255,255,255,.02) 0%, rgba(255,255,255,.28) 56%, rgba(255,255,255,.34) 76%);
+  pointer-events:none}
+.hero-vignette{position:absolute; inset:auto 0 0 0; height:38%;
+  background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.16) 72%, rgba(0,0,0,.24) 100%); pointer-events:none}
+
+.hero-inner{position:relative; z-index:1; width:100%; padding:18vh 16px 18px}
+.lead{display:inline-flex; align-items:center; gap:.6ch; margin:0 0 10px; font-weight:700; background:#fff; padding:8px 12px; border-radius:999px; box-shadow:0 10px 22px rgba(0,0,0,.12)}
+.led-dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(#9df,#09f); box-shadow:0 0 14px #09f inset, 0 0 10px #09f}
+.title{font-weight:900; font-size:clamp(26px,6vw,34px); line-height:1.18; margin:10px 0 12px; color:#0b1224}
 .title span{display:block}
-.cta-row{display:flex; gap:10px; flex-wrap:wrap}
-.btn{position:relative; display:inline-flex; align-items:center; gap:.6ch;
-  padding:.54rem .98rem; font-size:.95rem; font-weight:900; border-radius:999px; text-decoration:none; overflow:hidden}
-.btn-primary{background:linear-gradient(180deg,#1480ff,#0f6de0); color:#fff}
-.btn-line{background:linear-gradient(180deg,#00c100,#00a700); color:#fff}
-.btn-ghost{background:linear-gradient(180deg,#111,#0c0c0c); color:#fff}
 
-/* さりげない“キラッ”スイープ（左→右） */
-.sweep{--shine:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.6) 50%, transparent 100%);
-  position:relative; isolation:isolate}
+/* CTA */
+.cta-row{display:flex; gap:8px; flex-wrap:wrap}
+.btn{position:relative; display:inline-flex; align-items:center; justify-content:center; gap:.6ch;
+  padding:.56rem 1rem; font-size:.95rem; font-weight:900;
+  border-radius:999px; text-decoration:none; overflow:hidden; transition:.12s}
+.btn-primary{background:linear-gradient(180deg,#1480ff,#0f6de0); color:#fff; box-shadow:0 8px 22px rgba(20,128,255,.28)}
+.btn-line{background:linear-gradient(180deg,#00c100,#00a700); color:#fff; box-shadow:0 8px 22px rgba(0,200,0,.24)}
+.btn-ghost{background:linear-gradient(180deg,#111,#0c0c0c); color:#fff; box-shadow:0 8px 22px rgba(0,0,0,.24)}
+.btn:active{transform:scale(.98)}
+
+/* 共通：左→右に “キラッ” 反射（控えめ） */
+.sweep{position:relative; overflow:hidden; isolation:isolate}
 .sweep::after{
-  content:""; position:absolute; inset:-2px; transform:skewX(-20deg) translateX(-120%);
-  background:var(--shine); mix-blend-mode:screen; opacity:.0; pointer-events:none;
-  animation:shine 3.2s ease-in-out infinite; animation-delay:.5s;
+  content:""; position:absolute; inset:-20% -60% auto auto; width:40%; height:200%;
+  background:linear-gradient(110deg, transparent 0 46%, rgba(255,255,255,.75) 50%, transparent 54%);
+  transform:translateX(-140%) skewX(-18deg); filter:blur(2px); pointer-events:none;
 }
-@keyframes shine{ 0%{opacity:0;transform:skewX(-20deg) translateX(-120%)} 8%{opacity:.8} 22%{opacity:.0;transform:skewX(-20deg) translateX(140%)} 100%{opacity:0} }
+.sweep:hover::after{ animation:sweep .9s ease-out forwards }
+@keyframes sweep{ to{ transform:translateX(160%) skewX(-18deg); opacity:.0 } }
 
-/* ========== Section titles ========== */
-.section{padding:60px 0}
-.section-title{position:relative; display:inline-block; font-weight:900; font-size:clamp(22px,4.4vw,32px); margin:0 0 16px; padding-bottom:6px}
-.section-title::after{content:""; position:absolute; left:0; bottom:0; height:6px; width:100%;
-  background:linear-gradient(90deg,#0f7bff,#7bd6ff); border-radius:6px; opacity:.6}
-.hand{font-family:'Yomogi','Noto Sans JP',sans-serif; font-weight:400; font-size:clamp(26px,5.2vw,38px); color:#2a2f38; line-height:1.25}
+/* セクション */
+.section{padding:26px 0}
+.section-title{
+  position:relative; display:inline-block; font-weight:900;
+  font-size:clamp(22px,5.4vw,28px); margin:0 0 14px; color:#0b1224;
+}
+.section-title::after{
+  content:""; position:absolute; left:0; bottom:-6px; height:6px; width:100px;
+  background:linear-gradient(90deg,#0f7bff,#7bd6ff); border-radius:6px;
+}
+.hand{font-family:'Yomogi','Noto Sans JP',sans-serif; font-weight:400}
 
-/* ========== Cards (Students) ========== */
-.grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
-@media (max-width:980px){ .grid{grid-template-columns:repeat(2,1fr)} }
-@media (max-width:620px){ .grid{grid-template-columns:1fr} }
-
-/* 学科カラー（薄め） */
-.dept-sweets  { --c1:#b5efe9; --c2:#8fe4dd; }
-.dept-imagine { --c1:#ffdcec; --c2:#ffc4dc; }
-.dept-hoiku   { --c1:#ffe7b0; --c2:#ffd783; }
-
+/* ===== 学生カード ===== */
 .student-card{
-  position:relative; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;
-  background:linear-gradient(180deg, var(--c1), var(--c2));
-  padding:24px 20px 18px; padding-right:clamp(24px, 10vw, 120px);
+  position:relative; background:#fff; border-radius:18px; padding:18px 14px 16px;
+  box-shadow:var(--shadow); overflow:hidden; margin:16px 0;
 }
-.badge{
-  position:absolute; right:14px; top:14px; z-index:2; width:112px; height:112px;
-  border-radius:50%; overflow:hidden; background:#fff; border:4px solid #eaf2ff;
-  box-shadow:0 10px 22px rgba(0,0,0,.18), 0 0 0 6px rgba(255,255,255,.9)
-}
-.badge img{width:100%; height:100%; object-fit:cover; object-position:center}
+.dept-sweets { background:linear-gradient(180deg, color-mix(in srgb,var(--c-sweets) 60%, #fff 40%), #fff) }
+.dept-imagine{ background:linear-gradient(180deg, color-mix(in srgb,var(--c-imagine) 60%, #fff 40%), #fff) }
+.dept-hoiku  { background:linear-gradient(180deg, color-mix(in srgb,var(--c-hoiku) 60%, #fff 40%), #fff) }
+.sticker{display:inline-block; font-weight:900; font-size:.82rem; background:#fff; padding:6px 10px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,.12); margin-bottom:6px}
+.badge{position:absolute; right:12px; top:12px; width:84px; height:84px; border-radius:50%; overflow:hidden; box-shadow:0 10px 22px rgba(0,0,0,.18),0 0 0 4px rgba(255,255,255,.9)}
+.badge img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
+.student-title{margin:6px 0 2px; font-weight:900}
+.student-name{margin:0 0 8px; font-weight:900; font-size:1.25rem}
+.student-body{margin:6px 0 10px; color:#273140}
 
-.sticker{display:inline-block; font-weight:900; font-size:.86rem; color:#213; background:#fff; padding:6px 10px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,.12); margin-bottom:6px}
-.student-title{margin:0 0 2px; font-weight:900}
-.student-name{margin:4px 0 10px; font-weight:900; font-size:clamp(20px,3.8vw,26px)}
-.student-body{margin:10px 0 0}
-
-/* 授業写真 2枚を均等中央 */
+/* 授業風景：左右均等・センター */
 .student-photos{
-  --w: min(300px, 44vw);
-  display:grid; grid-template-columns:repeat(2, var(--w)); justify-content:center; gap:14px;
-  width:100%; margin:16px auto 0;
+  display:grid; grid-template-columns:1fr 1fr; gap:10px; align-items:center; justify-items:center;
 }
 .student-photos img{
-  width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:16px; box-shadow:0 8px 22px rgba(15,23,42,.12)
+  width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:14px; display:block; /* ←白帯対策 */
+  box-shadow:0 8px 22px rgba(15,23,42,.12);
 }
 
-/* ========== Flow (当日の流れ) ========== */
-.steps{display:grid; gap:18px}
+/* ===== 当日の流れ ===== */
 .step{
-  position:relative; display:grid; grid-template-columns:320px 1fr; gap:18px;
-  background:#fff; border-radius:22px; box-shadow:var(--shadow); overflow:hidden;
+  display:grid; grid-template-columns:1fr; gap:10px; background:#fff; border-radius:18px; box-shadow:var(--shadow);
+  overflow:hidden; margin:16px 0; border-left:8px solid transparent;
 }
-.step img{width:100%; height:100%; object-fit:cover; aspect-ratio:16/10}
-.step .body{padding:16px 18px}
-.step .num{display:inline-block; font-weight:900; color:#fff; background:linear-gradient(180deg,#0f7bff,#7bd6ff); padding:.2rem .6rem; border-radius:999px;}
+.step img{width:100%; height:auto; display:block; object-fit:cover; vertical-align:middle}
+.step .body{padding:14px}
+.num{display:inline-block; font-weight:900; color:#fff; background:linear-gradient(180deg,#0f7bff,#7bd6ff); padding:.25rem .6rem; border-radius:999px; margin-bottom:6px}
 
-/* 左端の白帯ケア：画像をはみ出し配置して縁を消す */
-.step img{display:block; transform:translateX(0)}
-.step{background-clip:padding-box}
-.step::before{content:""; position:absolute; inset:0; pointer-events:none} /* 予約（何も描かない） */
-
-/* キラッ反射（控えめ） */
-.step img.sweep::after{animation-duration:4s}
-
-/* スクロール連動：上下にそっと動く（モーションはCSS Scroll-linked） */
-@supports (animation-timeline: view()){
-  .lift{ animation: rise 1s linear both; animation-timeline: view(); animation-range: entry 10% cover 35% }
-  @keyframes rise{ from{ transform:translateY(18px) } to{ transform:translateY(0) } }
+/* ===== 安心ガイド（ストーリー） ===== */
+.guide-steps{list-style:none; margin:0; padding:0}
+.gstep{position:relative; padding-left:72px; margin:18px 0}
+.gline{
+  position:absolute; left:40px; top:60px; bottom:-12px; width:3px;
+  background:linear-gradient(180deg,#0f7bff,#7bd6ff);
+  opacity:.28; z-index:0; /* ←アバターの下に配置 */
 }
-
-/* ========== Guide timeline（線が丸に被らない完全版） ========== */
-.guide-story{ --line-x: 28px; --avatar: 56px; --gap: 16px; }
-.guide-steps{ position:relative; list-style:none; margin:0; padding:0; }
-.guide-steps::before{
-  content:""; position:absolute; top:0; bottom:0; left:var(--line-x); width:3px;
-  background:linear-gradient(180deg,#d9e9ff,#cfe3ff); border-radius:2px; z-index:0;
-}
-.gstep{ position:relative; padding-left:calc(var(--line-x) + var(--avatar) + var(--gap)); margin:18px 0; }
 .gavatar{
-  position:absolute; left:calc(var(--line-x) - var(--avatar)/2); top:8px;
-  width:var(--avatar); height:var(--avatar); border-radius:50%; overflow:hidden;
-  background:#fff; border:3px solid #eaf2ff; box-shadow:0 6px 16px rgba(26,46,90,.12); z-index:2;
+  position:absolute; left:0; top:0; width:64px; height:64px; border-radius:50%;
+  object-fit:cover; object-position:center 40%; display:block; z-index:1;
+  box-shadow:0 8px 20px rgba(0,0,0,.16), 0 0 0 4px #fff;
 }
-.gavatar{ display:grid; place-items:center }
-.gavatar[src], .gavatar img{ width:100%; height:100%; object-fit:cover; object-position:center 35% }
-.gcard{ position:relative; z-index:1; background:#fff; border-radius:16px; padding:14px 16px; box-shadow:0 10px 28px rgba(15,23,42,.10) }
-.ghead{ font-weight:900; margin-bottom:8px }
-.gtime{ display:inline-block; font-weight:900; background:#e9f2ff; color:#0b3f9b; padding:.2rem .6rem; border-radius:999px }
-.gstep .gline{ display:none !important }
+.gcard{
+  position:relative; background:#fff; border-radius:16px; padding:12px 12px;
+  box-shadow:var(--shadow); z-index:2;
+}
+.ghead{font-weight:900; margin-bottom:4px}
+.gtime{display:inline-block; background:#e9f1ff; color:#0b3b9a; padding:.2rem .6rem; border-radius:999px}
+.glist{margin:0; padding-left:1em}
+.glist li{margin:.2rem 0}
 
-/* PC拡張 */
-@media (min-width:960px){
-  .guide-story{ --line-x: 36px; --avatar: 64px; --gap: 18px; }
-  .gstep{ margin:22px 0 }
-  .gcard{ padding:16px 18px }
-}
-/* 小端末微調整 */
-@media (max-width:360px){
-  .guide-story{ --line-x: 24px; --avatar: 52px; --gap: 14px; }
+/* ===== スクロール連動（CSS Scroll-linked Animation） ===== */
+@supports (animation-timeline: view()) {
+  .card-parallax{animation: rise 1s linear both; animation-timeline: view(); animation-range: entry 20% cover 30%}
+  .step-parallax{animation: rise 1s linear both; animation-timeline: view(); animation-range: entry 10% cover 30%}
+  @keyframes rise{ from{ transform:translateY(10px); opacity:.0 } to{ transform:none; opacity:1 } }
 }
 
-/* ========== Footer/Sticky ========== */
-.footer{padding:46px 0 56px; text-align:center; color:var(--muted)}
-.footer-cta{margin-bottom:1rem; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap}
-
-/* スマホ固定CTA（省略形） */
-.sticky-cta{position:fixed; left:0; right:0; bottom:0; display:flex; gap:10px; padding:10px 14px; backdrop-filter:blur(10px); background:rgba(255,255,255,.88); box-shadow:0 -10px 24px rgba(0,0,0,.12); z-index:999}
-.sticky-cta .btn{flex:1; justify-content:center; padding:.6rem 0; font-size:1rem}
-@media (min-width:960px){ .sticky-cta{ display:none } }
-/* ===== スマホ幅をPCでも中央表示する設定 ===== */
-.app {
-  /* 表示幅をスマホ幅に固定 */
-  width: min(430px, 100vw);
-  margin: 0 auto; /* 中央寄せ */
-  background: inherit; /* 背景は元のまま */
+/* Fallback（対応外ブラウザ） */
+@media not all and (animation-timeline: view()){
+  .card-parallax, .step-parallax{opacity:0; transform:translateY(10px); transition:.5s}
+  .card-parallax.is-in, .step-parallax.is-in{opacity:1; transform:none}
 }
+
+/* フッター・固定CTA */
+.footer{padding:40px 0 70px; text-align:center; color:var(--muted)}
+.footer-cta{margin-bottom:1rem; display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap}
+.sticky-cta{position:fixed; left:0; right:0; bottom:0; display:flex; gap:10px; padding:10px 14px; backdrop-filter:blur(10px); background:rgba(255,255,255,.92); box-shadow:0 -10px 24px rgba(0,0,0,.12); z-index:1000}
+.sticky-cta .btn{flex:1}
+
+/* トップへ */
+.to-top{position:fixed; right:14px; bottom:76px; width:42px; height:42px; border:none; border-radius:999px; background:#111; color:#fff; box-shadow:0 10px 24px rgba(0,0,0,.25); opacity:0; visibility:hidden; transition:.25s; z-index:999}
+.to-top.show{opacity:1; visibility:visible}
+
+/* 余計な白帯対策 */
+img{background:#fff}
