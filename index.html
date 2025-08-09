@@ -1,20 +1,20 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>日本デザイン福祉専門学校｜OCサポーター紹介</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Yomogi&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Yomogi&display=swap" rel="stylesheet" />
 <style>
-/* ========= 基本 ========= */
+/* ===== Base ===== */
 *{box-sizing:border-box}
 html,body{margin:0}
 img{max-width:100%;display:block;height:auto}
 :root{
-  --ink:#0b1224; --muted:#6b7280;
-  --blue:#1480ff; --blue2:#0f6de0;
-  --line:#00c100; --line2:#00a400;
-  --blk:#111; --blk2:#0b0b0b;
+  --ink:#0b1224;--muted:#6b7280;
+  --blue:#1480ff;--blue2:#0f6de0;
+  --line:#00c100;--line2:#00a400;
+  --blk:#111;--blk2:#0b0b0b;
   --shadow:0 14px 34px rgba(15,23,42,.16);
   --r:18px;
 }
@@ -22,7 +22,6 @@ body{
   color:var(--ink);
   font-family:'Noto Sans JP',system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
   line-height:1.85;
-  /* 楽しげな淡グラデ（固定） */
   background:
     radial-gradient(120% 80% at 10% -10%, #ffe9f6 0 45%, transparent 46%),
     radial-gradient(120% 80% at 95% 0%,  #e6f7ff 0 45%, transparent 46%),
@@ -31,7 +30,7 @@ body{
   background-attachment:fixed,fixed,fixed,fixed;
 }
 
-/* ========= ラッパー/セクション ========= */
+/* ===== Layout / Section ===== */
 .container{width:min(980px,92vw);margin-inline:auto}
 .section{padding:28px 0;position:relative}
 .section-title{
@@ -43,11 +42,8 @@ body{
 }
 .section-title.hand{
   font-family:'Yomogi','Noto Sans JP',sans-serif;
-  /* 手書き太字風：アウトライン＋シャドウでコシを出す */
-  text-shadow:
-    0 0 1px rgba(11,18,36,.35),
-    0 1px 0 rgba(11,18,36,.25);
-  -webkit-text-stroke: .6px rgba(11,18,36,.12);
+  text-shadow:0 0 1px rgba(11,18,36,.35),0 1px 0 rgba(11,18,36,.25);
+  -webkit-text-stroke:.6px rgba(11,18,36,.12);
 }
 .section-title .underline{
   display:block;height:6px;width:100%;
@@ -55,74 +51,73 @@ body{
   border-radius:6px;opacity:.9;margin-top:8px;
 }
 
-/* スクロールでふわっと（文字が追いつく） */
+/* ===== Reveal (scroll) ===== */
 .reveal{opacity:0;transform:translateY(26px)}
 .reveal.in{opacity:1;animation:catch .8s cubic-bezier(.2,.8,.2,1) both}
 @keyframes catch{0%{transform:translateY(26px)}60%{transform:translateY(-8px)}100%{transform:translateY(0)}}
 
-/* ========= 固定ラベル ========= */
+/* ===== Fixed label ===== */
 .site-title{
   position:fixed;top:14px;left:4vw;z-index:50;
   font-weight:900;font-size:12px;color:#2f2f2f;
   background:rgba(255,255,255,.95);padding:6px 10px;border-radius:999px;box-shadow:0 8px 20px rgba(0,0,0,.12)
 }
 
-/* ========= HERO（スマホ前提でコンパクト） ========= */
+/* ===== HERO ===== */
 .hero{position:relative;min-height:62svh;display:grid;place-items:end start;overflow:hidden}
 .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 0,rgba(0,0,0,.18) 75%,rgba(0,0,0,.25))}
 .hero-inner{position:relative;z-index:1;width:100%;padding:14px 0 20px}
+
+/* ← 透明度をさらに上げ、ぼかしも弱め */
 .lead{
   width:min(900px,92vw);margin:0 auto 8px;
-  background:rgba(255,255,255,.75); /* 目立ちすぎない透明度に */
-  backdrop-filter:blur(6px);
+  background:rgba(255,255,255,.55);
+  backdrop-filter:blur(3px);
   border-radius:999px;padding:8px 14px;
   font-weight:700;font-size:14px;display:flex;gap:.6ch;align-items:center;
-  box-shadow:0 10px 24px rgba(0,0,0,.08)
+  box-shadow:0 10px 18px rgba(0,0,0,.06)
 }
 .lead .dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(#7bd6ff,#1480ff)}
+
+/* ← 大見出しの幕&ぼかしを弱める */
 .title{
-  width:min(900px,92vw);margin:0 auto 10px;color:#0b1224;font-weight:900;font-size:clamp(22px,6.5vw,34px);line-height:1.18;
+  width:min(900px,92vw);margin:0 auto 10px;color:#0b1224;font-weight:900;
+  font-size:clamp(22px,6.5vw,34px);line-height:1.18;
   padding:6px 10px;border-radius:14px;
-  /* 縁取り＆淡幕で読みやすく */
-  background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.04));
-  -webkit-backdrop-filter:blur(2px);
-  text-shadow:
-    0 2px 0 rgba(255,255,255,.45),
-    0 3px 10px rgba(0,0,0,.12);
+  background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.02));
+  -webkit-backdrop-filter:blur(1.2px);
+  text-shadow:0 2px 0 rgba(255,255,255,.35),0 3px 8px rgba(0,0,0,.10);
 }
 .title span{display:block}
 
-/* ヒーロー下のボタン列（3つ横並び・左端はサイトラベルとツラ） */
+/* Buttons under hero */
 .btnrow{width:min(900px,92vw);margin:0 auto;display:flex;gap:10px}
 .btn{
   --c1:#000;--c2:#333;
   flex:1;display:flex;justify-content:center;align-items:center;gap:.5ch;
-  height:48px;padding:0 14px;border-radius:999px;font-weight:900;font-size:15px;color:#fff;
-  text-decoration:none;position:relative;overflow:hidden;
+  height:48px;padding:0 14px;border-radius:999px;font-weight:900;
+  font-size:clamp(14px,3.8vw,15px); /* ほんの少しだけ可変で1行死守 */
+  color:#fff;text-decoration:none;position:relative;overflow:hidden;
   background:linear-gradient(180deg,var(--c1),var(--c2));
   box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 10px 22px rgba(15,23,42,.20);
+  white-space:nowrap; /* ← 必ず1行 */
 }
 .btn::before{content:"";position:absolute;inset:0 0 55% 0;background:linear-gradient(180deg,rgba(255,255,255,.45),transparent);pointer-events:none}
 .btn:active{transform:translateY(1px)}
 .btn-blue{--c1:#2b8dff;--c2:#0f6de0}
 .btn-line{--c1:#00c100;--c2:#00a400}
 .btn-black{--c1:#161616;--c2:#0b0b0b}
-
-/* キラッ：スクロールで領域が入った時だけ */
+/* Shine on appear */
 .sweep{position:relative;overflow:hidden}
-.sweep.in::after{
-  content:"";position:absolute;inset:0;transform:translateX(-120%) skewX(-20deg);
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent);
-  animation:shine 900ms ease forwards
-}
+.sweep.in::after{content:"";position:absolute;inset:0;transform:translateX(-120%) skewX(-20deg);background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent);animation:shine 900ms ease forwards}
 @keyframes shine{to{transform:translateX(120%) skewX(-20deg)}}
 
-/* ========= グリッド/カード ========= */
+/* ===== Cards / Grid ===== */
 .grid{display:grid;gap:16px}
 @media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}
 .card{position:relative;padding:16px;border-radius:var(--r);box-shadow:var(--shadow);background:#fff;overflow:hidden}
-/* 淡い学科色（復活・控えめ） */
+/* 学科色（淡め） */
 .dept-sweets{--tone:#bff3ec}
 .dept-imagine{--tone:#ffe0ec}
 .dept-hoiku{--tone:#ffeec0}
@@ -134,28 +129,27 @@ body{
 .card .photos{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
 .card .photos img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;box-shadow:0 8px 22px rgba(15,23,42,.12);background:#0001}
 
-/* ========= 当日の流れ ========= */
+/* ===== Flow ===== */
 .step{display:grid;grid-template-columns:1fr;gap:10px;background:#fff;border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
 .step img{width:100%;aspect-ratio:16/10;object-fit:cover;background:#0001}
 .step .body{padding:12px 14px}
 .num{display:inline-block;background:linear-gradient(180deg,#1480ff,#7bd6ff);color:#fff;font-weight:900;padding:.2rem .6rem;border-radius:999px;margin-bottom:6px}
 
-/* ========= 安心ガイド（ストーリー） ========= */
+/* ===== Guide ===== */
 .guide{position:relative}
 .glist{list-style:none;margin:0;padding:0;display:grid;gap:12px}
 .gitem{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center}
 .gavatar{width:60px;height:60px;border-radius:999px;overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,.14);background:linear-gradient(180deg,#e6f5ff,#fff);display:grid;place-items:center}
 .gavatar img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
-/* ②アクセスの顔が切れないように下げる（下寄せ） */
+/* ②アクセスの顔が切れないようにやや下寄せ */
 .gitem.access .gavatar img{object-position:center 48%}
 .gcard{background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:10px 12px}
 
-/* ========= スクロール連動の上下微動（軽量） ========= */
+/* ===== Scroll micro float ===== */
 [data-float]{will-change:transform}
 
-/* ========= フッター/固定CTA ========= */
+/* ===== Footer / Sticky CTA ===== */
 .footer{padding:42px 0 96px;text-align:center;color:var(--muted)}
-.footer small{display:block;margin-top:10px}
 .sticky-cta{
   position:fixed;left:0;right:0;bottom:-80px;display:flex;gap:10px;padding:10px 14px;
   background:rgba(255,255,255,.92);backdrop-filter:blur(10px);box-shadow:0 -12px 24px rgba(0,0,0,.14);
@@ -167,10 +161,8 @@ body{
 </head>
 <body>
 
-<!-- 固定ラベル（左端はボタン列とツラ合わせ：4vw） -->
 <div class="site-title">日本デザイン福祉専門学校</div>
 
-<!-- ========== HERO ========== -->
 <header class="hero">
   <img class="hero-bg" src="images/Google_AI_Studio_2025-07-16T07_54_39.403Z.png" alt="キャンパスの雰囲気">
   <div class="hero-overlay"></div>
@@ -191,12 +183,8 @@ body{
 
 <main class="container">
 
-  <!-- ========== 学生インタビュー ========== -->
   <section class="section">
-    <h2 class="section-title hand reveal">
-      OCサポーターが語る<br>“私”がここにいる理由
-      <span class="underline"></span>
-    </h2>
+    <h2 class="section-title hand reveal">OCサポーターが語る<br>“私”がここにいる理由<span class="underline"></span></h2>
 
     <div class="grid" data-float>
       <article class="card dept-sweets sweep reveal">
@@ -237,12 +225,8 @@ body{
     </div>
   </section>
 
-  <!-- ========== 当日の流れ ========== -->
   <section class="section" id="flow">
-    <h2 class="section-title reveal">
-      当日の流れ
-      <span class="underline"></span>
-    </h2>
+    <h2 class="section-title reveal">当日の流れ<span class="underline"></span></h2>
 
     <div class="grid" data-float>
       <article class="step sweep reveal">
@@ -292,56 +276,40 @@ body{
     </div>
   </section>
 
-  <!-- ========== 安心ガイド（ストーリー） ========== -->
   <section class="section guide" id="guide">
-    <h2 class="section-title hand reveal">
-      はじめてのドキドキを、ぜんぶワクワクに！<br>オープンキャンパス安心ガイド
-      <span class="underline"></span>
-    </h2>
+    <h2 class="section-title hand reveal">はじめてのドキドキを、ぜんぶワクワクに！<br>オープンキャンパス安心ガイド<span class="underline"></span></h2>
 
     <ul class="glist" data-float>
       <li class="gitem sweep reveal">
         <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_39_37.511Z.png" alt=""></div>
-        <div class="gcard">
-          <strong>① 出発前</strong><br>👕 服装は自由。<b>制服でも私服でもOK</b>。／ 👜 持ち物は <b>無しでOK</b>！資料はこっちで用意。
-        </div>
+        <div class="gcard"><strong>① 出発前</strong><br>👕 服装は自由。<b>制服でも私服でもOK</b>。／ 👜 持ち物は <b>無しでOK</b>！資料はこっちで用意。</div>
       </li>
       <li class="gitem access sweep reveal">
         <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_45_02.490Z.png" alt=""></div>
-        <div class="gcard">
-          <strong>② アクセス</strong><br>📍 迷ったら <a href="https://ndc.ac.jp/access/" target="_blank" rel="noopener">アクセス案内</a> or <b>LINE</b>してね！
-        </div>
+        <div class="gcard"><strong>② アクセス</strong><br>📍 迷ったら <a href="https://ndc.ac.jp/access/" target="_blank" rel="noopener">アクセス案内</a> or <b>LINE</b>してね！</div>
       </li>
       <li class="gitem sweep reveal">
         <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_44_19.676Z.png" alt=""></div>
-        <div class="gcard">
-          <strong>③ 到着したら</strong><br>学校に着いたらワクワクタイムの始まり！<b>まずはゆったり受付へ</b>
-        </div>
+        <div class="gcard"><strong>③ 到着したら</strong><br>学校に着いたらワクワクタイムの始まり！<b>まずはゆったり受付へ</b></div>
       </li>
       <li class="gitem sweep reveal">
         <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_44_44.871Z.png" alt=""></div>
-        <div class="gcard">
-          <strong>④ 見学・体験中</strong><br>👀 見て・聞いて・体験！<b>ひらめいたらその場で質問🎶</b> ／ 🧃 休憩もOK。
-        </div>
+        <div class="gcard"><strong>④ 見学・体験中</strong><br>👀 見て・聞いて・体験！<b>ひらめいたらその場で質問🎶</b> ／ 🧃 休憩もOK。</div>
       </li>
       <li class="gitem sweep reveal">
         <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_41_21.515Z.png" alt=""></div>
-        <div class="gcard">
-          <strong>⑤ 帰り道</strong><br>📸 <b>SNSアップOK!</b> 記念にパシャっとどうぞ。／ 🚶 気楽に来て、気楽に帰ってOK。
-        </div>
+        <div class="gcard"><strong>⑤ 帰り道</strong><br>📸 <b>SNSアップOK!</b> 記念にパシャっとどうぞ。／ 🚶 気楽に来て、気楽に帰ってOK。</div>
       </li>
     </ul>
   </section>
 </main>
 
-<!-- ========== フッター ========== -->
 <footer class="footer">
   <div class="container">
     <small>© 2025 NIPPON DESIGN WELFARE COLLEGE</small>
   </div>
 </footer>
 
-<!-- 固定CTA（スクロールで出現） -->
 <nav class="sticky-cta" aria-label="固定操作バー">
   <a class="btn btn-blue"  href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンを予約</a>
   <a class="btn btn-line"  href="https://lin.ee/y2DLr3Y" target="_blank" rel="noopener">LINEで質問</a>
@@ -349,22 +317,18 @@ body{
 </nav>
 
 <script>
-/* 交差監視：入ったら .in 付与（キラッ＆ふわっと） */
+/* IntersectionObserver: .in 付与（キラッ&ふわっと） */
 const io = new IntersectionObserver((ents)=>{
   ents.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add('in');
-      io.unobserve(e.target);
-    }
+    if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
   });
 },{threshold:.22});
 document.querySelectorAll('.reveal,.sweep').forEach(el=>io.observe(el));
 
-/* フローティング：ある程度下がったら表示（最初は出さない） */
-const sticky = document.querySelector('.sticky-cta');
+/* Sticky CTA：最初からは出さない */
+const sticky=document.querySelector('.sticky-cta');
 function onScroll(){
-  const vh = innerHeight;
-  // ふわっとした上下微動（軽め）
+  const vh=innerHeight;
   document.querySelectorAll('[data-float]').forEach(g=>{
     const r=g.getBoundingClientRect();
     const center=(r.top+r.bottom)/2;
@@ -381,13 +345,8 @@ onScroll();
 /* 画像最適化 */
 document.querySelectorAll('img').forEach(i=>{ i.loading='lazy'; i.decoding='async'; });
 
-/* ヒーローのリード文を1行キープ（英数字で幅が変わる端末対策） */
-function clampLead(){
-  const lead = document.querySelector('.lead-text');
-  if(!lead) return;
-  lead.style.whiteSpace='nowrap';
-}
-clampLead();
+/* リード文は必ず1行 */
+document.querySelector('.lead-text').style.whiteSpace='nowrap';
 </script>
 </body>
 </html>
