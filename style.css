@@ -211,3 +211,51 @@ body{
   .reveal,.hand span.char{animation:none!important;transition:none!important}
   .reveal{opacity:1;transform:none}
 }
+/* ===== Glassy site-title (no animation) ===== */
+.site-title{
+  position: fixed !important;
+  top: max(12px, env(safe-area-inset-top,0)) !important;
+  left: 4vw !important;
+  z-index: 9999 !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+
+  /* ガラス感：半透明＋強めのブラー＋わずかに彩度UP */
+  padding: 8px 16px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.32)) !important;
+  -webkit-backdrop-filter: saturate(140%) blur(12px) !important;
+  backdrop-filter: saturate(140%) blur(12px) !important;
+
+  /* ガラスの縁と奥行き */
+  border: 1px solid rgba(255,255,255,.75) !important;
+  box-shadow:
+    inset 0 0 0 0.5px rgba(255,255,255,.6),
+    0 6px 18px rgba(15,23,42,.14) !important;
+
+  /* 文字はくっきり */
+  color: #0b1224 !important;
+  font-weight: 800 !important;
+  font-size: 12px !important;
+  letter-spacing: .02em !important;
+}
+
+/* 上縁のハイライト（静的・非アニメ） */
+.site-title::before{
+  content: "" !important;
+  position: absolute !important;
+  left: 8px; right: 8px; top: 4px; height: 40%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,0)) !important;
+  pointer-events: none;
+}
+
+/* 以前の“キラッ”エフェクトを完全無効化 */
+.site-title::after{
+  content: none !important;
+  animation: none !important;
+  background: none !important;
+  transform: none !important;
+}
