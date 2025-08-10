@@ -12,7 +12,7 @@ img{max-width:100%;display:block;height:auto}
   --r:18px;
 }
 
-/* 背景：多層グラデを固定 */
+/* 背景：多層グラデ（固定） */
 body{
   color:var(--ink);
   font-family:'Noto Sans JP',system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
@@ -25,20 +25,17 @@ body{
   background-attachment:fixed,fixed,fixed,fixed;
 }
 
-/* ========== Layout / Sections ========== */
+/* Layout */
 .container{width:min(980px,92vw);margin-inline:auto}
 .section{padding:28px 0;position:relative}
 
-/* 見出し（手書きフォント＋下線） */
+/* 見出し（手書き＋下線） */
 .section-title{
   margin:0 0 16px; font-weight:900;
   font-size:clamp(20px,5.8vw,28px); letter-spacing:.02em;
   position:relative;
 }
-.section-title.hand{
-  font-family:'Yomogi','Noto Sans JP',sans-serif;
-  -webkit-text-stroke:.6px rgba(11,18,36,.12);
-}
+.section-title.hand{font-family:'Yomogi','Noto Sans JP',sans-serif;-webkit-text-stroke:.6px rgba(11,18,36,.12)}
 .section-title .underline{
   display:block; height:6px; width:100%;
   background:linear-gradient(90deg,#7bd6ff,#1480ff);
@@ -52,7 +49,7 @@ body{
 }
 @keyframes u-shine{to{transform:translateX(120%) skewX(-20deg)}}
 
-/* 手書き文字の1文字ポップ（JSで .char を付与） */
+/* 手書き1文字ポップ */
 .hand span.char{
   display:inline-block; opacity:0; transform:translateY(14px) rotate(var(--rot,0deg)) scale(.92);
   filter:blur(2px);
@@ -66,7 +63,7 @@ body{
   100%{transform:translateY(0) rotate(0) scale(1); filter:blur(0); opacity:1}
 }
 
-/* ========== 固定ラベル ========== */
+/* 固定ラベル */
 .site-title{
   position:fixed; top:14px; left:4vw; z-index:50;
   font-weight:900; font-size:12px; color:#2f2f2f;
@@ -74,13 +71,13 @@ body{
   box-shadow:0 8px 20px rgba(0,0,0,.12)
 }
 
-/* ========== HERO（スマホ前提） ========== */
+/* HERO */
 .hero{position:relative; min-height:62svh; display:grid; place-items:end start; overflow:hidden}
 .hero-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 35%}
 .hero-overlay{position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0) 0,rgba(0,0,0,.18) 75%,rgba(0,0,0,.25))}
 .hero-inner{position:relative; z-index:1; width:100%; padding:14px 0 20px}
 
-/* リード（白帯）控えめに */
+/* リード（白帯控えめ） */
 .lead{
   width:min(900px,92vw); margin:0 auto 8px;
   background:rgba(255,255,255,.24); backdrop-filter:blur(2px);
@@ -91,38 +88,23 @@ body{
 .lead .dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(#7bd6ff,#1480ff)}
 .lead .lead-text{white-space:nowrap}
 
-/* ヒーロー見出し：濃ネイビー＋白フチ（文字の裏側） */
+/* ヒーロー見出し（濃ネイビー＋白縁“後ろだけ”※text-shadow） */
 .title{
-  width:min(900px,92vw);
-  margin:0 auto 10px;
-  font-weight:900;
-  font-size:clamp(22px,6.5vw,34px);
-  line-height:1.16;
-  color:#133a7c;                 /* 濃いめネイビー */
-  background:transparent;
-  padding:0;
+  width:min(900px,92vw); margin:0 auto 10px;
+  font-weight:900; font-size:clamp(22px,6.5vw,34px); line-height:1.16;
+  color:#12316b; background:transparent; padding:0;
 }
-.title span{display:block}
-
-/* Safari/iOS 主体：白フチを直接描く */
-@supports (-webkit-text-stroke: 1px white) {
-  .title{
-    -webkit-text-stroke: 2px rgba(255,255,255,.95);
-    text-stroke: 2px rgba(255,255,255,.95);
-    text-shadow: 0 2px 6px rgba(0,0,0,.25); /* ほんのり落ち影 */
-  }
-}
-/* フォールバック：多方向シャドウで白フチ風 */
-@supports not (-webkit-text-stroke: 1px white) {
-  .title{
-    text-shadow:
-      -1px -1px 0 #fff, 1px -1px 0 #fff,
-      -1px  1px 0 #fff, 1px  1px 0 #fff,
-      0 2px 6px rgba(0,0,0,.25);
-  }
+.title .line{
+  display:block;
+  /* 白縁は text-shadow で“奥側”にだけ。強すぎない値に調整 */
+  text-shadow:
+    0 0 2px rgba(255,255,255,.82),
+    0 0 4px rgba(255,255,255,.55),
+    0 0 8px rgba(255,255,255,.36),
+    0 2px 8px rgba(0,0,0,.25); /* ほんの少し落ち影で可読性UP */
 }
 
-/* ========== Buttons（グロッシー） ========== */
+/* Buttons */
 .btnrow{width:min(900px,92vw); margin:0 auto; display:flex; gap:10px}
 .btn{
   --c1:#000; --c2:#333;
@@ -135,21 +117,11 @@ body{
 }
 .btn::before{content:""; position:absolute; inset:0 0 55% 0; background:linear-gradient(180deg,rgba(255,255,255,.45),transparent); pointer-events:none}
 .btn:active{transform:translateY(1px)}
-.btn-blue{--c1:#2b8dff; --c2:#0f6de0; font-size:clamp(13px,3.4vw,14px)} /* 青だけ少し小さく＝1行死守 */
+.btn-blue{--c1:#2b8dff; --c2:#0f6de0; font-size:clamp(13px,3.4vw,14px)} /* 1行死守 */
 .btn-line{--c1:#00c100; --c2:#009400}
 .btn-black{--c1:#161616; --c2:#0b0b0b}
 
-/* さりげない“キラッ” */
-.sweep{position:relative; overflow:hidden}
-.sweep.in::after{
-  content:""; position:absolute; inset:0;
-  transform:translateX(-120%) skewX(-20deg);
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent);
-  animation:shine .9s ease forwards;
-}
-@keyframes shine{to{transform:translateX(120%) skewX(-20deg)}}
-
-/* ========== グリッド / カード ========== */
+/* カード */
 .grid{display:grid; gap:16px}
 @media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}
 
@@ -157,7 +129,7 @@ body{
   position:relative; padding:16px; border-radius:var(--r);
   box-shadow:var(--shadow); background:#fff; overflow:hidden;
 }
-/* 学科色（淡く） */
+/* 学科色（淡め） */
 .dept-sweets{--tone:#bff3ec}
 .dept-imagine{--tone:#ffe0ec}
 .dept-hoiku{--tone:#ffeec0}
@@ -166,26 +138,36 @@ body{
   background:linear-gradient(135deg, color-mix(in srgb,var(--tone) 68%,#fff 32%), #fff);
   z-index:-1;
 }
+
+/* ★ 3学科の顔サークル = 1.8倍（72→130px） */
 .badge{
-  position:absolute; right:12px; top:12px; width:72px; height:72px; border-radius:999px;
-  background:#fff; box-shadow:0 10px 22px rgba(0,0,0,.16), 0 0 0 6px rgba(255,255,255,.95); overflow:hidden;
+  position:absolute; right:12px; top:12px;
+  width:130px; height:130px; border-radius:999px; background:#fff;
+  box-shadow:0 10px 22px rgba(0,0,0,.16), 0 0 0 6px rgba(255,255,255,.95);
+  overflow:hidden;
 }
 .badge img{width:100%; height:100%; object-fit:cover; object-position:center 30%}
+.grade{margin:.4rem 0 0; font-weight:900}
+.name{margin:10px 0 6px; font-weight:900}
 .sticker{display:inline-block; background:#fff; color:#111; padding:6px 10px; border-radius:10px; font-weight:900; font-size:12px; box-shadow:0 8px 18px rgba(0,0,0,.12); margin-bottom:8px}
-.card h3{margin:10px 0 6px; font-weight:900}
+
+/* サークルが大きいぶん本文の右余白を確保 */
+.card{padding-right: calc(16px + 130px + 16px)}
+
+/* 授業写真2枚を均等 */
 .card .photos{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:12px}
 .card .photos img{width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px; box-shadow:0 8px 22px rgba(15,23,42,.12); background:#0001}
 
-/* ========== 当日の流れ ========== */
+/* 当日の流れ */
 .step{
-  display:grid; grid-template-columns:1fr; gap:10px;
+  display:grid; gap:10px;
   background:#fff; border-radius:16px; box-shadow:var(--shadow); overflow:hidden;
 }
 .step img{width:100%; aspect-ratio:16/10; object-fit:cover; background:#0001}
 .step .body{padding:12px 14px}
 .num{display:inline-block; background:linear-gradient(180deg,#1480ff,#7bd6ff); color:#fff; font-weight:900; padding:.2rem .6rem; border-radius:999px; margin-bottom:6px}
 
-/* ========== 安心ガイド（タイムライン） ========== */
+/* 安心ガイド（左の丸画像） */
 .guide{position:relative}
 .glist{list-style:none; margin:0; padding:0; display:grid; gap:12px}
 .gitem{display:grid; grid-template-columns:auto 1fr; gap:10px; align-items:center}
@@ -195,16 +177,20 @@ body{
   background:linear-gradient(180deg,#e6f5ff,#fff); display:grid; place-items:center;
 }
 .gavatar img{width:100%; height:100%; object-fit:cover; object-position:center 35%}
-/* ①④は少し上寄せ、②（アクセス）は下寄せで顔切れ防止、⑤は新画像用 */
-.gitem:nth-child(1) .gavatar img,
-.gitem:nth-child(4) .gavatar img{object-position:center 28%}
+/* ①と④は“寄り”でバストアップ強調 */
+.glist > .gitem:nth-of-type(1) .gavatar img,
+.glist > .gitem:nth-of-type(4) .gavatar img{
+  transform:scale(1.22);
+  transform-origin:center;
+  object-position:center 38%;
+}
 .gitem.access .gavatar img{object-position:center 48%}
 .gcard{background:#fff; border-radius:14px; box-shadow:var(--shadow); padding:10px 12px}
 
-/* ========== “追いつく”上下モーションの対象 ========== */
+/* パララックス対象 */
 [data-float]{will-change:transform}
 
-/* ========== フッター / 固定CTA ========== */
+/* フッター / 固定CTA */
 .footer{padding:42px 0 96px; text-align:center; color:var(--muted)}
 .sticky-cta{
   position:fixed; left:0; right:0; bottom:-80px;
@@ -215,15 +201,13 @@ body{
 .sticky-cta .btn{height:46px}
 .sticky-cta.show{bottom:0}
 
-/* ========== リビール / パララックス ========== */
+/* リビール */
 .reveal{opacity:0; transform:translateY(26px)}
 .reveal.in{opacity:1; animation:catch .8s cubic-bezier(.2,.8,.2,1) both}
-@keyframes catch{
-  0%{transform:translateY(26px)} 60%{transform:translateY(-8px)} 100%{transform:translateY(0)}
-}
+@keyframes catch{0%{transform:translateY(26px)}60%{transform:translateY(-8px)}100%{transform:translateY(0)}}
 
-/* 低モーション環境 */
+/* 低モーション */
 @media (prefers-reduced-motion: reduce){
-  .reveal,.sweep,.hand span.char{animation:none!important;transition:none!important}
+  .reveal,.hand span.char{animation:none!important;transition:none!important}
   .reveal{opacity:1;transform:none}
 }
