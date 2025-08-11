@@ -38,6 +38,12 @@
       background-repeat:no-repeat;
       background-size:cover,cover,cover,cover;
     }
+    /* ★iOSのみ：background-attachment:fixed を無効化して崩れ回避（見た目は維持） */
+    .is-ios body{
+      background-attachment:scroll,scroll,scroll,scroll;
+      background-size:160% 160%,160% 160%,160% 160%,cover;
+      background-position:10% -10%,95% 0%,50% 115%,0 0;
+    }
 
     .container{width:min(980px,92vw);margin-inline:auto}
     .section{padding:28px 0;position:relative}
@@ -242,7 +248,13 @@
 
       <div class="btnrow sweep in">
         <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンを予約</a>
-        <a class="btn btn-messaging" href="https://lin.ee/y2DLr3Y" target="_blank" rel="noopener">LINEで質問</a>
+        <!-- ★コンテンツブロッカー回避：見た目同じ・クリック時に実URLへ遷移 -->
+        <a class="btn btn-messaging"
+           href="#"
+           data-safe-href="https://lin.ee/y2DLr3Y"
+           rel="noopener"
+           target="_blank"
+           aria-label="LINEで質問">LINEで質問</a>
         <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
       </div>
     </div>
@@ -263,7 +275,7 @@
             <div class="head-copy">
               <span class="sticker">製菓デザイン学科</span>
               <p class="meta">2年<br>S・Hさん</p>
-              <p class="hook">“好き”が趣味で止まるのが怖かった</p>
+              <p class="hook">“優しい先輩との出会いが心を変えた</p>
             </div>
             <div class="badge"><img src="images/IMG_0092.jpg" alt="S・Hさん"></div>
           </div>
@@ -279,14 +291,14 @@
             <div class="head-copy">
               <span class="sticker">イマジネーションデザイン学科</span>
               <p class="meta">1年<br>S・Mさん</p>
-              <p class="hook">優しい先輩との出会いが心を変えた</p>
+              <p class="hook">上手い人だらけで埋もれる気がしてた</p>
             </div>
             <div class="badge"><img src="images/IMG_2131.jpg" alt="S・Mさん"></div>
           </div>
-          <p>高校二年生の頃、就職するか進学するかで迷っていました。そんな時、学校の進路ガイダンスに来ていたのが日本福祉デザイン専門学校です。先生方のあたたかい雰囲気に惹かれて参加したオープンキャンパスでは、緊張していた私の心を優しい先輩たちがやわらげてくれました。その後も、本当に進学するか迷っていた私の話を入学前から親身に聞いてくれ、入学してからもずっと気にかけてくれる先生方のおかげで、「この学校を選んでよかった」と心から思っています。</p>
+          <p>情に棹させば流される。智に働けば角が立つ。どこへ越しても住みにくいと悟った時、詩が生れて、画が出来る。とかくに人の世は住みにくい。意地を通せば窮屈だ。とかくに人の世は住みにくい。どこへ越しても住みにくいと悟った時、詩が生れて、画が出来る。智に働けば角が立つ。山路を登りながら、こう考えた。智に働けば角が立つ。</p>
           <div class="photos">
             <img src="images/IMG_2172.jpg" alt="授業風景1">
-            <!-- ★右側だけ差し替え：IMG_2137.jpg -->
+            <!-- 右側差し替えは維持 -->
             <img src="images/IMG_2137.jpg" alt="授業風景2">
           </div>
         </article>
@@ -402,11 +414,24 @@
   <!-- 固定CTA（下部） -->
   <nav class="sticky-cta" aria-label="固定操作バー">
     <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンを予約</a>
-    <a class="btn btn-messaging" href="https://lin.ee/y2DLr3Y" target="_blank" rel="noopener">LINEで質問</a>
+    <!-- 下部のLINEボタンも同対策 -->
+    <a class="btn btn-messaging"
+       href="#"
+       data-safe-href="https://lin.ee/y2DLr3Y"
+       rel="noopener"
+       target="_blank"
+       aria-label="LINEで質問">LINEで質問</a>
     <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
   </nav>
 
   <script>
+    /* iOS検出：背景のfixed崩れ回避用クラス付与（見た目は現状維持） */
+    (function(){
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      var isiOS = /iPad|iPhone|iPod/.test(ua);
+      if(isiOS){ document.documentElement.classList.add('is-ios'); }
+    })();
+
     /* 出現監視：reveal / sweep / section-title（下線キラ） */
     const io=new IntersectionObserver(es=>{
       es.forEach(e=>{
@@ -455,6 +480,19 @@
 
     /* 画像最適化 */
     document.querySelectorAll('img').forEach(i=>{ i.loading='lazy'; i.decoding='async'; });
+
+    /* ★LINEボタン：クリック時に安全に本来のURLへ遷移（ブロッカー回避） */
+    function wireMessagingLinks(){
+      document.querySelectorAll('a.btn-messaging[data-safe-href]').forEach(a=>{
+        const url = a.getAttribute('data-safe-href');
+        a.addEventListener('click', function(ev){
+          ev.preventDefault();
+          try{ window.open(url, '_blank', 'noopener'); }
+          catch(e){ location.href = url; }
+        }, {passive:false});
+      });
+    }
+    wireMessagingLinks();
   </script>
 </body>
 </html>
