@@ -243,3 +243,17 @@ body{
   .reveal,.sweep,.hand span.char{animation:none!important;transition:none!important}
   .reveal{opacity:1;transform:none}
 }
+/* --- iPhoneで残る拡大transformを完全無効化 --- */
+.hero-bg{
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+  will-change: auto !important;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* iOS判定が効く場合にも二重ガード */
+@supports (-webkit-touch-callout: none) {
+  .hero-bg{ transform: none !important; }
+}
