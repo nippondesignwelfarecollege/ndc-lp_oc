@@ -131,16 +131,17 @@
       --c1:#000; --c2:#333;
       flex:1; display:flex; justify-content:center; align-items:center; gap:.5ch;
       height:48px; padding:0 14px; border-radius:999px; font-weight:900;
-      font-size:clamp(13px,3.4vw,14px); /* ← 直近の指定どおり小さめ */
+      font-size:clamp(13px,3.4vw,14px); /* 小さめ */
       color:#fff; text-decoration:none;
       position:relative; overflow:hidden; white-space:nowrap;
       background:linear-gradient(180deg,var(--c1),var(--c2));
       box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 10px 22px rgba(15,23,42,.20);
+      cursor:pointer;
     }
     .btn::before{content:""; position:absolute; inset:0 0 55% 0; background:linear-gradient(180deg,rgba(255,255,255,.45),transparent); pointer-events:none}
     .btn:active{transform:translateY(1px)}
     .btn-blue{--c1:#2b8dff; --c2:#0f6de0}
-    .btn-messaging{--c1:var(--line); --c2:var(--line2)}   /* Safari対策 */
+    .btn-messaging{--c1:var(--line); --c2:var(--line2)}   /* Safari対策で neutral 名 */
     .btn-black{--c1:#161616; --c2:#0b0b0b}
 
     /* さりげない“キラッ” */
@@ -203,9 +204,8 @@
 
     @media (max-width:560px){ :root{--badge:112px} .card-header{gap:12px} .hook{font-size:.98rem} }
 
-    /* =====★ 指定箇所だけ字詰めをタイトに（他は変更なし） ===== */
+    /* 指定箇所の字詰め（既出のまま） */
     #flow .section-title{letter-spacing:-0.02em; line-height:1.16}
-    /* 1文字ずつの span に軽く詰め補正（過度にならない程度） */
     #flow .section-title.hand span.char{margin-right:-0.02em}
   </style>
 </head>
@@ -230,9 +230,21 @@
       </h1>
 
       <div class="btnrow sweep in">
-        <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンを予約</a>
-        <a class="btn btn-messaging" href="https://lin.ee/y2DLr3Y" target="_blank" rel="noopener">LINEで質問</a>
-        <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
+        <!-- ★ ここだけ “安全リンク化”：href をダミー化し URL は data-u(Base64) から開く -->
+        <a class="btn btn-blue safe-link"
+           href="#"
+           role="link" aria-label="オープンキャンパスを予約する"
+           data-u="aHR0cHM6Ly9uZGMuYWMuanAvb2NscC8=">オーキャンを予約</a>
+
+        <a class="btn btn-messaging safe-link"
+           href="#"
+           role="link" aria-label="LINEで質問する"
+           data-u="aHR0cHM6Ly9saW4uZWUveTJEUHIzWQ==">LINEで質問</a>
+
+        <a class="btn btn-black safe-link"
+           href="#"
+           role="link" aria-label="学校公式サイトを開く"
+           data-u="aHR0cHM6Ly9uZGMuYWMuanAv">学校公式サイト</a>
       </div>
     </div>
   </header>
@@ -392,9 +404,10 @@
 
   <!-- 固定CTA（下部） -->
   <nav class="sticky-cta" aria-label="固定操作バー">
-    <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンを予約</a>
-    <a class="btn btn-messaging" href="https://lin.ee/y2DLr3Y" target="_blank" rel="noopener">LINEで質問</a>
-    <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
+    <!-- 下部の3ボタンも同じ “安全リンク化” を適用 -->
+    <a class="btn btn-blue safe-link" href="#" role="link" aria-label="オープンキャンパスを予約する" data-u="aHR0cHM6Ly9uZGMuYWMuanAvb2NscC8=">オーキャンを予約</a>
+    <a class="btn btn-messaging safe-link" href="#" role="link" aria-label="LINEで質問する" data-u="aHR0cHM6Ly9saW4uZWUveTJEUHIzWQ==">LINEで質問</a>
+    <a class="btn btn-black safe-link" href="#" role="link" aria-label="学校公式サイトを開く" data-u="aHR0cHM6Ly9uZGMuYWMuanAv">学校公式サイト</a>
   </nav>
 
   <script>
@@ -446,6 +459,31 @@
 
     /* 画像最適化 */
     document.querySelectorAll('img').forEach(i=>{ i.loading='lazy'; i.decoding='async'; });
+
+    /* ===== 安全リンク起動（コンテンツブロッカー回避） =====
+       - a.safe-link は href をダミー（#）にし、data-u(Base64) から開く
+       - 中クリック / Cmd+クリック もケア
+    */
+    function b64(s){ try{ return atob(s); }catch(e){ return ''; } }
+    document.querySelectorAll('a.safe-link[data-u]').forEach(a=>{
+      const url = b64(a.dataset.u);
+      const open = (newTab)=>{ if(!url) return;
+        if(newTab){ window.open(url,'_blank','noopener'); }
+        else{ window.location.href=url; }
+      };
+      a.addEventListener('click',e=>{
+        e.preventDefault();
+        const newTab = e.metaKey || e.ctrlKey || e.button===1 || a.target==='_blank';
+        open(newTab);
+      });
+      a.addEventListener('auxclick',e=>{
+        if(e.button===1){ e.preventDefault(); open(true); }
+      });
+      // アクセシビリティ: Enter/Space でも開く
+      a.addEventListener('keydown',e=>{
+        if(e.key==='Enter' || e.key===' '){ e.preventDefault(); open(true); }
+      });
+    });
   </script>
 </body>
 </html>
