@@ -3,6 +3,7 @@
 html,body{margin:0}
 img{max-width:100%;display:block;height:auto}
 
+/* ========== Variables ========== */
 :root{
   --ink:#0b1224; --muted:#6b7280;
   --blue:#1480ff; --blue2:#0f6de0;
@@ -12,7 +13,7 @@ img{max-width:100%;display:block;height:auto}
   --r:18px;
 }
 
-/* 背景：多層グラデ（固定） */
+/* ========== Body / Background ========== */
 body{
   color:var(--ink);
   font-family:'Noto Sans JP',system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
@@ -29,7 +30,7 @@ body{
 .container{width:min(980px,92vw);margin-inline:auto}
 .section{padding:28px 0;position:relative}
 
-/* 見出し（手書きフォント＋下線） */
+/* 見出し（手書き＋下線） */
 .section-title{
   margin:0 0 16px; font-weight:900;
   font-size:clamp(20px,5.8vw,28px); letter-spacing:.02em;
@@ -52,7 +53,7 @@ body{
 }
 @keyframes u-shine{to{transform:translateX(120%) skewX(-20deg)}}
 
-/* 手書き文字：1文字ずつポップ（JSで .char を付与） */
+/* 手書き：1文字ずつポップ（JSで .char を付与） */
 .hand span.char{
   display:inline-block; opacity:0; transform:translateY(14px) rotate(var(--rot,0deg)) scale(.92);
   filter:blur(2px);
@@ -66,21 +67,37 @@ body{
   100%{transform:translateY(0) rotate(0) scale(1); filter:blur(0); opacity:1}
 }
 
-/* ========== 固定ラベル ========== */
+/* ========== Glassy School Label（★今回のみ更新） ========== */
 .site-title{
-  position:fixed; top:14px; left:4vw; z-index:50;
-  font-weight:900; font-size:12px; color:#2f2f2f;
-  background:rgba(255,255,255,.95); padding:6px 10px; border-radius:999px;
-  box-shadow:0 8px 20px rgba(0,0,0,.12)
+  position:fixed; top:14px; left:4vw; z-index:80;
+  font-weight:900; font-size:12px; letter-spacing:.02em; color:#0e1b2a;
+  padding:8px 14px; border-radius:999px; display:inline-block; /* テキスト幅にフィット */
+  background:
+    radial-gradient(180% 160% at 0% 0%, rgba(255,255,255,.55), rgba(255,255,255,.22) 55%, rgba(255,255,255,.10) 100%),
+    linear-gradient(180deg, rgba(255,255,255,.28), rgba(255,255,255,.08));
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(150%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.45),
+    inset 0 -1px 0 rgba(255,255,255,.35),
+    0 10px 26px rgba(13,27,42,.12);
+  position:relative; overflow:hidden;
+}
+.site-title::before{
+  /* 上辺のヌメっとした虹がかったハイライト（ごく薄く） */
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(120% 60% at 20% -20%, rgba(255,255,255,.65) 0 25%, transparent 26%),
+             linear-gradient(90deg, rgba(255,255,255,.25), rgba(255,255,255,.05) 40%, rgba(255,255,255,.2) 60%, rgba(255,255,255,0) 100%);
+  mix-blend-mode:screen; pointer-events:none; opacity:.8;
 }
 
-/* ========== HERO（スマホ前提） ========== */
+/* ========== HERO ========== */
 .hero{position:relative; min-height:62svh; display:grid; place-items:end start; overflow:hidden}
 .hero-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 35%}
 .hero-overlay{position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0) 0,rgba(0,0,0,.18) 75%,rgba(0,0,0,.25))}
 .hero-inner{position:relative; z-index:1; width:100%; padding:14px 0 20px}
 
-/* リード（白帯）控えめに */
+/* リード（白帯） */
 .lead{
   width:min(900px,92vw); margin:0 auto 8px;
   background:rgba(255,255,255,.24); backdrop-filter:blur(2px);
@@ -91,43 +108,37 @@ body{
 .lead .dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(#7bd6ff,#1480ff)}
 .lead .lead-text{white-space:nowrap}
 
-/* ====== ★今回修正対象：ヒーロー見出し（ネイビー文字の後ろに白ぼかし） ====== */
+/* ヒーロー見出し（濃ネイビー＋白フチを“後ろ”に） */
 .title{
   width:min(900px,92vw);
   margin:0 auto 10px;
   font-weight:900;
   font-size:clamp(22px,6.5vw,34px);
   line-height:1.16;
-  color:#133a7c;              /* ネイビー */
+  color:#133a7c;
   background:transparent;
   padding:0;
-  /* 既存の縁取り系を完全リセット（前面に出さない） */
-  -webkit-text-stroke: 0 !important;
-  text-shadow: none !important;
 }
 .title span{display:block}
-
-/* 文字の“後ろだけ”に柔らか白ぼかし（前面にかぶらない） */
-.hero .title{
-  filter:
-    drop-shadow(0 0 2px rgba(255,255,255,.85))
-    drop-shadow(0 0 6px rgba(255,255,255,.55));
+/* WebKit：半透明ストローク＋軽い影（前に出ない） */
+@supports (-webkit-text-stroke: 1px white) {
+  .title{
+    -webkit-text-stroke:2px rgba(255,255,255,.95);
+    text-stroke:2px rgba(255,255,255,.95);
+    text-shadow:0 2px 6px rgba(0,0,0,.25);
+  }
 }
-/* Safari 等で子要素分割があっても同等に効くよう保険 */
-.hero .title span{
-  filter:
-    drop-shadow(0 0 2px rgba(255,255,255,.85))
-    drop-shadow(0 0 6px rgba(255,255,255,.55));
-}
-
-/* どこかに残っている inline の text-stroke を無効化（ヒーロー見出し限定） */
-.hero .title,
-.hero .title *{
-  -webkit-text-stroke: 0 !important;
-  text-stroke: 0 !important;
+/* Fallback：擬似アウトライン（前景化しない程度） */
+@supports not (-webkit-text-stroke: 1px white) {
+  .title{
+    text-shadow:
+      -1px -1px 0 #fff, 1px -1px 0 #fff,
+      -1px  1px 0 #fff, 1px  1px 0 #fff,
+      0 2px 6px rgba(0,0,0,.25);
+  }
 }
 
-/* ========== Buttons（グロッシー） ========== */
+/* Buttons */
 .btnrow{width:min(900px,92vw); margin:0 auto; display:flex; gap:10px}
 .btn{
   --c1:#000; --c2:#333;
@@ -140,7 +151,7 @@ body{
 }
 .btn::before{content:""; position:absolute; inset:0 0 55% 0; background:linear-gradient(180deg,rgba(255,255,255,.45),transparent); pointer-events:none}
 .btn:active{transform:translateY(1px)}
-.btn-blue{--c1:#2b8dff; --c2:#0f6de0; font-size:clamp(13px,3.4vw,14px)} /* 青だけ少し小さめ＝1行死守 */
+.btn-blue{--c1:#2b8dff; --c2:#0f6de0; font-size:clamp(13px,3.4vw,14px)}
 .btn-line{--c1:#00c100; --c2:#009400}
 .btn-black{--c1:#161616; --c2:#0b0b0b}
 
@@ -154,7 +165,7 @@ body{
 }
 @keyframes shine{to{transform:translateX(120%) skewX(-20deg)}}
 
-/* ========== グリッド / カード ========== */
+/* ========== Grid / Cards（3学科） ========== */
 .grid{display:grid; gap:16px}
 @media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}
 
@@ -162,7 +173,6 @@ body{
   position:relative; padding:16px; border-radius:var(--r);
   box-shadow:var(--shadow); background:#fff; overflow:hidden;
 }
-/* 学科色（淡く） */
 .dept-sweets{--tone:#bff3ec}
 .dept-imagine{--tone:#ffe0ec}
 .dept-hoiku{--tone:#ffeec0}
@@ -172,20 +182,18 @@ body{
   z-index:-1;
 }
 .badge{
-  position:absolute; right:12px; top:12px;
-  width:130px; height:130px;               /* 顔サークル 1.8倍 */
+  position:absolute; right:12px; top:12px; width:130px; height:130px;
   border-radius:999px; background:#fff;
   box-shadow:0 10px 22px rgba(0,0,0,.16), 0 0 0 6px rgba(255,255,255,.95);
   overflow:hidden;
 }
 .badge img{width:100%; height:100%; object-fit:cover; object-position:center 30%}
-
 .sticker{display:inline-block; background:#fff; color:#111; padding:6px 10px; border-radius:10px; font-weight:900; font-size:12px; box-shadow:0 8px 18px rgba(0,0,0,.12); margin-bottom:8px}
 .card h3{margin:10px 0 6px; font-weight:900}
 .card .photos{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:12px}
 .card .photos img{width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px; box-shadow:0 8px 22px rgba(15,23,42,.12); background:#0001}
 
-/* ========== 当日の流れ ========== */
+/* ========== Flow（当日の流れ） ========== */
 .step{
   display:grid; grid-template-columns:1fr; gap:10px;
   background:#fff; border-radius:16px; box-shadow:var(--shadow); overflow:hidden;
@@ -209,10 +217,10 @@ body{
 .gitem.access .gavatar img{object-position:center 48%}
 .gcard{background:#fff; border-radius:14px; box-shadow:var(--shadow); padding:10px 12px}
 
-/* ========== “追いつく”上下モーション ========== */
+/* ========== “追いつく”上下モーション対象 ========== */
 [data-float]{will-change:transform}
 
-/* ========== フッター / 固定CTA ========== */
+/* ========== Footer / Sticky CTA ========== */
 .footer{padding:42px 0 96px; text-align:center; color:var(--muted)}
 .sticky-cta{
   position:fixed; left:0; right:0; bottom:-80px;
@@ -223,7 +231,7 @@ body{
 .sticky-cta .btn{height:46px}
 .sticky-cta.show{bottom:0}
 
-/* ========== リビール / パララックス ========== */
+/* ========== Reveal（スクロール出現） ========== */
 .reveal{opacity:0; transform:translateY(26px)}
 .reveal.in{opacity:1; animation:catch .8s cubic-bezier(.2,.8,.2,1) both}
 @keyframes catch{
