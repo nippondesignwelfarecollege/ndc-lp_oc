@@ -29,7 +29,6 @@
       color:var(--ink);
       font-family:'Noto Sans JP',system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
       line-height:1.85;
-      /* 本体はプレーン。背景は下の .global-bg に集約 */
       background:#ffffff;
     }
     .global-bg{
@@ -43,7 +42,7 @@
       background-size:cover,cover,cover,cover;
       background-position:10% -10%, 95% 0%, 50% 115%, 0 0;
       will-change:transform;
-      transform:translateZ(0); /* iOSでのバンディング防止 */
+      transform:translateZ(0);
     }
 
     .container{width:min(980px,92vw);margin-inline:auto}
@@ -292,7 +291,7 @@
             </div>
             <div class="badge"><img src="images/IMG_2131.jpg" alt="S・Mさん"></div>
           </div>
-          <p>高校二年生の頃、就職するか進学するかで迷っていました。そんな時、学校の進路ガイダンスに来ていたのが日本デザイン福祉専門学校です。先生方のあたたかい雰囲気に惹かれて参加したオープンキャンパスでは、緊張していた私の心を優しい先輩たちがやわらげてくれました。その後も、本当に進学するか迷っていた私の話を入学前から親身に聞いてくれ、入学してからもずっと気にかけてくれる先生方のおかげで、「この学校を選んでよかった」と心から思っています。</p>
+          <p>高校二年生の頃、就職するか進学するかで迷っていました。そんな時、学校の進路ガイダンスに来ていたのが日本デザイン福祉専門学校です。先生方のあたたかい雰囲気に惹かれて参加したオープンキャンパスでは、緊張していた私の心を優しい先輩たちがやわらげてくれました。その後も、本当に進学するか迷っていた私の話を入学前から親身に聞いてくれ、入学してからもずっと気にかけてくれる先生方のおかげで、「この学校を選んでよかった」と心から思っています。」</p>
           <div class="photos">
             <img src="images/IMG_2172.jpg" alt="授業風景1">
             <img src="images/IMG_2137.jpg" alt="授業風景2">
@@ -349,8 +348,9 @@
           </div>
         </article>
 
+        <!-- ★差し替え済み：images/hall.jpg -->
         <article class="step sweep reveal">
-          <img src="images/Google_AI_Studio_2025-08-08T14_33_39.722Z.jpg" alt="個別相談">
+          <img src="images/hall.jpg" alt="個別相談">
           <div class="body">
             <span class="num">4. 個別相談（11:45〜随時）</span>
             <h3 style="margin:.3rem 0 .4rem">不安に寄り添います</h3>
