@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>日本デザイン福祉専門学校｜OCサポーター紹介</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Yomogi&display=swap" rel="stylesheet" />
+  <!-- ヒーロー画像を先読み（確実表示用） -->
+  <link rel="preload" as="image" href="images/Google_AI_Studio_2025-07-16T07_54_39.403Z.png" fetchpriority="high">
+
   <style>
     /* ===== Reset / Base ===== */
     *{box-sizing:border-box}
@@ -14,13 +17,14 @@
     :root{
       --ink:#0b1224; --muted:#6b7280;
       --blue:#1480ff; --blue2:#0f6de0;
-      --line:#00c100; --line2:#00a400;  /* 緑ボタン用 */
+      --line:#00c100; --line2:#00a400;
       --blk:#111; --blk2:#0b0b0b;
       --shadow:0 14px 34px rgba(15,23,42,.16);
       --r:18px;
       --badge:130px;
     }
 
+    /* ===== 背景：淡い多層グラデ ===== */
     body{
       color:var(--ink);
       font-family:'Noto Sans JP',system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
@@ -31,6 +35,8 @@
         radial-gradient(120% 80% at 50% 115%, #fff6d9 0 45%, transparent 46%),
         linear-gradient(180deg,#fff 0%,#f9fbff 45%,#ffffff 100%);
       background-attachment:fixed,fixed,fixed,fixed;
+      background-repeat:no-repeat;
+      background-size:cover,cover,cover,cover;
     }
 
     .container{width:min(980px,92vw);margin-inline:auto}
@@ -65,7 +71,7 @@
     .hand.in span.char{animation:charPop .6s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--d,0ms)}
     @keyframes charPop{40%{transform:translateY(-6px) rotate(var(--rot,0)) scale(1.02);filter:blur(0);opacity:1}100%{transform:translateY(0) rotate(0) scale(1);filter:blur(0);opacity:1}}
 
-    /* ===== 固定ラベル（ガラス・縁取りなし） ===== */
+    /* ===== 固定ラベル（ガラス） ===== */
     .site-title{
       position:fixed; top:14px; left:4vw; z-index:90;
       font-weight:900; font-size:12px; color:#2f2f2f;
@@ -88,7 +94,10 @@
 
     /* ===== HERO ===== */
     .hero{position:relative; min-height:62svh; display:grid; place-items:end start; overflow:hidden}
-    .hero-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 35%}
+    .hero .hero-bg{
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; object-position:center 35%;
+    }
     .hero-overlay{position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0) 0,rgba(0,0,0,.18) 75%,rgba(0,0,0,.25))}
     .hero-inner{position:relative; z-index:1; width:100%; padding:14px 0 20px}
 
@@ -103,7 +112,7 @@
     .lead .dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(#7bd6ff,#1480ff)}
     .lead .lead-text{white-space:nowrap}
 
-    /* ★ヒーロー見出し：白＋黒縁取り（背面無し） */
+    /* ヒーロー見出し：白＋黒縁取り */
     .title{
       width:min(900px,92vw);
       margin:0 auto 10px;
@@ -131,20 +140,19 @@
       --c1:#000; --c2:#333;
       flex:1; display:flex; justify-content:center; align-items:center; gap:.5ch;
       height:48px; padding:0 14px; border-radius:999px; font-weight:900;
-      font-size:clamp(13px,3.4vw,14px); /* 小さめ */
+      font-size:clamp(13px,3.4vw,14px);
       color:#fff; text-decoration:none;
       position:relative; overflow:hidden; white-space:nowrap;
       background:linear-gradient(180deg,var(--c1),var(--c2));
       box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 10px 22px rgba(15,23,42,.20);
-      cursor:pointer;
     }
     .btn::before{content:""; position:absolute; inset:0 0 55% 0; background:linear-gradient(180deg,rgba(255,255,255,.45),transparent); pointer-events:none}
     .btn:active{transform:translateY(1px)}
     .btn-blue{--c1:#2b8dff; --c2:#0f6de0}
-    .btn-messaging{--c1:var(--line); --c2:var(--line2)}   /* Safari対策で neutral 名 */
+    .btn-messaging{--c1:var(--line); --c2:var(--line2)}
     .btn-black{--c1:#161616; --c2:#0b0b0b}
 
-    /* さりげない“キラッ” */
+    /* “キラッ” */
     .sweep{position:relative; overflow:hidden}
     .sweep.in::after{
       content:""; position:absolute; inset:0;
@@ -204,25 +212,28 @@
 
     @media (max-width:560px){ :root{--badge:112px} .card-header{gap:12px} .hook{font-size:.98rem} }
 
-    /* 指定箇所の字詰め（既出のまま） */
+    /* 知る・感じる… の字詰めだけ */
     #flow .section-title{letter-spacing:-0.02em; line-height:1.16}
     #flow .section-title.hand span.char{margin-right:-0.02em}
   </style>
 </head>
 <body>
 
-  <!-- ガラス質感ラベル（縁なし・艶感） -->
   <div class="site-title">日本デザイン福祉専門学校</div>
 
   <!-- ===== HERO ===== -->
   <header class="hero">
-    <img class="hero-bg" src="images/Google_AI_Studio_2025-07-16T07_54_39.403Z.png" alt="キャンパスの雰囲気">
+    <!-- 単一 <img> に戻して確実表示 -->
+    <img class="hero-bg"
+         src="images/Google_AI_Studio_2025-07-16T07_54_39.403Z.png"
+         alt="キャンパスの雰囲気"
+         fetchpriority="high"
+         width="1920" height="1080">
     <div class="hero-overlay"></div>
 
     <div class="hero-inner">
       <p class="lead"><span class="dot"></span><span class="lead-text">私たちOCサポーターも、進路に悩んだ高校生でした。</span></p>
 
-      <!-- 白テキスト＋黒縁取り -->
       <h1 class="title">
         <span>そんな私たちが、</span>
         <span>この学校を選んだ</span>
@@ -230,21 +241,9 @@
       </h1>
 
       <div class="btnrow sweep in">
-        <!-- ★ ここだけ “安全リンク化”：href をダミー化し URL は data-u(Base64) から開く -->
-        <a class="btn btn-blue safe-link"
-           href="#"
-           role="link" aria-label="オープンキャンパスを予約する"
-           data-u="aHR0cHM6Ly9uZGMuYWMuanAvb2NscC8=">オーキャンを予約</a>
-
-        <a class="btn btn-messaging safe-link"
-           href="#"
-           role="link" aria-label="LINEで質問する"
-           data-u="aHR0cHM6Ly9saW4uZWUveTJEUHIzWQ==">LINEで質問</a>
-
-        <a class="btn btn-black safe-link"
-           href="#"
-           role="link" aria-label="学校公式サイトを開く"
-           data-u="aHR0cHM6Ly9uZGMuYWMuanAv">学校公式サイト</a>
+        <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンを予約</a>
+        <a class="btn btn-messaging" href="https://lin.ee/y2DLr3Y" target="_blank" rel="noopener">LINEで質問</a>
+        <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
       </div>
     </div>
   </header>
@@ -259,24 +258,22 @@
       </h2>
 
       <div class="grid" data-float>
-        <!-- 製菓 -->
         <article class="card dept-sweets sweep reveal">
           <div class="card-header">
             <div class="head-copy">
               <span class="sticker">製菓デザイン学科</span>
               <p class="meta">2年<br>S・Hさん</p>
-              <p class="hook">“好き”が趣味で止まるのが怖かった</p>
+              <p class="hook">“優しい先輩との出会いが心を変えた</p>
             </div>
             <div class="badge"><img src="images/IMG_0092.jpg" alt="S・Hさん"></div>
           </div>
-          <p>情に棹させば流される。智に働けば角が立つ。どこへ越しても住みにくいと悟った時、詩が生れて、画が出来る。とかくに人の世は住みにくい。意地を通せば窮屈だ。とかくに人の世は住みにくい。どこへ越しても住みにくいと悟った時、詩が生れて、画が出来る。意地を通せば窮屈だ。山路を登りながら、こう考えた。智に働けば角が立つ。どこへ越しても住みにくいと悟った時、詩が生れて、画が出来る。智に働けば角が立つ。</p>
+          <p>高校二年生の頃、就職するか進学するかで迷っていました。そんな時、学校の進路ガイダンスに来ていたのが日本福祉デザイン専門学校です。先生方のあたたかい雰囲気に惹かれて参加したオープンキャンパスでは、緊張していた私の心を優しい先輩たちがやわらげてくれました。その後も、本当に進学するか迷っていた私の話を入学前から親身に聞いてくれ、入学してからもずっと気にかけてくれる先生方のおかげで、「この学校を選んでよかった」と心から思っています。</p>
           <div class="photos">
             <img src="images/IMG_2172.jpg" alt="授業風景1">
             <img src="images/2024_161.jpg" alt="授業風景2">
           </div>
         </article>
 
-        <!-- イマジネーション -->
         <article class="card dept-imagine sweep reveal">
           <div class="card-header">
             <div class="head-copy">
@@ -289,11 +286,11 @@
           <p>情に棹させば流される。智に働けば角が立つ。どこへ越しても住みにくいと悟った時、詩が生れて、画が出来る。とかくに人の世は住みにくい。意地を通せば窮屈だ。とかくに人の世は住みにくい。どこへ越しても住みにくいと悟った時、詩が生れて、画が出来る。智に働けば角が立つ。山路を登りながら、こう考えた。智に働けば角が立つ。</p>
           <div class="photos">
             <img src="images/IMG_2172.jpg" alt="授業風景1">
-            <img src="images/2024_161.jpg" alt="授業風景2">
+            <!-- ★右側だけ差し替え：IMG_2137.jpg -->
+            <img src="images/IMG_2137.jpg" alt="授業風景2">
           </div>
         </article>
 
-        <!-- 保育こども -->
         <article class="card dept-hoiku sweep reveal">
           <div class="card-header">
             <div class="head-copy">
@@ -404,10 +401,9 @@
 
   <!-- 固定CTA（下部） -->
   <nav class="sticky-cta" aria-label="固定操作バー">
-    <!-- 下部の3ボタンも同じ “安全リンク化” を適用 -->
-    <a class="btn btn-blue safe-link" href="#" role="link" aria-label="オープンキャンパスを予約する" data-u="aHR0cHM6Ly9uZGMuYWMuanAvb2NscC8=">オーキャンを予約</a>
-    <a class="btn btn-messaging safe-link" href="#" role="link" aria-label="LINEで質問する" data-u="aHR0cHM6Ly9saW4uZWUveTJEUHIzWQ==">LINEで質問</a>
-    <a class="btn btn-black safe-link" href="#" role="link" aria-label="学校公式サイトを開く" data-u="aHR0cHM6Ly9uZGMuYWMuanAv">学校公式サイト</a>
+    <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンを予約</a>
+    <a class="btn btn-messaging" href="https://lin.ee/y2DLr3Y" target="_blank" rel="noopener">LINEで質問</a>
+    <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
   </nav>
 
   <script>
@@ -459,31 +455,6 @@
 
     /* 画像最適化 */
     document.querySelectorAll('img').forEach(i=>{ i.loading='lazy'; i.decoding='async'; });
-
-    /* ===== 安全リンク起動（コンテンツブロッカー回避） =====
-       - a.safe-link は href をダミー（#）にし、data-u(Base64) から開く
-       - 中クリック / Cmd+クリック もケア
-    */
-    function b64(s){ try{ return atob(s); }catch(e){ return ''; } }
-    document.querySelectorAll('a.safe-link[data-u]').forEach(a=>{
-      const url = b64(a.dataset.u);
-      const open = (newTab)=>{ if(!url) return;
-        if(newTab){ window.open(url,'_blank','noopener'); }
-        else{ window.location.href=url; }
-      };
-      a.addEventListener('click',e=>{
-        e.preventDefault();
-        const newTab = e.metaKey || e.ctrlKey || e.button===1 || a.target==='_blank';
-        open(newTab);
-      });
-      a.addEventListener('auxclick',e=>{
-        if(e.button===1){ e.preventDefault(); open(true); }
-      });
-      // アクセシビリティ: Enter/Space でも開く
-      a.addEventListener('keydown',e=>{
-        if(e.key==='Enter' || e.key===' '){ e.preventDefault(); open(true); }
-      });
-    });
   </script>
 </body>
 </html>
