@@ -14,7 +14,7 @@
     :root{
       --ink:#0b1224; --muted:#6b7280;
       --blue:#1480ff; --blue2:#0f6de0;
-      --line:#00c100; --line2:#00a400;  /* ← 緑ボタン用。class名はSafari対策で変更 */
+      --line:#00c100; --line2:#00a400;  /* 緑ボタン用 */
       --blk:#111; --blk2:#0b0b0b;
       --shadow:0 14px 34px rgba(15,23,42,.16);
       --r:18px;
@@ -45,7 +45,6 @@
     .section-title.hand{
       font-family:'Yomogi','Noto Sans JP',sans-serif;
       line-height:1.22;
-      /* 疑似ボールド（Yomogiは1ウェイト） */
       text-shadow:.35px 0 currentColor,-.35px 0 currentColor,0 .35px currentColor,0 -.35px currentColor;
     }
     .section-title .underline{
@@ -132,7 +131,8 @@
       --c1:#000; --c2:#333;
       flex:1; display:flex; justify-content:center; align-items:center; gap:.5ch;
       height:48px; padding:0 14px; border-radius:999px; font-weight:900;
-      font-size:clamp(14px,3.8vw,15px); color:#fff; text-decoration:none;
+      font-size:clamp(13px,3.4vw,14px); /* ← 直近の指定どおり小さめ */
+      color:#fff; text-decoration:none;
       position:relative; overflow:hidden; white-space:nowrap;
       background:linear-gradient(180deg,var(--c1),var(--c2));
       box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 10px 22px rgba(15,23,42,.20);
@@ -140,7 +140,7 @@
     .btn::before{content:""; position:absolute; inset:0 0 55% 0; background:linear-gradient(180deg,rgba(255,255,255,.45),transparent); pointer-events:none}
     .btn:active{transform:translateY(1px)}
     .btn-blue{--c1:#2b8dff; --c2:#0f6de0}
-    .btn-messaging{--c1:var(--line); --c2:var(--line2)}   /* ← Safari対策でclass名変更 */
+    .btn-messaging{--c1:var(--line); --c2:var(--line2)}   /* Safari対策 */
     .btn-black{--c1:#161616; --c2:#0b0b0b}
 
     /* さりげない“キラッ” */
@@ -202,6 +202,11 @@
     @keyframes catch{0%{transform:translateY(26px)} 60%{transform:translateY(-8px)} 100%{transform:translateY(0)}}
 
     @media (max-width:560px){ :root{--badge:112px} .card-header{gap:12px} .hook{font-size:.98rem} }
+
+    /* =====★ 指定箇所だけ字詰めをタイトに（他は変更なし） ===== */
+    #flow .section-title{letter-spacing:-0.02em; line-height:1.16}
+    /* 1文字ずつの span に軽く詰め補正（過度にならない程度） */
+    #flow .section-title.hand span.char{margin-right:-0.02em}
   </style>
 </head>
 <body>
