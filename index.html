@@ -14,7 +14,7 @@
     :root{
       --ink:#0b1224; --muted:#6b7280;
       --blue:#1480ff; --blue2:#0f6de0;
-      --line:#00c100; --line2:#00a400;
+      --line:#00c100; --line2:#00a400;  /* ← 緑ボタン用。class名はSafari対策で変更 */
       --blk:#111; --blk2:#0b0b0b;
       --shadow:0 14px 34px rgba(15,23,42,.16);
       --r:18px;
@@ -36,7 +36,7 @@
     .container{width:min(980px,92vw);margin-inline:auto}
     .section{padding:28px 0;position:relative}
 
-    /* ===== 手書き見出し（既存・1文字出現用） ===== */
+    /* ===== 手書き見出し（1文字出現） ===== */
     .section-title{
       margin:0 0 16px; font-weight:900;
       font-size:clamp(20px,5.8vw,28px); letter-spacing:.02em;
@@ -45,6 +45,7 @@
     .section-title.hand{
       font-family:'Yomogi','Noto Sans JP',sans-serif;
       line-height:1.22;
+      /* 疑似ボールド（Yomogiは1ウェイト） */
       text-shadow:.35px 0 currentColor,-.35px 0 currentColor,0 .35px currentColor,0 -.35px currentColor;
     }
     .section-title .underline{
@@ -65,7 +66,7 @@
     .hand.in span.char{animation:charPop .6s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--d,0ms)}
     @keyframes charPop{40%{transform:translateY(-6px) rotate(var(--rot,0)) scale(1.02);filter:blur(0);opacity:1}100%{transform:translateY(0) rotate(0) scale(1);filter:blur(0);opacity:1}}
 
-    /* ===== 固定ラベル（ガラス・縁取り感ゼロにブラッシュアップ） ===== */
+    /* ===== 固定ラベル（ガラス・縁取りなし） ===== */
     .site-title{
       position:fixed; top:14px; left:4vw; z-index:90;
       font-weight:900; font-size:12px; color:#2f2f2f;
@@ -139,7 +140,7 @@
     .btn::before{content:""; position:absolute; inset:0 0 55% 0; background:linear-gradient(180deg,rgba(255,255,255,.45),transparent); pointer-events:none}
     .btn:active{transform:translateY(1px)}
     .btn-blue{--c1:#2b8dff; --c2:#0f6de0}
-    .btn-line{--c1:#00c100; --c2:#00a400}
+    .btn-messaging{--c1:var(--line); --c2:var(--line2)}   /* ← Safari対策でclass名変更 */
     .btn-black{--c1:#161616; --c2:#0b0b0b}
 
     /* さりげない“キラッ” */
@@ -205,7 +206,7 @@
 </head>
 <body>
 
-  <!-- ガラス質感ラベル（縁なし・艶感アップ） -->
+  <!-- ガラス質感ラベル（縁なし・艶感） -->
   <div class="site-title">日本デザイン福祉専門学校</div>
 
   <!-- ===== HERO ===== -->
@@ -216,7 +217,7 @@
     <div class="hero-inner">
       <p class="lead"><span class="dot"></span><span class="lead-text">私たちOCサポーターも、進路に悩んだ高校生でした。</span></p>
 
-      <!-- ★見出し：白＋黒縁取り（背面無し） -->
+      <!-- 白テキスト＋黒縁取り -->
       <h1 class="title">
         <span>そんな私たちが、</span>
         <span>この学校を選んだ</span>
@@ -225,7 +226,7 @@
 
       <div class="btnrow sweep in">
         <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンを予約</a>
-        <a class="btn btn-line" href="https://lin.ee/y2DLr3Y" target="_blank" rel="noopener">LINEで質問</a>
+        <a class="btn btn-messaging" href="https://lin.ee/y2DLr3Y" target="_blank" rel="noopener">LINEで質問</a>
         <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
       </div>
     </div>
@@ -241,6 +242,7 @@
       </h2>
 
       <div class="grid" data-float>
+        <!-- 製菓 -->
         <article class="card dept-sweets sweep reveal">
           <div class="card-header">
             <div class="head-copy">
@@ -257,6 +259,7 @@
           </div>
         </article>
 
+        <!-- イマジネーション -->
         <article class="card dept-imagine sweep reveal">
           <div class="card-header">
             <div class="head-copy">
@@ -273,6 +276,7 @@
           </div>
         </article>
 
+        <!-- 保育こども -->
         <article class="card dept-hoiku sweep reveal">
           <div class="card-header">
             <div class="head-copy">
@@ -381,10 +385,10 @@
     </div>
   </footer>
 
-  <!-- 固定CTA -->
+  <!-- 固定CTA（下部） -->
   <nav class="sticky-cta" aria-label="固定操作バー">
     <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンを予約</a>
-    <a class="btn btn-line" href="https://lin.ee/y2DLr3Y" target="_blank" rel="noopener">LINEで質問</a>
+    <a class="btn btn-messaging" href="https://lin.ee/y2DLr3Y" target="_blank" rel="noopener">LINEで質問</a>
     <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
   </nav>
 
@@ -419,7 +423,7 @@
     }
     document.querySelectorAll('.js-hand').forEach(splitHand);
 
-    /* スクロール連動：微パララックス＆CTA表示（※ヒーロー拡大は実装していません） */
+    /* スクロール連動：微パララックス＆CTA表示 */
     const sticky=document.querySelector('.sticky-cta');
     function onScroll(){
       const vh=innerHeight;
