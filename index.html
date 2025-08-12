@@ -4,7 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>日本デザイン福祉専門学校｜OCサポーター紹介</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Yomogi&display=swap" rel="stylesheet" />
+  <!-- 既存フォント -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet" />
+  <!-- 見出し用フォント -->
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet" />
+  <!-- ヒーロー画像を先読み（確実表示用） -->
   <link rel="preload" as="image" href="images/Google_AI_Studio_2025-07-16T07_54_39.403Z.png" fetchpriority="high">
 
   <style>
@@ -23,12 +27,12 @@
       --badge:130px;
     }
 
-    /* ===== 背景（固定レイヤー：iOSでも切れない） ===== */
+    /* ===== 背景：固定レイヤー方式（iOSでも切れない） ===== */
     body{
       color:var(--ink);
       font-family:'Noto Sans JP',system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
       line-height:1.85;
-      background:#fff;
+      background:#ffffff;
     }
     .global-bg{
       position:fixed; inset:0; z-index:-1; pointer-events:none;
@@ -40,6 +44,7 @@
       background-repeat:no-repeat;
       background-size:cover,cover,cover,cover;
       background-position:10% -10%, 95% 0%, 50% 115%, 0 0;
+      will-change:transform;
       transform:translateZ(0);
     }
 
@@ -53,9 +58,10 @@
       position:relative;
     }
     .section-title.hand{
-      font-family:'Yomogi','Noto Sans JP',sans-serif;
+      font-family:'Zen Kaku Gothic New','Noto Sans JP',sans-serif;
+      font-weight:900;
       line-height:1.22;
-      text-shadow:.35px 0 currentColor,-.35px 0 currentColor,0 .35px currentColor,0 -.35px currentColor;
+      text-shadow:none;
     }
     .section-title .underline{
       display:block; height:6px; width:100%;
@@ -70,7 +76,6 @@
     }
     @keyframes u-shine{to{transform:translateX(120%) skewX(-20deg)}}
 
-    /* 1文字ポップ */
     .hand span.char{display:inline-block;opacity:0;transform:translateY(14px) rotate(var(--rot,0)) scale(.92);filter:blur(2px)}
     .hand.in span.char{animation:charPop .6s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--d,0ms)}
     @keyframes charPop{40%{transform:translateY(-6px) rotate(var(--rot,0)) scale(1.02);filter:blur(0);opacity:1}100%{transform:translateY(0) rotate(0) scale(1);filter:blur(0);opacity:1}}
@@ -98,7 +103,10 @@
 
     /* ===== HERO ===== */
     .hero{position:relative; min-height:62svh; display:grid; place-items:end start; overflow:hidden}
-    .hero .hero-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 35%}
+    .hero .hero-bg{
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; object-position:center 35%;
+    }
     .hero-overlay{position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0) 0,rgba(0,0,0,.18) 75%,rgba(0,0,0,.25))}
     .hero-inner{position:relative; z-index:1; width:100%; padding:14px 0 20px}
 
@@ -115,13 +123,24 @@
 
     /* ヒーロー見出し：白＋黒縁取り */
     .title{
-      width:min(900px,92vw); margin:0 auto 10px;
-      font-weight:900; font-size:clamp(22px,6.5vw,34px);
-      line-height:1.16; color:#fff; position:relative;
+      width:min(900px,92vw);
+      margin:0 auto 10px;
+      font-weight:900;
+      font-size:clamp(22px,6.5vw,34px);
+      line-height:1.16;
+      color:#fff;
+      position:relative;
+      padding:0;
+      border-radius:0;
     }
     .title span{
       display:block;
-      text-shadow:-1.2px -1.2px 0 #000, 1.2px -1.2px 0 #000, -1.2px 1.2px 0 #000, 1.2px 1.2px 0 #000, 0 2px 6px rgba(0,0,0,.35);
+      text-shadow:
+        -1.2px -1.2px 0 #000,
+         1.2px -1.2px 0 #000,
+        -1.2px  1.2px 0 #000,
+         1.2px  1.2px 0 #000,
+         0 2px 6px rgba(0,0,0,.35);
     }
 
     /* Buttons */
@@ -130,7 +149,8 @@
       --c1:#000; --c2:#333;
       flex:1; display:flex; justify-content:center; align-items:center; gap:.5ch;
       height:48px; padding:0 14px; border-radius:999px; font-weight:900;
-      font-size:clamp(13px,3.4vw,14px); color:#fff; text-decoration:none;
+      font-size:clamp(13px,3.4vw,14px);
+      color:#fff; text-decoration:none;
       position:relative; overflow:hidden; white-space:nowrap;
       background:linear-gradient(180deg,var(--c1),var(--c2));
       box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 10px 22px rgba(15,23,42,.20);
@@ -144,7 +164,8 @@
     /* “キラッ” */
     .sweep{position:relative; overflow:hidden}
     .sweep.in::after{
-      content:""; position:absolute; inset:0; transform:translateX(-120%) skewX(-20deg);
+      content:""; position:absolute; inset:0;
+      transform:translateX(-120%) skewX(-20deg);
       background:linear-gradient(120deg,transparent,rgba(255,255,255,.42),transparent);
       animation:shine .9s ease forwards;
     }
@@ -153,15 +174,20 @@
     /* ===== Grid / Card ===== */
     .grid{display:grid; gap:16px}
     @media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}
+
     .card{position:relative; padding:16px; border-radius:var(--r); box-shadow:var(--shadow); background:#fff; overflow:hidden}
-    .dept-sweets{--tone:#bff3ec} .dept-imagine{--tone:#ffe0ec} .dept-hoiku{--tone:#ffeec0}
+    .dept-sweets{--tone:#bff3ec}
+    .dept-imagine{--tone:#ffe0ec}
+    .dept-hoiku{--tone:#ffeec0}
     .card::before{content:""; position:absolute; inset:0; background:linear-gradient(135deg, color-mix(in srgb,var(--tone) 68%,#fff 32%), #fff); z-index:-1}
+
     .card-header{display:grid; grid-template-columns:1fr auto; align-items:center; gap:14px; min-height: calc(var(--badge) * .72 + 28px); margin-bottom:12px}
     .sticker{display:inline-block; background:#fff; color:#111; padding:6px 10px; border-radius:10px; font-weight:900; font-size:12px; box-shadow:0 8px 18px rgba(0,0,0,.12); margin-bottom:8px}
     .meta{line-height:1.25; margin:2px 0 0; font-weight:700}
     .hook{margin:8px 0 0; padding:8px 12px; font-weight:900; line-height:1.45; color:#0d2b6f; background:linear-gradient(180deg,#eef4ff,#ffffff); border-left:6px solid #78a9ff; border-radius:10px; box-shadow:0 6px 14px rgba(13,43,111,.08) inset}
     .badge{width:var(--badge); height:var(--badge); border-radius:999px; background:#fff; box-shadow:0 10px 22px rgba(0,0,0,.16), 0 0 0 6px rgba(255,255,255,.95); overflow:hidden; justify-self:end}
     .badge img{width:100%; height:100%; object-fit:cover; object-position:center 30%}
+
     .card .photos{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:12px}
     .card .photos img{width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px; box-shadow:0 8px 22px rgba(15,23,42,.12); background:#0001}
 
@@ -179,153 +205,119 @@
 
     /* ===== Footer / 固定CTA ===== */
     .footer{padding:42px 0 96px; text-align:center; color:var(--muted)}
-    .sticky-cta{position:fixed; left:0; right:0; bottom:-80px; display:flex; gap:10px; padding:10px 14px; background:rgba(255,255,255,.92); backdrop-filter:blur(10px); box-shadow:0 -12px 24px rgba(0,0,0,.14); transition:bottom .28s; z-index:60;}
+    .sticky-cta{
+      position:fixed; left:0; right:0; bottom:-80px;
+      display:flex; gap:10px; padding:10px 14px;
+      background:rgba(255,255,255,.92); backdrop-filter:blur(10px);
+      box-shadow:0 -12px 24px rgba(0,0,0,.14); transition:bottom .28s; z-index:60;
+    }
     .sticky-cta .btn{height:46px}
     .sticky-cta.show{bottom:0}
 
-    /* ===== Reveal ===== */
+    /* ===== Reveal / Parallax ===== */
     .reveal{opacity:0; transform:translateY(26px)}
     .reveal.in{opacity:1; animation:catch .8s cubic-bezier(.2,.8,.2,1) both}
     @keyframes catch{0%{transform:translateY(26px)} 60%{transform:translateY(-8px)} 100%{transform:translateY(0)}}
 
     @media (max-width:560px){ :root{--badge:112px} .card-header{gap:12px} .hook{font-size:.98rem} }
 
-    /* 知る・感じる… の字詰め */
+    /* 知る・感じる… の字詰めだけ */
     #flow .section-title{letter-spacing:-0.02em; line-height:1.16}
     #flow .section-title.hand span.char{margin-right:-0.02em}
 
-    /* ===== ★1分ショート：ガラス/グラデ縁取り/アンビエント ===== */
-    .shorts-wrap{width:min(980px,92vw); margin:0 auto}
-    .shorts-head{
-      position:relative; padding:16px 16px 12px; border-radius:20px;
-      background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.36));
-      -webkit-backdrop-filter:blur(12px) saturate(1.05); backdrop-filter:blur(12px) saturate(1.05);
-      box-shadow:0 14px 28px rgba(15,23,42,.12);
-      overflow:hidden;
+    /* ===== 1分解説動画（最下段） ===== */
+    .shorts{padding:34px 0 20px}
+    .glass-toggle{
+      width:min(900px,92vw); margin:0 auto 14px;
+      display:flex; align-items:center; justify-content:center; gap:.6ch;
+      padding:14px 18px; border-radius:999px; font-weight:900;
+      color:#0b1224; text-decoration:none; cursor:pointer;
+      background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.32));
+      box-shadow:0 10px 28px rgba(15,23,42,.16), inset 0 1px 0 rgba(255,255,255,.6);
+      backdrop-filter:blur(12px) saturate(1.1);
+      -webkit-backdrop-filter:blur(12px) saturate(1.1);
+      border:1px solid rgba(255,255,255,.7);
     }
-    .shorts-head::before{
-      content:""; position:absolute; inset:0; border-radius:20px; padding:2px;
-      background:conic-gradient(from 120deg,#8fd3ff, #ff9ad9, #ffe07a, #8fd3ff);
-      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-      -webkit-mask-composite:xor; mask-composite:exclude;
-      pointer-events:none;
-    }
-    .shorts-head::after{
-      content:""; position:absolute; inset:-20% -10% -10% -10%; z-index:-1; border-radius:28px;
-      background:
-        radial-gradient(60% 50% at 0% 0%, rgba(20,128,255,.18), transparent 60%),
-        radial-gradient(60% 50% at 100% 30%, rgba(255,154,217,.22), transparent 60%),
-        radial-gradient(50% 40% at 60% 120%, rgba(255,224,122,.18), transparent 60%);
-      filter:blur(12px);
-    }
-    .shorts-title{margin:0; font-weight:900; font-size:clamp(18px,5vw,22px)}
-    .shorts-desc{margin:4px 0 10px; color:var(--muted); font-weight:700}
-    .gate{
-      display:flex; justify-content:center; padding:10px 0 0;
-    }
-    .gate-btn{
-      border:0; cursor:pointer; font-weight:900; padding:.7rem 1.2rem; border-radius:999px; color:#fff;
-      background:linear-gradient(180deg,#7c3aed,#6d28d9);
-      box-shadow:0 8px 18px rgba(124,58,237,.35), inset 0 1px 0 rgba(255,255,255,.25);
-      display:inline-flex; align-items:center; gap:.6ch;
-      transition:transform .12s ease, filter .2s ease, background .2s ease;
-    }
-    .gate-btn::before{content:"＋"; font-weight:900}
-    .gate-btn[aria-expanded="true"]{background:linear-gradient(180deg,#10b981,#059669)}
-    .gate-btn[aria-expanded="true"]::before{content:"－"}
-    .gate-btn:active{transform:translateY(1px)}
+    .glass-toggle .dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(#7bd6ff,#1480ff)}
+    .glass-toggle small{opacity:.7;font-weight:700}
 
-    .shorts-grid{display:none; margin-top:16px; gap:16px}
-    .shorts-grid.open{display:grid}
-    @media(min-width:760px){.shorts-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(min-width:1024px){.shorts-grid{grid-template-columns:repeat(3,1fr)}}
+    #shortsPanel{display:none}
+    #shortsPanel.open{display:block}
 
-    .short-item{
-      position:relative; border-radius:20px; padding:14px;
-      background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.38));
-      -webkit-backdrop-filter:blur(10px) saturate(1.05);
-      backdrop-filter:blur(10px) saturate(1.05);
-      box-shadow:0 12px 26px rgba(15,23,42,.12);
-      isolation:isolate;
+    /* ガラスカード */
+    .s-card{
+      width:min(900px,92vw); margin:12px auto; padding:14px; border-radius:18px;
+      background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.40));
+      border:1px solid rgba(255,255,255,.75);
+      box-shadow:0 14px 30px rgba(15,23,42,.14), inset 0 1px 0 rgba(255,255,255,.7);
+      backdrop-filter:blur(14px) saturate(1.15);
+      -webkit-backdrop-filter:blur(14px) saturate(1.15);
     }
-    .short-item::before{
-      content:""; position:absolute; inset:0; border-radius:20px; z-index:-1;
-      padding:2px; background:linear-gradient(135deg,#8fd3ff, #ff9ad9 35%, #ffe07a 70%, #8fd3ff);
-      -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite:xor; mask-composite:exclude;
-    }
-    .short-item.open::after{
-      content:""; position:absolute; inset:-20% -10% -10% -10%; z-index:-2; border-radius:28px;
-      background:
-        radial-gradient(60% 50% at 20% 0%, rgba(20,128,255,.18), transparent 60%),
-        radial-gradient(60% 50% at 100% 30%, rgba(255,154,217,.22), transparent 60%),
-        radial-gradient(50% 40% at 50% 120%, rgba(255,224,122,.18), transparent 60%);
-      filter:blur(10px);
-      transition:opacity .35s ease; opacity:1;
-    }
+    /* タイトル左、ボタン群右で常に整列 */
+    .s-head{display:grid; grid-template-columns:1fr auto; align-items:center; gap:10px}
+    .s-title{font-weight:900; margin:0 0 4px}
+    .s-desc{margin:0 0 10px; color:#475569; line-height:1.55; letter-spacing:.01em}
+    .s-actions{display:flex; gap:8px; align-items:center; justify-content:flex-end}
 
-    .short-head{display:grid; grid-template-columns:1fr auto; align-items:center; gap:12px}
-    .short-title{font-weight:900}
-    .short-sub{color:var(--muted); font-weight:700; font-size:.95rem}
+    /* 統一サイズのアイコンボタン（Play と Close） */
+    .s-icon{
+      width:42px; height:42px; border-radius:999px; display:inline-flex;
+      align-items:center; justify-content:center; border:none; cursor:pointer;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.45), 0 8px 18px rgba(15,23,42,.18);
+      background:linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.12));
+      color:#0b1224;
+    }
+    .s-icon svg{width:18px;height:18px;display:block}
+    .s-icon.play{background:linear-gradient(180deg,#2b8dff,#0f6de0); color:#fff}
+    .s-icon:active{transform:translateY(1px)}
 
-    .short-controls{display:flex; gap:8px; align-items:center}
-    .short-play{
-      border:0; cursor:pointer; font-weight:900; padding:.55rem 1rem; border-radius:999px;
-      color:#fff; background:linear-gradient(180deg,#7c3aed,#6d28d9);
-      display:inline-flex; align-items:center; gap:.6ch; box-shadow:0 8px 18px rgba(124,58,237,.35);
-      transition:transform .12s ease, background .2s ease;
+    /* モーダル（サイト内再生） */
+    .player-backdrop{
+      position:fixed; inset:0; display:none; place-items:center;
+      background:rgba(0,0,0,.48); z-index:120;
+      padding:20px;
     }
-    .short-play::before{
-      content:""; width:0; height:0; border-left:9px solid #fff; border-top:6px solid transparent; border-bottom:6px solid transparent; display:inline-block;
+    .player-backdrop.open{display:grid}
+    .player-modal{
+      width:min(420px,90vw); aspect-ratio:9/16; background:#000; border-radius:16px; overflow:hidden;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+      position:relative;
     }
-    .short-play[aria-expanded="true"]{background:linear-gradient(180deg,#10b981,#059669)}
-    .short-play:active{transform:translateY(1px)}
-
-    .short-close{
-      border:0; cursor:pointer; padding:.55rem .8rem; border-radius:999px; font-weight:900;
-      background:linear-gradient(180deg,#e5e7eb,#d1d5db); color:#111;
-      box-shadow:0 6px 12px rgba(17,17,17,.12), inset 0 1px 0 rgba(255,255,255,.6);
-      display:none;
+    .player-modal iframe{width:100%; height:100%; border:0}
+    .player-close{
+      position:absolute; top:8px; right:8px; z-index:2;
+      width:36px; height:36px; border-radius:999px; border:none; cursor:pointer;
+      background:rgba(255,255,255,.85); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+      display:flex; align-items:center; justify-content:center; font-weight:900;
+      box-shadow:0 4px 12px rgba(0,0,0,.2);
     }
-    .short-close.show{display:inline-flex}
-
-    .short-panel{margin-top:12px; display:none}
-    .short-panel.open{display:block}
-    .vertical-embed{
-      position:relative; width:min(480px,90vw); margin:0 auto; aspect-ratio:9/16;
-      border-radius:22px; overflow:hidden; background:#000;
-      box-shadow:0 20px 40px rgba(15,23,42,.28), inset 0 0 0 1px rgba(255,255,255,.06);
-    }
-    .vertical-embed::before{
-      content:""; position:absolute; inset:-1px; border-radius:24px;
-      background:linear-gradient(135deg,rgba(255,255,255,.4),rgba(255,255,255,.06));
-      mix-blend-mode:overlay; pointer-events:none;
-    }
-    .vertical-embed::after{
-      content:""; position:absolute; left:50%; top:8px; transform:translateX(-50%);
-      width:32%; height:6px; border-radius:999px; background:rgba(255,255,255,.16); filter:blur(.5px);
-    }
-    .vertical-embed iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
-
-    /* 再生後に出る予約CTA（既存仕様を保持） */
-    .video-cta{display:none; place-items:center; margin-top:14px}
-    .video-cta.show{display:grid}
-    .video-cta .btn{max-width:420px; margin:0 auto}
   </style>
 </head>
 <body>
 
+  <!-- ★固定背景レイヤー -->
   <div class="global-bg" aria-hidden="true"></div>
 
   <div class="site-title">日本デザイン福祉専門学校</div>
 
   <!-- ===== HERO ===== -->
   <header class="hero">
-    <img class="hero-bg" src="images/Google_AI_Studio_2025-07-16T07_54_39.403Z.png" alt="キャンパスの雰囲気" fetchpriority="high" width="1920" height="1080">
+    <img class="hero-bg"
+         src="images/Google_AI_Studio_2025-07-16T07_54_39.403Z.png"
+         alt="キャンパスの雰囲気"
+         fetchpriority="high"
+         width="1920" height="1080">
     <div class="hero-overlay"></div>
+
     <div class="hero-inner">
       <p class="lead"><span class="dot"></span><span class="lead-text">私たちOCサポーターも、進路に悩んだ高校生でした。</span></p>
-      <h1 class="title"><span>そんな私たちが、</span><span>この学校を選んだ</span><span>“きっかけ”教えます。</span></h1>
+
+      <h1 class="title">
+        <span>そんな私たちが、</span>
+        <span>この学校を選んだ</span>
+        <span>“きっかけ”教えます。</span>
+      </h1>
+
       <div class="btnrow sweep in">
         <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンを予約</a>
         <a class="btn btn-messaging" href="#" data-safe-href="https://lin.ee/y2DLr3Y" rel="noopener" target="_blank" aria-label="LINEで質問">LINEで質問</a>
@@ -338,7 +330,11 @@
 
     <!-- ===== 学生インタビュー ===== -->
     <section class="section">
-      <h2 class="section-title hand reveal js-hand">OCサポーターが語る<br>“私”がここにいる理由<span class="underline"></span></h2>
+      <h2 class="section-title hand reveal js-hand">
+        OCサポーターが語る<br>“私”がここにいる理由
+        <span class="underline"></span>
+      </h2>
+
       <div class="grid" data-float>
         <article class="card dept-sweets sweep reveal">
           <div class="card-header">
@@ -393,6 +389,7 @@
     <!-- ===== 当日の流れ ===== -->
     <section class="section" id="flow">
       <h2 class="section-title hand reveal js-hand">知る・感じる・ハマる・そんな1日<span class="underline"></span></h2>
+
       <div class="grid" data-float>
         <article class="step sweep reveal">
           <img src="images/IMG_8359.jpg" alt="受付">
@@ -402,6 +399,7 @@
             <p>イベント開始5分前までにご来校ください。オーキャンサポーターがお出迎えしますよ♪</p>
           </div>
         </article>
+
         <article class="step sweep reveal">
           <img src="images/IMG_4046.jpg" alt="学校説明会">
           <div class="body">
@@ -410,6 +408,7 @@
             <p>気になることをわかりやすくご紹介します。<br>初めての方でも安心して聞ける内容になっています。</p>
           </div>
         </article>
+
         <article class="step sweep reveal">
           <img src="images/IMG_5870.jpg" alt="校内見学">
           <div class="body">
@@ -418,6 +417,8 @@
             <p>意外と映えスポットがあるんですよ！</p>
           </div>
         </article>
+
+        <!-- 差し替え済み：images/hall.jpg -->
         <article class="step sweep reveal">
           <img src="images/hall.jpg" alt="個別相談">
           <div class="body">
@@ -426,6 +427,7 @@
             <p>入学前に感じる不安は誰もが抱えるもの。<br>スタッフと先輩が親切にサポートします。</p>
           </div>
         </article>
+
         <article class="step sweep reveal">
           <img src="images/IMG_6704.jpg" alt="体験講座">
           <div class="body">
@@ -437,154 +439,153 @@
       </div>
     </section>
 
-    <!-- ===== ★1分でわかる NDC / 学科ショート（折りたたみ表示） ===== -->
-    <section class="section" id="shorts">
-      <div class="shorts-wrap">
-        <div class="shorts-head reveal sweep">
-          <h2 class="shorts-title">NDC＆学科ガイド60秒でチェック</h2>
-          <p class="shorts-desc">タップで開くと各動画が展開します。</p>
-          <div class="gate">
-            <button class="gate-btn" type="button" aria-expanded="false" aria-controls="shortsGrid">ガイド動画を開く</button>
+    <!-- ===== 安心ガイド ===== -->
+    <section class="section guide" id="guide">
+      <h2 class="section-title hand reveal js-hand">
+        はじめてのドキドキを、<br>ぜんぶワクワクに！<br>オープンキャンパス安心ガイド
+        <span class="underline"></span>
+      </h2>
+
+      <ul class="glist" data-float>
+        <li class="gitem sweep reveal">
+          <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_39_37.511Z.png" alt=""></div>
+          <div class="gcard"><strong>① 出発前</strong><br> 服装は自由。<b>制服でも私服でもOK</b>。／ 持ち物は <b>無しでOK</b>！資料はこっちで用意。</div>
+        </li>
+        <li class="gitem access sweep reveal">
+          <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_45_02.490Z.png" alt=""></div>
+          <div class="gcard"><strong>② アクセス</strong><br>迷ったら <a href="https://ndc.ac.jp/access/" target="_blank" rel="noopener">アクセス案内</a> or <b>LINE</b>してね！</div>
+        </li>
+        <li class="gitem sweep reveal">
+          <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_44_19.676Z.png" alt=""></div>
+          <div class="gcard"><strong>③ 到着したら</strong><br>学校に着いたらワクワクタイムの始まり！<b>まずはゆったり受付へ</b></div>
+        </li>
+        <li class="gitem sweep reveal">
+          <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_44_44.871Z.png" alt=""></div>
+          <div class="gcard"><strong>④ 見学・体験中</strong><br> 見て・聞いて・体験！<b>ひらめいたらその場で質問🎶</b> ／ 休憩もOK。</div>
+        </li>
+        <li class="gitem sweep reveal">
+          <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_41_21.515Z.png" alt=""></div>
+          <div class="gcard"><strong>⑤ 帰り道</strong><br> <b>SNSアップOK!</b> 記念にパシャっとどうぞ。／  気楽に来て、気楽に帰ってOK。</div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===== 1分解説動画（最下段、開閉式・ガラスUI） ===== -->
+    <section class="section shorts" id="shorts">
+      <button class="glass-toggle" id="shortsToggle" type="button" aria-expanded="false" aria-controls="shortsPanel">
+        <span class="dot"></span><strong>1分解説動画を開く</strong><small>（縦動画・ショート）</small>
+      </button>
+
+      <div id="shortsPanel" aria-hidden="true">
+        <!-- 日本デザイン福祉専門学校（LINE特別） -->
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】日本デザイン福祉専門学校（LINE特別）</h3>
+              <p class="s-desc">縦動画で学校の空気感を1分でさっくっと。</p>
+            </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/vbWDxIgAiLU">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
+            </div>
           </div>
         </div>
 
-        <div class="shorts-grid" id="shortsGrid" hidden>
-          <!-- NDC 全体 -->
-          <div class="short-item sweep reveal" data-video="vbWDxIgAiLU">
-            <div class="short-head">
-              <div>
-                <div class="short-title">LINE特別コンテンツ｜【1分でわかる】日本デザイン福祉専門学校</div>
-                <div class="short-sub">全体像をサクッとひと目で。</div>
-              </div>
-              <div class="short-controls">
-                <button class="short-play" type="button" aria-expanded="false">再生</button>
-                <button class="short-close" type="button" aria-label="閉じる">閉じる</button>
-              </div>
+        <!-- 製菓デザイン学科 -->
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】製菓デザイン学科</h3>
+              <p class="s-desc">実習の雰囲気をショートで。</p>
             </div>
-            <div class="short-panel" id="p-vbWDxIgAiLU" hidden>
-              <div class="vertical-embed">
-                <iframe data-embed-src="https://www.youtube.com/embed/vbWDxIgAiLU?rel=0&modestbranding=1&playsinline=1&enablejsapi=1"></iframe>
-              </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/7dL2RRYDxxA">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
             </div>
           </div>
+        </div>
 
-          <!-- 製菓 -->
-          <div class="short-item sweep reveal" data-video="7dL2RRYDxxA">
-            <div class="short-head">
-              <div>
-                <div class="short-title">【1分でわかる】製菓デザイン学科</div>
-                <div class="short-sub">スイーツ×デザインの学びをギュッと。</div>
-              </div>
-              <div class="short-controls">
-                <button class="short-play" type="button" aria-expanded="false">再生</button>
-                <button class="short-close" type="button" aria-label="閉じる">閉じる</button>
-              </div>
+        <!-- コミックイラスト学科 -->
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】コミックイラスト学科</h3>
+              <p class="s-desc">描く・学ぶ・見るを1分で。</p>
             </div>
-            <div class="short-panel" id="p-7dL2RRYDxxA" hidden>
-              <div class="vertical-embed">
-                <iframe data-embed-src="https://www.youtube.com/embed/7dL2RRYDxxA?rel=0&modestbranding=1&playsinline=1&enablejsapi=1"></iframe>
-              </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/xz6X2a-AEU8">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
             </div>
           </div>
+        </div>
 
-          <!-- コミックイラスト -->
-          <div class="short-item sweep reveal" data-video="xz6X2a-AEU8">
-            <div class="short-head">
-              <div>
-                <div class="short-title">【1分でわかる】コミックイラスト学科</div>
-                <div class="short-sub">描く力と仕事のつながりを1分で。</div>
-              </div>
-              <div class="short-controls">
-                <button class="short-play" type="button" aria-expanded="false">再生</button>
-                <button class="short-close" type="button" aria-label="閉じる">閉じる</button>
-              </div>
+        <!-- コミックmanabi学科 -->
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】コミックmanabi学科</h3>
+              <p class="s-desc">学びの流れを1分で。</p>
             </div>
-            <div class="short-panel" id="p-xz6X2a-AEU8" hidden>
-              <div class="vertical-embed">
-                <iframe data-embed-src="https://www.youtube.com/embed/xz6X2a-AEU8?rel=0&modestbranding=1&playsinline=1&enablejsapi=1"></iframe>
-              </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/7_MpflBuv9k">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
             </div>
           </div>
+        </div>
 
-          <!-- コミックmanabi -->
-          <div class="short-item sweep reveal" data-video="7_MpflBuv9k">
-            <div class="short-head">
-              <div>
-                <div class="short-title">【1分でわかる】コミックmanabi学科</div>
-                <div class="short-sub">はじめてでもOK。学びの入り口。</div>
-              </div>
-              <div class="short-controls">
-                <button class="short-play" type="button" aria-expanded="false">再生</button>
-                <button class="short-close" type="button" aria-label="閉じる">閉じる</button>
-              </div>
+        <!-- イマジネーションデザイン学科 -->
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】イマジネーションデザイン学科</h3>
+              <p class="s-desc">発想を形にする1分。</p>
             </div>
-            <div class="short-panel" id="p-7_MpflBuv9k" hidden>
-              <div class="vertical-embed">
-                <iframe data-embed-src="https://www.youtube.com/embed/7_MpflBuv9k?rel=0&modestbranding=1&playsinline=1&enablejsapi=1"></iframe>
-              </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/tm8ZayZMb6M">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
             </div>
           </div>
+        </div>
 
-          <!-- イマジネーション -->
-          <div class="short-item sweep reveal" data-video="tm8ZayZMb6M">
-            <div class="short-head">
-              <div>
-                <div class="short-title">【1分でわかる】イマジネーションデザイン学科</div>
-                <div class="short-sub">発想と表現を広げる要点を1分で。</div>
-              </div>
-              <div class="short-controls">
-                <button class="short-play" type="button" aria-expanded="false">再生</button>
-                <button class="short-close" type="button" aria-label="閉じる">閉じる</button>
-              </div>
+        <!-- 保育こどもデザイン学科 -->
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】保育こどもデザイン学科</h3>
+              <p class="s-desc">子ども×デザインの入口を1分で。</p>
             </div>
-            <div class="short-panel" id="p-tm8ZayZMb6M" hidden>
-              <div class="vertical-embed">
-                <iframe data-embed-src="https://www.youtube.com/embed/tm8ZayZMb6M?rel=0&modestbranding=1&playsinline=1&enablejsapi=1"></iframe>
-              </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/oEpO0rFOr8g">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
             </div>
           </div>
+        </div>
 
-          <!-- 保育こども -->
-          <div class="short-item sweep reveal" data-video="oEpO0rFOr8g">
-            <div class="short-head">
-              <div>
-                <div class="short-title">【1分でわかる】保育こどもデザイン学科</div>
-                <div class="short-sub">“好き”を仕事に。やさしく解説。</div>
-              </div>
-              <div class="short-controls">
-                <button class="short-play" type="button" aria-expanded="false">再生</button>
-                <button class="short-close" type="button" aria-label="閉じる">閉じる</button>
-              </div>
+        <!-- ホテル観光学科 -->
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】ホテル観光学科</h3>
+              <p class="s-desc">おもてなしの現場感を1分で。</p>
             </div>
-            <div class="short-panel" id="p-oEpO0rFOr8g" hidden>
-              <div class="vertical-embed">
-                <iframe data-embed-src="https://www.youtube.com/embed/oEpO0rFOr8g?rel=0&modestbranding=1&playsinline=1&enablejsapi=1"></iframe>
-              </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/akdyF5vbAro">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
             </div>
-          </div>
-
-          <!-- ホテル観光 -->
-          <div class="short-item sweep reveal" data-video="akdyF5vbAro">
-            <div class="short-head">
-              <div>
-                <div class="short-title">【1分でわかる】ホテル観光学科</div>
-                <div class="short-sub">おもてなしの世界観を1分ダイジェスト。</div>
-              </div>
-              <div class="short-controls">
-                <button class="short-play" type="button" aria-expanded="false">再生</button>
-                <button class="short-close" type="button" aria-label="閉じる">閉じる</button>
-              </div>
-            </div>
-            <div class="short-panel" id="p-akdyF5vbAro" hidden>
-              <div class="vertical-embed">
-                <iframe data-embed-src="https://www.youtube.com/embed/akdyF5vbAro?rel=0&modestbranding=1&playsinline=1&enablejsapi=1"></iframe>
-              </div>
-            </div>
-          </div>
-
-          <!-- 再生後に出る予約CTA（既存仕様キープ） -->
-          <div class="video-cta" id="video-cta">
-            <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">体験講座を予約する</a>
           </div>
         </div>
       </div>
@@ -593,108 +594,135 @@
   </main>
 
   <footer class="footer">
-    <div class="container"><small>© 2025 NIPPON DESIGN WELFARE COLLEGE</small></div>
+    <div class="container">
+      <small>© 2025 NIPPON DESIGN WELFARE COLLEGE</small>
+    </div>
   </footer>
 
-  <!-- 固定CTA -->
+  <!-- 固定CTA（下部） -->
   <nav class="sticky-cta" aria-label="固定操作バー">
     <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンを予約</a>
     <a class="btn btn-messaging" href="#" data-safe-href="https://lin.ee/y2DLr3Y" rel="noopener" target="_blank" aria-label="LINEで質問">LINEで質問</a>
     <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
   </nav>
 
-  <script src="https://www.youtube.com/iframe_api"></script>
+  <!-- サイト内再生モーダル -->
+  <div class="player-backdrop" id="ytBackdrop" aria-hidden="true">
+    <div class="player-modal" role="dialog" aria-label="動画プレイヤー">
+      <button class="player-close" type="button" id="ytClose" aria-label="閉じる">×</button>
+      <iframe id="ytFrame" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+  </div>
+
   <script>
-    /* 出現監視 */
-    const io=new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });},{threshold:.22});
+    /* 出現監視：reveal / sweep / section-title（下線キラ） */
+    const io=new IntersectionObserver(es=>{
+      es.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    },{threshold:.22});
     document.querySelectorAll('.reveal,.sweep,.section-title').forEach(el=>io.observe(el));
 
-    /* 手書きタイトル分割 */
+    /* 手書きタイトルを1文字分割（既存エフェクト維持） */
     function splitHand(el){
-      if(el.dataset.splitted) return; el.dataset.splitted="1";
-      const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null); const texts=[]; while(walker.nextNode()) texts.push(walker.currentNode);
+      if(el.dataset.splitted) return;
+      el.dataset.splitted="1";
+      const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null);
+      const texts=[]; while(walker.nextNode()) texts.push(walker.currentNode);
       texts.forEach(node=>{
         const s=node.nodeValue; if(!s.trim()) return;
         const frag=document.createDocumentFragment();
-        [...s].forEach((ch,i)=>{ const sp=document.createElement('span'); sp.className='char'; sp.style.setProperty('--d',(i*45)+'ms'); sp.style.setProperty('--rot',(Math.random()*6-3).toFixed(1)+'deg'); sp.textContent=ch; frag.appendChild(sp);});
+        [...s].forEach((ch,i)=>{
+          const span=document.createElement('span');
+          span.className='char';
+          span.style.setProperty('--d', (i*45)+'ms');
+          span.style.setProperty('--rot', (Math.random()*6-3).toFixed(1)+'deg');
+          span.textContent=ch;
+          frag.appendChild(span);
+        });
         node.parentNode.replaceChild(frag,node);
       });
     }
     document.querySelectorAll('.js-hand').forEach(splitHand);
 
-    /* スクロール演出＆CTA表示 */
+    /* スクロール連動：微パララックス＆CTA表示（既存） */
     const sticky=document.querySelector('.sticky-cta');
     function onScroll(){
       const vh=innerHeight;
       document.querySelectorAll('[data-float]').forEach(g=>{
-        const r=g.getBoundingClientRect(); const center=(r.top+r.bottom)/2; const delta=(vh*0.5-center)/(vh*0.5);
+        const r=g.getBoundingClientRect();
+        const center=(r.top+r.bottom)/2;
+        const delta=(vh*0.5-center)/(vh*0.5);
         g.style.transform=`translateY(${Math.max(-10,Math.min(10,-delta*8))}px)`;
       });
       sticky.classList.toggle('show', scrollY>700);
     }
-    addEventListener('scroll', onScroll, {passive:true}); addEventListener('resize', onScroll); onScroll();
+    addEventListener('scroll', onScroll, {passive:true});
+    addEventListener('resize', onScroll);
+    onScroll();
 
-    /* ===== Shorts：ゲート開閉 ===== */
-    const gateBtn=document.querySelector('.gate-btn');
-    const grid=document.getElementById('shortsGrid');
-    gateBtn.addEventListener('click',()=>{
-      const open=grid.classList.toggle('open');
-      grid.hidden=!open;
-      gateBtn.setAttribute('aria-expanded', open?'true':'false');
-      if(open) grid.scrollIntoView({behavior:'smooth', block:'start'});
-    });
+    /* 画像最適化（既存） */
+    document.querySelectorAll('img').forEach(i=>{ i.loading='lazy'; i.decoding='async'; });
 
-    /* 遅延 embed & 再生で予約CTA表示 + 各パネルに閉じるボタン */
-    let ytReady=false, players={}, ctaShown=false;
-    function revealCTA(){ if(ctaShown) return; ctaShown=true; document.getElementById('video-cta').classList.add('show'); }
-    document.querySelectorAll('.short-item').forEach(item=>{
-      const play=item.querySelector('.short-play');
-      const close=item.querySelector('.short-close');
-      const panel=item.querySelector('.short-panel');
-      const iframe=panel.querySelector('iframe');
-      const vid=item.dataset.video;
-
-      function openPanel(){
-        panel.classList.add('open'); panel.hidden=false;
-        item.classList.add('open'); play.setAttribute('aria-expanded','true'); close.classList.add('show');
-        if(!iframe.src){ iframe.src=iframe.dataset.embedSrc; }
-        if(ytReady && !players[vid]){
-          players[vid]=new YT.Player(iframe,{events:{onStateChange:(e)=>{ if(e.data===YT.PlayerState.PLAYING) revealCTA(); } }});
-        }
-        panel.scrollIntoView({behavior:'smooth', block:'center'});
-      }
-      function closePanel(){
-        panel.classList.remove('open'); panel.hidden=true;
-        item.classList.remove('open'); play.setAttribute('aria-expanded','false'); close.classList.remove('show');
-        // 停止（読み込み済みなら）
-        try{ players[vid]?.stopVideo?.(); }catch(_){}
-      }
-
-      play.addEventListener('click',()=>{
-        if(panel.classList.contains('open')){ closePanel(); } else { openPanel(); }
-      });
-      close.addEventListener('click', closePanel);
-    });
-
-    window.onYouTubeIframeAPIReady=function(){
-      ytReady=true;
-      // すでに開かれていたらプレイヤー生成
-      document.querySelectorAll('.short-item').forEach(item=>{
-        const vid=item.dataset.video; const panel=item.querySelector('.short-panel'); const iframe=panel.querySelector('iframe');
-        if(panel.classList.contains('open') && iframe.src){
-          players[vid]=new YT.Player(iframe,{events:{onStateChange:(e)=>{ if(e.data===YT.PlayerState.PLAYING) revealCTA(); } }});
-        }
-      });
-    };
-
-    /* LINEボタン（ブロッカー回避遷移） */
+    /* LINEボタン：クリック時に安全遷移（ブロッカー回避） */
     document.querySelectorAll('a.btn-messaging[data-safe-href]').forEach(a=>{
       const url=a.getAttribute('data-safe-href');
-      a.addEventListener('click',function(ev){ ev.preventDefault(); try{ window.open(url,'_blank','noopener'); }catch(e){ location.href=url; } },{passive:false});
+      a.addEventListener('click',function(ev){
+        ev.preventDefault();
+        try{ window.open(url,'_blank','noopener'); }catch(e){ location.href=url; }
+      },{passive:false});
     });
 
-    /* 画像最適化 */
-    document.querySelectorAll('img').forEach(i=>{ i.loading='lazy'; i.decoding='async'; });
+    /* ▼ 1分動画：開閉と“閉じる”動作（一覧は消さない） */
+    const toggle=document.getElementById('shortsToggle');
+    const panel=document.getElementById('shortsPanel');
+    toggle.addEventListener('click',()=>{
+      const open=!panel.classList.contains('open');
+      panel.classList.toggle('open',open);
+      toggle.setAttribute('aria-expanded',open);
+      panel.setAttribute('aria-hidden',!open);
+      if(open){ panel.scrollIntoView({behavior:'smooth',block:'start'}); }
+    });
+    document.querySelectorAll('[data-close-panel]').forEach(btn=>{
+      btn.addEventListener('click',()=>{ // 一覧を閉じるだけ
+        panel.classList.remove('open');
+        panel.setAttribute('aria-hidden','true');
+        toggle.setAttribute('aria-expanded','false');
+        toggle.scrollIntoView({behavior:'smooth',block:'center'});
+      });
+    });
+
+    /* ▼ サイト内で再生（YouTube埋め込みモーダル） */
+    const backdrop=document.getElementById('ytBackdrop');
+    const frame=document.getElementById('ytFrame');
+    const closeBtn=document.getElementById('ytClose');
+
+    function toEmbed(url){
+      try{
+        // /shorts/{id} または youtu.be/{id} を想定
+        const m=url.match(/shorts\/([A-Za-z0-9_-]{6,})/) || url.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/);
+        const id=m?m[1]:null;
+        return id ? `https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0` : '';
+      }catch(_){ return ''; }
+    }
+    function openPlayer(url){
+      const embed=toEmbed(url);
+      if(!embed) return;
+      frame.src=embed;
+      backdrop.classList.add('open');
+      backdrop.setAttribute('aria-hidden','false');
+    }
+    function closePlayer(){
+      frame.src='about:blank';
+      backdrop.classList.remove('open');
+      backdrop.setAttribute('aria-hidden','true');
+    }
+    document.querySelectorAll('.s-icon.play[data-video]').forEach(b=>{
+      b.addEventListener('click',()=>openPlayer(b.getAttribute('data-video')));
+    });
+    closeBtn.addEventListener('click',closePlayer);
+    backdrop.addEventListener('click',e=>{ if(e.target===backdrop) closePlayer(); });
+    addEventListener('keydown',e=>{ if(e.key==='Escape') closePlayer(); });
   </script>
 </body>
 </html>
