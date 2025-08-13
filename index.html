@@ -306,7 +306,7 @@
       box-shadow:0 4px 12px rgba(0,0,0,.2);
     }
 
-    /* ====== 日程UI（追加） ====== */
+    /* ====== 日程UI ====== */
     .dates-wrap{width:min(900px,92vw); margin:12px auto 0}
     .dates-sub{margin:0 0 8px; color:#475569; font-weight:800; display:flex; align-items:center; gap:.6ch}
     .soon{display:inline-flex; align-items:center; gap:.4ch; margin-left:.6ch; padding:.22rem .6rem;
@@ -318,10 +318,11 @@
     .pill{
       display:flex; align-items:center; justify-content:center; gap:.5ch;
       padding:11px 12px; border-radius:999px; font-weight:900; color:#fff; text-decoration:none; white-space:nowrap;
-      background:linear-gradient(180deg,#2b8dff,#0f6de0);
-      box-shadow:0 8px 18px rgba(15,23,42,.18), inset 0 1px 0 rgba(255,255,255,.35);
+      background:linear-gradient(180deg,#a78bfa,#7c3aed); /* ← パープル系 */
+      box-shadow:0 8px 18px rgba(124,58,237,.28), inset 0 1px 0 rgba(255,255,255,.35);
     }
     .pill small{opacity:.9; font-weight:800}
+    .pill:active{transform:translateY(1px)}
   </style>
 </head>
 <body>
@@ -358,7 +359,8 @@
       </div>
 
       <div class="btnrow sweep in">
-        <a class="btn btn-blue" href="https://www.school-go.info/ffz85h/ndc/form.php?fno=60&fsno=1&_gl=1*1gypnfh*_gcl_au*MjEwNTk1MjIyMi4xNzU0NTM1NTA1&nnso=3" target="_blank" rel="noopener">オーキャンを予約</a>
+        <!-- ヘッダーの主要CTAは OCLP へ：文言を「オーキャンについて」に統一 -->
+        <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンについて</a>
         <a class="btn btn-messaging" href="#" data-safe-href="https://lin.ee/y2DLr3Y" rel="noopener" target="_blank" aria-label="LINEで質問">LINEで質問</a>
         <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
       </div>
@@ -650,7 +652,8 @@
 
   <!-- 固定CTA（下部） -->
   <nav class="sticky-cta" aria-label="固定操作バー">
-    <a class="btn btn-blue" href="https://www.school-go.info/ffz85h/ndc/form.php?fno=60&fsno=1&_gl=1*1gypnfh*_gcl_au*MjEwNTk1MjIyMi4xNzU0NTM1NTA1&nnso=3" target="_blank" rel="noopener">オーキャンを予約</a>
+    <!-- フローティングも OCLP へ：文言「オーキャンについて」 -->
+    <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンについて</a>
     <a class="btn btn-messaging" href="#" data-safe-href="https://lin.ee/y2DLr3Y" rel="noopener" target="_blank" aria-label="LINEで質問">LINEで質問</a>
     <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
   </nav>
@@ -664,14 +667,10 @@
   </div>
 
   <script>
-    /* ====== 予約リンク（共通） ====== */
+    /* ====== 予約リンク（直近2日ピルのみ：予約フォーム直リンク） ====== */
     const RESERVE_URL = 'https://www.school-go.info/ffz85h/ndc/form.php?fno=60&fsno=1&_gl=1*1gypnfh*_gcl_au*MjEwNTk1MjIyMi4xNzU0NTM1NTA1&nnso=3';
 
-    /* ====== 日程（固定配列→今日以降→最短＋2件） ======
-       8/20, 8/24, 9/28, 10/12, 10/19, 10/26, 11/16, 11/23, 12/14,
-       2026/1/25, 2026/02/08, 2026/03/08, 2026/03/22
-       ※ 2025年は年を補完してISO化
-    */
+    /* ====== 日程（固定配列→今日以降→最短＋2件） ====== */
     const UPCOMING = [
       '2025-08-20','2025-08-24','2025-09-28','2025-10-12','2025-10-19','2025-10-26',
       '2025-11-16','2025-11-23','2025-12-14',
@@ -749,7 +748,7 @@
     }
     document.querySelectorAll('.js-hand').forEach(splitHand);
 
-    /* スクロール連動：微パララックス＆CTA表示（既存） */
+    /* スクロール連動：微パララックス＆CTA表示 */
     const sticky=document.querySelector('.sticky-cta');
     function onScroll(){
       const vh=innerHeight;
