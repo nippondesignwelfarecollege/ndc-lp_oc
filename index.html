@@ -5,21 +5,17 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>日本デザイン福祉専門学校｜OCサポーター紹介</title>
 
-  <!-- Font perf -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Fonts（負荷最適化） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet" />
 
-  <!-- OGP / LINE向け -->
-  <meta property="og:title" content="日本デザイン福祉専門学校｜OCサポーターの“200字”で不安ほぐし">
-  <meta property="og:description" content="服装自由・1人参加OK・予約無しもOK。まずは学生の生の声で“行ける気持ち”に。">
+  <!-- OGP（LINE向け） -->
+  <meta property="og:title" content="在校生の“きっかけ”から分かる｜日本デザイン福祉専門学校 OC">
+  <meta property="og:description" content="服装自由・1人参加OK・予約無しもOK。直近2日のみ表示で迷わず予約。">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://nippondesignwelfarecollege.github.io/ndc-lp_oc/">
-  <meta property="og:image" content="images/ogp_line.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="images/ogp-ndc-oc.jpg">
+  <meta property="og:site_name" content="日本デザイン福祉専門学校">
 
   <!-- ヒーロー先読み -->
   <link rel="preload" as="image" href="images/Google_AI_Studio_2025-07-16T07_54_39.403Z.png" fetchpriority="high">
@@ -36,19 +32,17 @@
       --line:#00c100; --line2:#00a400;
       --blk:#111; --blk2:#0b0b0b;
       --shadow:0 14px 34px rgba(15,23,42,.16);
-      --r:18px;
-      --badge:130px;
-
-      --pill1:#8b5cf6; /* purple for date pills */
-      --pill2:#6d28d9;
+      --r:18px; --badge:130px;
+      --vio:#7b5cff; --vio2:#6a48ff; /* 日程ピル */
     }
 
     body{
       color:var(--ink);
       font-family:'Noto Sans JP',system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
-      line-height:1.85;
-      background:#ffffff;
+      line-height:1.85; background:#fff;
     }
+
+    /* 背景（固定） */
     .global-bg{
       position:fixed; inset:0; z-index:-1; pointer-events:none;
       background:
@@ -57,204 +51,129 @@
         radial-gradient(120% 80% at 50% 115%, #fff6d9 0 45%, transparent 46%),
         linear-gradient(180deg,#fff 0%,#f9fbff 45%,#ffffff 100%);
       background-repeat:no-repeat;
-      background-size:cover,cover,cover,cover;
-      background-position:10% -10%, 95% 0%, 50% 115%, 0 0;
-      will-change:transform;
-      transform:translateZ(0);
     }
 
     .container{width:min(980px,92vw);margin-inline:auto}
     .section{padding:28px 0;position:relative}
 
-    /* ===== 手書き見出し ===== */
-    .section-title{
-      margin:0 0 16px; font-weight:900;
-      font-size:clamp(20px,5.8vw,28px); letter-spacing:.02em;
-      position:relative;
-    }
-    .section-title.hand{
-      font-family:'Zen Kaku Gothic New','Noto Sans JP',sans-serif;
-      font-weight:900; line-height:1.22; text-shadow:none;
-    }
-    .section-title .underline{
-      display:block; height:6px; width:100%;
-      background:linear-gradient(90deg,#7bd6ff,#1480ff);
-      border-radius:6px; opacity:.95; margin-top:8px; position:relative; overflow:hidden;
-    }
-    .section-title.in .underline::after{
-      content:""; position:absolute; inset:0;
-      transform:translateX(-120%) skewX(-20deg);
-      background:linear-gradient(120deg,transparent,rgba(255,255,255,.7),transparent);
-      animation:u-shine .9s ease .2s forwards;
-    }
+    /* 見出し（手書き風） */
+    .section-title{margin:0 0 16px;font-weight:900;font-size:clamp(20px,5.8vw,28px)}
+    .section-title.hand{font-family:'Zen Kaku Gothic New','Noto Sans JP',sans-serif;line-height:1.22}
+    .section-title .underline{display:block;height:6px;background:linear-gradient(90deg,#7bd6ff,#1480ff);border-radius:6px;opacity:.95;margin-top:8px;position:relative;overflow:hidden}
+    .section-title.in .underline::after{content:"";position:absolute;inset:0;transform:translateX(-120%) skewX(-20deg);background:linear-gradient(120deg,transparent,rgba(255,255,255,.7),transparent);animation:u-shine .9s ease .2s forwards}
     @keyframes u-shine{to{transform:translateX(120%) skewX(-20deg)}}
     .hand span.char{display:inline-block;opacity:0;transform:translateY(14px) rotate(var(--rot,0)) scale(.92);filter:blur(2px)}
     .hand.in span.char{animation:charPop .6s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--d,0ms)}
-    @keyframes charPop{40%{transform:translateY(-6px) rotate(var(--rot,0)) scale(1.02);filter:blur(0);opacity:1}100%{transform:translateY(0) rotate(0) scale(1);filter:blur(0);opacity:1}}
+    @keyframes charPop{40%{transform:translateY(-6px) scale(1.02);filter:blur(0);opacity:1}100%{transform:translateY(0) scale(1);filter:blur(0);opacity:1}}
 
-    /* ===== 固定ラベル（ガラス） ===== */
+    /* 固定ラベル（ガラス） */
     .site-title{
       position:fixed; top:14px; left:4vw; z-index:90;
       font-weight:900; font-size:12px; color:#2f2f2f;
       padding:6px 12px; border-radius:999px;
-      background:
-        radial-gradient(140% 120% at 30% 0%, rgba(255,255,255,.32), rgba(255,255,255,.12) 60%, rgba(255,255,255,.06) 100%),
-        linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,.16));
-      box-shadow:
-        0 8px 24px rgba(0,0,0,.16),
-        inset 0 12px 18px rgba(255,255,255,.22),
-        inset 0 -10px 16px rgba(0,0,0,.06);
-      -webkit-backdrop-filter: blur(14px) saturate(1.25) contrast(1.05);
-      backdrop-filter: blur(14px) saturate(1.25) contrast(1.05);
-      border:1px solid rgba(255,255,255,.55);
+      background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,.20));
+      border:1px solid rgba(0,0,0,.08);
+      box-shadow:0 8px 24px rgba(0,0,0,.16), inset 0 12px 18px rgba(255,255,255,.22), inset 0 -10px 16px rgba(0,0,0,.06);
+      -webkit-backdrop-filter: blur(14px) saturate(1.25); backdrop-filter: blur(14px) saturate(1.25);
     }
 
     /* ===== HERO ===== */
-    .hero{position:relative; min-height:62svh; display:block; overflow:hidden}
-    .hero .hero-bg{
-      position:absolute; inset:0; width:100%; height:100%;
-      object-fit:cover; object-position:center 34%; /* 顔に帯が被らない保険：やや上を切る */
-    }
-    .hero-overlay{position:absolute; inset:0; background:
-      linear-gradient(180deg,rgba(0,0,0,0) 0,rgba(0,0,0,.12) 75%,rgba(0,0,0,.22))}
-    .hero-inner{position:relative; z-index:1; width:100%; padding:0 0 20px}
+    .hero{position:relative; min-height:68svh; overflow:hidden}
+    .hero .hero-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 24%}
+    .hero-overlay{position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0) 0,rgba(0,0,0,.18) 75%,rgba(0,0,0,.28))}
 
-    /* 顔に帯が被らない：リードは左上に固定表示（ガラス） */
+    /* ヒーロー下部のコンテンツ（顔に被らない） */
+    .hero-inner{
+      position:absolute; left:50%; transform:translateX(-50%);
+      bottom:calc(env(safe-area-inset-bottom) + 18px);
+      width:min(900px,92vw); z-index:1;
+    }
+
+    /* リード（タイトルの上／固定ではない） */
     .lead{
-      position:absolute;
-      left:4vw;
-      top:calc(10px + env(safe-area-inset-top));
-      display:inline-flex; align-items:center; gap:.6ch;
-      max-width:min(92vw,560px);
-      background:linear-gradient(180deg,rgba(255,255,255,.36),rgba(255,255,255,.22));
-      -webkit-backdrop-filter:blur(6px) saturate(1.05);
-      backdrop-filter:blur(6px) saturate(1.05);
-      border:1px solid rgba(255,255,255,.55);
-      border-radius:999px; padding:8px 14px;
-      font-weight:700; font-size:13px; color:#0b1224;
-      box-shadow:0 10px 14px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.7);
+      margin:0 0 10px;
+      background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.32));
+      -webkit-backdrop-filter:blur(10px) saturate(1.05); backdrop-filter:blur(10px) saturate(1.05);
+      border-radius:999px; padding:8px 14px; font-weight:700; font-size:14px;
+      display:inline-flex; gap:.6ch; align-items:center;
+      box-shadow:0 12px 24px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.6); border:1px solid rgba(0,0,0,.06);
+      color:#0b1224;
     }
     .lead .dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(#7bd6ff,#1480ff)}
     .lead .lead-text{white-space:nowrap}
 
-    /* タイトル（縁取りのみで背景帯は無し） */
-    .title{
-      width:min(900px,92vw);
-      margin:0 auto 10px;
-      padding-top:100px; /* 上のリードと間を取る */
-      font-weight:900;
-      font-size:clamp(22px,6.5vw,34px);
-      line-height:1.16;
-      color:#fff;
-    }
-    .title span{
-      display:block;
-      text-shadow:
-        -1.2px -1.2px 0 #000,
-         1.2px -1.2px 0 #000,
-        -1.2px  1.2px 0 #000,
-         1.2px  1.2px 0 #000,
-         0 2px 6px rgba(0,0,0,.35);
-    }
+    .title{margin:0 0 10px;font-weight:900;font-size:clamp(22px,6.5vw,34px);line-height:1.16;color:#fff}
+    .title span{display:block;text-shadow:-1.2px -1.2px 0 #000,1.2px -1.2px 0 #000,-1.2px 1.2px 0 #000,1.2px 1.2px 0 #000,0 2px 6px rgba(0,0,0,.35)}
 
-    /* ガラス質感バッジ（1列スクロール） */
-    .glass-badges{
-      width:min(900px,92vw);
-      margin:8px auto 14px;
-      display:flex; gap:8px; flex-wrap:nowrap; overflow-x:auto;
-      -webkit-overflow-scrolling:touch; scrollbar-width:none;
-      mask-image:linear-gradient(to right,#000 92%,transparent);
-    }
-    .glass-badges::-webkit-scrollbar{display:none}
+    /* タグ：1列スクロール＋さらに透明度UP */
+    .glass-badges{display:flex; gap:8px; flex-wrap:nowrap; overflow-x:auto; padding:2px 0 6px}
     .g-badge{
-      display:inline-flex; align-items:center; gap:.5ch;
-      padding:8px 12px; border-radius:999px; font-weight:900; font-size:12px;
-      color:#0b1224; white-space:nowrap;
-      background:
-        radial-gradient(120% 180% at 20% -20%, rgba(255,255,255,.75), rgba(255,255,255,.20) 60%),
-        linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,.18));
-      box-shadow:0 10px 22px rgba(15,23,42,.18), inset 0 1px 0 rgba(255,255,255,.72);
-      -webkit-backdrop-filter:blur(14px) saturate(1.15);
-      backdrop-filter:blur(14px) saturate(1.15);
-      border:1px solid rgba(255,255,255,.65);
-      position:relative; overflow:hidden;
-    }
-    .g-badge::after{
-      content:""; position:absolute; inset:2px; border-radius:inherit;
-      background:linear-gradient(120deg,rgba(255,255,255,.55),rgba(255,255,255,0) 35%);
-      mix-blend-mode:screen; pointer-events:none;
+      flex:0 0 auto; display:inline-flex; align-items:center; gap:.5ch;
+      padding:8px 12px; border-radius:999px; font-weight:900; font-size:12px; white-space:nowrap;
+      /* 透明度さらに高く */
+      background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.10));
+      border:1px solid rgba(255,255,255,.45);
+      -webkit-backdrop-filter:blur(18px) saturate(1.15); backdrop-filter:blur(18px) saturate(1.15);
+      box-shadow:0 10px 22px rgba(15,23,42,.14), inset 0 1px 0 rgba(255,255,255,.55);
+      color:#0b1224;
     }
 
-    /* Buttons（カラーは維持＋軽いガラス感） */
-    .btnrow{width:min(900px,92vw); margin:0 auto; display:flex; gap:10px}
+    /* CTA（ガラス光沢はボタン内だけ） */
+    .btnrow{display:flex; gap:10px; margin-top:10px}
     .btn{
       --c1:#000; --c2:#333;
       flex:1; display:flex; justify-content:center; align-items:center; gap:.5ch;
       height:48px; padding:0 14px; border-radius:999px; font-weight:900;
-      font-size:clamp(12.5px,3.2vw,14px);
-      color:#fff; text-decoration:none; white-space:nowrap;
-      position:relative; overflow:hidden;
+      font-size:clamp(11.5px,3vw,13px); letter-spacing:-.01em;
+      color:#fff; text-decoration:none; position:relative; white-space:nowrap;
       background:linear-gradient(180deg,var(--c1),var(--c2));
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 10px 22px rgba(15,23,42,.20);
-      -webkit-backdrop-filter:saturate(1.1) blur(2px);
-      backdrop-filter:saturate(1.1) blur(2px);
-      border:1px solid rgba(255,255,255,.28);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 10px 22px rgba(15,23,42,.20);
+      border:1px solid rgba(255,255,255,.22);
+      overflow:hidden; /* ←ハイライトはみ出し防止 */
     }
     .btn::before{
-      content:""; position:absolute; inset:0 0 55% 0;
-      background:linear-gradient(180deg,rgba(255,255,255,.45),transparent);
-      pointer-events:none;
+      content:""; position:absolute; left:0; right:0; top:0; height:48%;
+      border-radius:inherit; pointer-events:none;
+      background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,0));
     }
     .btn:active{transform:translateY(1px)}
     .btn-blue{--c1:#2b8dff; --c2:#0f6de0}
     .btn-messaging{--c1:var(--line); --c2:var(--line2)}
     .btn-black{--c1:#161616; --c2:#0b0b0b}
-    .btn .shrink{font-size:.92em; letter-spacing:-.01em}
 
     /* “キラッ” */
     .sweep{position:relative; overflow:hidden}
-    .sweep.in::after{
-      content:""; position:absolute; inset:0;
-      transform:translateX(-120%) skewX(-20deg);
-      background:linear-gradient(120deg,transparent,rgba(255,255,255,.42),transparent);
-      animation:shine .9s ease forwards;
-    }
+    .sweep.in::after{content:"";position:absolute;inset:0;transform:translateX(-120%) skewX(-20deg);background:linear-gradient(120deg,transparent,rgba(255,255,255,.42),transparent);animation:shine .9s ease forwards}
     @keyframes shine{to{transform:translateX(120%) skewX(-20deg)}}
 
-    /* ===== Grid / Card ===== */
+    /* Grid / Card */
     .grid{display:grid; gap:16px}
     @media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}
-
     .card{position:relative; padding:16px; border-radius:var(--r); box-shadow:var(--shadow); background:#fff; overflow:hidden}
-    .dept-sweets{--tone:#bff3ec}
-    .dept-imagine{--tone:#ffe0ec}
-    .dept-hoiku{--tone:#ffeec0}
-    .card::before{content:""; position:absolute; inset:0; background:linear-gradient(135deg, color-mix(in srgb,var(--tone) 68%,#fff 32%), #fff); z-index:-1}
+    .dept-sweets{--tone:#bff3ec}.dept-imagine{--tone:#ffe0ec}.dept-hoiku{--tone:#ffeec0}
+    .card::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg, color-mix(in srgb,var(--tone) 68%,#fff 32%), #fff);z-index:-1}
+    .card-header{display:grid;grid-template-columns:1fr auto;align-items:center;gap:14px;min-height: calc(var(--badge) * .72 + 28px);margin-bottom:12px}
+    .sticker{display:inline-block;background:#fff;color:#111;padding:6px 10px;border-radius:10px;font-weight:900;font-size:12px;box-shadow:0 8px 18px rgba(0,0,0,.12);margin-bottom:8px}
+    .meta{line-height:1.25;margin:2px 0 0;font-weight:700}
+    .hook{margin:8px 0 0;padding:8px 12px;font-weight:900;line-height:1.45;color:#0d2b6f;background:linear-gradient(180deg,#eef4ff,#ffffff);border-left:6px solid #78a9ff;border-radius:10px;box-shadow:0 6px 14px rgba(13,43,111,.08) inset}
+    .badge{width:var(--badge);height:var(--badge);border-radius:999px;background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.16), 0 0 0 6px rgba(255,255,255,.95);overflow:hidden;justify-self:end}
+    .badge img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+    .card .photos{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+    .card .photos img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;box-shadow:0 8px 22px rgba(15,23,42,.12);background:#0001}
 
-    .card-header{display:grid; grid-template-columns:1fr auto; align-items:center; gap:14px; min-height: calc(var(--badge) * .72 + 28px); margin-bottom:12px}
-    .sticker{display:inline-block; background:#fff; color:#111; padding:6px 10px; border-radius:10px; font-weight:900; font-size:12px; box-shadow:0 8px 18px rgba(0,0,0,.12); margin-bottom:8px}
-    .meta{line-height:1.25; margin:2px 0 0; font-weight:700}
-    .hook{margin:8px 0 0; padding:8px 12px; font-weight:900; line-height:1.45; color:#0d2b6f; background:linear-gradient(180deg,#eef4ff,#ffffff); border-left:6px solid #78a9ff; border-radius:10px; box-shadow:0 6px 14px rgba(13,43,111,.08) inset}
-    .badge{width:var(--badge); height:var(--badge); border-radius:999px; background:#fff; box-shadow:0 10px 22px rgba(0,0,0,.16), 0 0 0 6px rgba(255,255,255,.95); overflow:hidden; justify-self:end}
-    .badge img{width:100%; height:100%; object-fit:cover; object-position:center 30%}
-
-    .card .photos{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:12px}
-    .card .photos img{width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px; box-shadow:0 8px 22px rgba(15,23,42,.12); background:#0001}
-
-    /* ===== Flow / Guide ===== */
-    .step{display:grid; gap:10px; background:#fff; border-radius:16px; box-shadow:var(--shadow); overflow:hidden}
-    .step img{width:100%; aspect-ratio:16/10; object-fit:cover; background:#0001}
+    /* Flow / Guide */
+    .step{display:grid;gap:10px;background:#fff;border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+    .step img{width:100%;aspect-ratio:16/10;object-fit:cover;background:#0001}
     .step .body{padding:12px 14px}
-    .num{display:inline-block; background:linear-gradient(180deg,#1480ff,#7bd6ff); color:#fff; font-weight:900; padding:.2rem .6rem; border-radius:999px; margin-bottom:6px}
+    .num{display:inline-block;background:linear-gradient(180deg,#1480ff,#7bd6ff);color:#fff;font-weight:900;padding:.2rem .6rem;border-radius:999px;margin-bottom:6px}
+    .guide .glist{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+    .gitem{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center}
+    .gavatar{width:60px;height:60px;border-radius:999px;overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,.14);background:linear-gradient(180deg,#e6f5ff,#fff);display:grid;place-items:center}
+    .gavatar img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
+    .gcard{background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:10px 12px}
 
-    .guide .glist{list-style:none; margin:0; padding:0; display:grid; gap:12px}
-    .gitem{display:grid; grid-template-columns:auto 1fr; gap:10px; align-items:center}
-    .gavatar{width:60px; height:60px; border-radius:999px; overflow:hidden; box-shadow:0 8px 18px rgba(0,0,0,.14); background:linear-gradient(180deg,#e6f5ff,#fff); display:grid; place-items:center}
-    .gavatar img{width:100%; height:100%; object-fit:cover; object-position:center 35%}
-    .gcard{background:#fff; border-radius:14px; box-shadow:var(--shadow); padding:10px 12px}
-
-    /* ===== Footer / 固定CTA ===== */
-    .footer{padding:42px 0 96px; text-align:center; color:#6b7280}
+    /* Footer / 固定CTA */
+    .footer{padding:42px 0 96px;text-align:center;color:#6b7280}
     .sticky-cta{
       position:fixed; left:0; right:0; bottom:-80px;
       display:flex; gap:10px; padding:10px 14px;
@@ -264,18 +183,22 @@
     .sticky-cta .btn{height:46px}
     .sticky-cta.show{bottom:0}
 
-    /* ===== Reveal / Parallax ===== */
+    /* 出現アニメ */
     .reveal{opacity:0; transform:translateY(26px)}
     .reveal.in{opacity:1; animation:catch .8s cubic-bezier(.2,.8,.2,1) both}
-    @keyframes catch{0%{transform:translateY(26px)} 60%{transform:translateY(-8px)} 100%{transform:translateY(0)}}
+    @keyframes catch{0%{transform:translateY(26px)}60%{transform:translateY(-8px)}100%{transform:translateY(0)}}
 
     @media (max-width:560px){ :root{--badge:112px} .card-header{gap:12px} .hook{font-size:.98rem} }
 
-    /* 知る・感じる… の字詰めだけ */
-    #flow .section-title{letter-spacing:-0.02em; line-height:1.16}
-    #flow .section-title.hand span.char{margin-right:-0.02em}
+    /* ===== 日程（2件・パープル） ===== */
+    .dates-wrap{width:min(900px,92vw); margin:12px auto 0}
+    .dates-sub{margin:0 0 8px; color:#475569; font-weight:800; display:flex; align-items:center; gap:.6ch}
+    .soon{display:inline-flex; align-items:center; gap:.4ch; margin-left:.6ch; padding:.22rem .6rem;border-radius:999px; font-weight:900; font-size:12px; color:#0b1224;background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.40)); border:1px solid rgba(0,0,0,.06)}
+    .dates{display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:10px; overflow-x:auto; padding:2px}
+    .pill{display:flex; align-items:center; justify-content:center; gap:.5ch; padding:11px 12px; border-radius:999px; font-weight:900; color:#fff; text-decoration:none; white-space:nowrap; background:linear-gradient(180deg,var(--vio),var(--vio2)); box-shadow:0 8px 18px rgba(15,23,42,.18), inset 0 1px 0 rgba(255,255,255,.35)}
+    .pill small{opacity:.9; font-weight:800}
 
-    /* ===== Shorts（最下段） ===== */
+    /* ===== 1分解説動画 ===== */
     .shorts{padding:34px 0 20px}
     .glass-toggle{
       width:min(900px,92vw); margin:0 auto 14px;
@@ -315,49 +238,35 @@
     .s-icon.play{background:linear-gradient(180deg,#2b8dff,#0f6de0); color:#fff}
     .s-icon:active{transform:translateY(1px)}
 
-    /* ====== 日程UI ====== */
-    .dates-wrap{width:min(900px,92vw); margin:12px auto 0}
-    .dates-sub{margin:0 0 8px; color:#475569; font-weight:800; display:flex; align-items:center; gap:.6ch}
-    .soon{display:inline-flex; align-items:center; gap:.4ch; margin-left:.6ch; padding:.22rem .6rem;
-      border-radius:999px; font-weight:900; font-size:12px; color:#0b1224;
-      background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.40));
-      border:1px solid rgba(0,0,0,.06);
-    }
-    .dates{display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:10px; overflow-x:auto; padding:2px}
-    .pill{
-      display:flex; align-items:center; justify-content:center; gap:.5ch;
-      padding:11px 12px; border-radius:999px; font-weight:900; color:#fff; text-decoration:none; white-space:nowrap;
-      background:linear-gradient(180deg,var(--pill1),var(--pill2));
-      box-shadow:0 8px 18px rgba(15,23,42,.18), inset 0 1px 0 rgba(255,255,255,.35);
-      border:1px solid rgba(255,255,255,.35);
-    }
-    .pill small{opacity:.9; font-weight:800}
+    /* モーダル */
+    .player-backdrop{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.48); z-index:120; padding:20px}
+    .player-backdrop.open{display:grid}
+    .player-modal{width:min(420px,90vw); aspect-ratio:9/16; background:#000; border-radius:16px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.35); position:relative}
+    .player-modal iframe{width:100%; height:100%; border:0}
+    .player-close{position:absolute; top:8px; right:8px; z-index:2; width:36px; height:36px; border-radius:999px; border:none; cursor:pointer; background:rgba(255,255,255,.85); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; font-weight:900; box-shadow:0 4px 12px rgba(0,0,0,.2)}
   </style>
 </head>
 <body>
+
+  <!-- 背景 -->
   <div class="global-bg" aria-hidden="true"></div>
   <div class="site-title">日本デザイン福祉専門学校</div>
 
   <!-- ===== HERO ===== -->
   <header class="hero">
-    <img class="hero-bg"
-         src="images/Google_AI_Studio_2025-07-16T07_54_39.403Z.png"
-         alt="キャンパスの雰囲気"
-         fetchpriority="high"
-         width="1920" height="1080">
+    <img class="hero-bg" src="images/Google_AI_Studio_2025-07-16T07_54_39.403Z.png" alt="キャンパスの雰囲気" fetchpriority="high" width="1920" height="1080">
     <div class="hero-overlay"></div>
 
-    <!-- 顔に帯が被らない保険：左上に小さめガラスラベル -->
-    <p class="lead"><span class="dot"></span><span class="lead-text">私たちOCサポーターも、進路に悩んだ高校生でした。</span></p>
-
+    <!-- 下部：リード→タイトル→タグ→CTA（顔に被らない） -->
     <div class="hero-inner">
+      <p class="lead"><span class="dot"></span><span class="lead-text">私たちOCサポーターも、進路に悩んだ高校生でした。</span></p>
+
       <h1 class="title">
         <span>そんな私たちが、</span>
         <span>この学校を選んだ</span>
         <span>“きっかけ”教えます。</span>
       </h1>
 
-      <!-- ガラスのタグ（1列スクロール） -->
       <div class="glass-badges" role="list" aria-label="参加に関する情報">
         <span class="g-badge" role="listitem">👕 服装自由</span>
         <span class="g-badge" role="listitem">🙌 1人参加OK</span>
@@ -366,7 +275,7 @@
       </div>
 
       <div class="btnrow sweep in">
-        <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener"><span class="shrink">オーキャンについて</span></a>
+        <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンについて</a>
         <a class="btn btn-messaging" href="#" data-safe-href="https://lin.ee/y2DLr3Y" rel="noopener" target="_blank" aria-label="LINEで質問">LINEで質問</a>
         <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
       </div>
@@ -374,8 +283,7 @@
   </header>
 
   <main class="container">
-
-    <!-- ===== 日程（直近2件のみ） ===== -->
+    <!-- ===== 日程（直近2件） ===== -->
     <section class="section" id="dates">
       <h2 class="section-title hand reveal js-hand">
         次の開催日から選ぶ <span id="soon" class="soon">最短：—</span>
@@ -446,7 +354,6 @@
     <!-- ===== 当日の流れ ===== -->
     <section class="section" id="flow">
       <h2 class="section-title hand reveal js-hand">知る・感じる・ハマる・そんな1日<span class="underline"></span></h2>
-
       <div class="grid" data-float>
         <article class="step sweep reveal">
           <img src="images/IMG_8359.jpg" alt="受付">
@@ -456,7 +363,6 @@
             <p>イベント開始5分前までにご来校ください。オーキャンサポーターがお出迎えしますよ♪</p>
           </div>
         </article>
-
         <article class="step sweep reveal">
           <img src="images/IMG_4046.jpg" alt="学校説明会">
           <div class="body">
@@ -465,7 +371,6 @@
             <p>気になることをわかりやすくご紹介します。<br>初めての方でも安心して聞ける内容になっています。</p>
           </div>
         </article>
-
         <article class="step sweep reveal">
           <img src="images/IMG_5870.jpg" alt="校内見学">
           <div class="body">
@@ -474,7 +379,6 @@
             <p>意外と映えスポットがあるんですよ！</p>
           </div>
         </article>
-
         <article class="step sweep reveal">
           <img src="images/hall.jpg" alt="個別相談">
           <div class="body">
@@ -483,7 +387,6 @@
             <p>入学前に感じる不安は誰もが抱えるもの。<br>スタッフと先輩が親切にサポートします。</p>
           </div>
         </article>
-
         <article class="step sweep reveal">
           <img src="images/IMG_6704.jpg" alt="体験講座">
           <div class="body">
@@ -493,37 +396,6 @@
           </div>
         </article>
       </div>
-    </section>
-
-    <!-- ===== 安心ガイド ===== -->
-    <section class="section guide" id="guide">
-      <h2 class="section-title hand reveal js-hand">
-        はじめてのドキドキを、<br>ぜんぶワクワクに！<br>オープンキャンパス安心ガイド
-        <span class="underline"></span>
-      </h2>
-
-      <ul class="glist" data-float>
-        <li class="gitem sweep reveal">
-          <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_39_37.511Z.png" alt=""></div>
-          <div class="gcard"><strong>① 出発前</strong><br> 服装は自由。<b>制服でも私服でもOK</b>。／ 持ち物は <b>無しでOK</b>！資料はこっちで用意。</div>
-        </li>
-        <li class="gitem access sweep reveal">
-          <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_45_02.490Z.png" alt=""></div>
-          <div class="gcard"><strong>② アクセス</strong><br>迷ったら <a href="https://ndc.ac.jp/access/" target="_blank" rel="noopener">アクセス案内</a> or <b>LINE</b>してね！</div>
-        </li>
-        <li class="gitem sweep reveal">
-          <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_44_19.676Z.png" alt=""></div>
-          <div class="gcard"><strong>③ 到着したら</strong><br>学校に着いたらワクワクタイムの始まり！<b>まずはゆったり受付へ</b></div>
-        </li>
-        <li class="gitem sweep reveal">
-          <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_44_44.871Z.png" alt=""></div>
-          <div class="gcard"><strong>④ 見学・体験中</strong><br> 見て・聞いて・体験！<b>ひらめいたらその場で質問🎶</b> ／ 休憩もOK。</div>
-        </li>
-        <li class="gitem sweep reveal">
-          <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_41_21.515Z.png" alt=""></div>
-          <div class="gcard"><strong>⑤ 帰り道</strong><br> <b>SNSアップOK!</b> 記念にパシャっとどうぞ。／  気楽に来て、気楽に帰ってOK。</div>
-        </li>
-      </ul>
     </section>
 
     <!-- ===== 1分解説動画 ===== -->
@@ -540,7 +412,9 @@
               <p class="s-desc">縦動画で学校の空気感を1分でさっくっと。</p>
             </div>
             <div class="s-actions">
-              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/vbWDxIgAiLU"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/vbWDxIgAiLU">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </button>
               <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
             </div>
           </div>
@@ -553,7 +427,9 @@
               <p class="s-desc">実習の雰囲気をショートで。</p>
             </div>
             <div class="s-actions">
-              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/7dL2RRYDxxA"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/7dL2RRYDxxA">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
               <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
             </div>
           </div>
@@ -566,20 +442,9 @@
               <p class="s-desc">描く・学ぶ・見るを1分で。</p>
             </div>
             <div class="s-actions">
-              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/xz6X2a-AEU8"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
-              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="s-card">
-          <div class="s-head">
-            <div>
-              <h3 class="s-title">【1分でわかる】コミックmanabi学科</h3>
-              <p class="s-desc">学びの流れを1分で。</p>
-            </div>
-            <div class="s-actions">
-              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/7_MpflBuv9k"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/xz6X2a-AEU8">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
               <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
             </div>
           </div>
@@ -592,7 +457,9 @@
               <p class="s-desc">発想を形にする1分。</p>
             </div>
             <div class="s-actions">
-              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/tm8ZayZMb6M"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/tm8ZayZMb6M">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
               <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
             </div>
           </div>
@@ -605,7 +472,9 @@
               <p class="s-desc">子ども×デザインの入口を1分で。</p>
             </div>
             <div class="s-actions">
-              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/oEpO0rFOr8g"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/oEpO0rFOr8g">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
               <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
             </div>
           </div>
@@ -618,141 +487,162 @@
               <p class="s-desc">おもてなしの現場感を1分で。</p>
             </div>
             <div class="s-actions">
-              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/akdyF5vbAro"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/akdyF5vbAro">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
               <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
             </div>
           </div>
         </div>
       </div>
     </section>
-
   </main>
 
   <footer class="footer">
-    <div class="container">
-      <small>© 2025 NIPPON DESIGN WELFARE COLLEGE</small>
-    </div>
+    <div class="container"><small>© 2025 NIPPON DESIGN WELFARE COLLEGE</small></div>
   </footer>
 
   <!-- 固定CTA -->
   <nav class="sticky-cta" aria-label="固定操作バー">
-    <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener"><span class="shrink">オーキャンについて</span></a>
+    <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンについて</a>
     <a class="btn btn-messaging" href="#" data-safe-href="https://lin.ee/y2DLr3Y" rel="noopener" target="_blank" aria-label="LINEで質問">LINEで質問</a>
     <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
   </nav>
 
-  <!-- 動画モーダル -->
-  <div class="player-backdrop" id="ytBackdrop" aria-hidden="true" style="display:none"></div>
+  <!-- 再生モーダル -->
+  <div class="player-backdrop" id="ytBackdrop" aria-hidden="true">
+    <div class="player-modal" role="dialog" aria-label="動画プレイヤー">
+      <button class="player-close" type="button" id="ytClose" aria-label="閉じる">×</button>
+      <iframe id="ytFrame" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+  </div>
 
   <script>
-    /* ====== 予約リンク（直近2件は予約フォームへ） ====== */
-    const RESERVE_URL = 'https://www.school-go.info/ffz85h/ndc/form.php?fno=60&fsno=1&_gl=1*1gypnfh*_gcl_au*MjEwNTk1MjIyMi4xNzU0NTM1NTA1&nnso=3';
+    /* ====== 予約フォーム（ピル） ====== */
+    const FORM_URL = 'https://www.school-go.info/ffz85h/ndc/form.php?fno=60&fsno=1&_gl=1*1gypnfh*_gcl_au*MjEwNTk1MjIyMi4xNzU0NTM1NTA1&nnso=3';
 
-    /* ====== 日程（固定配列→今日以降→最短＋2件） ====== */
+    /* 日程（今日以降 → 最短＋2件） */
     const UPCOMING = [
       '2025-08-20','2025-08-24','2025-09-28','2025-10-12','2025-10-19','2025-10-26',
       '2025-11-16','2025-11-23','2025-12-14',
       '2026-01-25','2026-02-08','2026-03-08','2026-03-22'
     ];
-
-    function weekdayJa(d){ return ['日','月','火','水','木','金','土'][d.getDay()]; }
+    const weekdayJa = d => ['日','月','火','水','木','金','土'][d.getDay()];
 
     function renderDates(){
       const wrap = document.getElementById('datePills');
-      const soonEl = document.getElementById('soon');
-      if(!wrap || !soonEl) return;
-
+      const soonEl = document.getElementById('soon'); if(!wrap||!soonEl) return;
       wrap.innerHTML = '';
       const todayMidnight = new Date(new Date().toDateString());
-
-      const list = UPCOMING
-        .map(s => new Date(s + 'T00:00:00+09:00'))
-        .filter(d => d >= todayMidnight)
-        .sort((a,b)=>a-b);
-
-      if(!list.length){
-        soonEl.textContent = '最短：準備中';
-        wrap.insertAdjacentHTML('beforeend','<span class="muted">日程準備中</span>');
-        return;
-      }
-
-      const soon = list[0];
+      const list = UPCOMING.map(s=>new Date(s+'T00:00:00+09:00')).filter(d=>d>=todayMidnight).sort((a,b)=>a-b);
+      if(!list.length){ soonEl.textContent='最短：準備中'; wrap.innerHTML='<span class="muted">日程準備中</span>'; return; }
+      const soon=list[0];
       soonEl.textContent = `最短：${(soon.getMonth()+1)}/${soon.getDate()}(${weekdayJa(soon)})`;
-
       list.slice(0,2).forEach(d=>{
-        const mm = String(d.getMonth()+1).padStart(2,'0');
-        const dd = String(d.getDate()).padStart(2,'0');
-        const w = weekdayJa(d);
-        const a = document.createElement('a');
-        a.className = 'pill';
-        a.href = RESERVE_URL;
-        a.target = '_blank';
-        a.rel = 'noopener';
-        a.setAttribute('aria-label', `${mm}/${dd}(${w})の予約ページを開く`);
-        a.innerHTML = `📅 ${mm}/${dd}(${w}) <small>予約へ</small>`;
+        const mm=String(d.getMonth()+1).padStart(2,'0');
+        const dd=String(d.getDate()).padStart(2,'0');
+        const w=weekdayJa(d);
+        const a=document.createElement('a');
+        a.className='pill';
+        a.href=FORM_URL; a.target='_blank'; a.rel='noopener';
+        a.setAttribute('aria-label',`${mm}/${dd}(${w})の予約フォームへ`);
+        a.innerHTML=`📅 ${mm}/${dd}(${w}) <small>予約へ</small>`;
         wrap.appendChild(a);
       });
     }
 
-    /* 出現監視：reveal / sweep / section-title（下線キラ） */
+    /* 出現アニメ */
     const io=new IntersectionObserver(es=>{
-      es.forEach(e=>{
-        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-      });
+      es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
     },{threshold:.22});
     document.querySelectorAll('.reveal,.sweep,.section-title').forEach(el=>io.observe(el));
 
-    /* 手書きタイトルを1文字分割 */
+    /* 手書き見出し：1文字ずつ */
     function splitHand(el){
-      if(el.dataset.splitted) return;
-      el.dataset.splitted="1";
-      const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null);
-      const texts=[]; while(walker.nextNode()) texts.push(walker.currentNode);
+      if(el.dataset.splitted) return; el.dataset.splitted="1";
+      const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null); const texts=[];
+      while(walker.nextNode()) texts.push(walker.currentNode);
       texts.forEach(node=>{
         const s=node.nodeValue; if(!s.trim()) return;
         const frag=document.createDocumentFragment();
         [...s].forEach((ch,i)=>{
-          const span=document.createElement('span');
-          span.className='char';
-          span.style.setProperty('--d', (i*45)+'ms');
-          span.style.setProperty('--rot', (Math.random()*6-3).toFixed(1)+'deg');
-          span.textContent=ch;
-          frag.appendChild(span);
+          const span=document.createElement('span'); span.className='char';
+          span.style.setProperty('--d',(i*45)+'ms'); span.style.setProperty('--rot',(Math.random()*6-3).toFixed(1)+'deg');
+          span.textContent=ch; frag.appendChild(span);
         });
         node.parentNode.replaceChild(frag,node);
       });
     }
     document.querySelectorAll('.js-hand').forEach(splitHand);
 
-    /* スクロール連動：微パララックス＆CTA表示 */
+    /* スクロール：微パララックス＆CTA表示 */
     const sticky=document.querySelector('.sticky-cta');
     function onScroll(){
       const vh=innerHeight;
       document.querySelectorAll('[data-float]').forEach(g=>{
-        const r=g.getBoundingClientRect();
-        const center=(r.top+r.bottom)/2;
+        const r=g.getBoundingClientRect(); const center=(r.top+r.bottom)/2;
         const delta=(vh*0.5-center)/(vh*0.5);
         g.style.transform=`translateY(${Math.max(-10,Math.min(10,-delta*8))}px)`;
       });
       sticky.classList.toggle('show', scrollY>700);
     }
     addEventListener('scroll', onScroll, {passive:true});
-    addEventListener('resize', onScroll);
-    onScroll();
+    addEventListener('resize', onScroll); onScroll();
 
     /* 画像最適化 */
     document.querySelectorAll('img').forEach(i=>{ i.loading='lazy'; i.decoding='async'; });
 
-    /* LINEボタン：クリック時の安全遷移 */
+    /* LINE起動（ブロッカー回避） */
     document.querySelectorAll('a.btn-messaging[data-safe-href]').forEach(a=>{
       const url=a.getAttribute('data-safe-href');
-      a.addEventListener('click',function(ev){
-        ev.preventDefault();
-        try{ window.open(url,'_blank','noopener'); }catch(e){ location.href=url; }
-      },{passive:false});
+      a.addEventListener('click',ev=>{ ev.preventDefault(); try{ window.open(url,'_blank','noopener'); }catch{ location.href=url; }});
     });
 
-    /* 起動：日程描画 */
+    /* ▼ 1分動画：開閉＋モーダル再生 */
+    const toggle=document.getElementById('shortsToggle');
+    const panel=document.getElementById('shortsPanel');
+    const backdrop=document.getElementById('ytBackdrop');
+    const frame=document.getElementById('ytFrame');
+    const closeBtn=document.getElementById('ytClose');
+
+    toggle.addEventListener('click',()=>{
+      const open=!panel.classList.contains('open');
+      panel.classList.toggle('open',open);
+      toggle.setAttribute('aria-expanded',open);
+      panel.setAttribute('aria-hidden',!open);
+      if(open){ panel.scrollIntoView({behavior:'smooth',block:'start'}); }
+    });
+    document.querySelectorAll('[data-close-panel]').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        panel.classList.remove('open');
+        panel.setAttribute('aria-hidden','true');
+        toggle.setAttribute('aria-expanded','false');
+        toggle.scrollIntoView({behavior:'smooth',block:'center'});
+      });
+    });
+
+    function toEmbed(url){
+      try{
+        const m=url.match(/shorts\/([A-Za-z0-9_-]{6,})/) || url.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/);
+        const id=m?m[1]:null;
+        return id ? `https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0` : '';
+      }catch(_){ return ''; }
+    }
+    function openPlayer(url){
+      const embed=toEmbed(url); if(!embed) return;
+      frame.src=embed; backdrop.classList.add('open'); backdrop.setAttribute('aria-hidden','false');
+    }
+    function closePlayer(){
+      frame.src='about:blank'; backdrop.classList.remove('open'); backdrop.setAttribute('aria-hidden','true');
+    }
+    document.querySelectorAll('.s-icon.play[data-video]').forEach(b=>{
+      b.addEventListener('click',()=>openPlayer(b.getAttribute('data-video')));
+    });
+    closeBtn.addEventListener('click',closePlayer);
+    backdrop.addEventListener('click',e=>{ if(e.target===backdrop) closePlayer(); });
+    addEventListener('keydown',e=>{ if(e.key==='Escape') closePlayer(); });
+
+    /* 起動 */
     renderDates();
   </script>
 </body>
