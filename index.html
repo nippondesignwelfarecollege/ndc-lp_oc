@@ -143,6 +143,23 @@
          0 2px 6px rgba(0,0,0,.35);
     }
 
+    /* ガラス質感バッジ（ヒーロー） */
+    .glass-badges{
+      width:min(900px,92vw);
+      margin:8px auto 12px;
+      display:flex; gap:8px; flex-wrap:wrap;
+    }
+    .g-badge{
+      display:inline-flex; align-items:center; gap:.5ch;
+      padding:8px 12px; border-radius:999px; font-weight:900; font-size:12px;
+      color:#0b1224; white-space:nowrap;
+      background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.40));
+      box-shadow:0 10px 22px rgba(15,23,42,.14), inset 0 1px 0 rgba(255,255,255,.7);
+      border:1px solid rgba(0,0,0,.06);
+      -webkit-backdrop-filter:blur(10px) saturate(1.1);
+      backdrop-filter:blur(10px) saturate(1.1);
+    }
+
     /* Buttons */
     .btnrow{width:min(900px,92vw); margin:0 auto; display:flex; gap:10px}
     .btn{
@@ -204,7 +221,7 @@
     .gcard{background:#fff; border-radius:14px; box-shadow:var(--shadow); padding:10px 12px}
 
     /* ===== Footer / 固定CTA ===== */
-    .footer{padding:42px 0 96px; text-align:center; color:var(--muted)}
+    .footer{padding:42px 0 96px; text-align:center; color:#6b7280}
     .sticky-cta{
       position:fixed; left:0; right:0; bottom:-80px;
       display:flex; gap:10px; padding:10px 14px;
@@ -253,13 +270,10 @@
       backdrop-filter:blur(14px) saturate(1.15);
       -webkit-backdrop-filter:blur(14px) saturate(1.15);
     }
-    /* タイトル左、ボタン群右で常に整列 */
     .s-head{display:grid; grid-template-columns:1fr auto; align-items:center; gap:10px}
     .s-title{font-weight:900; margin:0 0 4px}
     .s-desc{margin:0 0 10px; color:#475569; line-height:1.55; letter-spacing:.01em}
     .s-actions{display:flex; gap:8px; align-items:center; justify-content:flex-end}
-
-    /* 統一サイズのアイコンボタン（Play と Close） */
     .s-icon{
       width:42px; height:42px; border-radius:999px; display:inline-flex;
       align-items:center; justify-content:center; border:none; cursor:pointer;
@@ -291,6 +305,23 @@
       display:flex; align-items:center; justify-content:center; font-weight:900;
       box-shadow:0 4px 12px rgba(0,0,0,.2);
     }
+
+    /* ====== 日程UI（追加） ====== */
+    .dates-wrap{width:min(900px,92vw); margin:12px auto 0}
+    .dates-sub{margin:0 0 8px; color:#475569; font-weight:800; display:flex; align-items:center; gap:.6ch}
+    .soon{display:inline-flex; align-items:center; gap:.4ch; margin-left:.6ch; padding:.22rem .6rem;
+      border-radius:999px; font-weight:900; font-size:12px; color:#0b1224;
+      background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.40));
+      border:1px solid rgba(0,0,0,.06);
+    }
+    .dates{display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:10px; overflow-x:auto; padding:2px}
+    .pill{
+      display:flex; align-items:center; justify-content:center; gap:.5ch;
+      padding:11px 12px; border-radius:999px; font-weight:900; color:#fff; text-decoration:none; white-space:nowrap;
+      background:linear-gradient(180deg,#2b8dff,#0f6de0);
+      box-shadow:0 8px 18px rgba(15,23,42,.18), inset 0 1px 0 rgba(255,255,255,.35);
+    }
+    .pill small{opacity:.9; font-weight:800}
   </style>
 </head>
 <body>
@@ -318,8 +349,16 @@
         <span>“きっかけ”教えます。</span>
       </h1>
 
+      <!-- ★ガラス質感バッジ -->
+      <div class="glass-badges" role="list" aria-label="参加に関する情報">
+        <span class="g-badge" role="listitem">👕 服装自由</span>
+        <span class="g-badge" role="listitem">🙌 1人参加OK</span>
+        <span class="g-badge" role="listitem">📝 予約無しもOK</span>
+        <span class="g-badge" role="listitem">🕒 途中参加OK</span>
+      </div>
+
       <div class="btnrow sweep in">
-        <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンを予約</a>
+        <a class="btn btn-blue" href="https://www.school-go.info/ffz85h/ndc/form.php?fno=60&fsno=1&_gl=1*1gypnfh*_gcl_au*MjEwNTk1MjIyMi4xNzU0NTM1NTA1&nnso=3" target="_blank" rel="noopener">オーキャンを予約</a>
         <a class="btn btn-messaging" href="#" data-safe-href="https://lin.ee/y2DLr3Y" rel="noopener" target="_blank" aria-label="LINEで質問">LINEで質問</a>
         <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
       </div>
@@ -327,6 +366,16 @@
   </header>
 
   <main class="container">
+
+    <!-- ===== 日程（直近2件のみ） ===== -->
+    <section class="section" id="dates">
+      <h2 class="section-title hand reveal js-hand">
+        次の開催日から選ぶ <span id="soon" class="soon">最短：—</span>
+        <span class="underline"></span>
+      </h2>
+      <p class="dates-sub">直近<strong>2つ</strong>の日程だけを表示します。</p>
+      <div class="dates" id="datePills" aria-live="polite"></div>
+    </section>
 
     <!-- ===== 学生インタビュー ===== -->
     <section class="section">
@@ -601,7 +650,7 @@
 
   <!-- 固定CTA（下部） -->
   <nav class="sticky-cta" aria-label="固定操作バー">
-    <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンを予約</a>
+    <a class="btn btn-blue" href="https://www.school-go.info/ffz85h/ndc/form.php?fno=60&fsno=1&_gl=1*1gypnfh*_gcl_au*MjEwNTk1MjIyMi4xNzU0NTM1NTA1&nnso=3" target="_blank" rel="noopener">オーキャンを予約</a>
     <a class="btn btn-messaging" href="#" data-safe-href="https://lin.ee/y2DLr3Y" rel="noopener" target="_blank" aria-label="LINEで質問">LINEで質問</a>
     <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
   </nav>
@@ -615,6 +664,61 @@
   </div>
 
   <script>
+    /* ====== 予約リンク（共通） ====== */
+    const RESERVE_URL = 'https://www.school-go.info/ffz85h/ndc/form.php?fno=60&fsno=1&_gl=1*1gypnfh*_gcl_au*MjEwNTk1MjIyMi4xNzU0NTM1NTA1&nnso=3';
+
+    /* ====== 日程（固定配列→今日以降→最短＋2件） ======
+       8/20, 8/24, 9/28, 10/12, 10/19, 10/26, 11/16, 11/23, 12/14,
+       2026/1/25, 2026/02/08, 2026/03/08, 2026/03/22
+       ※ 2025年は年を補完してISO化
+    */
+    const UPCOMING = [
+      '2025-08-20','2025-08-24','2025-09-28','2025-10-12','2025-10-19','2025-10-26',
+      '2025-11-16','2025-11-23','2025-12-14',
+      '2026-01-25','2026-02-08','2026-03-08','2026-03-22'
+    ];
+
+    function weekdayJa(d){ return ['日','月','火','水','木','金','土'][d.getDay()]; }
+
+    function renderDates(){
+      const wrap = document.getElementById('datePills');
+      const soonEl = document.getElementById('soon');
+      if(!wrap || !soonEl) return;
+
+      wrap.innerHTML = '';
+      // 現地0時基準（タイムゾーン差異の影響を避ける）
+      const today = new Date();
+      const todayMidnight = new Date(today.toDateString());
+
+      const list = UPCOMING
+        .map(s => new Date(s + 'T00:00:00+09:00'))
+        .filter(d => d >= todayMidnight)
+        .sort((a,b)=>a-b);
+
+      if(!list.length){
+        soonEl.textContent = '最短：準備中';
+        wrap.insertAdjacentHTML('beforeend','<span class="muted">日程準備中</span>');
+        return;
+      }
+
+      const soon = list[0];
+      soonEl.textContent = `最短：${(soon.getMonth()+1)}/${soon.getDate()}(${weekdayJa(soon)})`;
+
+      list.slice(0,2).forEach(d=>{
+        const mm = String(d.getMonth()+1).padStart(2,'0');
+        const dd = String(d.getDate()).padStart(2,'0');
+        const w = weekdayJa(d);
+        const a = document.createElement('a');
+        a.className = 'pill';
+        a.href = RESERVE_URL;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.setAttribute('aria-label', `${mm}/${dd}(${w})の予約ページを開く`);
+        a.innerHTML = `📅 ${mm}/${dd}(${w}) <small>予約へ</small>`;
+        wrap.appendChild(a);
+      });
+    }
+
     /* 出現監視：reveal / sweep / section-title（下線キラ） */
     const io=new IntersectionObserver(es=>{
       es.forEach(e=>{
@@ -699,7 +803,6 @@
 
     function toEmbed(url){
       try{
-        // /shorts/{id} または youtu.be/{id} を想定
         const m=url.match(/shorts\/([A-Za-z0-9_-]{6,})/) || url.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/);
         const id=m?m[1]:null;
         return id ? `https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0` : '';
@@ -720,9 +823,12 @@
     document.querySelectorAll('.s-icon.play[data-video]').forEach(b=>{
       b.addEventListener('click',()=>openPlayer(b.getAttribute('data-video')));
     });
-    closeBtn.addEventListener('click',closePlayer);
+    document.getElementById('ytClose').addEventListener('click',closePlayer);
     backdrop.addEventListener('click',e=>{ if(e.target===backdrop) closePlayer(); });
     addEventListener('keydown',e=>{ if(e.key==='Escape') closePlayer(); });
+
+    /* 起動：日程描画 */
+    renderDates();
   </script>
 </body>
 </html>
