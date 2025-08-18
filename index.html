@@ -4,6 +4,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>日本デザイン福祉専門学校｜OCサポーター紹介</title>
+  <meta name="description" content="“高校時代に悩んだ私たちが、NDCを選んだ理由”。オープンキャンパスは直近2日から予約OK。服装自由・1人参加OK・予約無しもOK。">
+  <!-- OGP（LINE最適化） -->
+  <meta property="og:title" content="日本デザイン福祉専門学校｜OCサポーター紹介">
+  <meta property="og:description" content="“高校時代に悩んだ私たちが、NDCを選んだ理由”。直近2日程から予約OK。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/ogp-ndc-oc.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#0f6de0" />
+  <!-- フォント最適化 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- 既存フォント -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet" />
   <!-- 見出し用フォント -->
@@ -27,7 +40,6 @@
       --badge:130px;
     }
 
-    /* ===== 背景：固定レイヤー方式（iOSでも切れない） ===== */
     body{
       color:var(--ink);
       font-family:'Noto Sans JP',system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
@@ -50,6 +62,7 @@
 
     .container{width:min(980px,92vw);margin-inline:auto}
     .section{padding:28px 0;position:relative}
+    .muted{color:var(--muted)}
 
     /* ===== 手書き見出し（1文字出現） ===== */
     .section-title{
@@ -59,9 +72,7 @@
     }
     .section-title.hand{
       font-family:'Zen Kaku Gothic New','Noto Sans JP',sans-serif;
-      font-weight:900;
-      line-height:1.22;
-      text-shadow:none;
+      font-weight:900; line-height:1.22; text-shadow:none;
     }
     .section-title .underline{
       display:block; height:6px; width:100%;
@@ -107,10 +118,17 @@
       position:absolute; inset:0; width:100%; height:100%;
       object-fit:cover; object-position:center 35%;
     }
-    .hero-overlay{position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0) 0,rgba(0,0,0,.18) 75%,rgba(0,0,0,.25))}
-    .hero-inner{position:relative; z-index:1; width:100%; padding:14px 0 20px}
+    /* 上部は透明、下部だけ薄く暗くして帯で顔を隠さない */
+    .hero-overlay{
+      position:absolute; inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,0) 0 55%,rgba(0,0,0,.18) 82%,rgba(0,0,0,.25));
+    }
+    .hero-inner{
+      position:relative; z-index:1; width:100%;
+      padding: min(8svh, 60px) 0 20px; /* 先頭が上がりすぎない保険 */
+    }
 
-    /* リード */
+    /* リード（見出しの上に常に表示） */
     .lead{
       width:min(900px,92vw); margin:0 auto 8px;
       background:rgba(255,255,255,.24); backdrop-filter:blur(2px);
@@ -121,7 +139,7 @@
     .lead .dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(#7bd6ff,#1480ff)}
     .lead .lead-text{white-space:nowrap}
 
-    /* ヒーロー見出し：白＋黒縁取り */
+    /* ヒーロー見出し：白＋濃紺の縁取り（黒→濃紺） */
     .title{
       width:min(900px,92vw);
       margin:0 auto 10px;
@@ -136,28 +154,29 @@
     .title span{
       display:block;
       text-shadow:
-        -1.2px -1.2px 0 #000,
-         1.2px -1.2px 0 #000,
-        -1.2px  1.2px 0 #000,
-         1.2px  1.2px 0 #000,
-         0 2px 6px rgba(0,0,0,.35);
+        1.2px  1.2px 0 rgba(17,34,68,.88),
+       -1.2px  1.2px 0 rgba(17,34,68,.88),
+        1.2px -1.2px 0 rgba(17,34,68,.88),
+       -1.2px -1.2px 0 rgba(17,34,68,.88),
+        0 2px 6px rgba(13,32,70,.35);
     }
 
-    /* ガラス質感バッジ（ヒーロー） */
+    /* ガラス質感バッジ（ヒーロー）— 1列スクロール & 高透明 */
     .glass-badges{
       width:min(900px,92vw);
       margin:8px auto 12px;
-      display:flex; gap:8px; flex-wrap:wrap;
+      display:flex; gap:8px; flex-wrap:nowrap;
+      overflow-x:auto; -webkit-overflow-scrolling:touch;
     }
     .g-badge{
       display:inline-flex; align-items:center; gap:.5ch;
       padding:8px 12px; border-radius:999px; font-weight:900; font-size:12px;
       color:#0b1224; white-space:nowrap;
-      background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.40));
-      box-shadow:0 10px 22px rgba(15,23,42,.14), inset 0 1px 0 rgba(255,255,255,.7);
-      border:1px solid rgba(0,0,0,.06);
-      -webkit-backdrop-filter:blur(10px) saturate(1.1);
-      backdrop-filter:blur(10px) saturate(1.1);
+      background:linear-gradient(180deg,rgba(255,255,255,.32),rgba(255,255,255,.16));
+      border:1px solid rgba(255,255,255,.65);
+      -webkit-backdrop-filter: blur(8px) saturate(1.05);
+      backdrop-filter: blur(8px) saturate(1.05);
+      box-shadow:0 10px 22px rgba(15,23,42,.10), inset 0 1px 0 rgba(255,255,255,.7);
     }
 
     /* Buttons */
@@ -166,13 +185,18 @@
       --c1:#000; --c2:#333;
       flex:1; display:flex; justify-content:center; align-items:center; gap:.5ch;
       height:48px; padding:0 14px; border-radius:999px; font-weight:900;
-      font-size:clamp(13px,3.4vw,14px);
+      font-size:clamp(12px,3.3vw,14px); /* モバイルで溢れない調整 */
       color:#fff; text-decoration:none;
       position:relative; overflow:hidden; white-space:nowrap;
       background:linear-gradient(180deg,var(--c1),var(--c2));
       box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 10px 22px rgba(15,23,42,.20);
+      isolation:isolate; /* 擬似要素のはみ出し保険 */
     }
-    .btn::before{content:""; position:absolute; inset:0 0 55% 0; background:linear-gradient(180deg,rgba(255,255,255,.45),transparent); pointer-events:none}
+    .btn::before{
+      content:""; position:absolute; inset:0 0 55% 0;
+      background:linear-gradient(180deg,rgba(255,255,255,.45),transparent);
+      pointer-events:none; z-index:0;
+    }
     .btn:active{transform:translateY(1px)}
     .btn-blue{--c1:#2b8dff; --c2:#0f6de0}
     .btn-messaging{--c1:var(--line); --c2:var(--line2)}
@@ -224,9 +248,10 @@
     .footer{padding:42px 0 96px; text-align:center; color:#6b7280}
     .sticky-cta{
       position:fixed; left:0; right:0; bottom:-80px;
-      display:flex; gap:10px; padding:10px 14px;
+      display:flex; gap:10px;
+      padding:10px 14px calc(10px + env(safe-area-inset-bottom));
       background:rgba(255,255,255,.92); backdrop-filter:blur(10px);
-      box-shadow:0 -12px 24px rgba(0,0,0,.14); transition:bottom .28s; z-index:60;
+      box-shadow:0 -12px 24px rgba(0,0,0,.14); transition:bottom .28s; z-index:60; overflow:hidden;
     }
     .sticky-cta .btn{height:46px}
     .sticky-cta.show{bottom:0}
@@ -309,7 +334,8 @@
     /* ====== 日程UI ====== */
     .dates-wrap{width:min(900px,92vw); margin:12px auto 0}
     .dates-sub{margin:0 0 8px; color:#475569; font-weight:800; display:flex; align-items:center; gap:.6ch}
-    .soon{display:inline-flex; align-items:center; gap:.4ch; margin-left:.6ch; padding:.22rem .6rem;
+    .soon{
+      display:inline-flex; align-items:center; gap:.4ch; margin-left:.6ch; padding:.22rem .6rem;
       border-radius:999px; font-weight:900; font-size:12px; color:#0b1224;
       background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.40));
       border:1px solid rgba(0,0,0,.06);
@@ -318,8 +344,8 @@
     .pill{
       display:flex; align-items:center; justify-content:center; gap:.5ch;
       padding:11px 12px; border-radius:999px; font-weight:900; color:#fff; text-decoration:none; white-space:nowrap;
-      background:linear-gradient(180deg,#a78bfa,#7c3aed); /* ← パープル系 */
-      box-shadow:0 8px 18px rgba(124,58,237,.28), inset 0 1px 0 rgba(255,255,255,.35);
+      background:linear-gradient(180deg,#a78bfa,#7c3aed); /* パープル系 */
+      box-shadow:0 8px 18px rgba(124,58,237,.28), 0 0 16px rgba(106,89,255,.35), inset 0 1px 0 rgba(255,255,255,.35);
     }
     .pill small{opacity:.9; font-weight:800}
     .pill:active{transform:translateY(1px)}
@@ -342,6 +368,7 @@
     <div class="hero-overlay"></div>
 
     <div class="hero-inner">
+      <!-- リード：このまま見出しの上に配置 -->
       <p class="lead"><span class="dot"></span><span class="lead-text">私たちOCサポーターも、進路に悩んだ高校生でした。</span></p>
 
       <h1 class="title">
@@ -350,7 +377,7 @@
         <span>“きっかけ”教えます。</span>
       </h1>
 
-      <!-- ★ガラス質感バッジ -->
+      <!-- ★ガラス質感バッジ（1列スクロール・高透明） -->
       <div class="glass-badges" role="list" aria-label="参加に関する情報">
         <span class="g-badge" role="listitem">👕 服装自由</span>
         <span class="g-badge" role="listitem">🙌 1人参加OK</span>
@@ -359,7 +386,7 @@
       </div>
 
       <div class="btnrow sweep in">
-        <!-- ヘッダーの主要CTAは OCLP へ：文言を「オーキャンについて」に統一 -->
+        <!-- ヘッダー主要CTAは OCLP へ：文言は「オーキャンについて」 -->
         <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンについて</a>
         <a class="btn btn-messaging" href="#" data-safe-href="https://lin.ee/y2DLr3Y" rel="noopener" target="_blank" aria-label="LINEで質問">LINEで質問</a>
         <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
@@ -369,7 +396,7 @@
 
   <main class="container">
 
-    <!-- ===== 日程（直近2件のみ） ===== -->
+    <!-- ===== 日程（直近2件のみ：予約フォーム直リンク） ===== -->
     <section class="section" id="dates">
       <h2 class="section-title hand reveal js-hand">
         次の開催日から選ぶ <span id="soon" class="soon">最短：—</span>
@@ -392,7 +419,7 @@
             <div class="head-copy">
               <span class="sticker">製菓デザイン学科</span>
               <p class="meta">2年<br>S・Hさん</p>
-              <p class="hook">“上手い人だらけで埋もれる気がしてた</p>
+              <p class="hook">“上手い人だらけで埋もれる気がしてた”</p>
             </div>
             <div class="badge"><img src="images/IMG_0092.jpg" alt="S・Hさん"></div>
           </div>
@@ -412,7 +439,7 @@
             </div>
             <div class="badge"><img src="images/IMG_2131.jpg" alt="S・Mさん"></div>
           </div>
-          <p>高校二年生の頃、就職するか進学するかで迷っていました。そんな時、学校の進路ガイダンスに来ていたのが日本デザイン福祉専門学校です。先生方のあたたかい雰囲気に惹かれて参加したオープンキャンパスでは、緊張していた私の心を優しい先輩たちがやわらげてくれました。その後も、本当に進学するか迷っていた私の話を入学前から親身に聞いてくれ、入学してからもずっと気にかけてくれる先生方のおかげで、「この学校を選んでよかった」と心から思っています。」</p>
+          <p>高校二年生の頃、就職するか進学するかで迷っていました。そんな時、学校の進路ガイダンスに来ていたのが日本デザイン福祉専門学校です。先生方のあたたかい雰囲気に惹かれて参加したオープンキャンパスでは、緊張していた私の心を優しい先輩たちがやわらげてくれました。その後も、本当に進学するか迷っていた私の話を入学前から親身に聞いてくれ、入学してからもずっと気にかけてくれる先生方のおかげで、「この学校を選んでよかった」と心から思っています。</p>
           <div class="photos">
             <img src="images/IMG_2172.jpg" alt="授業風景1">
             <img src="images/IMG_2137.jpg" alt="授業風景2">
@@ -424,11 +451,11 @@
             <div class="head-copy">
               <span class="sticker">保育こどもデザイン学科</span>
               <p class="meta">1年<br>I・Yくん</p>
-              <p class="hook">子どもは好き。でも向いてるか分からなかった</p>
+              <p class="hook">「挑戦してよかった」という実感</p>
             </div>
             <div class="badge"><img src="images/IMG_2131.jpg" alt="I・Yくん"></div>
           </div>
-          <p>情に棹させば流される。智に働けば角が立つ。どこへ越しても住みにくいと悟った時、詩が生れて、画が出来る。とかくに人の世は住みにくい。意地を通せば窮屈だ。とかくに人の世は住みにくい。どこへ越しても住みにくいと悟った時、詩が生れて、画が出来る。智に働けば角が立つ。</p>
+          <p>高校生の頃、保育の仕事に興味はあったけど、ピアノが苦手で不安もありました。そんなときに出会ったのがこの学校。オープンキャンパスで先生方が一人ひとりを丁寧にサポートしている姿を見て、「ここなら大丈夫」と思えたのが入学のきっかけです。入学後は、ピアノが苦手な私にも先生が親身に教えてくださり、弾ける曲が増えていくのが嬉しくて、自信にもつながりました。また、デザインの学校ならではの授業も魅力で、好きな表現を活かせる活動や、おもちゃ作りなど、アイデアをカタチにする機会がたくさんあります。当時感じていた不安は、今では「挑戦してよかった」という実感に変わり、毎日が将来につながる大切な時間になっています。</p>
           <div class="photos">
             <img src="images/IMG_2172.jpg" alt="授業風景1">
             <img src="images/2024_161.jpg" alt="授業風景2">
@@ -469,7 +496,6 @@
           </div>
         </article>
 
-        <!-- 差し替え済み：images/hall.jpg -->
         <article class="step sweep reveal">
           <img src="images/hall.jpg" alt="個別相談">
           <div class="body">
@@ -533,7 +559,7 @@
           <div class="s-head">
             <div>
               <h3 class="s-title">【1分でわかる】日本デザイン福祉専門学校（LINE特別）</h3>
-              <p class="s-desc">縦動画で学校の空気感を1分でさっくっと。</p>
+              <p class="s-desc">縦動画で学校の空気感を1分でさくっと。</p>
             </div>
             <div class="s-actions">
               <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/vbWDxIgAiLU">
@@ -652,7 +678,6 @@
 
   <!-- 固定CTA（下部） -->
   <nav class="sticky-cta" aria-label="固定操作バー">
-    <!-- フローティングも OCLP へ：文言「オーキャンについて」 -->
     <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンについて</a>
     <a class="btn btn-messaging" href="#" data-safe-href="https://lin.ee/y2DLr3Y" rel="noopener" target="_blank" aria-label="LINEで質問">LINEで質問</a>
     <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
@@ -748,7 +773,7 @@
     }
     document.querySelectorAll('.js-hand').forEach(splitHand);
 
-    /* スクロール連動：微パララックス＆CTA表示 */
+    /* スクロール連動：微パララックス＆CTA表示（画面高80%で発火） */
     const sticky=document.querySelector('.sticky-cta');
     function onScroll(){
       const vh=innerHeight;
@@ -758,7 +783,8 @@
         const delta=(vh*0.5-center)/(vh*0.5);
         g.style.transform=`translateY(${Math.max(-10,Math.min(10,-delta*8))}px)`;
       });
-      sticky.classList.toggle('show', scrollY>700);
+      const trigger = vh * 0.8;
+      sticky.classList.toggle('show', scrollY>trigger);
     }
     addEventListener('scroll', onScroll, {passive:true});
     addEventListener('resize', onScroll);
