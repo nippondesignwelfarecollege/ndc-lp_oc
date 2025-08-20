@@ -1,0 +1,1234 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>日本デザイン福祉専門学校｜OCサポーター紹介</title>
+  <meta name="description" content="“高校時代に悩んだ私たちが、NDCを選んだ理由”。オープンキャンパスは直近2日から予約OK。服装自由・1人参加OK・予約無しもOK。">
+  <!-- OGP（LINE最適化） -->
+  <meta property="og:title" content="日本デザイン福祉専門学校｜OCサポーター紹介">
+  <meta property="og:description" content="“高校時代に悩んだ私たちが、NDCを選んだ理由”。直近2日程から予約OK。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/ogp-ndc-oc.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#0f6de0" />
+  <!-- フォント最適化 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- 既存フォント -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet" />
+  <!-- 見出し用フォント -->
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet" />
+  <!-- ヒーロー画像を先読み -->
+  <link rel="preload" as="image" href="images/Google_AI_Studio_2025-07-16T07_54_39.403Z.png" fetchpriority="high">
+
+  <style>
+    /* ===== Reset / Base ===== */
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    img{max-width:100%;display:block;height:auto}
+
+    :root{
+      --ink:#0b1224; --muted:#6b7280;
+      --blue:#1480ff; --blue2:#0f6de0;
+      --line:#00c100; --line2:#00a400;
+      --blk:#111; --blk2:#0b0b0b;
+      --shadow:0 14px 34px rgba(15,23,42,.16);
+      --r:18px;
+      --badge:130px;
+    }
+
+    body{
+      color:var(--ink);
+      font-family:'Noto Sans JP',system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
+      line-height:1.85;
+      background:#ffffff;
+    }
+    .global-bg{
+      position:fixed; inset:0; z-index:-1; pointer-events:none;
+      background:
+        radial-gradient(120% 80% at 10% -10%, #ffe9f6 0 45%, transparent 46%),
+        radial-gradient(120% 80% at 95% 0%,  #e6f7ff 0 45%, transparent 46%),
+        radial-gradient(120% 80% at 50% 115%, #fff6d9 0 45%, transparent 46%),
+        linear-gradient(180deg,#fff 0%,#f9fbff 45%,#ffffff 100%);
+      background-repeat:no-repeat;
+      background-size:cover,cover,cover,cover;
+      background-position:10% -10%, 95% 0%, 50% 115%, 0 0;
+      will-change:transform;
+      transform:translateZ(0);
+    }
+
+    .container{width:min(980px,92vw);margin-inline:auto}
+    .section{padding:28px 0;position:relative}
+    .muted{color:var(--muted)}
+
+    /* ===== 手書き見出し（1文字出現） ===== */
+    .section-title{
+      margin:0 0 16px; font-weight:900;
+      font-size:clamp(20px,5.8vw,28px); letter-spacing:.02em;
+      position:relative;
+    }
+    .section-title.hand{
+      font-family:'Zen Kaku Gothic New','Noto Sans JP',sans-serif;
+      font-weight:900; line-height:1.22; text-shadow:none;
+    }
+    .section-title .underline{
+      display:block; height:6px; width:100%;
+      background:linear-gradient(90deg,#7bd6ff,#1480ff);
+      border-radius:6px; opacity:.95; margin-top:8px; position:relative; overflow:hidden;
+    }
+    .section-title.in .underline::after{
+      content:""; position:absolute; inset:0;
+      transform:translateX(-120%) skewX(-20deg);
+      background:linear-gradient(120deg,transparent,rgba(255,255,255,.7),transparent);
+      animation:u-shine .9s ease .2s forwards;
+    }
+    @keyframes u-shine{to{transform:translateX(120%) skewX(-20deg)}}
+
+    .hand span.char{display:inline-block;opacity:0;transform:translateY(14px) rotate(var(--rot,0)) scale(.92);filter:blur(2px)}
+    .hand.in span.char{animation:charPop .6s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--d,0ms)}
+    @keyframes charPop{40%{transform:translateY(-6px) rotate(var(--rot,0)) scale(1.02);filter:blur(0);opacity:1}100%{transform:translateY(0) rotate(0) scale(1);filter:blur(0);opacity:1}}
+
+    /* ===== 固定ラベル（ガラス） ===== */
+    .site-title{
+      position:fixed; top:14px; left:4vw; z-index:90;
+      font-weight:900; font-size:12px; color:#2f2f2f;
+      padding:6px 12px; border-radius:999px;
+      background:
+        radial-gradient(140% 120% at 30% 0%, rgba(255,255,255,.38), rgba(255,255,255,.16) 60%, rgba(255,255,255,.10) 100%),
+        linear-gradient(180deg, rgba(255,255,255,.28), rgba(255,255,255,.18));
+      box-shadow:
+        0 8px 24px rgba(0,0,0,.16),
+        inset 0 12px 18px rgba(255,255,255,.22),
+        inset 0 -10px 16px rgba(0,0,0,.06);
+      -webkit-backdrop-filter: blur(14px) saturate(1.25) contrast(1.05);
+      backdrop-filter: blur(14px) saturate(1.25) contrast(1.05);
+    }
+    .site-title::after{
+      content:""; position:absolute; inset:2px; border-radius:999px; pointer-events:none;
+      background:linear-gradient(120deg, rgba(255,255,255,.38) 0%, rgba(255,255,255,.18) 18%, rgba(255,255,255,0) 40%);
+      mix-blend-mode:screen;
+    }
+
+    /* ===== HERO ===== */
+    .hero{position:relative; min-height:62svh; display:grid; place-items:end start; overflow:hidden}
+    .hero .hero-bg{
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; object-position:center 35%;
+    }
+    .hero-overlay{
+      position:absolute; inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,0) 0 55%,rgba(0,0,0,.18) 82%,rgba(0,0,0,.25));
+    }
+    .hero-inner{position:relative; z-index:1; width:100%; padding:min(8svh, 60px) 0 20px}
+
+    /* リード */
+    .lead{
+      width:min(900px,92vw); margin:0 auto 8px;
+      background:rgba(255,255,255,.24); backdrop-filter:blur(2px);
+      border-radius:999px; padding:8px 14px; font-weight:700; font-size:14px;
+      display:flex; gap:.6ch; align-items:center;
+      box-shadow:0 10px 14px rgba(0,0,0,.05)
+    }
+    .lead .dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(#7bd6ff,#1480ff)}
+    .lead .lead-text{white-space:nowrap}
+
+    /* ヒーロー見出し */
+    .title{
+      width:min(900px,92vw);
+      margin:0 auto 10px;
+      font-weight:900;
+      font-size:clamp(22px,6.5vw,34px);
+      line-height:1.16;
+      color:#fff; position:relative; padding:0; border-radius:0;
+    }
+    .title span{
+      display:block;
+      text-shadow:
+        1.2px  1.2px 0 rgba(17,34,68,.88),
+       -1.2px  1.2px 0 rgba(17,34,68,.88),
+        1.2px -1.2px 0 rgba(17,34,68,.88),
+       -1.2px -1.2px 0 rgba(17,34,68,.88),
+        0 2px 6px rgba(13,32,70,.35);
+    }
+
+    /* ガラス質感バッジ */
+    .glass-badges{
+      width:min(900px,92vw); margin:8px auto 12px;
+      display:flex; gap:8px; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    }
+    .g-badge{
+      display:inline-flex; align-items:center; gap:.5ch;
+      padding:8px 12px; border-radius:999px; font-weight:900; font-size:12px;
+      color:#0b1224; white-space:nowrap;
+      background:linear-gradient(180deg,rgba(255,255,255,.32),rgba(255,255,255,.16));
+      border:1px solid rgba(255,255,255,.65);
+      -webkit-backdrop-filter: blur(8px) saturate(1.05);
+      backdrop-filter: blur(8px) saturate(1.05);
+      box-shadow:0 10px 22px rgba(15,23,42,.10), inset 0 1px 0 rgba(255,255,255,.7);
+    }
+
+    /* Buttons */
+    .btnrow{width:min(900px,92vw); margin:0 auto; display:flex; gap:10px}
+    .btn{
+      --c1:#000; --c2:#333;
+      flex:1; display:flex; justify-content:center; align-items:center; gap:.5ch;
+      height:48px; padding:0 14px; border-radius:999px; font-weight:900;
+      font-size:clamp(12px,3.3vw,14px);
+      color:#fff; text-decoration:none;
+      position:relative; overflow:hidden; white-space:nowrap;
+      background:linear-gradient(180deg,var(--c1),var(--c2));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 10px 22px rgba(15,23,42,.20);
+      isolation:isolate;
+    }
+    .btn::before{content:""; position:absolute; inset:0 0 55% 0; background:linear-gradient(180deg,rgba(255,255,255,.45),transparent); pointer-events:none; z-index:0}
+    .btn:active{transform:translateY(1px)}
+    .btn-blue{--c1:#2b8dff; --c2:#0f6de0}
+    .btn-messaging{--c1:var(--line); --c2:var(--line2)}
+    .btn-black{--c1:#161616; --c2:#0b0b0b}
+
+    /* “キラッ” */
+    .sweep{position:relative; overflow:hidden}
+    .sweep.in::after{
+      content:""; position:absolute; inset:0;
+      transform:translateX(-120%) skewX(-20deg);
+      background:linear-gradient(120deg,transparent,rgba(255,255,255,.42),transparent);
+      animation:shine .9s ease forwards;
+    }
+    @keyframes shine{to{transform:translateX(120%) skewX(-20deg)}}
+
+    /* ===== Grid / Card ===== */
+    .grid{display:grid; gap:16px}
+    @media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}
+
+    .card{position:relative; padding:16px; border-radius:var(--r); box-shadow:var(--shadow); background:#fff; overflow:hidden}
+    .dept-sweets{--tone:#bff3ec}
+    .dept-imagine{--tone:#ffe0ec}
+    .dept-hoiku{--tone:#ffeec0}
+    .card::before{content:""; position:absolute; inset:0; background:linear-gradient(135deg, color-mix(in srgb,var(--tone) 68%,#fff 32%), #fff); z-index:-1}
+
+    .card-header{display:grid; grid-template-columns:1fr auto; align-items:center; gap:14px; min-height: calc(var(--badge) * .72 + 28px); margin-bottom:12px}
+    .sticker{display:inline-block; background:#fff; color:#111; padding:6px 10px; border-radius:10px; font-weight:900; font-size:12px; box-shadow:0 8px 18px rgba(0,0,0,.12); margin-bottom:8px}
+    .meta{line-height:1.25; margin:2px 0 0; font-weight:700}
+    .hook{margin:8px 0 0; padding:8px 12px; font-weight:900; line-height:1.45; color:#0d2b6f; background:linear-gradient(180deg,#eef4ff,#ffffff); border-left:6px solid #78a9ff; border-radius:10px; box-shadow:0 6px 14px rgba(13,43,111,.08) inset}
+    .badge{width:var(--badge); height:var(--badge); border-radius:999px; background:#fff; box-shadow:0 10px 22px rgba(0,0,0,.16), 0 0 0 6px rgba(255,255,255,.95); overflow:hidden; justify-self:end}
+    .badge img{width:100%; height:100%; object-fit:cover; object-position:center 30%}
+
+    .card .photos{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:12px}
+    .card .photos img{width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px; box-shadow:0 8px 22px rgba(15,23,42,.12); background:#0001}
+
+    /* ===== Flow / Guide ===== */
+    .step{display:grid; gap:10px; background:#fff; border-radius:16px; box-shadow:var(--shadow); overflow:hidden}
+    .step img{width:100%; aspect-ratio:16/10; object-fit:cover; background:#0001}
+    .step .body{padding:12px 14px}
+    .num{display:inline-block; background:linear-gradient(180deg,#1480ff,#7bd6ff); color:#fff; font-weight:900; padding:.2rem .6rem; border-radius:999px; margin-bottom:6px}
+
+    .guide .glist{list-style:none; margin:0; padding:0; display:grid; gap:12px}
+    .gitem{display:grid; grid-template-columns:auto 1fr; gap:10px; align-items:center}
+    .gavatar{width:60px; height:60px; border-radius:999px; overflow:hidden; box-shadow:0 8px 18px rgba(0,0,0,.14); background:linear-gradient(180deg,#e6f5ff,#fff); display:grid; place-items:center}
+    .gavatar img{width:100%; height:100%; object-fit:cover; object-position:center 35%}
+    .gcard{background:#fff; border-radius:14px; box-shadow:var(--shadow); padding:10px 12px}
+
+    /* ===== Footer / 固定CTA ===== */
+    .footer{padding:42px 0 96px; text-align:center; color:#6b7280}
+    .sticky-cta{
+      position:fixed; left:0; right:0; bottom:-80px;
+      display:flex; gap:10px;
+      padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+      background:rgba(255,255,255,.92); backdrop-filter:blur(10px);
+      box-shadow:0 -12px 24px rgba(0,0,0,.14); transition:bottom .28s; z-index:60; overflow:hidden;
+    }
+    .sticky-cta .btn{height:46px}
+    .sticky-cta.show{bottom:0}
+
+    /* ===== Reveal / Parallax ===== */
+    .reveal{opacity:0; transform:translateY(26px)}
+    .reveal.in{opacity:1; animation:catch .8s cubic-bezier(.2,.8,.2,1) both}
+    @keyframes catch{0%{transform:translateY(26px)} 60%{transform:translateY(-8px)} 100%{transform:translateY(0)}}
+
+    @media (max-width:560px){ :root{--badge:112px} .card-header{gap:12px} .hook{font-size:.98rem} }
+
+    /* 知る・感じる… の字詰めだけ */
+    #flow .section-title{letter-spacing:-0.02em; line-height:1.16}
+    #flow .section-title.hand span.char{margin-right:-0.02em}
+
+    /* ===== 1分解説動画（最下段） ===== */
+    .shorts{padding:34px 0 20px}
+    .glass-toggle{
+      width:min(900px,92vw); margin:0 auto 14px;
+      display:flex; align-items:center; justify-content:center; gap:.6ch;
+      padding:14px 18px; border-radius:999px; font-weight:900;
+      color:#0b1224; text-decoration:none; cursor:pointer;
+      background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.32));
+      box-shadow:0 10px 28px rgba(15,23,42,.16), inset 0 1px 0 rgba(255,255,255,.6);
+      backdrop-filter:blur(12px) saturate(1.1);
+      -webkit-backdrop-filter:blur(12px) saturate(1.1);
+      border:1px solid rgba(255,255,255,.7);
+    }
+    .glass-toggle .dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(#7bd6ff,#1480ff)}
+    .glass-toggle small{opacity:.7;font-weight:700}
+
+    #shortsPanel{display:none}
+    #shortsPanel.open{display:block}
+
+    /* ガラスカード */
+    .s-card{
+      width:min(900px,92vw); margin:12px auto; padding:14px; border-radius:18px;
+      background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.40));
+      border:1px solid rgba(255,255,255,.75);
+      box-shadow:0 14px 30px rgba(15,23,42,.14), inset 0 1px 0 rgba(255,255,255,.7);
+      backdrop-filter:blur(14px) saturate(1.15);
+      -webkit-backdrop-filter:blur(14px) saturate(1.15);
+    }
+    .s-head{display:grid; grid-template-columns:1fr auto; align-items:center; gap:10px}
+    .s-title{font-weight:900; margin:0 0 4px}
+    .s-desc{margin:0 0 10px; color:#475569; line-height:1.55; letter-spacing:.01em}
+    .s-actions{display:flex; gap:8px; align-items:center; justify-content:flex-end}
+    .s-icon{
+      width:42px; height:42px; border-radius:999px; display:inline-flex;
+      align-items:center; justify-content:center; border:none; cursor:pointer;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.45), 0 8px 18px rgba(15,23,42,.18);
+      background:linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.12));
+      color:#0b1224;
+    }
+    .s-icon svg{width:18px;height:18px;display:block}
+    .s-icon.play{background:linear-gradient(180deg,#2b8dff,#0f6de0); color:#fff}
+    .s-icon:active{transform:translateY(1px)}
+
+    /* モーダル（サイト内再生） */
+    .player-backdrop{
+      position:fixed; inset:0; display:none; place-items:center;
+      background:rgba(0,0,0,.48); z-index:120;
+      padding:20px;
+    }
+    .player-backdrop.open{display:grid}
+    .player-modal{
+      width:min(420px,90vw); aspect-ratio:9/16; background:#000; border-radius:16px; overflow:hidden;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+      position:relative;
+    }
+    .player-modal iframe{width:100%; height:100%; border:0}
+    .player-close{
+      position:absolute; top:8px; right:8px; z-index:2;
+      width:36px; height:36px; border-radius:999px; border:none; cursor:pointer;
+      background:rgba(255,255,255,.85); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+      display:flex; align-items:center; justify-content:center; font-weight:900;
+      box-shadow:0 4px 12px rgba(0,0,0,.2);
+    }
+
+    /* ====== 日程UI ====== */
+    .dates-wrap{width:min(900px,92vw); margin:12px auto 0}
+    .dates-sub{margin:0 0 8px; color:#475569; font-weight:800; display:flex; align-items:center; gap:.6ch}
+    .soon{
+      display:inline-flex; align-items:center; gap:.4ch; margin-left:.6ch; padding:.22rem .6rem;
+      border-radius:999px; font-weight:900; font-size:12px; color:#0b1224;
+      background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.40));
+      border:1px solid rgba(0,0,0,.06);
+    }
+    .dates{display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:10px; overflow-x:auto; padding:2px}
+    .pill{
+      display:flex; align-items:center; justify-content:center; gap:.5ch;
+      padding:11px 12px; border-radius:999px; font-weight:900; color:#fff; text-decoration:none; white-space:nowrap;
+      background:linear-gradient(180deg,#a78bfa,#7c3aed);
+      box-shadow:0 8px 18px rgba(124,58,237,.28), 0 0 16px rgba(106,89,255,.35), inset 0 1px 0 rgba(255,255,255,.35);
+    }
+    .pill small{opacity:.9; font-weight:800}
+    .pill:active{transform:translateY(1px)}
+
+    /* ===== Q&A（ここからのみ変更） ===== */
+    #qa{padding:28px 0}
+    #qa .qa-head{
+      display:flex; gap:10px; align-items:center; justify-content:space-between; margin:6px 0 14px;
+      position:sticky; top:0; z-index:5;
+      background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.65));
+      -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+      padding:8px 8px; border-radius:12px; box-shadow:0 6px 16px rgba(15,23,42,.08);
+    }
+    #qaSearch{
+      flex:1; height:40px; padding:0 12px 0 38px; border-radius:10px; border:1px solid rgba(15,23,42,.08);
+      background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.6));
+      font-weight:700;
+      transition:border-color .2s, box-shadow .2s, transform .2s;
+    }
+    .qa-head .search-ico{position:absolute; width:18px; height:18px; left:16px; top:50%; transform:translateY(-50%); opacity:.75}
+    .qa-head .jump{
+      height:40px; padding:0 12px; border-radius:10px; border:1px solid rgba(15,23,42,.08);
+      background:linear-gradient(180deg,#1480ff,#2b8dff); color:#fff; font-weight:900; white-space:nowrap;
+    }
+    /* 該当なしアラート（自動で数秒後フェード） */
+    .qa-alert{
+      margin-left:8px; font-weight:900; font-size:12px; color:#b91c1c;
+      background:linear-gradient(180deg,#fee2e2,#fff); border:1px solid #fecaca;
+      padding:.25rem .5rem; border-radius:999px; white-space:nowrap; display:none;
+    }
+    .qa-alert.show{display:inline-block; animation:fadeHold 2.2s ease forwards}
+    @keyframes fadeHold{0%{opacity:0}10%{opacity:1}80%{opacity:1}100%{opacity:0}}
+
+    /* シェイク */
+    .input-error{border-color:#ef4444 !important}
+    .shake{animation:shake .38s ease}
+    @keyframes shake{
+      0%{transform:translateX(0)}25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-4px)}100%{transform:translateX(0)}
+    }
+
+    .qa-list{display:grid; gap:10px}
+    @media(min-width:720px){ .qa-list{grid-template-columns:1fr 1fr} }
+
+    details.qa-item{
+      background:#fff; border:1px solid rgba(15,23,42,.08); border-radius:14px;
+      box-shadow:0 8px 18px rgba(15,23,42,.08);
+      overflow:hidden;
+    }
+    .qa-q{
+      list-style:none; cursor:pointer; display:grid; grid-template-columns:auto 1fr auto; gap:10px; align-items:center;
+      padding:10px 12px; font-weight:900; line-height:1.35;
+    }
+    .qdot{
+      width:22px; height:22px; border-radius:999px; display:grid; place-items:center; color:#fff; font-size:12px;
+      background:linear-gradient(180deg,#2b8dff,#0f6de0); box-shadow:0 6px 12px rgba(43,141,255,.35), inset 0 1px 0 rgba(255,255,255,.45);
+      flex:0 0 auto;
+    }
+    .caret{opacity:.6; transition:transform .22s}
+    details[open] .caret{transform:rotate(180deg)}
+    .qa-a{padding:0 12px 12px 46px; color:#0b1224; line-height:1.8; font-weight:600}
+    .qa-a p{margin:.4rem 0}
+    .qa-a .placeholder{opacity:.6; font-style:italic}
+    mark{background:#fff3b0; padding:0 .15em}
+
+    .qa-empty{margin:8px 0 0; color:var(--muted)}
+    .qa-link{display:none}
+  </style>
+</head>
+<body>
+
+  <!-- ★固定背景レイヤー -->
+  <div class="global-bg" aria-hidden="true"></div>
+
+  <div class="site-title">日本デザイン福祉専門学校</div>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <img class="hero-bg"
+         src="images/Google_AI_Studio_2025-07-16T07_54_39.403Z.png"
+         alt="キャンパスの雰囲気"
+         fetchpriority="high"
+         width="1920" height="1080">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-inner">
+      <p class="lead"><span class="dot"></span><span class="lead-text">私たちOCサポーターも、進路に悩んだ高校生でした。</span></p>
+
+      <h1 class="title">
+        <span>そんな私たちが、</span>
+        <span>この学校を選んだ</span>
+        <span>“きっかけ”教えます。</span>
+      </h1>
+
+      <div class="glass-badges" role="list" aria-label="参加に関する情報">
+        <span class="g-badge" role="listitem">👕 服装自由</span>
+        <span class="g-badge" role="listitem">🙌 1人参加OK</span>
+        <span class="g-badge" role="listitem">📝 予約無しもOK</span>
+        <span class="g-badge" role="listitem">🕒 途中参加OK</span>
+      </div>
+
+      <div class="btnrow sweep in">
+        <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンについて</a>
+        <a class="btn btn-messaging" href="#" data-safe-href="https://lin.ee/y2DLr3Y" rel="noopener" target="_blank" aria-label="LINEで質問">LINEで質問</a>
+        <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ===== 日程（直近2件のみ） ===== -->
+    <section class="section" id="dates">
+      <h2 class="section-title hand reveal js-hand">
+        次の開催日から選ぶ <span id="soon" class="soon">最短：—</span>
+        <span class="underline"></span>
+      </h2>
+      <p class="dates-sub">直近<strong>2つ</strong>の日程だけを表示します。</p>
+      <div class="dates" id="datePills" aria-live="polite"></div>
+    </section>
+
+    <!-- ===== 学生インタビュー ===== -->
+    <section class="section">
+      <h2 class="section-title hand reveal js-hand">
+        OCサポーターが語る<br>“私”がここにいる理由
+        <span class="underline"></span>
+      </h2>
+
+      <div class="grid" data-float>
+        <article class="card dept-sweets sweep reveal">
+          <div class="card-header">
+            <div class="head-copy">
+              <span class="sticker">製菓デザイン学科</span>
+              <p class="meta">2年<br>S・Hさん</p>
+              <p class="hook">“上手い人だらけで埋もれる気がしてた”</p>
+            </div>
+            <div class="badge"><img src="images/IMG_0092.jpg" alt="S・Hさん"></div>
+          </div>
+          <p>情に棹させば流される。智に働けば角が立つ。どこへ越しても住みにくいと悟った時、詩が生れて、画が出来る。とかくに人の世は住みにくい。意地を通せば窮屈だ。とかくに人の世は住みにくい。どこへ越しても住みにくいと悟った時、詩が生れて、画が出来る。智に働けば角が立つ。</p>
+          <div class="photos">
+            <img src="images/FA67B529-4B9D-4F32-8AB4-B6F6DBA3EE0F_1_105_c.jpg" alt="授業風景1">
+            <img src="images/B13D20F2-0E95-4357-A6E1-0EE873F872D9_1_105_c.jpg" alt="授業風景2">
+          </div>
+        </article>
+
+        <article class="card dept-imagine sweep reveal">
+          <div class="card-header">
+            <div class="head-copy">
+              <span class="sticker">イマジネーションデザイン学科</span>
+              <p class="meta">1年<br>S・Mさん</p>
+              <p class="hook">優しい先輩との出会いが心を変えた</p>
+            </div>
+            <div class="badge"><img src="images/IMG_2131.jpg" alt="S・Mさん"></div>
+          </div>
+          <p>高校二年生の頃、就職するか進学するかで迷っていました。そんな時、学校の進路ガイダンスに来ていたのが日本デザイン福祉専門学校です。先生方のあたたかい雰囲気に惹かれて参加したオープンキャンパスでは、緊張していた私の心を優しい先輩たちがやわらげてくれました。その後も、本当に進学するか迷っていた私の話を入学前から親身に聞いてくれ、入学してからもずっと気にかけてくれる先生方のおかげで、「この学校を選んでよかった」と心から思っています。</p>
+          <div class="photos">
+            <img src="images/IMG_2172.jpg" alt="授業風景1">
+            <img src="images/IMG_2137.jpg" alt="授業風景2">
+          </div>
+        </article>
+
+        <article class="card dept-hoiku sweep reveal">
+          <div class="card-header">
+            <div class="head-copy">
+              <span class="sticker">保育こどもデザイン学科</span>
+              <p class="meta">1年<br>I・Yくん</p>
+              <p class="hook">「挑戦してよかった」という実感</p>
+            </div>
+            <div class="badge"><img src="images/IMG_4327.jpg" alt="I・Yくん"></div>
+          </div>
+          <p>高校生の頃、保育の仕事に興味はあったものの、ピアノが苦手で不安を感じていました。そんな時に出会ったのがこの学校。オープンキャンパスで先生方の丁寧なサポートを見て「ここなら大丈夫」と思えたのが入学の決め手です。実際に入学してからも先生が親身に教えてくださり、少しずつ弾ける曲が増えて自信に。さらにデザインの学校ならではの授業で、好きな表現を活かした活動やおもちゃ作りに挑戦でき、不安は「挑戦してよかった」という実感に変わりました。</p>
+          <div class="photos">
+            <img src="images/IMG_8050.jpg" alt="授業風景1">
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== 当日の流れ ===== -->
+    <section class="section" id="flow">
+      <h2 class="section-title hand reveal js-hand">知る・感じる・ハマる・そんな1日<span class="underline"></span></h2>
+
+      <div class="grid" data-float>
+        <article class="step sweep reveal">
+          <img src="images/IMG_8359.jpg" alt="受付">
+          <div class="body">
+            <span class="num">1. 受付</span>
+            <h3 style="margin:.3rem 0 .4rem">学校説明会は11:00から、体験講座は13:30からスタート</h3>
+            <p>イベント開始5分前までにご来校ください。オーキャンサポーターがお出迎えしますよ♪</p>
+          </div>
+        </article>
+
+        <article class="step sweep reveal">
+          <img src="images/IMG_4046.jpg" alt="学校説明会">
+          <div class="body">
+            <span class="num">2. 学校説明会（11:00〜11:30）</span>
+            <h3 style="margin:.3rem 0 .4rem">学科のこと、入学の流れ、学費や<br>進路サポートまで</h3>
+            <p>気になることをわかりやすくご紹介します。<br>初めての方でも安心して聞ける内容になっています。</p>
+          </div>
+        </article>
+
+        <article class="step sweep reveal">
+          <img src="images/IMG_5870.jpg" alt="校内見学">
+          <div class="body">
+            <span class="num">3. 校内見学（11:30〜11:45）</span>
+            <h3 style="margin:.3rem 0 .4rem">レトロな環境 × 最新設備を<br>在校生がご案内</h3>
+            <p>意外と映えスポットがあるんですよ！</p>
+          </div>
+        </article>
+
+        <article class="step sweep reveal">
+          <img src="images/hall.jpg" alt="個別相談">
+          <div class="body">
+            <span class="num">4. 個別相談（11:45〜随時）</span>
+            <h3 style="margin:.3rem 0 .4rem">不安に寄り添います</h3>
+            <p>入学前に感じる不安は誰もが抱えるもの。<br>スタッフと先輩が親切にサポートします。</p>
+          </div>
+        </article>
+
+        <article class="step sweep reveal">
+          <img src="images/IMG_6704.jpg" alt="体験講座">
+          <div class="body">
+            <span class="num">5. 体験講座（13:30〜15:00）</span>
+            <h3 style="margin:.3rem 0 .4rem">初心者でも安心して体験できる<br>内容が充実してます</h3>
+            <p>講座の中で学科のことや将来のことなど、なんでもお気軽にご相談ください。<br>体験講座終了後も随時個別相談やってます！</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== 安心ガイド ===== -->
+    <section class="section guide" id="guide">
+      <h2 class="section-title hand reveal js-hand">
+        はじめてのドキドキを、<br>ぜんぶワクワクに！<br>オープンキャンパス安心ガイド
+        <span class="underline"></span>
+      </h2>
+
+      <ul class="glist" data-float>
+        <li class="gitem sweep reveal">
+          <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_39_37.511Z.png" alt=""></div>
+          <div class="gcard"><strong>① 出発前</strong><br> 服装は自由。<b>制服でも私服でもOK</b>。／ 持ち物は <b>無しでOK</b>！資料はこっちで用意。</div>
+        </li>
+        <li class="gitem access sweep reveal">
+          <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_45_02.490Z.png" alt=""></div>
+          <div class="gcard"><strong>② アクセス</strong><br>迷ったら <a href="https://ndc.ac.jp/access/" target="_blank" rel="noopener">アクセス案内</a> or <b>LINE</b>してね！</div>
+        </li>
+        <li class="gitem sweep reveal">
+          <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_44_19.676Z.png" alt=""></div>
+          <div class="gcard"><strong>③ 到着したら</strong><br>学校に着いたらワクワクタイムの始まり！<b>まずはゆったり受付へ</b></div>
+        </li>
+        <li class="gitem sweep reveal">
+          <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_44_44.871Z.png" alt=""></div>
+          <div class="gcard"><strong>④ 見学・体験中</strong><br> 見て・聞いて・体験！<b>ひらめいたらその場で質問🎶</b> ／ 休憩もOK。</div>
+        </li>
+        <li class="gitem sweep reveal">
+          <div class="gavatar"><img src="images/Google_AI_Studio_2025-08-09T03_41_21.515Z.png" alt=""></div>
+          <div class="gcard"><strong>⑤ 帰り道</strong><br> <b>SNSアップOK!</b> 記念にパシャっとどうぞ。／  気楽に来て、気楽に帰ってOK。</div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===== よくある質問 ===== -->
+    <section class="section" id="qa">
+      <h2 class="section-title hand js-hand">
+        よくある質問<span class="underline"></span>
+      </h2>
+
+      <div class="qa-head">
+        <svg class="search-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L20 21.5 21.5 20 15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <input id="qaSearch" type="search" placeholder="キーワード検索（例：服装、予約、アクセス）" aria-label="Q&A検索">
+        <button class="jump" id="qaJump" type="button" aria-label="最初のヒットへ移動">検索で該当へ</button>
+        <span id="qaAlert" class="qa-alert" role="status" aria-live="assertive" aria-atomic="true"></span>
+      </div>
+
+      <div id="qaList" class="qa-list" aria-live="polite"></div>
+      <p id="qaEmpty" class="qa-empty" aria-live="polite"></p>
+    </section>
+
+    <!-- ===== 1分解説動画 ===== -->
+    <section class="section shorts" id="shorts">
+      <button class="glass-toggle" id="shortsToggle" type="button" aria-expanded="false" aria-controls="shortsPanel">
+        <span class="dot"></span><strong>1分解説動画を開く</strong><small>（縦動画・ショート）</small>
+      </button>
+
+      <div id="shortsPanel" aria-hidden="true">
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】日本デザイン福祉専門学校（LINE特別）</h3>
+              <p class="s-desc">縦動画で学校の空気感を1分でさくっと。</p>
+            </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/vbWDxIgAiLU">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】製菓デザイン学科</h3>
+              <p class="s-desc">実習の雰囲気をショートで。</p>
+            </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/7dL2RRYDxxA">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】コミックイラスト学科</h3>
+              <p class="s-desc">描く・学ぶ・見るを1分で。</p>
+            </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/xz6X2a-AEU8">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】コミックmanabi学科</h3>
+              <p class="s-desc">学びの流れを1分で。</p>
+            </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/7_MpflBuv9k">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】イマジネーションデザイン学科</h3>
+              <p class="s-desc">発想を形にする1分。</p>
+            </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/tm8ZayZMb6M">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】保育こどもデザイン学科</h3>
+              <p class="s-desc">子ども×デザインの入口を1分で。</p>
+            </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/oEpO0rFOr8g">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】ホテル観光学科</h3>
+              <p class="s-desc">おもてなしの現場感を1分で。</p>
+            </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/akdyF5vbAro">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button class="s-icon" type="button" aria-label="閉じる" data-close-panel>×</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <small>© 2025 NIPPON DESIGN WELFARE COLLEGE</small>
+    </div>
+  </footer>
+
+  <!-- 固定CTA -->
+  <nav class="sticky-cta" aria-label="固定操作バー">
+    <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンについて</a>
+    <a class="btn btn-messaging" href="#" data-safe-href="https://lin.ee/y2DLr3Y" rel="noopener" target="_blank" aria-label="LINEで質問">LINEで質問</a>
+    <a class="btn btn-black" href="https://ndc.ac.jp/" target="_blank" rel="noopener">学校公式サイト</a>
+  </nav>
+
+  <!-- サイト内再生モーダル -->
+  <div class="player-backdrop" id="ytBackdrop" aria-hidden="true">
+    <div class="player-modal" role="dialog" aria-label="動画プレイヤー">
+      <button class="player-close" type="button" id="ytClose" aria-label="閉じる">×</button>
+      <iframe id="ytFrame" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+  </div>
+
+  <!-- ▼ Q&A本文（テキスト差替え専用） -->
+  <script type="text/plain" id="qaSource">
+Q.この学校では何が学べますか？
+A.この学校ではデザインや食品サンプル、映像、マンガ、ゲームキャラクター、コミックイラストを始め、卒業と同時に取得できる保育士の勉強。そして将来ホテル関連の仕事をしたい方向けの学科など様々な分野が準備されています。
+
+Q.デザインって何ですか？
+A.デザインを一言で説明するならば、私達の生活をより豊にするための手段です。その為には普段の生活の中で様々な気付きが必要になります。その気付きにより、より便利に、より面白く、より可愛く、より過ごしやすく、などなど様々な答えを導きだせます。
+
+Q.大学とは何が違うの？
+A.大学では学術・理論的な学問と幅広い教養を身につけるための教育を行います。専門学校では主に実践的な職業教育を行い、卒業後すぐに特定の職業につけるように短期間で効率的に学ぶことができます。
+
+Q.就職するのに有利な学科はどれ？
+A.どの学科も就職サポートをしっかりしています。キャリアサポート授業に於いては企業への電話の掛け方、面接の仕方はもちろん、ポートフォリオ制作など徹底的にサポートします。また、学科主任、担任、そしてキャリアサポート担当が連携を組み、様々な情報を共有しながら、あなたの将来のイメージを現実へと導きます。
+
+Q.遅刻や欠席があると入学は難しいですか？
+A.そんなことはありません。しかし遅刻や欠席が多いとどの分野でもマイナス印象になってしまいますね....きっと色んな理由があってと思います。先ずは私達と相談しましょう。きっと良い解決方法が見つかる筈です。
+
+Q.AOはなにをやりますか？
+A.エントリーレポートの提出とプレゼンテーション（面接）があります。エントリーレポートにはあなたの「好きなコトに対する気持ち」を書いていただきます。そしてプレゼンテーションではその好きなコトをアピールしてください！緊張する必要はありませんよ！
+本校の入学案内にはそんな悩みを解決するAO入学GUIDEが掲載されています。是非一度読んでみてくださいね！
+
+Q.課題は多い？　何が出る？
+A.課題はしっかりと出題されます。本校は教育活動をしっかりと重視し将来の夢を叶えるためのプロセスを大切にしています。もちろん判らないコトはなんでも先生に相談してください。きめ細かくサポートさせていただきます！！
+
+Q.学食ありますか？
+A.残念ながらございません....普段学生達は自宅からお弁当を持参したり、近隣のコンビニやお店で購入されてくる方が沢山います。また、本校には学生ホールがありますので仲間と一緒にランチタイムを過ごすコトができます。
+
+Q.PC持ってないけど大丈夫？
+A.本校には学内での貸出用のノートPCがありますのでご安心ください。また、コンピューターラボもありますのでラボが空いている時は自由に使用することができます。
+
+Q.高校生しか入学しませんか？
+A.社会人経験者や、大学卒業後に再進学をされてくる方が沢山いらっしゃいます。
+
+Q.男女はどっちが多い？
+A.年度にもよりますが比較的女性が多い学校です。6:4といったところでしょうか・・・
+
+Q.漫画の授業って何するんですか？
+A.
+
+Q.絵を描くのは嫌い（苦手）でもデザインできる？
+A.モデルを制作したり、画像や映像で表現したりと表現する方法は沢山あります！また本校のカリキュラムはデザイン等の経験が無い方でも安心して進めることができるカリキュラムが準備されていますのでご安心ください。そしてデザイン系学科ではデッサンの授業があり、えの描き方、観察の仕方など個々に合わせた指導をしていきます。
+
+Q.働きながらでも通えますか？
+A.アルバイトをしながら通学している学生は沢山います。
+本校の授業はフルで9:00〜16:10までとなります。曜日によっては午前のみ、午後のみの授業もあります。
+
+Q.テキスト代はいくらですか？
+A.学科によります。デザイン系の学科はほとんど必要ありません。
+　保育士取得のためのテキストや、ホテル観光業に関するテキスト購入がそれぞれの学科で　は必要となります。
+
+Q.初心者でもOK?
+A.ご安心ください！本校のカリキュラムは全くの初心者、未経験の方を対象にしたカリキュラムが準備されています。基礎をしっかり学び、応用に繋げ社会に通じる知識や技術が身につきます。
+
+Q.先生は怖いですか？
+A.先生は皆んな優しいです♫　しかし普段の学生生活の中で指導すべき点があった場合はしっかりと指導しますよ！笑
+
+Q.髪の色やピアスは自由ですか？
+A.基本自由です。在校生等は就職活動の時期は控えめになるかな・・・
+
+Q.4月しか入学できませんか？
+A.4月入学となっております。
+
+Q.場所がよくわからないんですが
+A.そんな方のために、動画で道案内をしています。是非こちらをご覧ください。
+　https://ndc.ac.jp/access/
+　それでも迷ってしまった場合はお気軽にお電話ください！
+
+Q.デザインやイラストは就職先はあるの？
+A.本校のキャリアサポート室には毎日の様に沢山の求人情報が入ってきます。大手企業から中小企業まで様々な求人票があります。デザインやイラストの求人のイメージはきっと少ないと思われている方も沢山いらっしゃると思いますが、企業はデザインを使って様々な訴求が必要となり沢山のデザイナーが求められています。
+
+Q.入学金や学費はいつまでに準備する？
+A.推薦入学、一般入学は出願後、合格通知発送日より3週間以内に納入となります。AO入学に関しては第1〜4回エントリーの方が入学金のみ合格通知発送日より3週間以内となり、その他の学費は納入期限は2020年12月24日までとしています。※第5・6回エントリーの方は、指定日までに入学金とその他の学費を納入してください。
+
+Q.不登校でも受け入れてますか?
+A.先ずは私達STAFFに相談してください。色々な事情があってのことと思います。不安に思っていることを伝えてください。きっと安心に変わります。また本校は学科主任、クラス担任がおりますのでどんな相談にも対応致します。また本校には専任の女性スクールカウンセラーがおりますので学生生活からプライベートな悩みまでなんでも相談できる環境が準備されています。
+
+Q.入学前に子供の適性を見てほしい。
+A.是非、保護者の方もオープンキャンパスにご参加ください！何度でも構いません。また保護者の方、ご本人が納得するまでサポートします。
+
+Q.昼食はどうなりますか？
+A.普段学生等は自宅からお弁当を持参したり、近隣のコンビニやお店で購入されてくる方が沢山います。また、本校には学生ホールがありますので仲間と一緒にランチタイムを過ごすコトができます。
+
+Q.定期券は学割になりますか？
+A.学割は適用されます。本校は都知事による認可校ですのでご安心ください。
+通学定期券をはじめ公的奨学金・教育ローンなどの要件を満たしています。
+
+Q.対人が難しい子供のサポートは？
+A.先ずは私達STAFFに相談してください。色々な事情があってのことと思います。不安に思っていることを伝えてください。きっと安心に変わります。また本校は学科主任、クラス担任がおりますのでどんな相談にも対応致します。また本校には専任の女性スクールカウンセラーがおりますので学生生活からプライベートな悩みまでなんでも相談できる環境が準備されています。
+
+Q.入学後の学費ローンは？
+A.本校は日本学生支援機構、東京都育英資金の認定校です。
+詳しくは本校ホームページに掲載されています。
+https://ndc.ac.jp/prospectus/scholarships/
+
+Q.高校中退ですが入学可能ですか？
+A.高等学校卒業程度認定試験および旧大学入学資格検定試験に合格されていれば可能です。
+
+Q.交通費のサポートはありますか？
+A.交通費サポートはございません。　　　→通学定期券は学割効いてるよ。定期の項目にジャンプ？
+
+Q.担任制ですか？
+A.担任制です。様々なことを一緒にきめ細かくサポートしています。
+　→様々なこと　が想像しにくい。　「生活面のケアや課題の悩み、就職への不安など」
+
+Q.希望の学科がなくても見学可能？
+A.もちろんです！先ずはオープンキャンパスで自分の面白そうだな！と思った講座に参加してみては如何でしょうか？？　そこから違った新しい発見が拡がります！
+
+Q.卒業して就職できなかったら？
+A.卒業後でも内定を取得するまで、繰り返しサポートを続けています。
+
+Q.漫画やゲームが好きなだけでついていける？
+A.最初からデザイン思考や描写力はなくても、好奇心や好きという気持ちがあれば
+　形になっていきます。何事も怖がらずにどんどん挑戦できれば大丈夫！
+　全然経験なくてもプロになった卒業生はたくさんいます。
+
+Q.美大受験との違いは？
+A.まず、美大受験ではデッサンや平面構成、立体構成などある程度のスキルが求められます。しかし専門学校ではそれらのスキルを入学してから学ぶ環境にあります。またその先には即戦力として社会に通じるスキルを短時間で身に着けることができるのです。
+
+Q.授業についていけないときは？
+A.担任の先生に遠慮なく相談しましょう。必ずあなたに最適な方法を見つけ出しますので、ご安心ください。
+
+
+Q.平均評定はどのくらい必要ですか？
+A.基本的に、皆さんが現在通われている学校の評定が基準となります。
+　欠席が多い、単位不足、成績が著しく悪い場合などは入学前にご相談ください。
+
+Q.子供が何をやりたいのかよくわからない
+A.学校見学やオープンキャンパスにご参加いただき我々スタッフと進路についてなんでもご相談ください。きっと方向性が見つかるかと思います。
+
+Q.保育こどもデザイン科では保育士も幼稚園教諭資格も取れるのでしょうか？
+A.保育士資格は卒業と同時に取得となります。幼稚園教諭二種免許状に関しては、豊岡短期大学通信部との併修により可能となります。
+
+Q.幼稚園教論免許も取得するにはどのようなことをするのでしょうか？
+A.幼稚園実習が4週間入ります。その準備として幼稚園実習に向けた実習準備科目が入ります。
+たとえば、日誌の書き方も保育とは異なる点があります。
+また、保育士と類似科目が多数ありますが、保育所は児童福祉施設、幼稚園は学校であるので、幼稚園教諭養成としての内容の学びがあります。
+保育士にはない科目として教員免許状取得に必要な憲法が入ります。
+
+Q.製菓デザイン学科はどんなことを学ぶのですか？
+A.この学科では食品サンプル制作やお菓子に関するパッケージデザイン、マーケティング戦略、広告企画、流通計画など、発想力とデザイン力で製菓業界で活躍する人材を育成します。
+
+Q.イマジネーションデザイン学科ではどんなことを学ぶのですか？
+A.この学科ではアイデアを表現するための技術を学びます。例えば動画撮影にて映像コンテンツを制作したり、グラフィックデザイン、イラスト、マンガ、アニメ、ゲーム、小説、広告といった多種多様なメディアに精通したクリエイターを育成します。
+また、4年次には各制作会社へのインターンシップ、コンペティションへの参加などプロの現場を体験していきます。
+
+Q.コミックイラスト学科はどんなことを学ぶのですか？
+A.漫画家、イラストレーターといった、「絵」を表現手段とした職業を目指しその基礎となる様々な技術・知識を学びます。
+
+Q.マンガ・アニメ・キャラクター学科はどんなことを学ぶのですか？
+A.日本のマンガとアニメは映画技法を取り入れることにより、独自の進化をとげ、世界中の人々を魅了してきました。この学科では、映画技法を教育の柱の一つとしてとらえ、３年間で基礎から専門的な技術まで幅広く学びます。
+
+Q.保育こどもデザイン学科はどんなことを学ぶのですか？
+A.子どもに関する様々な仕事に就くための学びがあります。
+例えば、おもちゃ、子供服の企画デザイン、こどもの遊び場のデザインなど保育士意外にも自分に合った仕事を見つけていきます。一人ひとりの夢を現実にする為に必要な学びがある保育士養成校です。
+また希望者には豊岡短期大学通信教育部（学習サポート校）提携により幼稚園教諭免許（二種）/短期大学士の取得が可能です。
+
+Q.ホテル観光学科はどんなことを学ぶのですか？
+A.代表的なホテルで実際に使われている本物の設備や備品を使って、本格的な技術を身に付けるとともに、世界のどこへ行っても通用する一流のホスピタリティマインド（おもてなしの心）を学びます。
+
+Q.国際コミュニケーションデザイン学科ではどんなことを学ぶのですか？
+A.1年間の学習を通じて、専門学校や大学への進学、企業への就職といった次のステップへ進むために必要なコミュニケーション力とさまざまなデザイン領域エッセンスを学びます。
+
+Q.どんな出願方法があるのですか？？
+A.AO入学、推薦入学、一般入学の3つのカテゴリーが準備されています。本校は特にAO入学で入学されてくる方が多いですね。詳しくはこちらに記してありますよ！https://ndc.ac.jp/prospectus/admission-procedure/
+
+Q.AO入学ってなんですか？
+A.学校が掲げるアドミッション・ポリシーに基づき選考する入学方法です。
+本校では学力に囚われず、好きなコトに対するやる気や自由な発想を大切にしています。あなたがやりたい事のために本校を選んでいることが基準となり、「将来についての目的意識」、「学習への意欲」、「熱意」、「個性」などを総合的に判断し選考いたします。
+
+Q.すでに高校卒業した人もAO入学を選べますか?
+A.各学科とも高校新卒者から大学や社会人の経験を経て入学をされる方など様々な人がいます。AO入学での出願も問題ありません。
+
+Q.AO入学って試験は何をやるの?
+A.AO入学エントリーレポートとAO入学プレゼンテーションを行います。学力を測るテストは実施しません。
+
+Q.AO入学前教育サポートって何をやるの?
+A.入学する学科の先生から出された課題をとおして事前に分野について学びます。各学科の分野に基づいたレポートや作品制作の課題が出されます。入学前から分野について触れることで、理解を深めたり発見を得る一歩になると思います。
+
+Q.AO入学はどんな人に向いてるの?
+A.
+・やりたいことが日本デザイン福祉専門学校にある人
+・技術や知識は不安だが、やる気を見て欲しい人
+・早期に進路を決めて、現在の学業などに専念したい人
+・入学前教育で安心して入学の準備をしたい人
+・在学中に他学科の授業も2科目無料聴講したい人
+
+Q.AO入学プレゼンテーションのときの服装は?
+A.服装は自由です。特に規定はございませんので私服でも、制服やスーツでも問題ありません。あまりにもラフな服装は適さないので、清潔感のある服装を心がけると良いでしょう。
+
+Q.学校の雰囲気はどんな感じですか？
+A.在校生のほとんどは、少人数制でアットホームで面倒見が良い学校と言ってくれます。一人ひとりとの対話を大切にする学校ならではの特徴です。
+
+Q.学費の分割はできますか？
+A.学費の納入期限延長や分割納入等のご相談は直接お問い合わせください。
+
+Q.学生寮はありますか?
+A.学生寮や賃貸マンションなどは専門業者に委託しており、様々な仕様の中から選ぶことができます。https://ndc.ac.jp/greeting/facility/
+
+Q.学校説明会はどんなことをするの？
+A.オーキャンサポーターの在校生が皆さんにリアルな学校の様子や課題のこと、学校の雰囲気など、学校の特徴をお話いたします。また設置学科や学べる内容なども詳しく説明します。
+また個別相談では各学科の授業内容、入学について、出願方法、特典や学費のことなど。「どんな学校なんだろう？」というみなさんの知りたい気持ちに沿って説明いたします。
+Q.出願の期限はいつですか？
+A.出願の方法や期限についてはこちらをご覧ください。
+https://ndc.ac.jp/prospectus/admission-procedure/
+  </script>
+
+  <script>
+    /* ====== 予約リンク（直近2日ピルのみ） ====== */
+    const RESERVE_URL = 'https://www.school-go.info/ffz85h/ndc/form.php?fno=60&fsno=1&_gl=1*1gypnfh*_gcl_au*MjEwNTk1MjIyMi4xNzU0NTM1NTA1&nnso=3';
+
+    /* ====== 日程 ====== */
+    const UPCOMING = [
+      '2025-08-20','2025-08-24','2025-09-28','2025-10-12','2025-10-19','2025-10-26',
+      '2025-11-16','2025-11-23','2025-12-14',
+      '2026-01-25','2026-02-08','2026-03-08','2026-03-22'
+    ];
+
+    function weekdayJa(d){ return ['日','月','火','水','木','金','土'][d.getDay()]; }
+
+    function renderDates(){
+      const wrap = document.getElementById('datePills');
+      const soonEl = document.getElementById('soon');
+      if(!wrap || !soonEl) return;
+
+      wrap.innerHTML = '';
+      const today = new Date();
+      const todayMidnight = new Date(today.toDateString());
+
+      const list = UPCOMING
+        .map(s => new Date(s + 'T00:00:00+09:00'))
+        .filter(d => d >= todayMidnight)
+        .sort((a,b)=>a-b);
+
+      if(!list.length){
+        soonEl.textContent = '最短：準備中';
+        wrap.insertAdjacentHTML('beforeend','<span class="muted">日程準備中</span>');
+        return;
+      }
+
+      const soon = list[0];
+      soonEl.textContent = `最短：${(soon.getMonth()+1)}/${soon.getDate()}(${weekdayJa(soon)})`;
+
+      list.slice(0,2).forEach(d=>{
+        const mm = String(d.getMonth()+1).padStart(2,'0');
+        const dd = String(d.getDate()).padStart(2,'0');
+        const w = weekdayJa(d);
+        const a = document.createElement('a');
+        a.className = 'pill';
+        a.href = RESERVE_URL;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.setAttribute('aria-label', `${mm}/${dd}(${w})の予約ページを開く`);
+        a.innerHTML = `📅 ${mm}/${dd}(${w}) <small>予約へ</small>`;
+        wrap.appendChild(a);
+      });
+    }
+
+    /* 出現監視 */
+    const io=new IntersectionObserver(es=>{
+      es.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    },{threshold:.22});
+    document.querySelectorAll('.reveal,.sweep,.section-title').forEach(el=>io.observe(el));
+
+    /* 手書きタイトル分割 */
+    function splitHand(el){
+      if(el.dataset.splitted) return;
+      el.dataset.splitted="1";
+      const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null);
+      const texts=[]; while(walker.nextNode()) texts.push(walker.currentNode);
+      texts.forEach(node=>{
+        const s=node.nodeValue; if(!s.trim()) return;
+        const frag=document.createDocumentFragment();
+        [...s].forEach((ch,i)=>{
+          const span=document.createElement('span');
+          span.className='char';
+          span.style.setProperty('--d', (i*45)+'ms');
+          span.style.setProperty('--rot', (Math.random()*6-3).toFixed(1)+'deg');
+          span.textContent=ch;
+          frag.appendChild(span);
+        });
+        node.parentNode.replaceChild(frag,node);
+      });
+    }
+    document.querySelectorAll('.js-hand').forEach(splitHand);
+
+    /* スクロール連動 */
+    const sticky=document.querySelector('.sticky-cta');
+    function onScroll(){
+      const vh=innerHeight;
+      document.querySelectorAll('[data-float]').forEach(g=>{
+        const r=g.getBoundingClientRect();
+        const center=(r.top+r.bottom)/2;
+        const delta=(vh*0.5-center)/(vh*0.5);
+        g.style.transform=`translateY(${Math.max(-10,Math.min(10,-delta*8))}px)`;
+      });
+      const trigger = vh * 0.8;
+      sticky.classList.toggle('show', scrollY>trigger);
+    }
+    addEventListener('scroll', onScroll, {passive:true});
+    addEventListener('resize', onScroll);
+    onScroll();
+
+    /* 画像最適化 */
+    document.querySelectorAll('img').forEach(i=>{ i.loading='lazy'; i.decoding='async'; });
+
+    /* LINEボタン：安全遷移 */
+    document.querySelectorAll('a.btn-messaging[data-safe-href]').forEach(a=>{
+      const url=a.getAttribute('data-safe-href');
+      a.addEventListener('click',function(ev){
+        ev.preventDefault();
+        try{ window.open(url,'_blank','noopener'); }catch(e){ location.href=url; }
+      },{passive:false});
+    });
+
+    /* ▼ 1分動画：開閉 */
+    const toggle=document.getElementById('shortsToggle');
+    const panel=document.getElementById('shortsPanel');
+    if(toggle && panel){
+      toggle.addEventListener('click',()=>{
+        const open=!panel.classList.contains('open');
+        panel.classList.toggle('open',open);
+        toggle.setAttribute('aria-expanded',open);
+        panel.setAttribute('aria-hidden',!open);
+        if(open){ panel.scrollIntoView({behavior:'smooth',block:'start'}); }
+      });
+      document.querySelectorAll('[data-close-panel]').forEach(btn=>{
+        btn.addEventListener('click',()=>{
+          panel.classList.remove('open');
+          panel.setAttribute('aria-hidden','true');
+          toggle.setAttribute('aria-expanded','false');
+          toggle.scrollIntoView({behavior:'smooth',block:'center'});
+        });
+      });
+    }
+
+    /* ▼ YouTubeモーダル */
+    const backdrop=document.getElementById('ytBackdrop');
+    const frame=document.getElementById('ytFrame');
+    function toEmbed(url){
+      try{
+        const m=url.match(/shorts\/([A-Za-z0-9_-]{6,})/) || url.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/);
+        const id=m?m[1]:null;
+        return id ? `https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0` : '';
+      }catch(_){ return ''; }
+    }
+    function openPlayer(url){
+      const embed=toEmbed(url);
+      if(!embed) return;
+      frame.src=embed;
+      backdrop.classList.add('open');
+      backdrop.setAttribute('aria-hidden','false');
+    }
+    function closePlayer(){
+      frame.src='about:blank';
+      backdrop.classList.remove('open');
+      backdrop.setAttribute('aria-hidden','true');
+    }
+    document.querySelectorAll('.s-icon.play[data-video]').forEach(b=>{
+      b.addEventListener('click',()=>openPlayer(b.getAttribute('data-video')));
+    });
+    document.getElementById('ytClose')?.addEventListener('click',closePlayer);
+    backdrop?.addEventListener('click',e=>{ if(e.target===backdrop) closePlayer(); });
+    addEventListener('keydown',e=>{ if(e.key==='Escape') closePlayer(); });
+
+    /* ===== Q&A：コンパクト表示＋検索ジャンプ（該当なし改善） ===== */
+    (function initQA(){
+      const src = document.getElementById('qaSource');
+      const listEl = document.getElementById('qaList');
+      const emptyEl = document.getElementById('qaEmpty');
+      const input = document.getElementById('qaSearch');
+      const jumpBtn = document.getElementById('qaJump');
+      const alertEl = document.getElementById('qaAlert');
+      let alertTimer = null;
+
+      if(!src || !listEl) return;
+
+      const lines = src.textContent.split(/\r?\n/).map(s=>s.trim());
+      const items = [];
+      let curQ=null, curA=[];
+      const isQ=s=>/^[QＱ]\s*[.:：]?\s*/i.test(s);
+      const isA=s=>/^[AＡ]\s*[.:：]?\s*/i.test(s);
+      const strip=s=>s.replace(/^[QAＱＡ]\s*[.:：]?\s*/i,'').trim();
+
+      for(const raw of lines){
+        if(!raw){ if(curA.length) curA.push(''); continue; }
+        if(isQ(raw)){ if(curQ){ items.push({q:curQ, a:curA.join('\n')}); curA=[]; } curQ=strip(raw); }
+        else if(isA(raw)){ curA.push(strip(raw)); }
+        else { if(curA.length) curA.push(raw); }
+      }
+      if(curQ){ items.push({q:curQ, a:curA.join('\n')}); }
+
+      function escapeHtml(s){return s.replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]));}
+      function linkify(s){
+        return s.replace(/(https?:\/\/[^\s<>"'）)]+)(?=[\s）)、。．。!?？！]|$)/g,
+          '<a href="$1" target="_blank" rel="noopener">$1</a>');
+      }
+      function toParas(raw){
+        if(!raw || !raw.trim()) return '<p class="placeholder">（回答準備中）</p>';
+        return raw.split(/\n{2,}/).map(p=>`<p>${linkify(escapeHtml(p).replace(/\n/g,'<br>'))}</p>`).join('');
+      }
+      function slug(s){
+        return s.toLowerCase().replace(/[^\p{L}\p{N}]+/gu,'-').replace(/^-+|-+$/g,'').slice(0,60)||'q';
+      }
+
+      let domItems = [];
+      function render(query=''){
+        listEl.innerHTML='';
+        domItems=[];
+        const re = query ? new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i') : null;
+
+        items.forEach((it, idx)=>{
+          const id = `qa-${idx}-${slug(it.q)}`;
+          const qTxt = escapeHtml(it.q);
+          const qHtml = re ? qTxt.replace(re, m=>`<mark>${m}</mark>`) : qTxt;
+          const aHtml = toParas(it.a||'');
+          const details = document.createElement('details'); details.className='qa-item'; details.id=id;
+          const sum = document.createElement('summary'); sum.className='qa-q';
+          sum.innerHTML = `<span class="qdot">Q</span><span>${qHtml}</span>
+            <svg class="caret" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg>`;
+          const body = document.createElement('div'); body.className='qa-a'; body.innerHTML = aHtml + `<a class="qa-link" href="#${id}">#</a>`;
+          details.appendChild(sum); details.appendChild(body);
+          listEl.appendChild(details);
+          domItems.push({id, el:details, q:it.q, a:it.a||''});
+        });
+
+        emptyEl.textContent = domItems.length ? '' : '現在、Q&Aを準備中です。';
+      }
+
+      function showAlert(msg){
+        if(!alertEl) return;
+        alertEl.textContent = msg;
+        alertEl.classList.remove('show'); void alertEl.offsetWidth; // reflow for restart
+        alertEl.classList.add('show');
+        clearTimeout(alertTimer);
+        alertTimer = setTimeout(()=>{ alertEl.classList.remove('show'); alertEl.textContent=''; }, 2300);
+      }
+
+      function jumpToFirst(query){
+        const q = query.trim();
+        if(!q){
+          showAlert('キーワードを入力してください');
+          input.focus();
+          input.classList.add('input-error','shake');
+          setTimeout(()=>input.classList.remove('shake'), 400);
+          return;
+        }
+        const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i');
+        const hit = domItems.find(it => re.test(it.q) || re.test(it.a));
+        if(hit){
+          const el = hit.el;
+          el.open = true;
+          history.replaceState(null,'',`#${hit.id}`);
+          el.scrollIntoView({behavior:'smooth', block:'start'});
+          input.classList.remove('input-error');
+        }else{
+          showAlert('該当する質問が見つかりません');
+          emptyEl.textContent = '該当する質問が見つかりませんでした。キーワードを変えてお試しください。';
+          input.classList.add('input-error','shake');
+          input.focus({preventScroll:true});
+          document.querySelector('.qa-head').scrollIntoView({behavior:'smooth', block:'start'});
+          setTimeout(()=>input.classList.remove('shake'), 400);
+        }
+      }
+
+      render('');
+
+      // 入力でプレビュー強調、Enter/ボタンでジャンプ
+      input.addEventListener('input', ()=>{ render(input.value.trim()); emptyEl.textContent=''; input.classList.remove('input-error'); }, {passive:true});
+      input.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ e.preventDefault(); jumpToFirst(input.value); }});
+      jumpBtn.addEventListener('click', ()=> jumpToFirst(input.value));
+
+      // ハッシュ直リンクで開く
+      if(location.hash && location.hash.startsWith('#qa-')){
+        const target = document.querySelector(location.hash);
+        if(target){ target.open = true; target.scrollIntoView({behavior:'smooth', block:'start'}); }
+      }
+    })();
+
+    /* 起動：日程描画 */
+    renderDates();
+  </script>
+</body>
+</html>
