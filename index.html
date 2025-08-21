@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>日本デザイン福祉専門学校｜OCサポーター紹介</title>
   <meta name="description" content="“高校時代に悩んだ私たちが、NDCを選んだ理由”。オープンキャンパスは直近2日から予約OK。服装自由・1人参加OK・予約無しもOK。">
-
   <!-- OGP（LINE最適化） -->
   <meta property="og:title" content="日本デザイン福祉専門学校｜OCサポーター紹介">
   <meta property="og:description" content="“高校時代に悩んだ私たちが、NDCを選んだ理由”。直近2日程から予約OK。">
@@ -15,7 +14,6 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#0f6de0" />
-
   <!-- フォント最適化 -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +21,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet" />
   <!-- 見出し用フォント -->
   <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet" />
-  <!-- ヒーロー画像を先読み -->
+  <!-- ヒーロー画像を先読み（確実表示用） -->
   <link rel="preload" as="image" href="images/Google_AI_Studio_2025-07-16T07_54_39.403Z.png" fetchpriority="high">
 
   <style>
@@ -40,9 +38,7 @@
       --shadow:0 14px 34px rgba(15,23,42,.16);
       --r:18px;
       --badge:130px;
-      --qa-accent:#0f6de0;
-      --qa-chip:#e8f0ff;
-      --qa-chip-text:#0b2a66;
+      --qa-top: 0px; /* ← QA検索バーの動的オフセット（JSで更新） */
     }
 
     body{
@@ -123,6 +119,7 @@
       position:absolute; inset:0; width:100%; height:100%;
       object-fit:cover; object-position:center 35%;
     }
+    /* 上部は透明、下部だけ薄く暗く */
     .hero-overlay{
       position:absolute; inset:0;
       background:linear-gradient(180deg,rgba(0,0,0,0) 0 55%,rgba(0,0,0,.18) 82%,rgba(0,0,0,.25));
@@ -132,7 +129,7 @@
       padding: min(8svh, 60px) 0 20px;
     }
 
-    /* リード */
+    /* リード（見出しの上） */
     .lead{
       width:min(900px,92vw); margin:0 auto 8px;
       background:rgba(255,255,255,.24); backdrop-filter:blur(2px);
@@ -143,7 +140,7 @@
     .lead .dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(#7bd6ff,#1480ff)}
     .lead .lead-text{white-space:nowrap}
 
-    /* 見出し：白＋濃紺の縁取り */
+    /* ヒーロー見出し：白＋濃紺の縁取り */
     .title{
       width:min(900px,92vw);
       margin:0 auto 10px;
@@ -151,9 +148,6 @@
       font-size:clamp(22px,6.5vw,34px);
       line-height:1.16;
       color:#fff;
-      position:relative;
-      padding:0;
-      border-radius:0;
     }
     .title span{
       display:block;
@@ -165,7 +159,7 @@
         0 2px 6px rgba(13,32,70,.35);
     }
 
-    /* ガラス質感バッジ（ヒーロー） */
+    /* ガラス質感バッジ（1列スクロール・高透明） */
     .glass-badges{
       width:min(900px,92vw);
       margin:8px auto 12px;
@@ -267,11 +261,11 @@
 
     @media (max-width:560px){ :root{--badge:112px} .card-header{gap:12px} .hook{font-size:.98rem} }
 
-    /* 知る・感じる… の字詰めだけ */
+    /* 知る・感じる… */
     #flow .section-title{letter-spacing:-0.02em; line-height:1.16}
     #flow .section-title.hand span.char{margin-right:-0.02em}
 
-    /* ===== 1分解説動画（最下段） ===== */
+    /* ===== 1分解説動画 ===== */
     .shorts{padding:34px 0 20px}
     .glass-toggle{
       width:min(900px,92vw); margin:0 auto 14px;
@@ -288,6 +282,7 @@
     .glass-toggle small{opacity:.7;font-weight:700}
     #shortsPanel{display:none}
     #shortsPanel.open{display:block}
+
     .s-card{
       width:min(900px,92vw); margin:12px auto; padding:14px; border-radius:18px;
       background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.40));
@@ -310,7 +305,12 @@
     .s-icon svg{width:18px;height:18px;display:block}
     .s-icon.play{background:linear-gradient(180deg,#2b8dff,#0f6de0); color:#fff}
     .s-icon:active{transform:translateY(1px)}
-    .player-backdrop{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.48); z-index:120; padding:20px}
+
+    .player-backdrop{
+      position:fixed; inset:0; display:none; place-items:center;
+      background:rgba(0,0,0,.48); z-index:120;
+      padding:20px;
+    }
     .player-backdrop.open{display:grid}
     .player-modal{width:min(420px,90vw); aspect-ratio:9/16; background:#000; border-radius:16px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.35); position:relative}
     .player-modal iframe{width:100%; height:100%; border:0}
@@ -319,12 +319,7 @@
     /* ====== 日程UI ====== */
     .dates-wrap{width:min(900px,92vw); margin:12px auto 0}
     .dates-sub{margin:0 0 8px; color:#475569; font-weight:800; display:flex; align-items:center; gap:.6ch}
-    .soon{
-      display:inline-flex; align-items:center; gap:.4ch; margin-left:.6ch; padding:.22rem .6rem;
-      border-radius:999px; font-weight:900; font-size:12px; color:#0b1224;
-      background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.40));
-      border:1px solid rgba(0,0,0,.06);
-    }
+    .soon{display:inline-flex; align-items:center; gap:.4ch; margin-left:.6ch; padding:.22rem .6rem; border-radius:999px; font-weight:900; font-size:12px; color:#0b1224; background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.40)); border:1px solid rgba(0,0,0,.06)}
     .dates{display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:10px; overflow-x:auto; padding:2px}
     .pill{
       display:flex; align-items:center; justify-content:center; gap:.5ch;
@@ -335,54 +330,32 @@
     .pill small{opacity:.9; font-weight:800}
     .pill:active{transform:translateY(1px)}
 
-    /* ===== Q&A（ここから追加） ===== */
-    #faq{padding:34px 0 28px}
-    .qa-wrap{width:min(980px,92vw); margin:0 auto}
-    .qa-sticky{
-      position:sticky; top:68px; z-index:40; /* ← 学校名バッジと重ならない */
-      background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.78));
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
-      border:1px solid rgba(0,0,0,.05);
-      border-radius:14px;
-      padding:10px; margin-bottom:12px;
-      box-shadow:0 8px 24px rgba(15,23,42,.08);
+    /* ====== よくある質問（QA） ====== */
+    #qa .qa-head{
+      display:flex; gap:10px; align-items:center; justify-content:space-between; margin:6px 0 14px;
+      position:sticky; top:var(--qa-top, 0px); z-index:5; /* ← 学校名バッジと重ならない */
+      background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.65));
+      -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+      padding:8px 8px; border-radius:12px; box-shadow:0 6px 16px rgba(15,23,42,.08);
     }
-    .qa-search{
-      display:grid; grid-template-columns:1fr auto; gap:8px; align-items:center;
+    .qa-input{
+      flex:1; display:flex; align-items:center; gap:8px;
+      background:#fff; border-radius:12px; padding:8px 10px; box-shadow:inset 0 1px 0 rgba(0,0,0,.04);
     }
-    .qa-search input{
-      width:100%; height:42px; padding:0 12px; border-radius:10px; border:1px solid #e5e7eb;
-      font-size:14px; outline:none;
-    }
-    .qa-chips, .qa-jumps{
-      display:flex; flex-wrap:wrap; gap:8px; margin-top:8px
-    }
-    .qa-chip, .qa-jump{
-      border:none; cursor:pointer; padding:.45rem .7rem; border-radius:999px; font-weight:800; font-size:12px;
-      background:var(--qa-chip); color:var(--qa-chip-text);
-    }
-    .qa-chip.active{background:#0f6de0; color:#fff}
-    .qa-clear{display:none; margin-left:auto; background:#efeefc; color:#4338ca}
-    .qa-clear.show{display:inline-flex}
-    .qa-grid{display:grid; gap:12px}
-    details.qa-item{
-      background:#fff; border:1px solid #e5e7eb; border-radius:14px; box-shadow:0 6px 16px rgba(15,23,42,.06); overflow:hidden
-    }
-    details.qa-item[open]{border-color:#cde1ff; box-shadow:0 10px 24px rgba(15,23,42,.08)}
-    details.qa-item summary{
-      list-style:none; cursor:pointer; padding:12px 14px; font-weight:900; position:relative
-    }
-    details.qa-item summary::-webkit-details-marker{display:none}
-    .qa-a{padding:0 14px 14px; color:#334155}
-    .qa-nohits{display:none; padding:18px; text-align:center; color:#64748b; background:#f8fafc; border:1px dashed #cbd5e1; border-radius:12px}
-    .qa-highlight{animation:qaGlow 1.5s ease}
-    @keyframes qaGlow{
-      0%{box-shadow:0 0 0 0 rgba(20,128,255,.0)}
-      30%{box-shadow:0 0 0 6px rgba(20,128,255,.20)}
-      100%{box-shadow:0 0 0 0 rgba(20,128,255,.0)}
-    }
-
+    .qa-input input{border:none; outline:none; width:100%; font-size:15px}
+    .qa-btn{white-space:nowrap; border:none; border-radius:10px; font-weight:900; padding:10px 12px; color:#fff; background:linear-gradient(180deg,#2b8dff,#0f6de0); box-shadow:0 8px 16px rgba(15,23,42,.16)}
+    .qa-btn:active{transform:translateY(1px)}
+    .qa-notice{display:none; margin:6px 4px 0; font-size:13px; color:#0b1224; background:rgba(255,255,255,.8); border-radius:999px; padding:6px 10px; box-shadow:0 4px 10px rgba(15,23,42,.08)}
+    .qa-notice.show{display:inline-block}
+    .shake{animation:shake .36s ease}
+    @keyframes shake{10%,90%{transform:translateX(-1px)} 20%,80%{transform:translateX(2px)} 30%,50%,70%{transform:translateX(-4px)} 40%,60%{transform:translateX(4px)}}
+    .qa-item{background:#fff; border-radius:14px; box-shadow:var(--shadow); overflow:hidden; margin:10px 0}
+    .qa-item summary{list-style:none; cursor:pointer; padding:14px 16px; font-weight:900; display:flex; align-items:center; gap:10px}
+    .qa-item summary::-webkit-details-marker{display:none}
+    .qa-qdot{width:28px;height:28px;border-radius:50%;display:inline-grid;place-items:center;color:#fff;background:linear-gradient(180deg,#1480ff,#7bd6ff);font-weight:900;flex:0 0 auto}
+    .qa-item .answer{padding:0 16px 14px; color:#334155}
+    .flash{animation:flash 1.1s ease}
+    @keyframes flash{0%{box-shadow:0 0 0 0 rgba(20,128,255,.65)} 100%{box-shadow:0 0 0 18px rgba(20,128,255,0)}}
   </style>
 </head>
 <body>
@@ -410,6 +383,7 @@
         <span>“きっかけ”教えます。</span>
       </h1>
 
+      <!-- ★ガラス質感バッジ -->
       <div class="glass-badges" role="list" aria-label="参加に関する情報">
         <span class="g-badge" role="listitem">👕 服装自由</span>
         <span class="g-badge" role="listitem">🙌 1人参加OK</span>
@@ -450,7 +424,7 @@
             <div class="head-copy">
               <span class="sticker">製菓デザイン学科</span>
               <p class="meta">2年<br>S・Hさん</p>
-              <p class="hook">“上手い人だらけで埋もれる気がしてた”</p>
+              <p class="hook">未来へ背中を押してくれる学校</p>
             </div>
             <div class="badge"><img src="images/IMG_0092.jpg" alt="S・Hさん"></div>
           </div>
@@ -487,8 +461,9 @@
             <div class="badge"><img src="images/IMG_4327.jpg" alt="I・Yくん"></div>
           </div>
           <p>高校生の頃、保育の仕事に興味はあったものの、ピアノが苦手で不安を感じていました。そんな時に出会ったのがこの学校。オープンキャンパスで先生方の丁寧なサポートを見て「ここなら大丈夫」と思えたのが入学の決め手です。実際に入学してからも先生が親身に教えてくださり、少しずつ弾ける曲が増えて自信に。さらにデザインの学校ならではの授業で、好きな表現を活かした活動やおもちゃ作りに挑戦でき、不安は「挑戦してよかった」という実感に変わりました。</p>
-          <div class="photos" style="grid-template-columns:1fr">
-            <img src="images/IMG_8050.jpg" alt="授業風景">
+          <div class="photos">
+            <img src="images/IMG_8050.jpg" alt="授業風景1">
+            <img src="images/2024_161.jpg" alt="授業風景2">
           </div>
         </article>
       </div>
@@ -577,6 +552,88 @@
       </ul>
     </section>
 
+    <!-- ===== よくある質問（検索つき） ===== -->
+    <section class="section" id="qa">
+      <h2 class="section-title hand reveal js-hand">よくある質問<span class="underline"></span></h2>
+
+      <div class="qa-head">
+        <div class="qa-input" id="qaInputBox">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#64748b" d="M15.5 14h-.79l-.28-.27a6.471 6.471 0 0 0 1.57-4.23C15.99 6.01 13.98 4 11.5 4S7.01 6.01 7.01 9.5 9.02 15 11.5 15c1.61 0 3.06-.59 4.23-1.57l.27.28v.79l4.25 4.25 1.49-1.49L15.5 14zm-4 0C9.01 14 7 11.99 7 9.5S9.01 5 11.5 5 16 7.01 16 9.5 13.99 14 11.5 14z"/></svg>
+          <input id="qaQuery" type="search" placeholder="例）学費　AO　アクセス など" inputmode="search" />
+        </div>
+        <button class="qa-btn" id="qaGo" type="button">検索で該当へ</button>
+      </div>
+      <div id="qaMsg" class="qa-notice" aria-live="polite"></div>
+
+      <div id="qaList" aria-live="polite"></div>
+
+      <!-- Q&A データ（編集しやすいJSON） -->
+      <script id="qaData" type="application/json">
+      [
+        {"q":"この学校では何が学べますか？","a":"デザイン、食品サンプル、映像、マンガ、ゲームキャラクター、コミックイラスト、保育士の学び、ホテル観光など多分野を用意しています。"},
+        {"q":"デザインって何ですか？","a":"生活をより豊かにするための手段です。日々の“気づき”から、便利・面白い・可愛い・過ごしやすいなどの解決を導きます。"},
+        {"q":"大学とは何が違うの？","a":"大学は学術的・理論的な学びと幅広い教養。専門学校は実践的な職業教育で、短期間で即戦力を目指します。"},
+        {"q":"就職するのに有利な学科はどれ？","a":"どの学科も就職サポートが充実。電話のかけ方、面接、ポートフォリオまで徹底支援。主任・担任・キャリアセンターが連携します。"},
+        {"q":"遅刻や欠席があると入学は難しいですか？","a":"そんなことはありません。理由があるはずなので、まずはご相談ください。良い解決方法を一緒に考えます。"},
+        {"q":"AOはなにをやりますか？","a":"エントリーレポート提出とプレゼンテーション（面接）。“好き”への想いを言語化し、当日アピールしてください。"},
+        {"q":"課題は多い？ 何が出る？","a":"将来の夢に向けたプロセスを重視して課題を出します。分からないことは先生がきめ細かくサポートします。"},
+        {"q":"学食ありますか？","a":"ありません。多くの学生はお弁当持参、または近隣のお店で購入。学生ホールでランチできます。"},
+        {"q":"PC持ってないけど大丈夫？","a":"貸出用ノートPCとコンピューターラボがあります。空いている時間に利用可能です。"},
+        {"q":"高校生しか入学しませんか？","a":"社会人や大学卒業後の再進学の方も多いです。"},
+        {"q":"男女はどっちが多い？","a":"年度によりますが比較的女性が多め（目安6:4）。"},
+        {"q":"絵が苦手でもデザインできる？","a":"モデル制作、写真・映像など表現は様々。未経験者向けの基礎カリキュラムも整っています。"},
+        {"q":"働きながらでも通えますか？","a":"アルバイトと両立している学生は多数。授業は9:00〜16:10（曜日により午前のみ/午後のみあり）。"},
+        {"q":"テキスト代はいくら？","a":"学科により異なります。デザイン系は少なめ。保育・ホテルは必要科目のテキスト購入があります。"},
+        {"q":"初心者でもOK？","a":"もちろん。基礎から学べる未経験者向けカリキュラムです。"},
+        {"q":"先生は怖い？","a":"基本優しいです。必要なときはしっかり指導します。"},
+        {"q":"髪色やピアスは自由？","a":"基本自由。就活期は控えめにする学生が多いです。"},
+        {"q":"4月しか入学できませんか？","a":"入学時期は4月です。"},
+        {"q":"場所がよくわからない","a":"動画で道案内を用意。https://ndc.ac.jp/access/　迷ったらお電話ください。"},
+        {"q":"デザインやイラストの就職先はある？","a":"キャリアセンターに毎日のように求人が届きます。企業はデザイン人材を幅広く求めています。"},
+        {"q":"学費はいつまでに準備？","a":"出願区分で異なります（推薦・一般は合格通知発送日より3週間以内等）。AOは回次ごとに納入期日を設定。"},
+        {"q":"不登校でも大丈夫？","a":"まずはご相談ください。主任・担任・女性カウンセラーが連携し、安心できる環境を整えます。"},
+        {"q":"入学前に適性を見てほしい","a":"保護者の方とぜひオープンキャンパスへ。納得できるまでサポートします。"},
+        {"q":"昼食はどうする？","a":"お弁当・近隣購入・学生ホール利用など自由です。"},
+        {"q":"定期券は学割？","a":"適用されます（都知事認可校）。"},
+        {"q":"対人が難しい子のサポートは？","a":"事情を伺い最適な支援を検討。主任・担任・カウンセラーが対応します。"},
+        {"q":"奨学金の申し込みが遅れた","a":"まずはご相談ください。状況に応じて説明します。"},
+        {"q":"入学後の学費ローンは？","a":"日本学生支援機構・東京都育英資金の認定校です。詳細：https://ndc.ac.jp/prospectus/scholarships/"},
+        {"q":"高校中退ですが入学可能？","a":"高卒認定（旧大検）合格で出願可能です。"},
+        {"q":"交通費サポートはある？","a":"交通費サポートはありませんが、通学定期は学割が効きます。"},
+        {"q":"担任制ですか？","a":"担任制です。生活面のケア、課題の悩み、就職の不安まできめ細かくサポートします。"},
+        {"q":"希望する学科がなくても見学OK？","a":"もちろん。面白そうな講座から体験を。新しい発見があります。"},
+        {"q":"卒業して就職できなかったら？","a":"卒業後も内定まで継続サポートします。"},
+        {"q":"漫画やゲームが好きなだけでついていける？","a":"好奇心と“好き”が原動力。未経験からプロになった卒業生も多数。"},
+        {"q":"美大受験との違いは？","a":"美大は入学前に一定のスキルが必要。専門は入学後に基礎から学び、短期間で実務力へ。"},
+        {"q":"授業についていけない時は？","a":"担任に相談を。あなたに最適な方法を一緒に見つけます。"},
+        {"q":"海外留学はできますか？","a":"時期や提携状況により異なります。まずはご相談ください。"},
+        {"q":"平均評定はどのくらい必要？","a":"在籍校の評定が基準。欠席が多い等は事前にご相談ください。"},
+        {"q":"子供が何をやりたいか分からない","a":"見学やオープンキャンパスでスタッフと相談しましょう。方向性が見えてきます。"},
+        {"q":"保育こどもデザイン学科：保育士・幼稚園教諭は取れる？","a":"保育士は卒業と同時取得。幼稚園教諭二種は豊岡短大通信との併修で可。"},
+        {"q":"幼稚園教諭免許の学びは？","a":"4週間の幼稚園実習、実習準備科目、憲法など教員免許に必要な科目を学びます。"},
+        {"q":"製菓デザイン学科では？","a":"食品サンプル、パッケージ、企画・流通、マーケなど。発想×デザインで活躍人材を育成。"},
+        {"q":"イマジネーションデザイン学科では？","a":"映像制作、グラフィック、イラスト、マンガ、アニメ、ゲーム、広告など“表現”全般を横断的に学びます。"},
+        {"q":"コミックイラスト学科では？","a":"漫画家・イラストレーターを目指し、絵の基礎からプロ実践まで。"},
+        {"q":"コミックmanabi学科では？","a":"1年間で短期間でクリエイターに必要なスキルを学びます。オンラインでの授業参加も一部可能です"},
+        {"q":"保育こどもデザイン学科では？","a":"保育士だけでなく、おもちゃ・子ども服・遊び場のデザインなど子ども領域全般を学びます。"},
+        {"q":"ホテル観光学科では？","a":"本物の設備・備品を用いて技術とホスピタリティを習得します。"},
+        {"q":"国際コミュニケーションデザイン学科では？","a":"進学・就職に必要なコミュ力とデザイン領域のエッセンスを1年で学びます。"},
+        {"q":"出願方法は？","a":"AO・推薦・一般の3区分。AO入学の詳細：https://ndc.ac.jp/prospectus/admission-procedure/"},
+        {"q":"AO入学って？","a":"学力にとらわれず“やる気・目的意識・個性”を重視する選考です。"},
+        {"q":"高校既卒でもAOを選べる？","a":"問題ありません。新卒〜社会人まで幅広く在籍。"},
+        {"q":"AO入学の試験内容は？","a":"エントリーレポートとプレゼンテーション。学力テストは行いません。"},
+        {"q":"AO入学前教育サポートは？","a":"入学前から各分野の課題に取り組み、理解を深めます。"},
+        {"q":"AOに向いている人は？","a":"やりたいことがある／やる気を見てほしい／早期に進路を決めたい／入学前教育で準備したい、など。"},
+        {"q":"AO面談の服装は？","a":"自由（私服・制服・スーツ可）。清潔感のある服装がおすすめ。"},
+        {"q":"学校の雰囲気は？","a":"少人数でアットホーム。対話を大切にする“面倒見の良さ”が特長です。"},
+        {"q":"学費の分割はできますか？","a":"納入期限の延長や分割相談は個別に対応します。"},
+        {"q":"学生寮はありますか？","a":"提携の学生寮・賃貸を専門業者経由でご案内可能です。https://ndc.ac.jp/greeting/facility/"},
+        {"q":"学校説明会はどんなことをするの？","a":"在校生がリアルにお話しし、学べる内容・出願・学費などを説明。個別相談も実施します。"},
+        {"q":"出願の期限はいつですか？","a":"出願方法・期限は案内ページをご確認ください。https://ndc.ac.jp/prospectus/admission-procedure/"}
+      ]
+      </script>
+    </section>
+
     <!-- ===== 1分解説動画 ===== -->
     <section class="section shorts" id="shorts">
       <button class="glass-toggle" id="shortsToggle" type="button" aria-expanded="false" aria-controls="shortsPanel">
@@ -584,45 +641,96 @@
       </button>
 
       <div id="shortsPanel" aria-hidden="true">
-        <!-- 6本（既存） -->
-        <div class="s-card"><div class="s-head"><div><h3 class="s-title">【1分でわかる】日本デザイン福祉専門学校（LINE特別）</h3><p class="s-desc">縦動画で学校の空気感を1分でさくっと。</p></div><div class="s-actions"><button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/vbWDxIgAiLU"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button><button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button></div></div></div>
-        <div class="s-card"><div class="s-head"><div><h3 class="s-title">【1分でわかる】製菓デザイン学科</h3><p class="s-desc">実習の雰囲気をショートで。</p></div><div class="s-actions"><button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/7dL2RRYDxxA"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button><button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button></div></div></div>
-        <div class="s-card"><div class="s-head"><div><h3 class="s-title">【1分でわかる】コミックイラスト学科</h3><p class="s-desc">描く・学ぶ・見るを1分で。</p></div><div class="s-actions"><button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/xz6X2a-AEU8"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button><button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button></div></div></div>
-        <div class="s-card"><div class="s-head"><div><h3 class="s-title">【1分でわかる】コミックmanabi学科</h3><p class="s-desc">学びの流れを1分で。</p></div><div class="s-actions"><button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/7_MpflBuv9k"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button><button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button></div></div></div>
-        <div class="s-card"><div class="s-head"><div><h3 class="s-title">【1分でわかる】イマジネーションデザイン学科</h3><p class="s-desc">発想を形にする1分。</p></div><div class="s-actions"><button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/tm8ZayZMb6M"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button><button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button></div></div></div>
-        <div class="s-card"><div class="s-head"><div><h3 class="s-title">【1分でわかる】保育こどもデザイン学科</h3><p class="s-desc">子ども×デザインの入口を1分で。</p></div><div class="s-actions"><button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/oEpO0rFOr8g"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button><button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button></div></div></div>
-        <div class="s-card"><div class="s-head"><div><h3 class="s-title">【1分でわかる】ホテル観光学科</h3><p class="s-desc">おもてなしの現場感を1分で。</p></div><div class="s-actions"><button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/akdyF5vbAro"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button><button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button></div></div></div>
-      </div>
-    </section>
-
-    <!-- ===== よくある質問（動画セクションの次） ===== -->
-    <section class="section" id="faq">
-      <div class="qa-wrap">
-        <h2 class="section-title hand reveal js-hand">よくある質問 <span class="underline"></span></h2>
-
-        <!-- Sticky：検索 + チップ + ジャンプ -->
-        <div class="qa-sticky">
-          <div class="qa-search">
-            <input id="qaSearch" type="search" placeholder="キーワードで検索（例：AO / 学費 / アクセス など）" aria-label="よくある質問を検索">
-            <button id="qaClear" class="qa-clear" type="button" aria-label="検索と絞り込みをすべて解除">すべて解除</button>
-          </div>
-          <div class="qa-chips" role="toolbar" aria-label="カテゴリで絞り込み">
-            <button class="qa-chip" data-tag="人気">人気</button>
-            <button class="qa-chip" data-tag="入試">入試</button>
-            <button class="qa-chip" data-tag="学費">学費</button>
-            <button class="qa-chip" data-tag="就職">就職</button>
-            <button class="qa-chip" data-tag="生活">生活</button>
-            <button class="qa-chip" data-tag="アクセス">アクセス</button>
-            <button class="qa-chip" data-tag="制度">制度</button>
-          </div>
-          <div class="qa-jumps" aria-label="よく見られている質問へジャンプ">
-            <!-- 指定の3ボタンを削除（その他は変更なし） -->
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】日本デザイン福祉専門学校（LINE特別）</h3>
+              <p class="s-desc">縦動画で学校の空気感を1分でさくっと。</p>
+            </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/vbWDxIgAiLU"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
+            </div>
           </div>
         </div>
 
-        <!-- リスト -->
-        <div id="qaList" class="qa-grid" aria-live="polite"></div>
-        <div id="qaNoHits" class="qa-nohits">該当する質問が見つかりませんでした。<br>キーワードやカテゴリを変えてお試しください。</div>
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】製菓デザイン学科</h3>
+              <p class="s-desc">実習の雰囲気をショートで。</p>
+            </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/7dL2RRYDxxA"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】コミックイラスト学科</h3>
+              <p class="s-desc">描く・学ぶ・見るを1分で。</p>
+            </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/xz6X2a-AEU8"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】コミックmanabi学科</h3>
+              <p class="s-desc">学びの流れを1分で。</p>
+            </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/7_MpflBuv9k"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】イマジネーションデザイン学科</h3>
+              <p class="s-desc">発想を形にする1分。</p>
+            </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/tm8ZayZMb6M"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】保育こどもデザイン学科</h3>
+              <p class="s-desc">子ども×デザインの入口を1分で。</p>
+            </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/oEpO0rFOr8g"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-card">
+          <div class="s-head">
+            <div>
+              <h3 class="s-title">【1分でわかる】ホテル観光学科</h3>
+              <p class="s-desc">おもてなしの現場感を1分で。</p>
+            </div>
+            <div class="s-actions">
+              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/akdyF5vbAro"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -634,7 +742,7 @@
     </div>
   </footer>
 
-  <!-- 固定CTA（下部） -->
+  <!-- 固定CTA -->
   <nav class="sticky-cta" aria-label="固定操作バー">
     <a class="btn btn-blue" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンについて</a>
     <a class="btn btn-messaging" href="#" data-safe-href="https://lin.ee/y2DLr3Y" rel="noopener" target="_blank" aria-label="LINEで質問">LINEで質問</a>
@@ -650,33 +758,65 @@
   </div>
 
   <script>
-    /* ===== 予約リンク（直近2日ピル） ===== */
+    /* ====== 予約リンク（直近2日ピルのみ：予約フォーム直リンク） ====== */
     const RESERVE_URL = 'https://www.school-go.info/ffz85h/ndc/form.php?fno=60&fsno=1&_gl=1*1gypnfh*_gcl_au*MjEwNTk1MjIyMi4xNzU0NTM1NTA1&nnso=3';
-    const UPCOMING = ['2025-08-20','2025-08-24','2025-09-28','2025-10-12','2025-10-19','2025-10-26','2025-11-16','2025-11-23','2025-12-14','2026-01-25','2026-02-08','2026-03-08','2026-03-22'];
+
+    /* ====== 日程（固定配列→今日以降→最短＋2件） ====== */
+    const UPCOMING = [
+      '2025-08-20','2025-08-24','2025-09-28','2025-10-12','2025-10-19','2025-10-26',
+      '2025-11-16','2025-11-23','2025-12-14',
+      '2026-01-25','2026-02-08','2026-03-08','2026-03-22'
+    ];
+
     function weekdayJa(d){ return ['日','月','火','水','木','金','土'][d.getDay()]; }
+
     function renderDates(){
       const wrap = document.getElementById('datePills');
       const soonEl = document.getElementById('soon');
       if(!wrap || !soonEl) return;
+
       wrap.innerHTML = '';
-      const todayMidnight = new Date(new Date().toDateString());
-      const list = UPCOMING.map(s => new Date(s + 'T00:00:00+09:00')).filter(d => d >= todayMidnight).sort((a,b)=>a-b);
-      if(!list.length){ soonEl.textContent = '最短：準備中'; wrap.insertAdjacentHTML('beforeend','<span class="muted">日程準備中</span>'); return; }
+      const today = new Date();
+      const todayMidnight = new Date(today.toDateString());
+
+      const list = UPCOMING
+        .map(s => new Date(s + 'T00:00:00+09:00'))
+        .filter(d => d >= todayMidnight)
+        .sort((a,b)=>a-b);
+
+      if(!list.length){
+        soonEl.textContent = '最短：準備中';
+        wrap.insertAdjacentHTML('beforeend','<span class="muted">日程準備中</span>');
+        return;
+      }
+
       const soon = list[0];
       soonEl.textContent = `最短：${(soon.getMonth()+1)}/${soon.getDate()}(${weekdayJa(soon)})`;
+
       list.slice(0,2).forEach(d=>{
-        const mm = String(d.getMonth()+1).padStart(2,'0'); const dd = String(d.getDate()).padStart(2,'0'); const w = weekdayJa(d);
-        const a = document.createElement('a'); a.className='pill'; a.href=RESERVE_URL; a.target='_blank'; a.rel='noopener';
-        a.setAttribute('aria-label',`${mm}/${dd}(${w})の予約ページを開く`);
-        a.innerHTML=`📅 ${mm}/${dd}(${w}) <small>予約へ</small>`; wrap.appendChild(a);
+        const mm = String(d.getMonth()+1).padStart(2,'0');
+        const dd = String(d.getDate()).padStart(2,'0');
+        const w = weekdayJa(d);
+        const a = document.createElement('a');
+        a.className = 'pill';
+        a.href = RESERVE_URL;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.setAttribute('aria-label', `${mm}/${dd}(${w})の予約ページを開く`);
+        a.innerHTML = `📅 ${mm}/${dd}(${w}) <small>予約へ</small>`;
+        wrap.appendChild(a);
       });
     }
 
-    /* ===== 出現監視 ===== */
-    const io=new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{threshold:.22});
+    /* 出現監視：reveal / sweep / section-title */
+    const io=new IntersectionObserver(es=>{
+      es.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    },{threshold:.22});
     document.querySelectorAll('.reveal,.sweep,.section-title').forEach(el=>io.observe(el));
 
-    /* 手書きタイトル分割 */
+    /* 手書きタイトルを1文字分割 */
     function splitHand(el){
       if(el.dataset.splitted) return;
       el.dataset.splitted="1";
@@ -698,12 +838,14 @@
     }
     document.querySelectorAll('.js-hand').forEach(splitHand);
 
-    /* スクロール連動：微パララックス＆CTA表示（画面高80%で発火） */
+    /* スクロール連動：微パララックス＆CTA表示 */
     const sticky=document.querySelector('.sticky-cta');
     function onScroll(){
       const vh=innerHeight;
       document.querySelectorAll('[data-float]').forEach(g=>{
-        const r=g.getBoundingClientRect(); const center=(r.top+r.bottom)/2; const delta=(vh*0.5-center)/(vh*0.5);
+        const r=g.getBoundingClientRect();
+        const center=(r.top+r.bottom)/2;
+        const delta=(vh*0.5-center)/(vh*0.5);
         g.style.transform=`translateY(${Math.max(-10,Math.min(10,-delta*8))}px)`;
       });
       const trigger = vh * 0.8;
@@ -716,21 +858,35 @@
     /* 画像最適化 */
     document.querySelectorAll('img').forEach(i=>{ i.loading='lazy'; i.decoding='async'; });
 
-    /* LINEボタン：安全遷移 */
+    /* LINEボタン：ブロッカー回避 */
     document.querySelectorAll('a.btn-messaging[data-safe-href]').forEach(a=>{
       const url=a.getAttribute('data-safe-href');
-      a.addEventListener('click',function(ev){ ev.preventDefault(); try{ window.open(url,'_blank','noopener'); }catch(e){ location.href=url; } },{passive:false});
+      a.addEventListener('click',function(ev){
+        ev.preventDefault();
+        try{ window.open(url,'_blank','noopener'); }catch(e){ location.href=url; }
+      },{passive:false});
     });
 
-    /* ▼ 1分動画開閉 */
+    /* ▼ 1分動画：開閉 */
     const toggle=document.getElementById('shortsToggle');
     const panel=document.getElementById('shortsPanel');
-    toggle.addEventListener('click',()=>{ const open=!panel.classList.contains('open'); panel.classList.toggle('open',open); toggle.setAttribute('aria-expanded',open); panel.setAttribute('aria-hidden',!open); if(open){ panel.scrollIntoView({behavior:'smooth',block:'start'}); }});
+    toggle.addEventListener('click',()=>{
+      const open=!panel.classList.contains('open');
+      panel.classList.toggle('open',open);
+      toggle.setAttribute('aria-expanded',open);
+      panel.setAttribute('aria-hidden',!open);
+      if(open){ panel.scrollIntoView({behavior:'smooth',block:'start'}); }
+    });
     document.querySelectorAll('[data-close-panel]').forEach(btn=>{
-      btn.addEventListener('click',()=>{ panel.classList.remove('open'); panel.setAttribute('aria-hidden','true'); toggle.setAttribute('aria-expanded','false'); toggle.scrollIntoView({behavior:'smooth',block:'center'}); });
+      btn.addEventListener('click',()=>{
+        panel.classList.remove('open');
+        panel.setAttribute('aria-hidden','true');
+        toggle.setAttribute('aria-expanded','false');
+        toggle.scrollIntoView({behavior:'smooth',block:'center'});
+      });
     });
 
-    /* ▼ YouTubeモーダル */
+    /* ▼ サイト内再生（YouTube） */
     const backdrop=document.getElementById('ytBackdrop');
     const frame=document.getElementById('ytFrame');
     function toEmbed(url){
@@ -740,144 +896,76 @@
         return id ? `https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0` : '';
       }catch(_){ return ''; }
     }
-    function openPlayer(url){ const embed=toEmbed(url); if(!embed) return; frame.src=embed; backdrop.classList.add('open'); backdrop.setAttribute('aria-hidden','false'); }
-    function closePlayer(){ frame.src='about:blank'; backdrop.classList.remove('open'); backdrop.setAttribute('aria-hidden','true'); }
-    document.querySelectorAll('.s-icon.play[data-video]').forEach(b=>{ b.addEventListener('click',()=>openPlayer(b.getAttribute('data-video'))); });
+    function openPlayer(url){
+      const src=toEmbed(url); if(!src) return;
+      frame.src=src; backdrop.classList.add('open'); backdrop.setAttribute('aria-hidden','false');
+    }
+    function closePlayer(){
+      frame.src='about:blank'; backdrop.classList.remove('open'); backdrop.setAttribute('aria-hidden','true');
+    }
+    document.querySelectorAll('.s-icon.play[data-video]').forEach(b=>b.addEventListener('click',()=>openPlayer(b.getAttribute('data-video'))));
     document.getElementById('ytClose').addEventListener('click',closePlayer);
     backdrop.addEventListener('click',e=>{ if(e.target===backdrop) closePlayer(); });
     addEventListener('keydown',e=>{ if(e.key==='Escape') closePlayer(); });
 
-    /* ====== Q&A データ ====== */
-    const FAQ_DATA = [
-      { id:'faq-what-learn', q:'この学校では何が学べますか？', a:'この学校ではデザインや食品サンプル、映像、マンガ、ゲームキャラクター、コミックイラスト、保育士の学び、そしてホテル関連の学科など様々な分野が準備されています。', tags:['人気'] },
-      { id:'faq-what-design', q:'デザインって何ですか？', a:'デザインを一言で説明するなら、私たちの生活をより豊かにするための手段です。日々の気付きから、より便利に・面白く・可愛く・過ごしやすく…という答えを導きます。', tags:['人気'] },
-      { id:'faq-diff-uni', q:'大学とは何が違うの？', a:'大学は学術的・理論的な学問や幅広い教養を中心に学びます。専門学校は<strong>実践的な職業教育</strong>が中心で、<strong>短期間で即戦力</strong>を目指せます。', tags:['入試'] },
-      { id:'faq-advantage', q:'就職するのに有利な学科はどれ？', a:'どの学科も<strong>キャリアサポート授業</strong>やポートフォリオ支援、<strong>担任・主任・キャリア担当</strong>の連携で徹底サポートします。', tags:['就職','人気'] },
-      { id:'faq-late-absent', q:'遅刻や欠席があると入学は難しいですか？', a:'そのままでも大丈夫。まずはご相談ください。状況に合わせて最適なプランを一緒に考えます。', tags:['入試','生活'] },
-      { id:'faq-ao-what', q:'AOはなにをやりますか？', a:'<b>AOエントリーレポート</b>の提出と、<b>AOプレゼンテーション</b>（学力テストなし）です。好きなコトや意欲を伝えてください。', tags:['入試'] },
-      { id:'faq-homework', q:'課題は多い？ 何が出る？', a:'教育活動を重視しているため、適切に課題が出ます。わからないことは先生に相談でき、きめ細かくサポートします。', tags:['生活'] },
-      { id:'faq-cafe', q:'学食ありますか？', a:'学食はありません。お弁当や近隣のコンビニ・飲食店の利用、校内の学生ホールでランチ可能です。', tags:['生活'] },
-      { id:'faq-pc', q:'PC持ってないけど大丈夫？', a:'学内に<strong>貸出用ノートPC</strong>があり、コンピューターラボも自由利用できます（空き時間）。', tags:['制度'] },
-      { id:'faq-age', q:'高校生しか入学しませんか？', a:'社会人や大学卒業後の再進学者も多数在籍しています。', tags:['入試'] },
-      { id:'faq-gender', q:'男女はどっちが多い？', a:'年度により異なりますが、目安として女性がやや多め（およそ6:4）です。', tags:['生活'] },
-      { id:'faq-drawing', q:'絵が苦手でもデザインできる？', a:'モデル制作・画像/映像など表現方法は多様。初心者からでも学べるカリキュラムで安心。デッサンも基礎から指導します。', tags:['人気'] },
-      { id:'faq-work', q:'働きながらでも通えますか？', a:'授業は9:00〜16:10（曜日により午前のみ/午後のみも）。アルバイトと両立する学生も多いです。', tags:['生活'] },
-      { id:'faq-text', q:'テキスト代はいくら？', a:'学科により異なります。デザイン系は少なめ。保育・ホテルは必要なテキストがあります。', tags:['学費'] },
-      { id:'faq-beginner', q:'初心者でもOK?', a:'もちろんOK。初心者・未経験を想定したカリキュラムで、基礎→応用→実践へ段階的に学べます。', tags:['人気'] },
-      { id:'faq-scary', q:'先生は怖いですか？', a:'みんな優しいです。ただし必要な場面ではしっかり指導します。', tags:['生活'] },
-      { id:'faq-style', q:'髪の色やピアスは自由？', a:'基本自由。就活時期は控えめにする学生が多いです。', tags:['生活'] },
-      { id:'faq-april', q:'4月しか入学できませんか？', a:'4月入学です。', tags:['入試'] },
-      { id:'faq-access', q:'場所がわからない', a:'動画の道案内をご用意しています。<a href="https://ndc.ac.jp/access/" target="_blank" rel="noopener">アクセスはこちら</a>。迷ったらお電話ください。', tags:['アクセス','人気'] },
-      { id:'faq-job', q:'デザインやイラストの就職先はある？', a:'キャリアサポート室に多数の求人が届きます。大手〜中小まで幅広く、デザイン人材の需要は高いです。', tags:['就職'] },
-      { id:'faq-tuition-when', q:'入学金や学費はいつまでに準備？', a:'出願区分により異なります。詳しくは募集要項をご確認ください。', tags:['学費','入試'] },
-      { id:'faq-nonattend', q:'不登校でも受け入れてますか？', a:'まずはご相談ください。学科主任・担任・スクールカウンセラーが連携してサポートします。', tags:['制度','入試'] },
-      { id:'faq-suitable', q:'入学前に子どもの適性を見てほしい', a:'保護者の方もオープンキャンパスにぜひご参加ください。ご納得までサポートします。', tags:['人気'] },
-      { id:'faq-commute', q:'定期券は学割？', a:'学割適用。都知事認可校のため、公的奨学金・教育ローン等も要件を満たします。', tags:['制度','生活'] },
-      { id:'faq-interpersonal', q:'対人が難しい子どものサポートは？', a:'学科主任・担任・専任カウンセラーが学業〜プライベートまで相談にのります。', tags:['制度','生活'] },
-      { id:'faq-loan', q:'入学後の学費ローンは？', a:'日本学生支援機構・東京都育英資金の認定校です。<a href="https://ndc.ac.jp/prospectus/scholarships/" target="_blank" rel="noopener">詳しくはこちら</a>。', tags:['学費','制度'] },
-      { id:'faq-dropout', q:'高校中退でも入学可能？', a:'高卒認定（旧大検）合格で可。', tags:['入試'] },
-      { id:'faq-dorm', q:'学生寮はありますか？', a:'委託先の学生寮・賃貸マンションから選べます。<a href="https://ndc.ac.jp/greeting/facility/" target="_blank" rel="noopener">詳細</a>。', tags:['生活'] },
-      { id:'faq-oc', q:'学校説明会はどんなことをするの？', a:'在校生がリアルな学校生活を紹介。個別相談で学科・出願・特典・学費など丁寧に説明します。', tags:['人気','入試'] },
-      { id:'faq-ao-why', q:'AO入学ってなんですか？', a:'アドミッション・ポリシーに基づき、学力より<strong>やる気・意欲・個性</strong>などを重視する選考です。', tags:['入試'] },
-      { id:'faq-ao-who', q:'既卒でもAO入学は選べますか？', a:'はい。高校新卒〜社会人経験者までAOでの出願が可能です。', tags:['入試'] },
-      { id:'faq-ao-how', q:'AO入学って試験は何をやるの？', a:'<b>AOエントリーレポート</b>と<b>AOプレゼンテーション</b>（学力テストなし）。', tags:['入試'] },
-      { id:'faq-ao-pre', q:'AO入学前教育サポートって何をやるの？', a:'入学前に分野理解を深める課題（レポート/作品制作など）に取り組みます。', tags:['入試'] },
-      { id:'faq-ao-suits', q:'AO入学はどんな人に向いてるの？', a:'「やりたいことがある」「意欲を見てほしい」「早めに進路を決めたい」などの方に適しています。', tags:['入試','人気'] },
-      { id:'faq-ao-wear', q:'AOプレゼンの服装は？', a:'自由（私服/制服/スーツ可）。清潔感のある服装がおすすめ。', tags:['入試'] },
-      { id:'faq-atmos', q:'学校の雰囲気は？', a:'少人数・アットホームで面倒見が良いと評価されています。対話を大切にする学校です。', tags:['人気','生活'] },
-      { id:'faq-install', q:'学費の分割はできますか？', a:'納入期限延長・分割納入など個別相談に応じます。', tags:['学費'] },
-      { id:'faq-exam-deadline', q:'出願の期限はいつ？', a:'出願方法や期限は募集要項をご覧ください。<a href="https://ndc.ac.jp/prospectus/admission-procedure/" target="_blank" rel="noopener">詳細</a>。', tags:['入試'] },
-    ];
-
-    /* ====== Q&A レンダリング ====== */
+    /* ====== QA：描画 ====== */
     const qaListEl = document.getElementById('qaList');
-    const noHitsEl = document.getElementById('qaNoHits');
-    const searchEl = document.getElementById('qaSearch');
-    const chipButtons = [...document.querySelectorAll('.qa-chip')];
-    const clearBtn = document.getElementById('qaClear');
-    const selected = new Set();
+    const qaData = JSON.parse(document.getElementById('qaData').textContent);
+    qaListEl.innerHTML = qaData.map((row,i)=>(
+      `<details class="qa-item" data-idx="${i}">
+         <summary><span class="qa-qdot">Q</span><span>${row.q}</span></summary>
+         <div class="answer">${row.a.replace(/\n/g,'<br>')}</div>
+       </details>`)).join('');
 
-    function renderQA(items){
-      qaListEl.innerHTML = '';
-      items.forEach(item=>{
-        const wrap = document.createElement('details');
-        wrap.className = 'qa-item';
-        wrap.id = item.id;
+    /* QA検索：該当へスクロール + フィードバック */
+    const qaGo = document.getElementById('qaGo');
+    const qaQuery = document.getElementById('qaQuery');
+    const qaMsg = document.getElementById('qaMsg');
+    const qaInputBox = document.getElementById('qaInputBox');
 
-        const sum = document.createElement('summary');
-        sum.textContent = 'Q. ' + item.q;
-
-        const body = document.createElement('div');
-        body.className = 'qa-a';
-        body.innerHTML = 'A. ' + item.a;
-
-        wrap.appendChild(sum);
-        wrap.appendChild(body);
-        qaListEl.appendChild(wrap);
-      });
-      noHitsEl.style.display = items.length ? 'none' : 'block';
+    function norm(s){ return (s||'').toLowerCase().replace(/\s+/g,'').replace(/[Ａ-Ｚａ-ｚ０-９]/g,s=>String.fromCharCode(s.charCodeAt(0)-0xFEE0)); }
+    function searchQA(){
+      const q = norm(qaQuery.value);
+      if(!q){ qaMsg.textContent='キーワードを入力してください。'; qaMsg.classList.add('show'); qaInputBox.classList.add('shake'); setTimeout(()=>qaInputBox.classList.remove('shake'),380); return; }
+      const idx = qaData.findIndex(row => norm(row.q+row.a).includes(q));
+      if(idx === -1){
+        qaMsg.textContent = `「${qaQuery.value}」に一致する質問が見つかりません。キーワードを短くする／別の言い回しを試すのがおすすめです。`;
+        qaMsg.classList.add('show');
+        qaInputBox.classList.add('shake'); setTimeout(()=>qaInputBox.classList.remove('shake'),380);
+        return;
+      }
+      qaMsg.classList.remove('show');
+      // 該当項目を開いてスクロール
+      const el = qaListEl.querySelector(`.qa-item[data-idx="${idx}"]`);
+      if(el){
+        el.open = true;
+        el.classList.add('flash');
+        el.scrollIntoView({behavior:'smooth', block:'center'});
+        setTimeout(()=>el.classList.remove('flash'),1200);
+      }
     }
+    qaGo.addEventListener('click', searchQA);
+    qaQuery.addEventListener('keydown', e=>{ if(e.key==='Enter') searchQA(); });
 
-    function norm(s){ return (s||'').toLowerCase().replace(/\s+/g,''); }
-    function matches(item, qTokens, tagSet){
-      const text = (item.q + ' ' + item.a).toLowerCase();
-      const keyOK = qTokens.every(t => text.includes(t));
-      const tagOK = !tagSet.size || [...tagSet].every(t => (item.tags||[]).includes(t));
-      return keyOK && tagOK;
-    }
-
-    function currentTokens(){ return searchEl.value.trim().toLowerCase().split(/\s+/).filter(Boolean); }
-
-    function applyFilter(){
-      const tokens = currentTokens();
-      const filtered = FAQ_DATA.filter(i => matches(i, tokens, selected));
-      renderQA(filtered);
-      clearBtn.classList.toggle('show', selected.size>0 || tokens.length>0);
-      attachOpenHandlers();
-    }
-
-    function attachOpenHandlers(){
-      qaListEl.querySelectorAll('details.qa-item summary').forEach(sum=>{
-        sum.addEventListener('click', e=>{
-          const parent = sum.parentElement;
-          if(!parent.open){
-            qaListEl.querySelectorAll('details.qa-item[open]').forEach(d=>{ if(d!==parent) d.open=false; });
-            requestAnimationFrame(()=>{ parent.classList.add('qa-highlight'); setTimeout(()=>parent.classList.remove('qa-highlight'), 1500); });
-          }
-        });
-      });
-    }
-
-    renderQA(FAQ_DATA);
-    attachOpenHandlers();
-
-    // 検索
-    searchEl.addEventListener('input', applyFilter);
-
-    // チップ（単一選択＆トグル解除）
-    chipButtons.forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const tag = btn.getAttribute('data-tag');
-        const isActive = btn.classList.contains('active');
-
-        chipButtons.forEach(b=>b.classList.remove('active'));
-        selected.clear();
-
-        if(!isActive){
-          btn.classList.add('active');
-          selected.add(tag);
+    /* 学校名バッジとQA検索バーの重なり回避（←今回の修正） */
+    (function setQaHeadOffset(){
+      const root = document.documentElement;
+      const SITE_SELECTOR = '.site-title';
+      const GAP = 8; // 学校名バッジの下に少し余白
+      function updateOffset(){
+        const st = document.querySelector(SITE_SELECTOR);
+        let top = 0;
+        if(st){
+          const r = st.getBoundingClientRect();
+          top = Math.max(0, Math.round(r.bottom + GAP));
         }
-        applyFilter();
-      });
-    });
-
-    // すべて解除
-    clearBtn.addEventListener('click', ()=>{
-      searchEl.value = '';
-      selected.clear();
-      chipButtons.forEach(b=>b.classList.remove('active'));
-      applyFilter();
-    });
+        root.style.setProperty('--qa-top', top + 'px');
+      }
+      updateOffset();
+      addEventListener('resize', updateOffset, {passive:true});
+      addEventListener('orientationchange', updateOffset);
+      let tid; addEventListener('scroll', ()=>{ clearTimeout(tid); tid=setTimeout(updateOffset, 120); }, {passive:true});
+    })();
 
     /* 起動：日程描画 */
     renderDates();
