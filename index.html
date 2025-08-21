@@ -268,7 +268,7 @@
     /* ===== 1分解説動画 ===== */
     .shorts{padding:34px 0 20px}
     .glass-toggle{
-      width:min(900px,92vw); margin:0 auto 14px;
+      width:min(900px,92vw); margin:0 auto 10px;
       display:flex; align-items:center; justify-content:center; gap:.6ch;
       padding:14px 18px; border-radius:999px; font-weight:900;
       color:#0b1224; text-decoration:none; cursor:pointer;
@@ -282,6 +282,32 @@
     .glass-toggle small{opacity:.7;font-weight:700}
     #shortsPanel{display:none}
     #shortsPanel.open{display:block}
+
+    /* ▼ 小さなサムネ（新規追加） */
+    .shorts-thumbs{
+      width:min(900px,92vw); margin:6px auto 12px;
+      display:grid; grid-auto-flow:column; grid-auto-columns:100px;
+      gap:10px; overflow-x:auto; padding:2px;
+      -webkit-overflow-scrolling:touch;
+    }
+    .thumb{
+      position:relative; border:none; background:transparent; padding:0; cursor:pointer;
+      border-radius:12px; overflow:hidden;
+      box-shadow:0 8px 18px rgba(15,23,42,.16), inset 0 1px 0 rgba(255,255,255,.45);
+    }
+    .thumb img{width:100%; aspect-ratio:9/16; object-fit:cover; display:block}
+    .thumb .play{
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      width:26px; height:26px; border-radius:50%;
+      background:rgba(255,255,255,.9); display:grid; place-items:center;
+      font-weight:900; line-height:1;
+      box-shadow:0 4px 10px rgba(0,0,0,.2);
+    }
+    .thumb .label{
+      position:absolute; left:6px; bottom:6px; padding:.12rem .45rem; border-radius:999px;
+      background:rgba(0,0,0,.6); color:#fff; font-weight:900; font-size:10.5px;
+    }
+    .thumb:active{transform:translateY(1px)}
 
     .s-card{
       width:min(900px,92vw); margin:12px auto; padding:14px; border-radius:18px;
@@ -332,8 +358,8 @@
 
     /* ====== よくある質問（QA） ====== */
     #qa .qa-head{
-      display:flex; gap:10px; align-items:center; justify-content:space-between; margin:6px 0 14px;
-      position:sticky; top:var(--qa-top, 0px); z-index:5; /* ← 学校名バッジと重ならない */
+      display:flex; gap:10px; align-items:center; justify-content:space-between; margin:6px 0 10px;
+      position:sticky; top:var(--qa-top, 0px); z-index:5;
       background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.65));
       -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
       padding:8px 8px; border-radius:12px; box-shadow:0 6px 16px rgba(15,23,42,.08);
@@ -356,6 +382,16 @@
     .qa-item .answer{padding:0 16px 14px; color:#334155}
     .flash{animation:flash 1.1s ease}
     @keyframes flash{0%{box-shadow:0 0 0 0 rgba(20,128,255,.65)} 100%{box-shadow:0 0 0 18px rgba(20,128,255,0)}}
+
+    /* ▼ 検索タグ */
+    .qa-tags{width:min(900px,92vw); margin:6px auto 0; display:flex; flex-wrap:wrap; gap:6px}
+    .qa-tag{
+      appearance:none; border:none; cursor:pointer;
+      padding:.35rem .7rem; border-radius:999px; font-weight:800; font-size:13px;
+      background:linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.12));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.45), 0 6px 14px rgba(15,23,42,.12);
+    }
+    .qa-tag:active{transform:translateY(1px)}
   </style>
 </head>
 <body>
@@ -552,93 +588,14 @@
       </ul>
     </section>
 
-    <!-- ===== よくある質問（検索つき） ===== -->
-    <section class="section" id="qa">
-      <h2 class="section-title hand reveal js-hand">よくある質問<span class="underline"></span></h2>
-
-      <div class="qa-head">
-        <div class="qa-input" id="qaInputBox">
-          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#64748b" d="M15.5 14h-.79l-.28-.27a6.471 6.471 0 0 0 1.57-4.23C15.99 6.01 13.98 4 11.5 4S7.01 6.01 7.01 9.5 9.02 15 11.5 15c1.61 0 3.06-.59 4.23-1.57l.27.28v.79l4.25 4.25 1.49-1.49L15.5 14zm-4 0C9.01 14 7 11.99 7 9.5S9.01 5 11.5 5 16 7.01 16 9.5 13.99 14 11.5 14z"/></svg>
-          <input id="qaQuery" type="search" placeholder="例）学費　AO　アクセス など" inputmode="search" />
-        </div>
-        <button class="qa-btn" id="qaGo" type="button">検索で該当へ</button>
-      </div>
-      <div id="qaMsg" class="qa-notice" aria-live="polite"></div>
-
-      <div id="qaList" aria-live="polite"></div>
-
-      <!-- Q&A データ（編集しやすいJSON） -->
-      <script id="qaData" type="application/json">
-      [
-        {"q":"この学校では何が学べますか？","a":"デザイン、食品サンプル、映像、マンガ、ゲームキャラクター、コミックイラスト、保育士の学び、ホテル観光など多分野を用意しています。"},
-        {"q":"デザインって何ですか？","a":"生活をより豊かにするための手段です。日々の“気づき”から、便利・面白い・可愛い・過ごしやすいなどの解決を導きます。"},
-        {"q":"大学とは何が違うの？","a":"大学は学術的・理論的な学びと幅広い教養。専門学校は実践的な職業教育で、短期間で即戦力を目指します。"},
-        {"q":"就職するのに有利な学科はどれ？","a":"どの学科も就職サポートが充実。電話のかけ方、面接、ポートフォリオまで徹底支援。主任・担任・キャリアセンターが連携します。"},
-        {"q":"遅刻や欠席があると入学は難しいですか？","a":"そんなことはありません。理由があるはずなので、まずはご相談ください。良い解決方法を一緒に考えます。"},
-        {"q":"AOはなにをやりますか？","a":"エントリーレポート提出とプレゼンテーション（面接）。“好き”への想いを言語化し、当日アピールしてください。"},
-        {"q":"課題は多い？ 何が出る？","a":"将来の夢に向けたプロセスを重視して課題を出します。分からないことは先生がきめ細かくサポートします。"},
-        {"q":"学食ありますか？","a":"ありません。多くの学生はお弁当持参、または近隣のお店で購入。学生ホールでランチできます。"},
-        {"q":"PC持ってないけど大丈夫？","a":"貸出用ノートPCとコンピューターラボがあります。空いている時間に利用可能です。"},
-        {"q":"高校生しか入学しませんか？","a":"社会人や大学卒業後の再進学の方も多いです。"},
-        {"q":"男女はどっちが多い？","a":"年度によりますが比較的女性が多め（目安6:4）。"},
-        {"q":"絵が苦手でもデザインできる？","a":"モデル制作、写真・映像など表現は様々。未経験者向けの基礎カリキュラムも整っています。"},
-        {"q":"働きながらでも通えますか？","a":"アルバイトと両立している学生は多数。授業は9:00〜16:10（曜日により午前のみ/午後のみあり）。"},
-        {"q":"テキスト代はいくら？","a":"学科により異なります。デザイン系は少なめ。保育・ホテルは必要科目のテキスト購入があります。"},
-        {"q":"初心者でもOK？","a":"もちろん。基礎から学べる未経験者向けカリキュラムです。"},
-        {"q":"先生は怖い？","a":"基本優しいです。必要なときはしっかり指導します。"},
-        {"q":"髪色やピアスは自由？","a":"基本自由。就活期は控えめにする学生が多いです。"},
-        {"q":"4月しか入学できませんか？","a":"入学時期は4月です。"},
-        {"q":"場所がよくわからない","a":"動画で道案内を用意。https://ndc.ac.jp/access/　迷ったらお電話ください。"},
-        {"q":"デザインやイラストの就職先はある？","a":"キャリアセンターに毎日のように求人が届きます。企業はデザイン人材を幅広く求めています。"},
-        {"q":"学費はいつまでに準備？","a":"出願区分で異なります（推薦・一般は合格通知発送日より3週間以内等）。AOは回次ごとに納入期日を設定。"},
-        {"q":"不登校でも大丈夫？","a":"まずはご相談ください。主任・担任・女性カウンセラーが連携し、安心できる環境を整えます。"},
-        {"q":"入学前に適性を見てほしい","a":"保護者の方とぜひオープンキャンパスへ。納得できるまでサポートします。"},
-        {"q":"昼食はどうする？","a":"お弁当・近隣購入・学生ホール利用など自由です。"},
-        {"q":"定期券は学割？","a":"適用されます（都知事認可校）。"},
-        {"q":"対人が難しい子のサポートは？","a":"事情を伺い最適な支援を検討。主任・担任・カウンセラーが対応します。"},
-        {"q":"奨学金の申し込みが遅れた","a":"まずはご相談ください。状況に応じて説明します。"},
-        {"q":"入学後の学費ローンは？","a":"日本学生支援機構・東京都育英資金の認定校です。詳細：https://ndc.ac.jp/prospectus/scholarships/"},
-        {"q":"高校中退ですが入学可能？","a":"高卒認定（旧大検）合格で出願可能です。"},
-        {"q":"交通費サポートはある？","a":"交通費サポートはありませんが、通学定期は学割が効きます。"},
-        {"q":"担任制ですか？","a":"担任制です。生活面のケア、課題の悩み、就職の不安まできめ細かくサポートします。"},
-        {"q":"希望する学科がなくても見学OK？","a":"もちろん。面白そうな講座から体験を。新しい発見があります。"},
-        {"q":"卒業して就職できなかったら？","a":"卒業後も内定まで継続サポートします。"},
-        {"q":"漫画やゲームが好きなだけでついていける？","a":"好奇心と“好き”が原動力。未経験からプロになった卒業生も多数。"},
-        {"q":"美大受験との違いは？","a":"美大は入学前に一定のスキルが必要。専門は入学後に基礎から学び、短期間で実務力へ。"},
-        {"q":"授業についていけない時は？","a":"担任に相談を。あなたに最適な方法を一緒に見つけます。"},
-        {"q":"海外留学はできますか？","a":"時期や提携状況により異なります。まずはご相談ください。"},
-        {"q":"平均評定はどのくらい必要？","a":"在籍校の評定が基準。欠席が多い等は事前にご相談ください。"},
-        {"q":"子供が何をやりたいか分からない","a":"見学やオープンキャンパスでスタッフと相談しましょう。方向性が見えてきます。"},
-        {"q":"保育こどもデザイン学科：保育士・幼稚園教諭は取れる？","a":"保育士は卒業と同時取得。幼稚園教諭二種は豊岡短大通信との併修で可。"},
-        {"q":"幼稚園教諭免許の学びは？","a":"4週間の幼稚園実習、実習準備科目、憲法など教員免許に必要な科目を学びます。"},
-        {"q":"製菓デザイン学科では？","a":"食品サンプル、パッケージ、企画・流通、マーケなど。発想×デザインで活躍人材を育成。"},
-        {"q":"イマジネーションデザイン学科では？","a":"映像制作、グラフィック、イラスト、マンガ、アニメ、ゲーム、広告など“表現”全般を横断的に学びます。"},
-        {"q":"コミックイラスト学科では？","a":"漫画家・イラストレーターを目指し、絵の基礎からプロ実践まで。"},
-        {"q":"コミックmanabi学科では？","a":"1年間で短期間でクリエイターに必要なスキルを学びます。オンラインでの授業参加も一部可能です"},
-        {"q":"保育こどもデザイン学科では？","a":"保育士だけでなく、おもちゃ・子ども服・遊び場のデザインなど子ども領域全般を学びます。"},
-        {"q":"ホテル観光学科では？","a":"本物の設備・備品を用いて技術とホスピタリティを習得します。"},
-        {"q":"国際コミュニケーションデザイン学科では？","a":"進学・就職に必要なコミュ力とデザイン領域のエッセンスを1年で学びます。"},
-        {"q":"出願方法は？","a":"AO・推薦・一般の3区分。AO入学の詳細：https://ndc.ac.jp/prospectus/admission-procedure/"},
-        {"q":"AO入学って？","a":"学力にとらわれず“やる気・目的意識・個性”を重視する選考です。"},
-        {"q":"高校既卒でもAOを選べる？","a":"問題ありません。新卒〜社会人まで幅広く在籍。"},
-        {"q":"AO入学の試験内容は？","a":"エントリーレポートとプレゼンテーション。学力テストは行いません。"},
-        {"q":"AO入学前教育サポートは？","a":"入学前から各分野の課題に取り組み、理解を深めます。"},
-        {"q":"AOに向いている人は？","a":"やりたいことがある／やる気を見てほしい／早期に進路を決めたい／入学前教育で準備したい、など。"},
-        {"q":"AO面談の服装は？","a":"自由（私服・制服・スーツ可）。清潔感のある服装がおすすめ。"},
-        {"q":"学校の雰囲気は？","a":"少人数でアットホーム。対話を大切にする“面倒見の良さ”が特長です。"},
-        {"q":"学費の分割はできますか？","a":"納入期限の延長や分割相談は個別に対応します。"},
-        {"q":"学生寮はありますか？","a":"提携の学生寮・賃貸を専門業者経由でご案内可能です。https://ndc.ac.jp/greeting/facility/"},
-        {"q":"学校説明会はどんなことをするの？","a":"在校生がリアルにお話しし、学べる内容・出願・学費などを説明。個別相談も実施します。"},
-        {"q":"出願の期限はいつですか？","a":"出願方法・期限は案内ページをご確認ください。https://ndc.ac.jp/prospectus/admission-procedure/"}
-      ]
-      </script>
-    </section>
-
     <!-- ===== 1分解説動画 ===== -->
     <section class="section shorts" id="shorts">
       <button class="glass-toggle" id="shortsToggle" type="button" aria-expanded="false" aria-controls="shortsPanel">
         <span class="dot"></span><strong>1分解説動画を開く</strong><small>（縦動画・ショート）</small>
       </button>
+
+      <!-- ▼ ちいさなサムネ行（追加） -->
+      <div id="shortsThumbs" class="shorts-thumbs" aria-label="1分解説サムネール"></div>
 
       <div id="shortsPanel" aria-hidden="true">
         <div class="s-card">
@@ -732,6 +689,101 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- ===== よくある質問（検索つき） ——— 最後に配置 ===== -->
+    <section class="section" id="qa">
+      <h2 class="section-title hand reveal js-hand">よくある質問<span class="underline"></span></h2>
+
+      <div class="qa-head">
+        <div class="qa-input" id="qaInputBox">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#64748b" d="M15.5 14h-.79l-.28-.27a6.471 6.471 0 0 0 1.57-4.23C15.99 6.01 13.98 4 11.5 4S7.01 6.01 7.01 9.5 9.02 15 11.5 15c1.61 0 3.06-.59 4.23-1.57l.27.28v.79l4.25 4.25 1.49-1.49L15.5 14zm-4 0C9.01 14 7 11.99 7 9.5S9.01 5 11.5 5 16 7.01 16 9.5 13.99 14 11.5 14z"/></svg>
+          <input id="qaQuery" type="search" placeholder="例）学費　就職　AO　アクセス など" inputmode="search" />
+        </div>
+        <button class="qa-btn" id="qaGo" type="button">検索で該当へ</button>
+      </div>
+
+      <!-- ▼ 検索タグ -->
+      <div class="qa-tags" aria-label="検索タグ">
+        <button class="qa-tag" type="button">学費</button>
+        <button class="qa-tag" type="button">就職</button>
+        <button class="qa-tag" type="button">AO</button>
+        <button class="qa-tag" type="button">アクセス</button>
+        <button class="qa-tag" type="button">奨学金</button>
+        <button class="qa-tag" type="button">分割</button>
+        <button class="qa-tag" type="button">寮</button>
+        <button class="qa-tag" type="button">留学</button>
+      </div>
+
+      <div id="qaMsg" class="qa-notice" aria-live="polite"></div>
+
+      <div id="qaList" aria-live="polite"></div>
+
+      <!-- Q&A データ（編集しやすいJSON） -->
+      <script id="qaData" type="application/json">
+      [
+        {"q":"この学校では何が学べますか？","a":"デザイン、食品サンプル、映像、マンガ、ゲームキャラクター、コミックイラスト、保育士の学び、ホテル観光など多分野を用意しています。"},
+        {"q":"デザインって何ですか？","a":"生活をより豊かにするための手段です。日々の“気づき”から、便利・面白い・可愛い・過ごしやすいなどの解決を導きます。"},
+        {"q":"大学とは何が違うの？","a":"大学は学術的・理論的な学びと幅広い教養。専門学校は実践的な職業教育で、短期間で即戦力を目指します。"},
+        {"q":"就職するのに有利な学科はどれ？","a":"どの学科も就職サポートが充実。電話のかけ方、面接、ポートフォリオまで徹底支援。主任・担任・キャリアセンターが連携します。"},
+        {"q":"遅刻や欠席があると入学は難しいですか？","a":"そんなことはありません。理由があるはずなので、まずはご相談ください。良い解決方法を一緒に考えます。"},
+        {"q":"AOはなにをやりますか？","a":"エントリーレポート提出とプレゼンテーション（面接）。“好き”への想いを言語化し、当日アピールしてください。"},
+        {"q":"課題は多い？ 何が出る？","a":"将来の夢に向けたプロセスを重視して課題を出します。分からないことは先生がきめ細かくサポートします。"},
+        {"q":"学食ありますか？","a":"ありません。多くの学生はお弁当持参、または近隣のお店で購入。学生ホールでランチできます。"},
+        {"q":"PC持ってないけど大丈夫？","a":"貸出用ノートPCとコンピューターラボがあります。空いている時間に利用可能です。"},
+        {"q":"高校生しか入学しませんか？","a":"社会人や大学卒業後の再進学の方も多いです。"},
+        {"q":"男女はどっちが多い？","a":"年度によりますが比較的女性が多め（目安6:4）。"},
+        {"q":"絵が苦手でもデザインできる？","a":"モデル制作、写真・映像など表現は様々。未経験者向けの基礎カリキュラムも整っています。"},
+        {"q":"働きながらでも通えますか？","a":"アルバイトと両立している学生は多数。授業は9:00〜16:10（曜日により午前のみ/午後のみあり）。"},
+        {"q":"テキスト代はいくら？","a":"学科により異なります。デザイン系は少なめ。保育・ホテルは必要科目のテキスト購入があります。"},
+        {"q":"初心者でもOK？","a":"もちろん。基礎から学べる未経験者向けカリキュラムです。"},
+        {"q":"先生は怖い？","a":"基本優しいです。必要なときはしっかり指導します。"},
+        {"q":"髪色やピアスは自由？","a":"基本自由。就活期は控えめにする学生が多いです。"},
+        {"q":"4月しか入学できませんか？","a":"入学時期は4月です。"},
+        {"q":"場所がよくわからない","a":"動画で道案内を用意。https://ndc.ac.jp/access/　迷ったらお電話ください。"},
+        {"q":"デザインやイラストの就職先はある？","a":"キャリアセンターに毎日のように求人が届きます。企業はデザイン人材を幅広く求めています。"},
+        {"q":"学費はいつまでに準備？","a":"出願区分で異なります（推薦・一般は合格通知発送日より3週間以内等）。AOは回次ごとに納入期日を設定。"},
+        {"q":"不登校でも大丈夫？","a":"まずはご相談ください。主任・担任・女性カウンセラーが連携し、安心できる環境を整えます。"},
+        {"q":"入学前に適性を見てほしい","a":"保護者の方とぜひオープンキャンパスへ。納得できるまでサポートします。"},
+        {"q":"昼食はどうする？","a":"お弁当・近隣購入・学生ホール利用など自由です。"},
+        {"q":"定期券は学割？","a":"適用されます（都知事認可校）。"},
+        {"q":"対人が難しい子のサポートは？","a":"事情を伺い最適な支援を検討。主任・担任・カウンセラーが対応します。"},
+        {"q":"奨学金の申し込みが遅れた","a":"まずはご相談ください。状況に応じて説明します。"},
+        {"q":"入学後の学費ローンは？","a":"日本学生支援機構・東京都育英資金の認定校です。詳細：https://ndc.ac.jp/prospectus/scholarships/"},
+        {"q":"高校中退ですが入学可能？","a":"高卒認定（旧大検）合格で出願可能です。"},
+        {"q":"交通費サポートはある？","a":"交通費サポートはありませんが、通学定期は学割が効きます。"},
+        {"q":"担任制ですか？","a":"担任制です。生活面のケア、課題の悩み、就職の不安まできめ細かくサポートします。"},
+        {"q":"希望する学科がなくても見学OK？","a":"もちろん。面白そうな講座から体験を。新しい発見があります。"},
+        {"q":"卒業して就職できなかったら？","a":"卒業後も内定まで継続サポートします。"},
+        {"q":"漫画やゲームが好きなだけでついていける？","a":"好奇心と“好き”が原動力。未経験からプロになった卒業生も多数。"},
+        {"q":"美大受験との違いは？","a":"美大は入学前に一定のスキルが必要。専門は入学後に基礎から学び、短期間で実務力へ。"},
+        {"q":"授業についていけない時は？","a":"担任に相談を。あなたに最適な方法を一緒に見つけます。"},
+        {"q":"海外留学はできますか？","a":"時期や提携状況により異なります。まずはご相談ください。"},
+        {"q":"平均評定はどのくらい必要？","a":"在籍校の評定が基準。欠席が多い等は事前にご相談ください。"},
+        {"q":"子供が何をやりたいか分からない","a":"見学やオープンキャンパスでスタッフと相談しましょう。方向性が見えてきます。"},
+        {"q":"保育こどもデザイン学科：保育士・幼稚園教諭は取れる？","a":"保育士は卒業と同時取得。幼稚園教諭二種は豊岡短大通信との併修で可。"},
+        {"q":"幼稚園教諭免許の学びは？","a":"4週間の幼稚園実習、実習準備科目、憲法など教員免許に必要な科目を学びます。"},
+        {"q":"製菓デザイン学科では？","a":"食品サンプル、パッケージ、企画・流通、マーケなど。発想×デザインで活躍人材を育成。"},
+        {"q":"イマジネーションデザイン学科では？","a":"映像制作、グラフィック、イラスト、マンガ、アニメ、ゲーム、広告など“表現”全般を横断的に学びます。"},
+        {"q":"コミックイラスト学科では？","a":"漫画家・イラストレーターを目指し、絵の基礎からプロ実践まで。"},
+        {"q":"コミックmanabi学科では？","a":"1年間で短期間でクリエイターに必要なスキルを学びます。オンラインでの授業参加も一部可能です"},
+        {"q":"保育こどもデザイン学科では？","a":"保育士だけでなく、おもちゃ・子ども服・遊び場のデザインなど子ども領域全般を学びます。"},
+        {"q":"ホテル観光学科では？","a":"本物の設備・備品を用いて技術とホスピタリティを習得します。"},
+        {"q":"国際コミュニケーションデザイン学科では？","a":"進学・就職に必要なコミュ力とデザイン領域のエッセンスを1年で学びます。"},
+        {"q":"出願方法は？","a":"AO・推薦・一般の3区分。AO入学の詳細：https://ndc.ac.jp/prospectus/admission-procedure/"},
+        {"q":"AO入学って？","a":"学力にとらわれず“やる気・目的意識・個性”を重視する選考です。"},
+        {"q":"高校既卒でもAOを選べる？","a":"問題ありません。新卒〜社会人まで幅広く在籍。"},
+        {"q":"AO入学の試験内容は？","a":"エントリーレポートとプレゼンテーション。学力テストは行いません。"},
+        {"q":"AO入学前教育サポートは？","a":"入学前から各分野の課題に取り組み、理解を深めます。"},
+        {"q":"AOに向いている人は？","a":"やりたいことがある／やる気を見てほしい／早期に進路を決めたい／入学前教育で準備したい、など。"},
+        {"q":"AO面談の服装は？","a":"自由（私服・制服・スーツ可）。清潔感のある服装がおすすめ。"},
+        {"q":"学校の雰囲気は？","a":"少人数でアットホーム。対話を大切にする“面倒見の良さ”が特長です。"},
+        {"q":"学費の分割はできますか？","a":"納入期限の延長や分割相談は個別に対応します。"},
+        {"q":"学生寮はありますか？","a":"提携の学生寮・賃貸を専門業者経由でご案内可能です。https://ndc.ac.jp/greeting/facility/"},
+        {"q":"学校説明会はどんなことをするの？","a":"在校生がリアルにお話しし、学べる内容・出願・学費などを説明。個別相談も実施します。"},
+        {"q":"出願の期限はいつですか？","a":"出願方法・期限は案内ページをご確認ください。https://ndc.ac.jp/prospectus/admission-procedure/"}
+      ]
+      </script>
     </section>
 
   </main>
@@ -886,12 +938,52 @@
       });
     });
 
+    /* ▼ ちいさなサムネを自動生成（追加） */
+    function getVideoId(url){
+      const m = url.match(/shorts\/([A-Za-z0-9_-]{6,})/) ||
+                url.match(/[?&]v=([A-Za-z0-9_-]{6,})/) ||
+                url.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/);
+      return m ? m[1] : null;
+    }
+    function buildShortsThumbs(){
+      const holder = document.getElementById('shortsThumbs');
+      if(!holder) return;
+      holder.innerHTML = '';
+      document.querySelectorAll('#shortsPanel .s-card').forEach(card=>{
+        const playBtn = card.querySelector('.s-icon.play[data-video]');
+        if(!playBtn) return;
+        const url = playBtn.getAttribute('data-video');
+        const id = getVideoId(url);
+        if(!id) return;
+        const title = (card.querySelector('.s-title')?.textContent || '1分解説').trim();
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'thumb';
+        btn.setAttribute('aria-label', `${title} を再生`);
+        btn.innerHTML = `
+          <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="${title}">
+          <span class="play">▶</span>
+          <span class="label">1分</span>
+        `;
+        btn.addEventListener('click',()=>{
+          if(!panel.classList.contains('open')){
+            panel.classList.add('open');
+            panel.setAttribute('aria-hidden','false');
+            toggle.setAttribute('aria-expanded','true');
+          }
+          openPlayer(url);
+        });
+        holder.appendChild(btn);
+      });
+    }
+    buildShortsThumbs();
+
     /* ▼ サイト内再生（YouTube） */
     const backdrop=document.getElementById('ytBackdrop');
     const frame=document.getElementById('ytFrame');
     function toEmbed(url){
       try{
-        const m=url.match(/shorts\/([A-Za-z0-9_-]{6,})/) || url.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/);
+        const m=url.match(/shorts\/([A-Za-z0-9_-]{6,})/) || url.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/) || url.match(/[?&]v=([A-Za-z0-9_-]{6,})/);
         const id=m?m[1]:null;
         return id ? `https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0` : '';
       }catch(_){ return ''; }
@@ -935,7 +1027,6 @@
         return;
       }
       qaMsg.classList.remove('show');
-      // 該当項目を開いてスクロール
       const el = qaListEl.querySelector(`.qa-item[data-idx="${idx}"]`);
       if(el){
         el.open = true;
@@ -947,11 +1038,19 @@
     qaGo.addEventListener('click', searchQA);
     qaQuery.addEventListener('keydown', e=>{ if(e.key==='Enter') searchQA(); });
 
-    /* 学校名バッジとQA検索バーの重なり回避（←今回の修正） */
+    /* ▼ 検索タグの挙動：クリックで検索実行（単一ワード） */
+    document.querySelectorAll('.qa-tag').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        qaQuery.value = btn.textContent.trim();
+        searchQA();
+      });
+    });
+
+    /* 学校名バッジとQA検索バーの重なり回避（既存） */
     (function setQaHeadOffset(){
       const root = document.documentElement;
       const SITE_SELECTOR = '.site-title';
-      const GAP = 8; // 学校名バッジの下に少し余白
+      const GAP = 8;
       function updateOffset(){
         const st = document.querySelector(SITE_SELECTOR);
         let top = 0;
