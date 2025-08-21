@@ -119,7 +119,6 @@
       position:absolute; inset:0; width:100%; height:100%;
       object-fit:cover; object-position:center 35%;
     }
-    /* 上部は透明、下部だけ薄く暗く */
     .hero-overlay{
       position:absolute; inset:0;
       background:linear-gradient(180deg,rgba(0,0,0,0) 0 55%,rgba(0,0,0,.18) 82%,rgba(0,0,0,.25));
@@ -253,6 +252,17 @@
     }
     .sticky-cta .btn{height:46px}
     .sticky-cta.show{bottom:0}
+    /* ▼ 文字はみ出し対策（固定CTAのみ） */
+    @media (max-width:420px){
+      .sticky-cta .btn{
+        white-space:normal;
+        line-height:1.2;
+        height:auto; min-height:46px;
+        padding:8px 10px;
+        text-align:center;
+        font-size:clamp(12px,3.6vw,14px);
+      }
+    }
 
     /* ===== Reveal / Parallax ===== */
     .reveal{opacity:0; transform:translateY(26px)}
@@ -268,9 +278,9 @@
     /* ===== 1分解説動画 ===== */
     .shorts{padding:34px 0 20px}
     .glass-toggle{
-      width:min(900px,92vw); margin:0 auto 10px;
+      width:min(900px,92vw); margin:0 auto 14px;
       display:flex; align-items:center; justify-content:center; gap:.6ch;
-      padding:14px 18px; border-radius:999px; font-weight:900;
+      padding:16px 18px; border-radius:999px; font-weight:900;
       color:#0b1224; text-decoration:none; cursor:pointer;
       background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.32));
       box-shadow:0 10px 28px rgba(15,23,42,.16), inset 0 1px 0 rgba(255,255,255,.6);
@@ -279,35 +289,10 @@
       border:1px solid rgba(255,255,255,.7);
     }
     .glass-toggle .dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(#7bd6ff,#1480ff)}
-    .glass-toggle small{opacity:.7;font-weight:700}
+    .glass-toggle strong{font-size:clamp(15px,4.6vw,20px)}
+    .glass-toggle small{opacity:.7;font-weight:700;font-size:clamp(12px,3.6vw,14px)}
     #shortsPanel{display:none}
     #shortsPanel.open{display:block}
-
-    /* ▼ 小さなサムネ（新規追加） */
-    .shorts-thumbs{
-      width:min(900px,92vw); margin:6px auto 12px;
-      display:grid; grid-auto-flow:column; grid-auto-columns:100px;
-      gap:10px; overflow-x:auto; padding:2px;
-      -webkit-overflow-scrolling:touch;
-    }
-    .thumb{
-      position:relative; border:none; background:transparent; padding:0; cursor:pointer;
-      border-radius:12px; overflow:hidden;
-      box-shadow:0 8px 18px rgba(15,23,42,.16), inset 0 1px 0 rgba(255,255,255,.45);
-    }
-    .thumb img{width:100%; aspect-ratio:9/16; object-fit:cover; display:block}
-    .thumb .play{
-      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-      width:26px; height:26px; border-radius:50%;
-      background:rgba(255,255,255,.9); display:grid; place-items:center;
-      font-weight:900; line-height:1;
-      box-shadow:0 4px 10px rgba(0,0,0,.2);
-    }
-    .thumb .label{
-      position:absolute; left:6px; bottom:6px; padding:.12rem .45rem; border-radius:999px;
-      background:rgba(0,0,0,.6); color:#fff; font-weight:900; font-size:10.5px;
-    }
-    .thumb:active{transform:translateY(1px)}
 
     .s-card{
       width:min(900px,92vw); margin:12px auto; padding:14px; border-radius:18px;
@@ -358,7 +343,7 @@
 
     /* ====== よくある質問（QA） ====== */
     #qa .qa-head{
-      display:flex; gap:10px; align-items:center; justify-content:space-between; margin:6px 0 10px;
+      display:flex; gap:10px; align-items:center; justify-content:space-between; margin:6px 0 14px;
       position:sticky; top:var(--qa-top, 0px); z-index:5;
       background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.65));
       -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
@@ -382,16 +367,6 @@
     .qa-item .answer{padding:0 16px 14px; color:#334155}
     .flash{animation:flash 1.1s ease}
     @keyframes flash{0%{box-shadow:0 0 0 0 rgba(20,128,255,.65)} 100%{box-shadow:0 0 0 18px rgba(20,128,255,0)}}
-
-    /* ▼ 検索タグ */
-    .qa-tags{width:min(900px,92vw); margin:6px auto 0; display:flex; flex-wrap:wrap; gap:6px}
-    .qa-tag{
-      appearance:none; border:none; cursor:pointer;
-      padding:.35rem .7rem; border-radius:999px; font-weight:800; font-size:13px;
-      background:linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.12));
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.45), 0 6px 14px rgba(15,23,42,.12);
-    }
-    .qa-tag:active{transform:translateY(1px)}
   </style>
 </head>
 <body>
@@ -414,9 +389,9 @@
       <p class="lead"><span class="dot"></span><span class="lead-text">私たちOCサポーターも、進路に悩んだ高校生でした。</span></p>
 
       <h1 class="title">
-        <span>そんな私たちが、</span>
-        <span>この学校を選んだ</span>
-        <span>“きっかけ”教えます。</span>
+        <span>迷いはスタートライン。</span>
+        <span>体験と先輩の本音で、</span>
+        <span>答えに近づく。</span>
       </h1>
 
       <!-- ★ガラス質感バッジ -->
@@ -588,14 +563,11 @@
       </ul>
     </section>
 
-    <!-- ===== 1分解説動画 ===== -->
+    <!-- ===== 1分解説動画（※FAQの直前に配置） ===== -->
     <section class="section shorts" id="shorts">
       <button class="glass-toggle" id="shortsToggle" type="button" aria-expanded="false" aria-controls="shortsPanel">
         <span class="dot"></span><strong>1分解説動画を開く</strong><small>（縦動画・ショート）</small>
       </button>
-
-      <!-- ▼ ちいさなサムネ行（追加） -->
-      <div id="shortsThumbs" class="shorts-thumbs" aria-label="1分解説サムネール"></div>
 
       <div id="shortsPanel" aria-hidden="true">
         <div class="s-card">
@@ -691,30 +663,17 @@
       </div>
     </section>
 
-    <!-- ===== よくある質問（検索つき） ——— 最後に配置 ===== -->
+    <!-- ===== よくある質問（検索つき） ※ページ最下部 ===== -->
     <section class="section" id="qa">
       <h2 class="section-title hand reveal js-hand">よくある質問<span class="underline"></span></h2>
 
       <div class="qa-head">
         <div class="qa-input" id="qaInputBox">
           <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#64748b" d="M15.5 14h-.79l-.28-.27a6.471 6.471 0 0 0 1.57-4.23C15.99 6.01 13.98 4 11.5 4S7.01 6.01 7.01 9.5 9.02 15 11.5 15c1.61 0 3.06-.59 4.23-1.57l.27.28v.79l4.25 4.25 1.49-1.49L15.5 14zm-4 0C9.01 14 7 11.99 7 9.5S9.01 5 11.5 5 16 7.01 16 9.5 13.99 14 11.5 14z"/></svg>
-          <input id="qaQuery" type="search" placeholder="例）学費　就職　AO　アクセス など" inputmode="search" />
+          <input id="qaQuery" type="search" placeholder="例）学費　AO　アクセス など" inputmode="search" />
         </div>
         <button class="qa-btn" id="qaGo" type="button">検索で該当へ</button>
       </div>
-
-      <!-- ▼ 検索タグ -->
-      <div class="qa-tags" aria-label="検索タグ">
-        <button class="qa-tag" type="button">学費</button>
-        <button class="qa-tag" type="button">就職</button>
-        <button class="qa-tag" type="button">AO</button>
-        <button class="qa-tag" type="button">アクセス</button>
-        <button class="qa-tag" type="button">奨学金</button>
-        <button class="qa-tag" type="button">分割</button>
-        <button class="qa-tag" type="button">寮</button>
-        <button class="qa-tag" type="button">留学</button>
-      </div>
-
       <div id="qaMsg" class="qa-notice" aria-live="polite"></div>
 
       <div id="qaList" aria-live="polite"></div>
@@ -766,7 +725,7 @@
         {"q":"製菓デザイン学科では？","a":"食品サンプル、パッケージ、企画・流通、マーケなど。発想×デザインで活躍人材を育成。"},
         {"q":"イマジネーションデザイン学科では？","a":"映像制作、グラフィック、イラスト、マンガ、アニメ、ゲーム、広告など“表現”全般を横断的に学びます。"},
         {"q":"コミックイラスト学科では？","a":"漫画家・イラストレーターを目指し、絵の基礎からプロ実践まで。"},
-        {"q":"コミックmanabi学科では？","a":"1年間で短期間でクリエイターに必要なスキルを学びます。オンラインでの授業参加も一部可能です"},
+        {"q":"コミックmanabi学科では？","a":"1年間で短期間でクリエイターに必要なスキルを学びます。オンラインでの授業参加も一部可能です。"},
         {"q":"保育こどもデザイン学科では？","a":"保育士だけでなく、おもちゃ・子ども服・遊び場のデザインなど子ども領域全般を学びます。"},
         {"q":"ホテル観光学科では？","a":"本物の設備・備品を用いて技術とホスピタリティを習得します。"},
         {"q":"国際コミュニケーションデザイン学科では？","a":"進学・就職に必要なコミュ力とデザイン領域のエッセンスを1年で学びます。"},
@@ -938,52 +897,12 @@
       });
     });
 
-    /* ▼ ちいさなサムネを自動生成（追加） */
-    function getVideoId(url){
-      const m = url.match(/shorts\/([A-Za-z0-9_-]{6,})/) ||
-                url.match(/[?&]v=([A-Za-z0-9_-]{6,})/) ||
-                url.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/);
-      return m ? m[1] : null;
-    }
-    function buildShortsThumbs(){
-      const holder = document.getElementById('shortsThumbs');
-      if(!holder) return;
-      holder.innerHTML = '';
-      document.querySelectorAll('#shortsPanel .s-card').forEach(card=>{
-        const playBtn = card.querySelector('.s-icon.play[data-video]');
-        if(!playBtn) return;
-        const url = playBtn.getAttribute('data-video');
-        const id = getVideoId(url);
-        if(!id) return;
-        const title = (card.querySelector('.s-title')?.textContent || '1分解説').trim();
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'thumb';
-        btn.setAttribute('aria-label', `${title} を再生`);
-        btn.innerHTML = `
-          <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="${title}">
-          <span class="play">▶</span>
-          <span class="label">1分</span>
-        `;
-        btn.addEventListener('click',()=>{
-          if(!panel.classList.contains('open')){
-            panel.classList.add('open');
-            panel.setAttribute('aria-hidden','false');
-            toggle.setAttribute('aria-expanded','true');
-          }
-          openPlayer(url);
-        });
-        holder.appendChild(btn);
-      });
-    }
-    buildShortsThumbs();
-
     /* ▼ サイト内再生（YouTube） */
     const backdrop=document.getElementById('ytBackdrop');
     const frame=document.getElementById('ytFrame');
     function toEmbed(url){
       try{
-        const m=url.match(/shorts\/([A-Za-z0-9_-]{6,})/) || url.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/) || url.match(/[?&]v=([A-Za-z0-9_-]{6,})/);
+        const m=url.match(/shorts\/([A-Za-z0-9_-]{6,})/) || url.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/);
         const id=m?m[1]:null;
         return id ? `https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0` : '';
       }catch(_){ return ''; }
@@ -1038,15 +957,7 @@
     qaGo.addEventListener('click', searchQA);
     qaQuery.addEventListener('keydown', e=>{ if(e.key==='Enter') searchQA(); });
 
-    /* ▼ 検索タグの挙動：クリックで検索実行（単一ワード） */
-    document.querySelectorAll('.qa-tag').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        qaQuery.value = btn.textContent.trim();
-        searchQA();
-      });
-    });
-
-    /* 学校名バッジとQA検索バーの重なり回避（既存） */
+    /* 学校名バッジとQA検索バーの重なり回避 */
     (function setQaHeadOffset(){
       const root = document.documentElement;
       const SITE_SELECTOR = '.site-title';
