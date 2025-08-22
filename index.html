@@ -21,7 +21,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet" />
   <!-- 見出し用フォント -->
   <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet" />
-  <!-- ヒーロー画像を先読み（確実表示用） -->
+  <!-- ヒーロー画像を先読み -->
   <link rel="preload" as="image" href="images/Google_AI_Studio_2025-07-16T07_54_39.403Z.png" fetchpriority="high">
 
   <style>
@@ -38,7 +38,7 @@
       --shadow:0 14px 34px rgba(15,23,42,.16);
       --r:18px;
       --badge:130px;
-      --qa-top: 0px; /* ← QA検索バーの動的オフセット（JSで更新） */
+      --qa-top: 0px; /* QA検索バーの動的オフセット（JSで更新） */
     }
 
     body{
@@ -57,7 +57,6 @@
       background-repeat:no-repeat;
       background-size:cover,cover,cover,cover;
       background-position:10% -10%, 95% 0%, 50% 115%, 0 0;
-      will-change:transform;
       transform:translateZ(0);
     }
 
@@ -65,29 +64,12 @@
     .section{padding:28px 0;position:relative}
     .muted{color:var(--muted)}
 
-    /* ===== 手書き見出し（1文字出現） ===== */
-    .section-title{
-      margin:0 0 16px; font-weight:900;
-      font-size:clamp(20px,5.8vw,28px); letter-spacing:.02em;
-      position:relative;
-    }
-    .section-title.hand{
-      font-family:'Zen Kaku Gothic New','Noto Sans JP',sans-serif;
-      font-weight:900; line-height:1.22; text-shadow:none;
-    }
-    .section-title .underline{
-      display:block; height:6px; width:100%;
-      background:linear-gradient(90deg,#7bd6ff,#1480ff);
-      border-radius:6px; opacity:.95; margin-top:8px; position:relative; overflow:hidden;
-    }
-    .section-title.in .underline::after{
-      content:""; position:absolute; inset:0;
-      transform:translateX(-120%) skewX(-20deg);
-      background:linear-gradient(120deg,transparent,rgba(255,255,255,.7),transparent);
-      animation:u-shine .9s ease .2s forwards;
-    }
+    /* ===== 手書き見出し ===== */
+    .section-title{margin:0 0 16px; font-weight:900; font-size:clamp(20px,5.8vw,28px); letter-spacing:.02em; position:relative}
+    .section-title.hand{font-family:'Zen Kaku Gothic New','Noto Sans JP',sans-serif; font-weight:900; line-height:1.22}
+    .section-title .underline{display:block; height:6px; width:100%; background:linear-gradient(90deg,#7bd6ff,#1480ff); border-radius:6px; opacity:.95; margin-top:8px; position:relative; overflow:hidden}
+    .section-title.in .underline::after{content:""; position:absolute; inset:0; transform:translateX(-120%) skewX(-20deg); background:linear-gradient(120deg,transparent,rgba(255,255,255,.7),transparent); animation:u-shine .9s ease .2s forwards}
     @keyframes u-shine{to{transform:translateX(120%) skewX(-20deg)}}
-
     .hand span.char{display:inline-block;opacity:0;transform:translateY(14px) rotate(var(--rot,0)) scale(.92);filter:blur(2px)}
     .hand.in span.char{animation:charPop .6s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--d,0ms)}
     @keyframes charPop{40%{transform:translateY(-6px) rotate(var(--rot,0)) scale(1.02);filter:blur(0);opacity:1}100%{transform:translateY(0) rotate(0) scale(1);filter:blur(0);opacity:1}}
@@ -119,81 +101,35 @@
       position:absolute; inset:0; width:100%; height:100%;
       object-fit:cover; object-position:center 35%;
     }
-    .hero-overlay{
-      position:absolute; inset:0;
-      background:linear-gradient(180deg,rgba(0,0,0,0) 0 55%,rgba(0,0,0,.18) 82%,rgba(0,0,0,.25));
+    .hero-overlay{position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,0) 0 55%,rgba(0,0,0,.18) 82%,rgba(0,0,0,.25))}
+    .hero-inner{position:relative; z-index:1; width:100%; padding:min(8svh,60px) 0 20px}
+
+    /* ★PCなど横長画面だけ上に寄せて顔が切れないように */
+    @media (min-width: 900px){
+      .hero{min-height:68svh}
+      .hero .hero-bg{object-position:center 24%}
     }
-    .hero-inner{
-      position:relative; z-index:1; width:100%;
-      padding: min(8svh, 60px) 0 20px;
+    @media (min-width: 1200px){
+      .hero .hero-bg{object-position:center 20%}
     }
 
-    /* リード（見出しの上） */
-    .lead{
-      width:min(900px,92vw); margin:0 auto 8px;
-      background:rgba(255,255,255,.24); backdrop-filter:blur(2px);
-      border-radius:999px; padding:8px 14px; font-weight:700; font-size:14px;
-      display:flex; gap:.6ch; align-items:center;
-      box-shadow:0 10px 14px rgba(0,0,0,.05)
-    }
+    /* リード */
+    .lead{width:min(900px,92vw); margin:0 auto 8px; background:rgba(255,255,255,.24); backdrop-filter:blur(2px); border-radius:999px; padding:8px 14px; font-weight:700; font-size:14px; display:flex; gap:.6ch; align-items:center; box-shadow:0 10px 14px rgba(0,0,0,.05)}
     .lead .dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(#7bd6ff,#1480ff)}
     .lead .lead-text{white-space:nowrap}
 
-    /* ヒーロー見出し：白＋濃紺の縁取り */
-    .title{
-      width:min(900px,92vw);
-      margin:0 auto 10px;
-      font-weight:900;
-      font-size:clamp(22px,6.5vw,34px);
-      line-height:1.16;
-      color:#fff;
-    }
-    .title span{
-      display:block;
-      text-shadow:
-        1.2px  1.2px 0 rgba(17,34,68,.88),
-       -1.2px  1.2px 0 rgba(17,34,68,.88),
-        1.2px -1.2px 0 rgba(17,34,68,.88),
-       -1.2px -1.2px 0 rgba(17,34,68,.88),
-        0 2px 6px rgba(13,32,70,.35);
-    }
+    /* ヒーロー見出し */
+    .title{width:min(900px,92vw); margin:0 auto 10px; font-weight:900; font-size:clamp(22px,6.5vw,34px); line-height:1.16; color:#fff}
+    .title span{display:block; text-shadow:1.2px 1.2px 0 rgba(17,34,68,.88), -1.2px 1.2px 0 rgba(17,34,68,.88), 1.2px -1.2px 0 rgba(17,34,68,.88), -1.2px -1.2px 0 rgba(17,34,68,.88), 0 2px 6px rgba(13,32,70,.35)}
 
-    /* ガラス質感バッジ（1列スクロール・高透明） */
-    .glass-badges{
-      width:min(900px,92vw);
-      margin:8px auto 12px;
-      display:flex; gap:8px; flex-wrap:nowrap;
-      overflow-x:auto; -webkit-overflow-scrolling:touch;
-    }
-    .g-badge{
-      display:inline-flex; align-items:center; gap:.5ch;
-      padding:8px 12px; border-radius:999px; font-weight:900; font-size:12px;
-      color:#0b1224; white-space:nowrap;
-      background:linear-gradient(180deg,rgba(255,255,255,.32),rgba(255,255,255,.16));
-      border:1px solid rgba(255,255,255,.65);
-      -webkit-backdrop-filter: blur(8px) saturate(1.05);
-      backdrop-filter: blur(8px) saturate(1.05);
-      box-shadow:0 10px 22px rgba(15,23,42,.10), inset 0 1px 0 rgba(255,255,255,.7);
-    }
+    /* ガラス質感バッジ */
+    .glass-badges{width:min(900px,92vw); margin:8px auto 12px; display:flex; gap:8px; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch}
+    .g-badge{display:inline-flex; align-items:center; gap:.5ch; padding:8px 12px; border-radius:999px; font-weight:900; font-size:12px; color:#0b1224; white-space:nowrap; background:linear-gradient(180deg,rgba(255,255,255,.32),rgba(255,255,255,.16)); border:1px solid rgba(255,255,255,.65); -webkit-backdrop-filter: blur(8px) saturate(1.05); backdrop-filter: blur(8px) saturate(1.05); box-shadow:0 10px 22px rgba(15,23,42,.10), inset 0 1px 0 rgba(255,255,255,.7)}
 
     /* Buttons */
     .btnrow{width:min(900px,92vw); margin:0 auto; display:flex; gap:10px}
-    .btn{
-      --c1:#000; --c2:#333;
-      flex:1; display:flex; justify-content:center; align-items:center; gap:.5ch;
-      height:48px; padding:0 14px; border-radius:999px; font-weight:900;
-      font-size:clamp(12px,3.3vw,14px);
-      color:#fff; text-decoration:none;
-      position:relative; overflow:hidden; white-space:nowrap;
-      background:linear-gradient(180deg,var(--c1),var(--c2));
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 10px 22px rgba(15,23,42,.20);
-      isolation:isolate;
-    }
-    .btn::before{
-      content:""; position:absolute; inset:0 0 55% 0;
-      background:linear-gradient(180deg,rgba(255,255,255,.45),transparent);
-      pointer-events:none; z-index:0;
-    }
+    .btn{--c1:#000; --c2:#333; flex:1; display:flex; justify-content:center; align-items:center; gap:.5ch; height:48px; padding:0 14px; border-radius:999px; font-weight:900; font-size:clamp(12px,3.3vw,14px); color:#fff; text-decoration:none; position:relative; overflow:hidden; white-space:nowrap; background:linear-gradient(180deg,var(--c1),var(--c2)); box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 10px 22px rgba(15,23,42,.20)}
+    .btn::before{content:""; position:absolute; inset:0 0 55% 0; background:linear-gradient(180deg,rgba(255,255,255,.45),transparent)}
     .btn:active{transform:translateY(1px)}
     .btn-blue{--c1:#2b8dff; --c2:#0f6de0}
     .btn-messaging{--c1:var(--line); --c2:var(--line2)}
@@ -201,12 +137,7 @@
 
     /* “キラッ” */
     .sweep{position:relative; overflow:hidden}
-    .sweep.in::after{
-      content:""; position:absolute; inset:0;
-      transform:translateX(-120%) skewX(-20deg);
-      background:linear-gradient(120deg,transparent,rgba(255,255,255,.42),transparent);
-      animation:shine .9s ease forwards;
-    }
+    .sweep.in::after{content:""; position:absolute; inset:0; transform:translateX(-120%) skewX(-20deg); background:linear-gradient(120deg,transparent,rgba(255,255,255,.42),transparent); animation:shine .9s ease forwards}
     @keyframes shine{to{transform:translateX(120%) skewX(-20deg)}}
 
     /* ===== Grid / Card ===== */
@@ -252,17 +183,6 @@
     }
     .sticky-cta .btn{height:46px}
     .sticky-cta.show{bottom:0}
-    /* ▼ 文字はみ出し対策（固定CTAのみ） */
-    @media (max-width:420px){
-      .sticky-cta .btn{
-        white-space:normal;
-        line-height:1.2;
-        height:auto; min-height:46px;
-        padding:8px 10px;
-        text-align:center;
-        font-size:clamp(12px,3.6vw,14px);
-      }
-    }
 
     /* ===== Reveal / Parallax ===== */
     .reveal{opacity:0; transform:translateY(26px)}
@@ -275,70 +195,37 @@
     #flow .section-title{letter-spacing:-0.02em; line-height:1.16}
     #flow .section-title.hand span.char{margin-right:-0.02em}
 
-    /* ===== 1分解説動画 ===== */
+    /* ===== 1分解説動画（既存） ===== */
     .shorts{padding:34px 0 20px}
-    .glass-toggle{
-      width:min(900px,92vw); margin:0 auto 14px;
-      display:flex; align-items:center; justify-content:center; gap:.6ch;
-      padding:16px 18px; border-radius:999px; font-weight:900;
-      color:#0b1224; text-decoration:none; cursor:pointer;
-      background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.32));
-      box-shadow:0 10px 28px rgba(15,23,42,.16), inset 0 1px 0 rgba(255,255,255,.6);
-      backdrop-filter:blur(12px) saturate(1.1);
-      -webkit-backdrop-filter:blur(12px) saturate(1.1);
-      border:1px solid rgba(255,255,255,.7);
-    }
+    .glass-toggle{width:min(900px,92vw);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;gap:.6ch;padding:12px 16px;border-radius:999px;font-weight:900;color:#0b1224;cursor:pointer;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.32));box-shadow:0 10px 28px rgba(15,23,42,.16),inset 0 1px 0 rgba(255,255,255,.6);backdrop-filter:blur(12px) saturate(1.1);border:1px solid rgba(255,255,255,.7);font-size:clamp(14px,3.6vw,16px)}
     .glass-toggle .dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(#7bd6ff,#1480ff)}
-    .glass-toggle strong{font-size:clamp(15px,4.6vw,20px)}
-    .glass-toggle small{opacity:.7;font-weight:700;font-size:clamp(12px,3.6vw,14px)}
+    .glass-toggle small{opacity:.7;font-weight:700}
+    /* 以前のサムネCSSは残します（DOMは削除） */
+    .s-thumbs{display:none}
     #shortsPanel{display:none}
     #shortsPanel.open{display:block}
-
-    .s-card{
-      width:min(900px,92vw); margin:12px auto; padding:14px; border-radius:18px;
-      background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.40));
-      border:1px solid rgba(255,255,255,.75);
-      box-shadow:0 14px 30px rgba(15,23,42,.14), inset 0 1px 0 rgba(255,255,255,.7);
-      backdrop-filter:blur(14px) saturate(1.15);
-      -webkit-backdrop-filter:blur(14px) saturate(1.15);
-    }
-    .s-head{display:grid; grid-template-columns:1fr auto; align-items:center; gap:10px}
-    .s-title{font-weight:900; margin:0 0 4px}
-    .s-desc{margin:0 0 10px; color:#475569; line-height:1.55; letter-spacing:.01em}
-    .s-actions{display:flex; gap:8px; align-items:center; justify-content:flex-end}
-    .s-icon{
-      width:42px; height:42px; border-radius:999px; display:inline-flex;
-      align-items:center; justify-content:center; border:none; cursor:pointer;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.45), 0 8px 18px rgba(15,23,42,.18);
-      background:linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.12));
-      color:#0b1224;
-    }
+    .s-card{width:min(900px,92vw);margin:12px auto;padding:14px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.40));border:1px solid rgba(255,255,255,.75);box-shadow:0 14px 30px rgba(15,23,42,.14),inset 0 1px 0 rgba(255,255,255,.7);backdrop-filter:blur(14px) saturate(1.15)}
+    .s-head{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px}
+    .s-title{font-weight:900;margin:0 0 4px}
+    .s-desc{margin:0 0 10px;color:#475569;line-height:1.55;letter-spacing:.01em}
+    .s-actions{display:flex;gap:8px;align-items:center;justify-content:flex-end}
+    .s-icon{width:42px;height:42px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;border:none;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 8px 18px rgba(15,23,42,.18);background:linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.12));color:#0b1224}
     .s-icon svg{width:18px;height:18px;display:block}
-    .s-icon.play{background:linear-gradient(180deg,#2b8dff,#0f6de0); color:#fff}
+    .s-icon.play{background:linear-gradient(180deg,#2b8dff,#0f6de0);color:#fff}
     .s-icon:active{transform:translateY(1px)}
-
-    .player-backdrop{
-      position:fixed; inset:0; display:none; place-items:center;
-      background:rgba(0,0,0,.48); z-index:120;
-      padding:20px;
-    }
+    .player-backdrop{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.48);z-index:120;padding:20px}
     .player-backdrop.open{display:grid}
-    .player-modal{width:min(420px,90vw); aspect-ratio:9/16; background:#000; border-radius:16px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.35); position:relative}
-    .player-modal iframe{width:100%; height:100%; border:0}
-    .player-close{position:absolute; top:8px; right:8px; z-index:2; width:36px; height:36px; border-radius:999px; border:none; cursor:pointer; background:rgba(255,255,255,.85); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; font-weight:900; box-shadow:0 4px 12px rgba(0,0,0,.2)}
+    .player-modal{width:min(420px,90vw);aspect-ratio:9/16;background:#000;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35);position:relative}
+    .player-modal iframe{width:100%;height:100%;border:0}
+    .player-close{position:absolute;top:8px;right:8px;z-index:2;width:36px;height:36px;border-radius:999px;border:none;cursor:pointer;background:rgba(255,255,255,.85);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;font-weight:900;box-shadow:0 4px 12px rgba(0,0,0,.2)}
 
     /* ====== 日程UI ====== */
-    .dates-wrap{width:min(900px,92vw); margin:12px auto 0}
-    .dates-sub{margin:0 0 8px; color:#475569; font-weight:800; display:flex; align-items:center; gap:.6ch}
-    .soon{display:inline-flex; align-items:center; gap:.4ch; margin-left:.6ch; padding:.22rem .6rem; border-radius:999px; font-weight:900; font-size:12px; color:#0b1224; background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.40)); border:1px solid rgba(0,0,0,.06)}
-    .dates{display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:10px; overflow-x:auto; padding:2px}
-    .pill{
-      display:flex; align-items:center; justify-content:center; gap:.5ch;
-      padding:11px 12px; border-radius:999px; font-weight:900; color:#fff; text-decoration:none; white-space:nowrap;
-      background:linear-gradient(180deg,#a78bfa,#7c3aed);
-      box-shadow:0 8px 18px rgba(124,58,237,.28), 0 0 16px rgba(106,89,255,.35), inset 0 1px 0 rgba(255,255,255,.35);
-    }
-    .pill small{opacity:.9; font-weight:800}
+    .dates-wrap{width:min(900px,92vw);margin:12px auto 0}
+    .dates-sub{margin:0 0 8px;color:#475569;font-weight:800;display:flex;align-items:center;gap:.6ch}
+    .soon{display:inline-flex;align-items:center;gap:.4ch;margin-left:.6ch;padding:.22rem .6rem;border-radius:999px;font-weight:900;font-size:12px;color:#0b1224;background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.40));border:1px solid rgba(0,0,0,.06)}
+    .dates{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:10px;overflow-x:auto;padding:2px}
+    .pill{display:flex;align-items:center;justify-content:center;gap:.5ch;padding:11px 12px;border-radius:999px;font-weight:900;color:#fff;text-decoration:none;white-space:nowrap;background:linear-gradient(180deg,#a78bfa,#7c3aed);box-shadow:0 8px 18px rgba(124,58,237,.28),0 0 16px rgba(106,89,255,.35),inset 0 1px 0 rgba(255,255,255,.35)}
+    .pill small{opacity:.9;font-weight:800}
     .pill:active{transform:translateY(1px)}
 
     /* ====== よくある質問（QA） ====== */
@@ -349,10 +236,7 @@
       -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
       padding:8px 8px; border-radius:12px; box-shadow:0 6px 16px rgba(15,23,42,.08);
     }
-    .qa-input{
-      flex:1; display:flex; align-items:center; gap:8px;
-      background:#fff; border-radius:12px; padding:8px 10px; box-shadow:inset 0 1px 0 rgba(0,0,0,.04);
-    }
+    .qa-input{flex:1; display:flex; align-items:center; gap:8px; background:#fff; border-radius:12px; padding:8px 10px; box-shadow:inset 0 1px 0 rgba(0,0,0,.04)}
     .qa-input input{border:none; outline:none; width:100%; font-size:15px}
     .qa-btn{white-space:nowrap; border:none; border-radius:10px; font-weight:900; padding:10px 12px; color:#fff; background:linear-gradient(180deg,#2b8dff,#0f6de0); box-shadow:0 8px 16px rgba(15,23,42,.16)}
     .qa-btn:active{transform:translateY(1px)}
@@ -455,7 +339,7 @@
             </div>
             <div class="badge"><img src="images/IMG_2131.jpg" alt="S・Mさん"></div>
           </div>
-          <p>高校二年生の頃、就職するか進学するかで迷っていました。そんな時、学校の進路ガイダンスに来ていたのが日本デザイン福祉専門学校です。先生方のあたたかい雰囲気に惹かれて参加したオープンキャンパスでは、緊張していた私の心を優しい先輩たちがやわらげてくれました。その後も、本当に進学するか迷っていた私の話を入学前から親身に聞いてくれ、入学してからもずっと気にかけてくれる先生方のおかげで、「この学校を選んでよかった」と心から思っています。</p>
+          <p>高校二年生の頃、就職するか進学するかで迷っていました。そんな時、学校の進路ガイダンスに来ていたのが日本デザイン福祉専門学校です。先生方のあたたかい雰囲気に惹かれて参加したオープンキャンパスでは、緊張していた私の心を優しい先輩たちがやわらげてくれました。その後も、本当に進学するか迷っていた私の話を入学前から親身に聞いてくれ、入学してからもずっと気にかけてくれる先生方のおかげで、「この学校を選んでよかった」と心から思っています。」</p>
           <div class="photos">
             <img src="images/IMG_2172.jpg" alt="授業風景1">
             <img src="images/IMG_2137.jpg" alt="授業風景2">
@@ -563,107 +447,24 @@
       </ul>
     </section>
 
-    <!-- ===== 1分解説動画（※FAQの直前に配置） ===== -->
+    <!-- ===== 1分解説動画（サムネ削除版） ===== -->
     <section class="section shorts" id="shorts">
       <button class="glass-toggle" id="shortsToggle" type="button" aria-expanded="false" aria-controls="shortsPanel">
         <span class="dot"></span><strong>1分解説動画を開く</strong><small>（縦動画・ショート）</small>
       </button>
 
       <div id="shortsPanel" aria-hidden="true">
-        <div class="s-card">
-          <div class="s-head">
-            <div>
-              <h3 class="s-title">【1分でわかる】日本デザイン福祉専門学校（LINE特別）</h3>
-              <p class="s-desc">縦動画で学校の空気感を1分でさくっと。</p>
-            </div>
-            <div class="s-actions">
-              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/vbWDxIgAiLU"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
-              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="s-card">
-          <div class="s-head">
-            <div>
-              <h3 class="s-title">【1分でわかる】製菓デザイン学科</h3>
-              <p class="s-desc">実習の雰囲気をショートで。</p>
-            </div>
-            <div class="s-actions">
-              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/7dL2RRYDxxA"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
-              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="s-card">
-          <div class="s-head">
-            <div>
-              <h3 class="s-title">【1分でわかる】コミックイラスト学科</h3>
-              <p class="s-desc">描く・学ぶ・見るを1分で。</p>
-            </div>
-            <div class="s-actions">
-              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/xz6X2a-AEU8"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
-              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="s-card">
-          <div class="s-head">
-            <div>
-              <h3 class="s-title">【1分でわかる】コミックmanabi学科</h3>
-              <p class="s-desc">学びの流れを1分で。</p>
-            </div>
-            <div class="s-actions">
-              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/7_MpflBuv9k"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
-              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="s-card">
-          <div class="s-head">
-            <div>
-              <h3 class="s-title">【1分でわかる】イマジネーションデザイン学科</h3>
-              <p class="s-desc">発想を形にする1分。</p>
-            </div>
-            <div class="s-actions">
-              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/tm8ZayZMb6M"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
-              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="s-card">
-          <div class="s-head">
-            <div>
-              <h3 class="s-title">【1分でわかる】保育こどもデザイン学科</h3>
-              <p class="s-desc">子ども×デザインの入口を1分で。</p>
-            </div>
-            <div class="s-actions">
-              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/oEpO0rFOr8g"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
-              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="s-card">
-          <div class="s-head">
-            <div>
-              <h3 class="s-title">【1分でわかる】ホテル観光学科</h3>
-              <p class="s-desc">おもてなしの現場感を1分で。</p>
-            </div>
-            <div class="s-actions">
-              <button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/akdyF5vbAro"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
-              <button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button>
-            </div>
-          </div>
-        </div>
+        <div class="s-card"><div class="s-head"><div><h3 class="s-title">【1分でわかる】日本デザイン福祉専門学校（LINE特別）</h3><p class="s-desc">縦動画で学校の空気感を1分でさくっと。</p></div><div class="s-actions"><button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/vbWDxIgAiLU"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button><button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button></div></div></div>
+        <div class="s-card"><div class="s-head"><div><h3 class="s-title">【1分でわかる】製菓デザイン学科</h3><p class="s-desc">実習の雰囲気をショートで。</p></div><div class="s-actions"><button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/7dL2RRYDxxA"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button><button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button></div></div></div>
+        <div class="s-card"><div class="s-head"><div><h3 class="s-title">【1分でわかる】コミックイラスト学科</h3><p class="s-desc">描く・学ぶ・見るを1分で。</p></div><div class="s-actions"><button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/xz6X2a-AEU8"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button><button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button></div></div></div>
+        <div class="s-card"><div class="s-head"><div><h3 class="s-title">【1分でわかる】コミックmanabi学科</h3><p class="s-desc">学びの流れを1分で。</p></div><div class="s-actions"><button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/7_MpflBuv9k"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button><button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button></div></div></div>
+        <div class="s-card"><div class="s-head"><div><h3 class="s-title">【1分でわかる】イマジネーションデザイン学科</h3><p class="s-desc">発想を形にする1分。</p></div><div class="s-actions"><button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/tm8ZayZMb6M"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button><button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button></div></div></div>
+        <div class="s-card"><div class="s-head"><div><h3 class="s-title">【1分でわかる】保育こどもデザイン学科</h3><p class="s-desc">子ども×デザインの入口を1分で。</p></div><div class="s-actions"><button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/oEpO0rFOr8g"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button><button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button></div></div></div>
+        <div class="s-card"><div class="s-head"><div><h3 class="s-title">【1分でわかる】ホテル観光学科</h3><p class="s-desc">おもてなしの現場感を1分で。</p></div><div class="s-actions"><button class="s-icon play" type="button" aria-label="再生" data-video="https://youtube.com/shorts/akdyF5vbAro"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button><button class="s-icon" type="button" data-close-panel aria-label="閉じる">×</button></div></div></div>
       </div>
     </section>
 
-    <!-- ===== よくある質問（検索つき） ※ページ最下部 ===== -->
+    <!-- ===== よくある質問（最後） ===== -->
     <section class="section" id="qa">
       <h2 class="section-title hand reveal js-hand">よくある質問<span class="underline"></span></h2>
 
@@ -675,15 +476,14 @@
         <button class="qa-btn" id="qaGo" type="button">検索で該当へ</button>
       </div>
       <div id="qaMsg" class="qa-notice" aria-live="polite"></div>
-
       <div id="qaList" aria-live="polite"></div>
 
-      <!-- Q&A データ（編集しやすいJSON） -->
+      <!-- Q&A データ（JSON） -->
       <script id="qaData" type="application/json">
       [
         {"q":"この学校では何が学べますか？","a":"デザイン、食品サンプル、映像、マンガ、ゲームキャラクター、コミックイラスト、保育士の学び、ホテル観光など多分野を用意しています。"},
         {"q":"デザインって何ですか？","a":"生活をより豊かにするための手段です。日々の“気づき”から、便利・面白い・可愛い・過ごしやすいなどの解決を導きます。"},
-        {"q":"大学とは何が違うの？","a":"大学は学術的・理論的な学びと幅広い教養。専門学校は実践的な職業教育で、短期間で即戦力を目指します。"},
+        {"q":"大学とは何が違うの？","a":"大学は学術的・理論的な学びと幅広い教養。専門学校は実践的な職業教育で、短期間で即戦力を目指します."},
         {"q":"就職するのに有利な学科はどれ？","a":"どの学科も就職サポートが充実。電話のかけ方、面接、ポートフォリオまで徹底支援。主任・担任・キャリアセンターが連携します。"},
         {"q":"遅刻や欠席があると入学は難しいですか？","a":"そんなことはありません。理由があるはずなので、まずはご相談ください。良い解決方法を一緒に考えます。"},
         {"q":"AOはなにをやりますか？","a":"エントリーレポート提出とプレゼンテーション（面接）。“好き”への想いを言語化し、当日アピールしてください。"},
@@ -725,7 +525,7 @@
         {"q":"製菓デザイン学科では？","a":"食品サンプル、パッケージ、企画・流通、マーケなど。発想×デザインで活躍人材を育成。"},
         {"q":"イマジネーションデザイン学科では？","a":"映像制作、グラフィック、イラスト、マンガ、アニメ、ゲーム、広告など“表現”全般を横断的に学びます。"},
         {"q":"コミックイラスト学科では？","a":"漫画家・イラストレーターを目指し、絵の基礎からプロ実践まで。"},
-        {"q":"コミックmanabi学科では？","a":"1年間で短期間でクリエイターに必要なスキルを学びます。オンラインでの授業参加も一部可能です。"},
+        {"q":"コミックmanabi学科では？","a":"1年間で短期間でクリエイターに必要なスキルを学びます。オンラインでの授業参加も一部可能です"},
         {"q":"保育こどもデザイン学科では？","a":"保育士だけでなく、おもちゃ・子ども服・遊び場のデザインなど子ども領域全般を学びます。"},
         {"q":"ホテル観光学科では？","a":"本物の設備・備品を用いて技術とホスピタリティを習得します。"},
         {"q":"国際コミュニケーションデザイン学科では？","a":"進学・就職に必要なコミュ力とデザイン領域のエッセンスを1年で学びます。"},
@@ -769,65 +569,46 @@
   </div>
 
   <script>
-    /* ====== 予約リンク（直近2日ピルのみ：予約フォーム直リンク） ====== */
-    const RESERVE_URL = 'https://www.school-go.info/ffz85h/ndc/form.php?fno=60&fsno=1&_gl=1*1gypnfh*_gcl_au*MjEwNTk1MjIyMi4xNzU0NTM1NTA1&nnso=3';
-
-    /* ====== 日程（固定配列→今日以降→最短＋2件） ====== */
-    const UPCOMING = [
-      '2025-08-20','2025-08-24','2025-09-28','2025-10-12','2025-10-19','2025-10-26',
-      '2025-11-16','2025-11-23','2025-12-14',
-      '2026-01-25','2026-02-08','2026-03-08','2026-03-22'
-    ];
-
-    function weekdayJa(d){ return ['日','月','火','水','木','金','土'][d.getDay()]; }
-
+    const RESERVE_URL='https://www.school-go.info/ffz85h/ndc/form.php?fno=60&fsno=1&_gl=1*1gypnfh*_gcl_au*MjEwNTk1MjIyMi4xNzU0NTM1NTA1&nnso=3';
+    const UPCOMING=['2025-08-20','2025-08-24','2025-09-28','2025-10-12','2025-10-19','2025-10-26','2025-11-16','2025-11-23','2025-12-14','2026-01-25','2026-02-08','2026-03-08','2026-03-22'];
+    function weekdayJa(d){return['日','月','火','水','木','金','土'][d.getDay()];}
     function renderDates(){
-      const wrap = document.getElementById('datePills');
-      const soonEl = document.getElementById('soon');
-      if(!wrap || !soonEl) return;
-
-      wrap.innerHTML = '';
-      const today = new Date();
-      const todayMidnight = new Date(today.toDateString());
-
-      const list = UPCOMING
-        .map(s => new Date(s + 'T00:00:00+09:00'))
-        .filter(d => d >= todayMidnight)
-        .sort((a,b)=>a-b);
-
+      const wrap=document.getElementById('datePills');
+      const soonEl=document.getElementById('soon');
+      if(!wrap||!soonEl) return;
+      wrap.innerHTML='';
+      const today=new Date();
+      const todayMidnight=new Date(today.toDateString());
+      const list=UPCOMING.map(s=>new Date(s+'T00:00:00+09:00')).filter(d=>d>=todayMidnight).sort((a,b)=>a-b);
       if(!list.length){
-        soonEl.textContent = '最短：準備中';
+        soonEl.textContent='最短：準備中';
         wrap.insertAdjacentHTML('beforeend','<span class="muted">日程準備中</span>');
         return;
       }
-
-      const soon = list[0];
-      soonEl.textContent = `最短：${(soon.getMonth()+1)}/${soon.getDate()}(${weekdayJa(soon)})`;
-
+      const soon=list[0];
+      soonEl.textContent=`最短：${(soon.getMonth()+1)}/${soon.getDate()}(${weekdayJa(soon)})`;
       list.slice(0,2).forEach(d=>{
-        const mm = String(d.getMonth()+1).padStart(2,'0');
-        const dd = String(d.getDate()).padStart(2,'0');
-        const w = weekdayJa(d);
-        const a = document.createElement('a');
-        a.className = 'pill';
-        a.href = RESERVE_URL;
-        a.target = '_blank';
-        a.rel = 'noopener';
+        const mm=String(d.getMonth()+1).padStart(2,'0');
+        const dd=String(d.getDate()).padStart(2,'0');
+        const w=weekdayJa(d);
+        const a=document.createElement('a');
+        a.className='pill';
+        a.href=RESERVE_URL;
+        a.target='_blank';
+        a.rel='noopener';
         a.setAttribute('aria-label', `${mm}/${dd}(${w})の予約ページを開く`);
-        a.innerHTML = `📅 ${mm}/${dd}(${w}) <small>予約へ</small>`;
+        a.innerHTML=`📅 ${mm}/${dd}(${w}) <small>予約へ</small>`;
         wrap.appendChild(a);
       });
     }
 
-    /* 出現監視：reveal / sweep / section-title */
+    /* 出現監視 */
     const io=new IntersectionObserver(es=>{
-      es.forEach(e=>{
-        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-      });
+      es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
     },{threshold:.22});
     document.querySelectorAll('.reveal,.sweep,.section-title').forEach(el=>io.observe(el));
 
-    /* 手書きタイトルを1文字分割 */
+    /* 手書きタイトル分割 */
     function splitHand(el){
       if(el.dataset.splitted) return;
       el.dataset.splitted="1";
@@ -897,7 +678,7 @@
       });
     });
 
-    /* ▼ サイト内再生（YouTube） */
+    /* ▼ サイト内YouTubeプレイヤー */
     const backdrop=document.getElementById('ytBackdrop');
     const frame=document.getElementById('ytFrame');
     function toEmbed(url){
@@ -919,7 +700,7 @@
     backdrop.addEventListener('click',e=>{ if(e.target===backdrop) closePlayer(); });
     addEventListener('keydown',e=>{ if(e.key==='Escape') closePlayer(); });
 
-    /* ====== QA：描画 ====== */
+    /* ====== QA：描画・検索 ====== */
     const qaListEl = document.getElementById('qaList');
     const qaData = JSON.parse(document.getElementById('qaData').textContent);
     qaListEl.innerHTML = qaData.map((row,i)=>(
@@ -928,7 +709,6 @@
          <div class="answer">${row.a.replace(/\n/g,'<br>')}</div>
        </details>`)).join('');
 
-    /* QA検索：該当へスクロール + フィードバック */
     const qaGo = document.getElementById('qaGo');
     const qaQuery = document.getElementById('qaQuery');
     const qaMsg = document.getElementById('qaMsg');
@@ -977,7 +757,6 @@
       let tid; addEventListener('scroll', ()=>{ clearTimeout(tid); tid=setTimeout(updateOffset, 120); }, {passive:true});
     })();
 
-    /* 起動：日程描画 */
     renderDates();
   </script>
 </body>
