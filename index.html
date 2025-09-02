@@ -446,7 +446,590 @@
         </li>
       </ul>
     </section>
+<!-- ===== 学科適性診断（35問・ビジュアル強化・誘導抑制＆NaN修正） ===== -->
+<section class="section" id="aptitude" style="position:relative">
+  <style>
+    /* ===== Scoped base ===== */
+    #aptitude{isolation:isolate}
+    #aptitude .aq-wrap{width:min(980px,92vw);margin:0 auto}
+    #aptitude .aq-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+    #aptitude .aq-title{font-weight:800;font-size:clamp(20px,4.8vw,26px);letter-spacing:.01em;display:flex;align-items:center;gap:.6rem}
+    #aptitude .aq-start{
+      appearance:none;border:0;cursor:pointer;white-space:nowrap;padding:10px 14px;border-radius:999px;font-weight:800;
+      background:
+        radial-gradient(120% 140% at 20% 0%, rgba(255,255,255,.55), rgba(255,255,255,.18) 70%),
+        linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,.18));
+      color:#0b1224;box-shadow:0 10px 24px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.6);
+      -webkit-backdrop-filter:blur(12px) saturate(1.2);backdrop-filter:blur(12px) saturate(1.2);
+      transition:transform .15s ease;
+    }
+    #aptitude .aq-start:hover{transform:translateY(-1px)}
+    #aptitude .aq-start svg{width:18px;height:18px;vertical-align:-3px}
 
+    /* Panel (glass) */
+    #aptitude .aq-panel{
+      margin-top:12px;border-radius:20px;overflow:hidden;position:relative;
+      background:
+        radial-gradient(120% 140% at 20% 0%, rgba(255,255,255,.6), rgba(255,255,255,.16) 70%),
+        linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,.14));
+      box-shadow:0 20px 42px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.5);
+      -webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);
+      display:none;
+    }
+    #aptitude .aq-panel.show{display:block;animation:aqDrop .36s cubic-bezier(.2,.8,.2,1)}
+    @keyframes aqDrop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+    /* Header bar */
+    #aptitude .aq-bar{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:12px 14px}
+    #aptitude .aq-progress{height:10px;border-radius:999px;background:rgba(0,0,0,.06);overflow:hidden}
+    #aptitude .aq-progress>i{display:block;height:100%;width:0%;background:linear-gradient(90deg,#7bd6ff,#1480ff)}
+    #aptitude .aq-count{font-weight:800;font-size:.9rem;opacity:.8}
+
+    /* Body */
+    #aptitude .aq-body{padding:14px}
+    #aptitude .aq-q{display:grid;gap:14px;align-items:start;grid-template-columns:32px 1fr}
+    #aptitude .aq-icon{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:#fff;box-shadow:0 8px 18px rgba(0,0,0,.12)}
+    #aptitude .aq-text{font-weight:800;font-size:clamp(16px,4vw,18px);line-height:1.5}
+
+    /* Options */
+    #aptitude .aq-opts{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+    #aptitude .aq-opt{
+      padding:10px 8px;border-radius:12px;border:1px solid rgba(0,0,0,.06);
+      background:rgba(255,255,255,.78);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+      display:grid;gap:6px;justify-items:center;cursor:pointer;user-select:none;box-shadow:0 6px 16px rgba(0,0,0,.08);
+      transition:transform .12s ease, box-shadow .12s ease;
+    }
+    #aptitude .aq-opt i{font-size:18px}
+    #aptitude .aq-opt span{font-size:.78rem;font-weight:800}
+    #aptitude .aq-opt:hover{transform:translateY(-1px)}
+    #aptitude .aq-opt.sel{outline:2px solid #1480ff;box-shadow:0 0 0 6px rgba(20,128,255,.12)}
+
+    /* Nav */
+    #aptitude .aq-nav{display:flex;justify-content:space-between;gap:10px;margin-top:12px}
+    #aptitude .aq-btn{appearance:none;border:0;border-radius:12px;padding:10px 14px;font-weight:800;cursor:pointer}
+    #aptitude .aq-btn.pri{color:#fff;background:linear-gradient(180deg,#2b8dff,#0f6de0);box-shadow:0 10px 20px rgba(15,109,224,.25), inset 0 1px 0 rgba(255,255,255,.4)}
+    #aptitude .aq-btn.ghost{background:transparent;border:1px solid rgba(0,0,0,.12)}
+
+    /* Result */
+    #aptitude .aq-result{display:none;padding:18px}
+    #aptitude .aq-result.show{display:block;animation:aqDrop .36s cubic-bezier(.2,.8,.2,1)}
+    #aptitude .aq-tops{display:grid;gap:12px}
+    #aptitude .aq-card{
+      display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;
+      padding:14px;border-radius:14px;background:
+        radial-gradient(140% 160% at 0% 0%, #ffffff 0%, #f4f8ff 70%);
+      box-shadow:0 10px 24px rgba(0,0,0,.12)
+    }
+    #aptitude .track{font-size:.7rem;font-weight:900;padding:.18rem .5rem;border-radius:999px;background:#eef3ff}
+    #aptitude .aq-card .score{font-weight:900}
+    #aptitude .aq-meter{height:8px;border-radius:999px;background:#eef3ff;overflow:hidden}
+    #aptitude .aq-meter>i{display:block;height:100%;background:linear-gradient(90deg,#7bd6ff,#1480ff);width:0%}
+    #aptitude .aq-note{margin-top:8px;font-size:.86rem;opacity:.8}
+    #aptitude .aq-actions{display:flex;gap:10px;margin-top:12px}
+    #aptitude .aq-actions .aq-btn{flex:1}
+
+    /* Donut score */
+    #aptitude .ring{width:56px;height:56px;position:relative;display:grid;place-items:center}
+    #aptitude .ring svg{transform:rotate(-90deg)}
+    #aptitude .ring .num{position:absolute;font-weight:900;font-size:.92rem}
+
+    /* Detail: radar & reasons */
+    #aptitude .aq-detail{display:grid;gap:12px;margin-top:16px}
+    #aptitude .aq-box{background:#fff;border-radius:14px;box-shadow:0 10px 24px rgba(0,0,0,.12);padding:12px}
+    #aptitude .aq-box h3{font-size:1rem;font-weight:900;margin:0 0 8px}
+    #aptitude .aq-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    #aptitude .tag{font-size:.72rem;font-weight:800;padding:.22rem .5rem;border-radius:999px;background:#eef3ff}
+    #aptitude .reasons{display:grid;gap:8px}
+    #aptitude .reason{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+    #aptitude .bar{height:8px;border-radius:999px;background:#eef3ff;overflow:hidden}
+    #aptitude .bar>i{display:block;height:100%;background:linear-gradient(90deg,#7bd6ff,#1480ff);width:0%}
+
+    /* Confetti */
+    #aptitude .confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    #aptitude .confetti i{
+      position:absolute;width:8px;height:14px;border-radius:2px;opacity:.9;
+      animation:fall 1.2s linear forwards;
+    }
+    @keyframes fall{
+      to{transform:translateY(140%) rotate(280deg);opacity:0}
+    }
+
+    @media(min-width:720px){#aptitude .aq-grid{grid-template-columns:repeat(2,1fr)}}
+  </style>
+
+  <div class="aq-wrap">
+    <div class="aq-head">
+      <h2 class="aq-title">学科適性診断</h2>
+      <button class="aq-start" id="aqStartBtn" type="button" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5v14l11-7L8 5Z" fill="currentColor"/></svg>
+        はじめる（1〜3分）
+      </button>
+    </div>
+
+    <div class="aq-panel" id="aqPanel" aria-hidden="true">
+      <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+      <div class="aq-bar">
+        <div class="aq-progress" aria-label="progress"><i id="aqProg"></i></div>
+        <div class="aq-count"><span id="aqNow">1</span>/<span id="aqTotal">—</span></div>
+      </div>
+
+      <div class="aq-body">
+        <div class="aq-q" id="aqQ">
+          <div class="aq-icon" id="aqIcon">🎯</div>
+          <div class="aq-text" id="aqText">読み込み中…</div>
+        </div>
+        <div class="aq-opts" id="aqOpts" role="group" aria-label="回答を選択"></div>
+        <div class="aq-nav">
+          <button class="aq-btn ghost" id="aqBack" type="button">戻る</button>
+          <button class="aq-btn pri" id="aqNext" type="button">次へ</button>
+        </div>
+      </div>
+
+      <div class="aq-result" id="aqResult" aria-live="polite">
+        <div class="aq-grid aq-tops" id="aqTopList"></div>
+
+        <div class="aq-detail" id="aqDetail">
+          <div class="aq-box">
+            <h3>あなたの傾向（レーダーチャート）</h3>
+            <div id="aqRadarWrap"><svg id="aqRadar" width="100%" height="320" viewBox="-180 -180 360 360" role="img" aria-label="適性レーダーチャート"></svg></div>
+            <div class="aq-legend" id="aqAxisLegend"></div>
+          </div>
+          <div class="aq-box">
+            <h3 id="aqWhyTitle">上位学科の根拠</h3>
+            <div class="reasons" id="aqReasons"></div>
+            <div class="aq-legend" id="aqTags"></div>
+          </div>
+        </div>
+
+        <p class="aq-note">※ 結果は目安です。興味・経験で変わることがあります。気になる学科が複数出たら、ぜひ両方の体験講座へ！</p>
+        <div class="aq-actions">
+          <button class="aq-btn ghost" id="aqRetry" type="button">やり直す</button>
+          <a class="aq-btn pri" href="https://ndc.ac.jp/oclp/" target="_blank" rel="noopener">オーキャンを予約</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    /* ===== 前提・誘導抑制 ===== */
+    // 「なるべく manabi／ホテルに流さない」ための最終バイアス
+    const HOTEL_BIAS  = 0.65;  // ホテル観光学科の最終係数（小さいほど出にくい）
+    const MANABI_BIAS = 0.78;  // manabi学科の最終係数（短期集中は残しつつ控えめに）
+
+    const DEPTS = [
+      {id:'sweets',  name:'製菓デザイン学科', emoji:'🧁', track:'デザイン系', desc:'食品サンプル・パッケージ・企画で「食×デザイン」を形にする。'},
+      {id:'imagine', name:'イマジネーションデザイン学科', emoji:'💡', track:'デザイン系', desc:'発想とデザイン素養を横断強化。表現の幅を広げる。'},
+      {id:'manabi',  name:'コミックmanabi学科（1年制）', emoji:'⏱️', track:'イラスト・キャラ系', desc:'短期集中で制作の反復と締切駆動。作品を一気に積み上げる。'},
+      {id:'comic',   name:'コミックイラスト学科', emoji:'🎨', track:'イラスト・キャラ系', desc:'キャラ・物語・構図・人体を総合的に育てる。'},
+      {id:'hotel',   name:'ホテル観光学科', emoji:'🏨', track:'ホテル系', desc:'おもてなし・語学・運営。現場で活きる実務力。'},
+      {id:'hoiku',   name:'保育こどもデザイン学科', emoji:'🧸', track:'保育系', desc:'子ども理解と活動設計。安心と成長を支える。'}
+    ];
+
+    /* ===== ディメンション（味覚系はゼロ） ===== */
+    const DIM_LABEL = {
+      creative:'発想', designSense:'デザイン感覚', craft:'クラフト',
+      model3d:'立体/食品サンプル', package:'パッケージ', planning:'企画/段取り',
+      precise:'正確性', quality:'クオリティ志向', digital:'デジタル制作',
+      learn:'自己学習', story:'物語/世界観', chara:'キャラ設計', anatomy:'人体/ポーズ',
+      motion:'動き/演出', present:'プレゼン', team:'チーム協働', empathy:'共感性',
+      kids:'子ども理解', play:'遊びの設計', patience:'根気/反復', stamina:'体力/継続',
+      service:'接客姿勢', language:'語学/多文化', crisis:'トラブル対応',
+      cleanliness:'清潔/衛生観', organize:'整理整頓', research:'リサーチ', trend:'トレンド感度',
+      sprint:'短期集中', mentoring:'フィードバック活用',
+      brand:'ブランド/訴求', photostyle:'撮影/スタイリング', ux:'ユーザー視点',
+      logistics:'陳列/流通', multitask:'並行作業'
+    };
+
+    /* レーダー軸（6） */
+    const AXES = [
+      {key:'design',  name:'デザイン/表現', dims:['creative','designSense','digital','present','trend','brand']},
+      {key:'craft',   name:'造形/クラフト', dims:['craft','model3d','precise','quality','package','photostyle']},
+      {key:'story',   name:'物語/キャラ',   dims:['story','chara','anatomy','motion']},
+      {key:'social',  name:'人・支援',     dims:['empathy','kids','play','team','service']},
+      {key:'manage',  name:'企画/運営',     dims:['planning','organize','research','language','crisis','cleanliness','ux','logistics','multitask']},
+      {key:'learn',   name:'学習/持続',     dims:['learn','patience','stamina','sprint','mentoring']}
+    ];
+
+    /* ディメンション→学科重み（NaN防止のため未知キーは無視） */
+    const DIM2DEPT = {
+      // デザイン系（製菓：サンプル/パッケ/企画/精度/撮影に強い）
+      creative:   {imagine:1.0, comic:.5, manabi:.4},
+      designSense:{imagine:.9, sweets:.7, comic:.5},
+      craft:      {sweets:1.0, imagine:.4},
+      model3d:    {sweets:1.0},
+      package:    {sweets:1.0, imagine:.4},  // ★以前のバグ：ここに brand を入れていた→削除
+      planning:   {sweets:.7, imagine:.5, manabi:.4, hotel:.3, hoiku:.3},
+      precise:    {sweets:.9, manabi:.5},
+      quality:    {sweets:.9, comic:.5, imagine:.4},
+      digital:    {imagine:.6, comic:.7, manabi:.7, sweets:.4},
+      research:   {sweets:.5, imagine:.5, comic:.4},
+      trend:      {imagine:.5, comic:.5, sweets:.4},
+      brand:      {sweets:.9, imagine:.6, comic:.4},
+      photostyle: {sweets:.9, imagine:.5},
+
+      // イラスト・キャラ
+      story:      {comic:1.0, manabi:.7, imagine:.6},
+      chara:      {comic:1.0, manabi:.7},
+      anatomy:    {comic:.9,  manabi:.6},
+      motion:     {comic:.8,  imagine:.5, manabi:.5},
+      present:    {imagine:.7, manabi:.4, comic:.5, hotel:.3, hoiku:.3},
+
+      patience:   {manabi:.6, comic:.5},
+      sprint:     {manabi:1.0},
+      learn:      {manabi:.9, comic:.5, imagine:.4},
+      mentoring:  {manabi:.7, comic:.4},
+      multitask:  {manabi:.5, sweets:.4, imagine:.3, hotel:.3},
+
+      // 保育
+      empathy:    {hoiku:1.0, imagine:.4},
+      kids:       {hoiku:1.0},
+      play:       {hoiku:.8, imagine:.4},
+      team:       {hoiku:.6, hotel:.6, imagine:.4},
+
+      // ホテル（抑制は後段で係数を掛ける）
+      service:    {hotel:1.0},
+      language:   {hotel:.8},
+      crisis:     {hotel:.7},
+      stamina:    {hotel:.6, hoiku:.4},
+      cleanliness:{hotel:.6, sweets:.4},
+      organize:   {sweets:.6, hoiku:.5, hotel:.5},
+
+      // デザイン横断（UX/陳列）
+      ux:         {imagine:.7, sweets:.6, hotel:.3},
+      logistics:  {sweets:.6, hotel:.4}
+    };
+
+    /* 35問（味・香りの表現なし） */
+    const QUESTIONS = [
+      {t:'ひらめきを形にするのが好きだ。', icon:'💡', dim:'creative'},
+      {t:'レイアウトや配色の良し悪しに敏感だ。', icon:'🎚️', dim:'designSense'},
+      {t:'手を動かす細かな制作（切る/貼る/削る）が得意。', icon:'✂️', dim:'craft'},
+      {t:'立体物の造形（模型/食品サンプルなど）にワクワクする。', icon:'🧱', dim:'model3d'},
+      {t:'パッケージの情報整理や見せ方を工夫したい。', icon:'📦', dim:'package'},
+      {t:'ブランドの魅力を伝えるキャッチや表現を考えるのが好き。', icon:'🏷️', dim:'brand'},
+      {t:'作品やモックの撮影・スタイリングにこだわりたい。', icon:'📸', dim:'photostyle'},
+      {t:'ユーザーの気持ちや使い方を想像しながら作れる。', icon:'🧭', dim:'ux'},
+      {t:'計画を立てて段取りよく進めるのが性に合う。', icon:'🗓️', dim:'planning'},
+      {t:'手順どおりに正確に仕上げられる。', icon:'📏', dim:'precise'},
+      {t:'仕上がりのクオリティに強いこだわりがある。', icon:'✨', dim:'quality'},
+      {t:'iPad/ペイントアプリなどデジタル制作が好き。', icon:'🖊️', dim:'digital'},
+      {t:'知らない分野でも自力で学び方を見つけられる。', icon:'📚', dim:'learn'},
+      {t:'物語や世界観づくりを考えるのが楽しい。', icon:'📖', dim:'story'},
+      {t:'キャラクターデザインや表情づけが好き。', icon:'😺', dim:'chara'},
+      {t:'人体やポーズの観察・練習が苦にならない。', icon:'🦴', dim:'anatomy'},
+      {t:'動きや演出で「見せ場」を作るのが得意。', icon:'🌀', dim:'motion'},
+      {t:'自分の考えを整理し、人に伝えるのが得意。', icon:'📣', dim:'present'},
+      {t:'チームで役割分担しながら進めるのが好き。', icon:'👥', dim:'team'},
+      {t:'相手の気持ちに寄り添って考えられる。', icon:'💞', dim:'empathy'},
+      {t:'子どもの成長や安全について考えるのが好き。', icon:'🧒', dim:'kids'},
+      {t:'遊びや活動の企画で人を盛り上げたい。', icon:'🎲', dim:'play'},
+      {t:'同じ練習をコツコツ積み重ねられる。', icon:'🔁', dim:'patience'},
+      {t:'立ち仕事や長時間の作業にも耐えられる。', icon:'🏃', dim:'stamina'},
+      {t:'接客や相手の立場に立った振る舞いを意識できる。', icon:'🙇', dim:'service'},
+      {t:'語学や多文化コミュニケーションに前向きだ。', icon:'🌐', dim:'language'},
+      {t:'トラブル時でも落ち着いて対処できる。', icon:'🚨', dim:'crisis'},
+      {t:'清潔感や衛生観念を保てる。', icon:'🧽', dim:'cleanliness'},
+      {t:'道具やデータを整理整頓できる。', icon:'🗃️', dim:'organize'},
+      {t:'ターゲットや課題をリサーチして考えるのが好き。', icon:'🔎', dim:'research'},
+      {t:'流行や新しい表現にアンテナが立っている。', icon:'📈', dim:'trend'},
+      {t:'短期集中で締切までに出し切るタイプだ。', icon:'⏱️', dim:'sprint'},
+      {t:'指摘やアドバイスを吸収して改善できる。', icon:'🧠', dim:'mentoring'},
+      {t:'店頭での見え方（陳列/ポップ）を工夫したい。', icon:'🛒', dim:'logistics'},
+      {t:'複数の作業を並行して進められる。', icon:'🧩', dim:'multitask'}
+    ];
+
+    /* 5段階評価（-2..+2） */
+    const OPTS = [
+      {k:'いいえ', v:-2, icon:'👎'},
+      {k:'ややいいえ', v:-1, icon:'➖'},
+      {k:'どちらでも', v:0, icon:'◯'},
+      {k:'ややはい', v:1, icon:'➕'},
+      {k:'はい', v:2, icon:'👍'}
+    ];
+
+    /* ===== 要素参照 ===== */
+    const $ = s=>document.querySelector(s);
+    const startBtn=$('#aqStartBtn'), panel=$('#aqPanel'), progBar=$('#aqProg');
+    const nowEl=$('#aqNow'), totalEl=$('#aqTotal'), iconEl=$('#aqIcon'), textEl=$('#aqText');
+    const optsEl=$('#aqOpts'), backBtn=$('#aqBack'), nextBtn=$('#aqNext');
+    const resultEl=$('#aqResult'), topList=$('#aqTopList');
+    const radarSvg=$('#aqRadar'), axisLegend=$('#aqAxisLegend'), reasonsEl=$('#aqReasons'), whyTitle=$('#aqWhyTitle'), tagsEl=$('#aqTags');
+    const confettiEl=$('#confetti');
+
+    /* ===== 状態 ===== */
+    let idx=0; let answers=[]; const total=QUESTIONS.length; totalEl.textContent=total;
+
+    /* ===== 画面構築 ===== */
+    function renderQuestion(){
+      const q=QUESTIONS[idx];
+      iconEl.textContent=q.icon; textEl.textContent=q.t; nowEl.textContent=(idx+1);
+      progBar.style.width=Math.round(idx/total*100)+'%';
+      // options
+      optsEl.innerHTML='';
+      OPTS.forEach(o=>{
+        const b=document.createElement('button');
+        b.type='button'; b.className='aq-opt'; if(answers[idx]===o.v) b.classList.add('sel');
+        b.innerHTML=`<i>${o.icon}</i><span>${o.k}</span>`;
+        b.addEventListener('click',()=>{
+          answers[idx]=o.v;
+          optsEl.querySelectorAll('.aq-opt').forEach(n=>n.classList.remove('sel'));
+          b.classList.add('sel');
+        },{passive:true});
+        optsEl.appendChild(b);
+      });
+      backBtn.disabled=(idx===0);
+      nextBtn.textContent=(idx===total-1)?'結果を見る':'次へ';
+    }
+
+    /* ===== 集計 ===== */
+    function getDimScores(){
+      const dimScore={};
+      QUESTIONS.forEach((q,i)=>{
+        const v=answers[i]??0;
+        dimScore[q.dim]=(dimScore[q.dim]||0)+v; // -2..+2
+      });
+      return dimScore;
+    }
+
+    function calcDeptScores(dimScore){
+      const deptScore=Object.fromEntries(DEPTS.map(d=>[d.id,0]));
+      Object.entries(dimScore).forEach(([dim,val])=>{
+        const map=DIM2DEPT[dim]||{};
+        Object.entries(map).forEach(([dept,w])=>{
+          // 未知キーを無視（NaN対策）
+          if(Object.prototype.hasOwnProperty.call(deptScore, dept)){
+            deptScore[dept]=(deptScore[dept]??0)+val*w;
+          }
+        });
+      });
+      // 誘導抑制
+      deptScore['hotel']  = (deptScore['hotel']  ?? 0) * HOTEL_BIAS;
+      deptScore['manabi'] = (deptScore['manabi'] ?? 0) * MANABI_BIAS;
+
+      // 0-100正規化（非数は0に）
+      const vals = Object.values(deptScore).map(v => Number.isFinite(v)? v : 0);
+      const min  = Math.min(...vals);
+      const max  = Math.max(...vals);
+      const norm = (id)=>{
+        const v = Number.isFinite(deptScore[id]) ? deptScore[id] : 0;
+        if(max===min) return 50;
+        const pct = Math.round((v - min)/(max - min)*100);
+        return Math.max(0, Math.min(100, pct));
+      };
+      const ranked = DEPTS.map(d=>({id:d.id,name:d.name,emoji:d.emoji,track:d.track,desc:d.desc,p:norm(d.id)}))
+                          .sort((a,b)=>b.p-a.p);
+      return {deptScore, ranked};
+    }
+
+    /* ===== レーダー ===== */
+    function axisScores(dimScore){
+      const to01=v => (v+2)/4; // -2..+2 → 0..1
+      return AXES.map(ax=>{
+        const vals=ax.dims.map(k=>to01(dimScore[k]??0));
+        const avg=vals.reduce((a,b)=>a+b,0)/vals.length;
+        return {key:ax.key,name:ax.name,score:avg};
+      });
+    }
+
+    function drawRadar(svgEl, axes){
+      const svg=svgEl; while(svg.firstChild) svg.removeChild(svg.firstChild);
+      const R=120; const steps=5;
+      const toXY=(angle,ratio)=>({x:Math.cos(angle)*R*ratio, y:Math.sin(angle)*R*ratio});
+      const n=axes.length;
+      for(let s=1;s<=steps;s++){
+        const r=s/steps, pts=[];
+        for(let i=0;i<n;i++){
+          const ang=(-Math.PI/2)+(2*Math.PI*i/n);
+          const p=toXY(ang,r); pts.push(`${p.x},${p.y}`);
+        }
+        const poly=document.createElementNS('http://www.w3.org/2000/svg','polygon');
+        poly.setAttribute('points',pts.join(' '));
+        poly.setAttribute('fill','#f5f8ff'); poly.setAttribute('stroke','#dfe7ff'); poly.setAttribute('stroke-width','1');
+        poly.setAttribute('opacity', s===steps?1:.8);
+        svg.appendChild(poly);
+      }
+      axes.forEach((ax,i)=>{
+        const ang=(-Math.PI/2)+(2*Math.PI*i/axes.length);
+        const end=toXY(ang,1);
+        const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+        line.setAttribute('x1',0); line.setAttribute('y1',0);
+        line.setAttribute('x2',end.x); line.setAttribute('y2',end.y);
+        line.setAttribute('stroke','#c9d6ff'); line.setAttribute('stroke-width','1');
+        svg.appendChild(line);
+
+        const label=document.createElementNS('http://www.w3.org/2000/svg','text');
+        const L=toXY(ang,1.15);
+        label.setAttribute('x',L.x); label.setAttribute('y',L.y);
+        label.setAttribute('text-anchor', Math.cos(ang)>0.3?'start':(Math.cos(ang)<-0.3?'end':'middle'));
+        label.setAttribute('dominant-baseline','middle');
+        label.setAttribute('font-size','10'); label.setAttribute('fill','#334'); label.textContent=ax.name;
+        svg.appendChild(label);
+      });
+      const pts=[];
+      axes.forEach((ax,i)=>{
+        const ang=(-Math.PI/2)+(2*Math.PI*i/axes.length);
+        const p=toXY(ang,ax.score); pts.push(`${p.x},${p.y}`);
+      });
+      const defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
+      const grad=document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
+      grad.setAttribute('id','radarGrad'); grad.setAttribute('x1','0'); grad.setAttribute('y1','0'); grad.setAttribute('x2','0'); grad.setAttribute('y2','1');
+      const s1=document.createElementNS('http://www.w3.org/2000/svg','stop'); s1.setAttribute('offset','0%'); s1.setAttribute('stop-color','#7bd6ff'); s1.setAttribute('stop-opacity','0.55');
+      const s2=document.createElementNS('http://www.w3.org/2000/svg','stop'); s2.setAttribute('offset','100%'); s2.setAttribute('stop-color','#1480ff'); s2.setAttribute('stop-opacity','0.35');
+      grad.appendChild(s1); grad.appendChild(s2); defs.appendChild(grad); svg.appendChild(defs);
+
+      const area=document.createElementNS('http://www.w3.org/2000/svg','polygon');
+      area.setAttribute('points',pts.join(' '));
+      area.setAttribute('fill','url(#radarGrad)'); area.setAttribute('stroke','#1480ff'); area.setAttribute('stroke-width','2'); area.setAttribute('opacity','0.95');
+      svg.appendChild(area);
+    }
+
+    /* ===== ドーナツスコア（トップ3） ===== */
+    function donut(el, raw){
+      const pct = Math.max(0, Math.min(100, Number(raw)||0)); // ★NaN防止＆クランプ
+      const r=26, c=2*Math.PI*r, off=c*(1-pct/100);
+      el.innerHTML = `
+        <svg viewBox="0 0 64 64" width="56" height="56" aria-hidden="true">
+          <circle cx="32" cy="32" r="${r}" fill="none" stroke="#eef3ff" stroke-width="10"/>
+          <circle cx="32" cy="32" r="${r}" fill="none" stroke="url(#ringGrad)" stroke-width="10"
+                  stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c}"/>
+          <defs>
+            <linearGradient id="ringGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7bd6ff"/><stop offset="100%" stop-color="#1480ff"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="num">${pct}%</div>
+      `;
+      requestAnimationFrame(()=>{
+        const fg=el.querySelector('circle[stroke-dasharray]');
+        fg.style.transition='stroke-dashoffset .7s ease';
+        fg.setAttribute('stroke-dashoffset', off);
+      });
+    }
+
+    /* ===== 根拠（寄与上位） ===== */
+    function reasonsFor(deptId, dimScore){
+      const rows=[];
+      Object.keys(DIM_LABEL).forEach(dim=>{
+        const v=dimScore[dim]??0;
+        const w=(DIM2DEPT[dim]||{})[deptId]??0;
+        let contrib=v*w;
+        if(contrib<0) contrib=0; // マイナスはノイズ扱い
+        rows.push({dim, label:DIM_LABEL[dim], contrib});
+      });
+      rows.sort((a,b)=>b.contrib-a.contrib);
+      return rows.slice(0,6);
+    }
+
+    /* ===== Confetti ===== */
+    function burst(){
+      confettiEl.innerHTML='';
+      const colors=['#7bd6ff','#1480ff','#a3e3ff','#dfe7ff','#b6ccff'];
+      for(let i=0;i<24;i++){
+        const p=document.createElement('i');
+        const x=Math.random()*100; const d=600+Math.random()*600;
+        const rot=(Math.random()*360|0);
+        p.style.left=x+'%';
+        p.style.transform=`translateY(-20%) rotate(${rot}deg)`;
+        p.style.background=colors[i%colors.length];
+        p.style.animationDuration=(d/1000)+'s';
+        confettiEl.appendChild(p);
+        setTimeout(()=>p.remove(), d+200);
+      }
+    }
+
+    /* ===== 結果描画 ===== */
+    function renderResult(){
+      const dimScore=getDimScores();
+      const {ranked}=calcDeptScores(dimScore);
+
+      // top3カード
+      topList.innerHTML='';
+      ranked.slice(0,3).forEach(r=>{
+        const card=document.createElement('div'); card.className='aq-card';
+        const ring=document.createElement('div'); ring.className='ring';
+        const info=document.createElement('div'); info.className='info';
+        info.innerHTML=`
+          <div style="font-weight:900;display:flex;align-items:center;gap:8px">${r.emoji} ${r.name} <span class="track">${r.track}</span></div>
+          <div class="aq-meter" style="margin-top:6px"><i style="width:${r.p}%"></i></div>
+          <div style="font-size:.82rem;opacity:.8;margin-top:4px">${r.desc}</div>
+        `;
+        const score=document.createElement('div'); score.className='score'; score.textContent='';
+        card.appendChild(ring); card.appendChild(info); card.appendChild(score);
+        topList.appendChild(card);
+        donut(ring, r.p); // ★数値はクランプ済み
+      });
+
+      // レーダー
+      const axes=axisScores(dimScore);
+      drawRadar(radarSvg, axes);
+      axisLegend.innerHTML='';
+      axes.forEach(ax=>{
+        const tag=document.createElement('span'); tag.className='tag'; tag.textContent=ax.name;
+        axisLegend.appendChild(tag);
+      });
+
+      // 根拠（最上位学科）
+      const top=ranked[0];
+      const rows=reasonsFor(top.id, dimScore);
+      whyTitle.textContent=`${top.name} が上位になった根拠`;
+      reasonsEl.innerHTML='';
+      const maxC=Math.max(...rows.map(r=>r.contrib), 1e-6);
+      const tagList=[];
+      rows.forEach(row=>{
+        const pct=Math.round((row.contrib/maxC)*100);
+        const item=document.createElement('div'); item.className='reason';
+        item.innerHTML=`
+          <div>
+            <div style="font-weight:800">${row.label}</div>
+            <div class="bar"><i style="width:${pct}%"></i></div>
+          </div>
+          <div style="font-weight:800">${pct}%</div>
+        `;
+        reasonsEl.appendChild(item);
+        tagList.push(row.label);
+      });
+      tagsEl.innerHTML='';
+      tagList.forEach(t=>{
+        const tag=document.createElement('span'); tag.className='tag'; tag.textContent=t;
+        tagsEl.appendChild(tag);
+      });
+
+      burst();
+      resultEl.classList.add('show');
+    }
+
+    /* ===== 進行 ===== */
+    function start(){
+      const panel=document.getElementById('aqPanel');
+      panel.classList.add('show'); panel.setAttribute('aria-hidden','false'); 
+      document.getElementById('aqStartBtn').setAttribute('aria-expanded','true');
+      idx=0; answers=[]; resultEl.classList.remove('show'); renderQuestion();
+    }
+
+    /* ===== イベント ===== */
+    document.getElementById('aqStartBtn').addEventListener('click', start);
+    document.getElementById('aqBack').addEventListener('click',()=>{ if(idx>0){ idx--; renderQuestion(); }});
+    document.getElementById('aqNext').addEventListener('click',()=>{
+      if(idx<total-1){ idx++; renderQuestion(); }
+      else{
+        progBar.style.width='100%'; renderResult();
+        resultEl.scrollIntoView({behavior:'smooth',block:'nearest'});
+      }
+    });
+    document.getElementById('aqRetry').addEventListener('click',()=>{
+      idx=0; answers=[]; resultEl.classList.remove('show'); renderQuestion();
+      document.getElementById('aqPanel').scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+
+    // 初期化
+    totalEl.textContent=QUESTIONS.length;
+  })();
+  </script>
+</section>
+<!-- ===== /学科適性診断 ===== -->
     <!-- ===== 1分解説動画（サムネ削除版） ===== -->
     <section class="section shorts" id="shorts">
       <button class="glass-toggle" id="shortsToggle" type="button" aria-expanded="false" aria-controls="shortsPanel">
